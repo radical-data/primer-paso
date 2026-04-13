@@ -1,2 +1,6 @@
+# Single-package repo today, but keep the workspace root so pnpm policy
+# and future package growth live in one obvious place.
+
 onlyBuiltDependencies:
   - esbuild
+  - '@sveltejs/kit'
