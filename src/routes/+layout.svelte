@@ -1,5 +1,6 @@
 <script lang="ts">
 import { browser } from '$app/environment'
+import { invalidateAll } from '$app/navigation'
 import { getTranslator } from '$lib/content'
 
 let { children, data } = $props()
@@ -22,6 +23,31 @@ const languages = [
 	{ value: 'ar', label: 'العربية' },
 	{ value: 'fr', label: 'Français' }
 ]
+
+const getLanguageHref = (languageValue: string) =>
+	`/language?set=${languageValue}&returnTo=${encodeURIComponent(currentPath)}`
+
+const switchLanguage = async (event: MouseEvent, languageValue: string) => {
+	if (!browser) return
+	if (languageValue === locale) return
+
+	event.preventDefault()
+
+	const href = getLanguageHref(languageValue)
+
+	try {
+		const response = await fetch(href, {
+			method: 'GET',
+			credentials: 'same-origin'
+		})
+
+		if (!response.ok) throw new Error(`Language switch failed: ${response.status}`)
+
+		await invalidateAll()
+	} catch {
+		window.location.href = href
+	}
+}
 </script>
 
 <svelte:head>
@@ -38,8 +64,9 @@ const languages = [
 					{#each languages as language}
 						<li>
 							<a
-								href={`/language?set=${language.value}&returnTo=${encodeURIComponent(currentPath)}`}
+								href={getLanguageHref(language.value)}
 								aria-current={language.value === locale ? 'true' : undefined}
+								onclick={(event) => switchLanguage(event, language.value)}
 							>
 								{language.label}
 							</a>
