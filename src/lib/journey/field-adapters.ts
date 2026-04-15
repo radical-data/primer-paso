@@ -1,5 +1,6 @@
+import type { FormattedReference, MessageKey, MessageReference, RawReference } from '$lib/content'
 import type { JourneyAnswers, MonthValue, ResidenceStartYearBucket } from '$lib/journey/types'
-import { MONTH_LABELS, MONTH_VALUES, RESIDENCE_START_YEAR_BUCKETS } from '$lib/journey/types'
+import { MONTH_VALUES, RESIDENCE_START_YEAR_BUCKETS } from '$lib/journey/types'
 import type { JourneyStepDefinition } from './config'
 
 interface ParseSuccess {
@@ -10,7 +11,7 @@ interface ParseSuccess {
 
 interface ParseFailure {
 	ok: false
-	error: string
+	errorKey: MessageKey
 	formValue: unknown
 }
 
@@ -19,10 +20,18 @@ type ParseResult = ParseSuccess | ParseFailure
 export interface FieldAdapter {
 	getFormValue: (answers: JourneyAnswers, step: JourneyStepDefinition) => unknown
 	parse: (formData: FormData, step: JourneyStepDefinition) => ParseResult
-	format: (answers: JourneyAnswers, step: JourneyStepDefinition) => string
+	format: (answers: JourneyAnswers, step: JourneyStepDefinition) => FormattedReference[]
 }
 
-const notAnswered = 'Not answered'
+const message = (key: MessageKey, values?: MessageReference['values']): MessageReference => ({
+	type: 'message',
+	key,
+	values
+})
+
+const raw = (value: string): RawReference => ({ type: 'raw', value })
+
+const notAnswered = (): FormattedReference[] => [message('common.not_answered')]
 
 const isValidMonth = (value: string): value is MonthValue =>
 	MONTH_VALUES.includes(value as MonthValue)
@@ -37,11 +46,7 @@ const singleChoiceAdapter: FieldAdapter = {
 		const valid = 'options' in step && step.options.some((option) => option.value === value)
 
 		if (!valid) {
-			return {
-				ok: false,
-				error: `Choose an answer for ${step.title.toLowerCase()}.`,
-				formValue: value
-			}
+			return { ok: false, errorKey: step.errorKey, formValue: value }
 		}
 
 		return {
@@ -52,8 +57,9 @@ const singleChoiceAdapter: FieldAdapter = {
 	},
 	format: (answers, step) => {
 		const value = answers[step.field]
-		if (!value || !('options' in step)) return notAnswered
-		return step.options.find((option) => option.value === value)?.label ?? notAnswered
+		if (!value || !('options' in step)) return notAnswered()
+		const option = step.options.find((entry) => entry.value === value)
+		return option ? [message(option.labelKey)] : notAnswered()
 	}
 }
 
@@ -69,11 +75,7 @@ const multiChoiceAdapter: FieldAdapter = {
 		const values = selected.filter((value) => validValues.has(value))
 
 		if (values.length === 0) {
-			return {
-				ok: false,
-				error: `Choose at least one option for ${step.title.toLowerCase()}.`,
-				formValue: selected
-			}
+			return { ok: false, errorKey: step.errorKey, formValue: selected }
 		}
 
 		return {
@@ -84,11 +86,11 @@ const multiChoiceAdapter: FieldAdapter = {
 	},
 	format: (answers, step) => {
 		const values = answers[step.field]
-		if (!Array.isArray(values) || !('options' in step) || values.length === 0) return notAnswered
+		if (!Array.isArray(values) || !('options' in step) || values.length === 0) return notAnswered()
 		const labels = values
-			.map((value) => step.options.find((option) => option.value === value)?.label)
-			.filter((value): value is string => Boolean(value))
-		return labels.length > 0 ? labels.join(', ') : notAnswered
+			.map((value) => step.options.find((option) => option.value === value)?.labelKey)
+			.filter((value): value is MessageKey => Boolean(value))
+		return labels.length > 0 ? labels.map((key) => message(key)) : notAnswered()
 	}
 }
 
@@ -99,11 +101,7 @@ const selectAdapter: FieldAdapter = {
 		const valid = 'options' in step && step.options.some((option) => option.value === value)
 
 		if (!valid) {
-			return {
-				ok: false,
-				error: `Choose an answer for ${step.title.toLowerCase()}.`,
-				formValue: value
-			}
+			return { ok: false, errorKey: step.errorKey, formValue: value }
 		}
 
 		return {
@@ -128,13 +126,13 @@ const residenceStartAdapter: FieldAdapter = {
 		const formValue = { yearBucket, month, monthUnknown }
 
 		if (!isValidYearBucket(yearBucket)) {
-			return { ok: false, error: 'Choose when you started living in Spain.', formValue }
+			return { ok: false, errorKey: step.errorKey, formValue }
 		}
 
 		if (yearBucket === '2025' && !monthUnknown && !isValidMonth(month)) {
 			return {
 				ok: false,
-				error: 'Choose the month, or say that you are not sure about the month.',
+				errorKey: 'steps.residence_start.month_error',
 				formValue
 			}
 		}
@@ -153,23 +151,76 @@ const residenceStartAdapter: FieldAdapter = {
 	},
 	format: (answers) => {
 		const value = answers.residenceStart
-		if (!value) return notAnswered
+		if (!value) return notAnswered()
 
 		switch (value.yearBucket) {
 			case '2024_or_earlier':
-				return '2024 or earlier'
+				return [message('answers.residence_start.2024_or_earlier')]
 			case '2026':
-				return '2026'
+				return [message('answers.residence_start.2026')]
 			case 'not_sure':
-				return "I'm not sure"
+				return [message('answers.residence_start.not_sure')]
 			case '2025':
 				if (value.monthUnknown) {
-					return '2025 — month not sure'
+					return [message('answers.residence_start.2025_month_unknown')]
 				}
-				return value.month ? `${MONTH_LABELS[value.month]} 2025` : '2025'
+				return value.month
+					? [
+							message('answers.residence_start.2025_month', {
+								month: message(`months.${value.month}` as MessageKey)
+							})
+						]
+					: [message('answers.residence_start.2025')]
 			default:
-				return notAnswered
+				return notAnswered()
 		}
+	}
+}
+
+const contactPreferenceAdapter: FieldAdapter = {
+	getFormValue: (answers) => ({
+		contactMethod: answers.contactMethod ?? '',
+		contactValue: answers.contactValue ?? ''
+	}),
+	parse: (formData, step) => {
+		const contactMethod = String(formData.get('contactMethod') ?? '')
+		const contactValue = String(formData.get('contactValue') ?? '').trim()
+		const valid = 'options' in step && step.options.some((option) => option.value === contactMethod)
+
+		if (!valid) {
+			return { ok: false, errorKey: step.errorKey, formValue: { contactMethod, contactValue } }
+		}
+
+		if (contactMethod !== 'through_organisation' && !contactValue) {
+			return {
+				ok: false,
+				errorKey: 'steps.contact.detail_required_error',
+				formValue: { contactMethod, contactValue }
+			}
+		}
+
+		return {
+			ok: true,
+			answersPatch: { contactMethod, contactValue } as Partial<JourneyAnswers>,
+			formValue: { contactMethod, contactValue }
+		}
+	},
+	format: (answers, step) => {
+		if (!answers.contactMethod || !('options' in step)) return notAnswered()
+
+		const method = step.options.find((option) => option.value === answers.contactMethod)
+		if (!method) return notAnswered()
+
+		if (answers.contactMethod === 'through_organisation' || !answers.contactValue) {
+			return [message(method.labelKey)]
+		}
+
+		return [
+			message('answers.contact.with_value', {
+				method: message(method.labelKey),
+				value: raw(answers.contactValue)
+			})
+		]
 	}
 }
 
@@ -177,5 +228,6 @@ export const fieldAdapters = {
 	'single-choice': singleChoiceAdapter,
 	'multi-choice': multiChoiceAdapter,
 	select: selectAdapter,
-	'residence-start': residenceStartAdapter
+	'residence-start': residenceStartAdapter,
+	'contact-preference': contactPreferenceAdapter
 } satisfies Record<string, FieldAdapter>

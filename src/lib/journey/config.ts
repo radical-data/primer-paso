@@ -1,11 +1,17 @@
+import type { MessageKey } from '$lib/content'
 import type { JourneyAnswers } from '$lib/journey/types'
 
 export interface JourneyOption {
 	value: string
-	label: string
+	labelKey: MessageKey
 }
 
-export type FieldAdapterName = 'single-choice' | 'multi-choice' | 'select' | 'residence-start'
+export type FieldAdapterName =
+	| 'single-choice'
+	| 'multi-choice'
+	| 'select'
+	| 'residence-start'
+	| 'contact-preference'
 
 export type StepResolver = string | ((answers: JourneyAnswers) => string)
 
@@ -14,11 +20,13 @@ export interface BaseStepDefinition {
 	slug: string
 	field: keyof JourneyAnswers
 	adapter: FieldAdapterName
-	eyebrow?: string
-	title: string
-	body?: string
-	hint?: string
-	checkAnswersLabel: string
+	eyebrowKey?: MessageKey
+	titleKey: MessageKey
+	bodyKey?: MessageKey
+	hintKey?: MessageKey
+	errorKey: MessageKey
+	checkAnswersLabelKey?: MessageKey
+	includeInCheckAnswers?: boolean
 	back: StepResolver
 	next: StepResolver
 	guard?: (answers: JourneyAnswers) => boolean
@@ -26,7 +34,7 @@ export interface BaseStepDefinition {
 }
 
 export interface ChoiceStepDefinition extends BaseStepDefinition {
-	adapter: 'single-choice' | 'multi-choice' | 'select'
+	adapter: 'single-choice' | 'multi-choice' | 'select' | 'contact-preference'
 	options: JourneyOption[]
 }
 
@@ -42,18 +50,20 @@ const steps: JourneyStepDefinition[] = [
 		slug: 'language',
 		field: 'language',
 		adapter: 'single-choice',
-		eyebrow: 'Session setup',
-		title: 'Choose a language',
-		body: 'Which language would you like to use?',
-		hint: 'You can change language at any time without losing your answers.',
-		checkAnswersLabel: 'Language',
+		eyebrowKey: 'eyebrows.session_setup',
+		titleKey: 'steps.language.title',
+		bodyKey: 'steps.language.body',
+		hintKey: 'steps.language.hint',
+		errorKey: 'steps.language.error',
+		checkAnswersLabelKey: 'steps.language.check_answers_label',
+		includeInCheckAnswers: true,
 		back: '/start',
 		next: 'completion-mode',
 		options: [
-			{ value: 'es', label: 'Español' },
-			{ value: 'en', label: 'English' },
-			{ value: 'ar', label: 'العربية' },
-			{ value: 'fr', label: 'Français' }
+			{ value: 'es', labelKey: 'steps.language.options.es' },
+			{ value: 'en', labelKey: 'steps.language.options.en' },
+			{ value: 'ar', labelKey: 'steps.language.options.ar' },
+			{ value: 'fr', labelKey: 'steps.language.options.fr' }
 		]
 	},
 	{
@@ -61,17 +71,19 @@ const steps: JourneyStepDefinition[] = [
 		slug: 'completion-mode',
 		field: 'completionMode',
 		adapter: 'single-choice',
-		eyebrow: 'Session setup',
-		title: 'Who are you filling this in for?',
-		body: 'Who are you filling this in for?',
-		hint: 'Choose the option that best matches this session.',
-		checkAnswersLabel: 'Who you are filling this in for',
+		eyebrowKey: 'eyebrows.session_setup',
+		titleKey: 'steps.completion_mode.title',
+		bodyKey: 'steps.completion_mode.body',
+		hintKey: 'steps.completion_mode.hint',
+		errorKey: 'steps.completion_mode.error',
+		checkAnswersLabelKey: 'steps.completion_mode.check_answers_label',
+		includeInCheckAnswers: true,
 		back: 'language',
 		next: 'in-spain-now',
 		options: [
-			{ value: 'self', label: 'Myself' },
-			{ value: 'someone_else', label: 'Someone else, with their permission' },
-			{ value: 'support_worker', label: "I'm a support worker or volunteer" }
+			{ value: 'self', labelKey: 'steps.completion_mode.options.self' },
+			{ value: 'someone_else', labelKey: 'steps.completion_mode.options.someone_else' },
+			{ value: 'support_worker', labelKey: 'steps.completion_mode.options.support_worker' }
 		]
 	},
 	{
@@ -79,16 +91,18 @@ const steps: JourneyStepDefinition[] = [
 		slug: 'in-spain-now',
 		field: 'inSpainNow',
 		adapter: 'single-choice',
-		eyebrow: 'Early eligibility filter',
-		title: 'Are you in Spain now?',
-		body: 'Are you in Spain now?',
-		checkAnswersLabel: 'Are you in Spain now?',
+		eyebrowKey: 'eyebrows.eligibility',
+		titleKey: 'steps.in_spain_now.title',
+		bodyKey: 'steps.in_spain_now.body',
+		errorKey: 'steps.in_spain_now.error',
+		checkAnswersLabelKey: 'steps.in_spain_now.check_answers_label',
+		includeInCheckAnswers: true,
 		back: 'completion-mode',
 		next: 'residence-start',
 		options: [
-			{ value: 'yes', label: 'Yes' },
-			{ value: 'no', label: 'No' },
-			{ value: 'not_sure', label: "I'm not sure" }
+			{ value: 'yes', labelKey: 'steps.common.options.yes' },
+			{ value: 'no', labelKey: 'steps.common.options.no' },
+			{ value: 'not_sure', labelKey: 'steps.common.options.not_sure' }
 		]
 	},
 	{
@@ -96,10 +110,12 @@ const steps: JourneyStepDefinition[] = [
 		slug: 'residence-start',
 		field: 'residenceStart',
 		adapter: 'residence-start',
-		eyebrow: 'Core eligibility',
-		title: 'When did you start living in Spain?',
-		hint: 'An approximate month is enough.',
-		checkAnswersLabel: 'When you started living in Spain',
+		eyebrowKey: 'eyebrows.eligibility',
+		titleKey: 'steps.residence_start.title',
+		hintKey: 'steps.residence_start.hint',
+		errorKey: 'steps.residence_start.error',
+		checkAnswersLabelKey: 'steps.residence_start.check_answers_label',
+		includeInCheckAnswers: true,
 		back: 'in-spain-now',
 		next: 'asylum-history'
 	},
@@ -108,17 +124,19 @@ const steps: JourneyStepDefinition[] = [
 		slug: 'asylum-history',
 		field: 'asylumBeforeCutoff',
 		adapter: 'single-choice',
-		eyebrow: 'Route split',
-		title: 'Did you apply for asylum or international protection in Spain before 1 January 2026?',
-		body: 'Did you apply for asylum or international protection in Spain before 1 January 2026?',
-		hint: 'Choose one option.',
-		checkAnswersLabel: 'Asylum or international protection before 1 January 2026',
+		eyebrowKey: 'eyebrows.route_split',
+		titleKey: 'steps.asylum_history.title',
+		bodyKey: 'steps.asylum_history.body',
+		hintKey: 'steps.asylum_history.hint',
+		errorKey: 'steps.asylum_history.error',
+		checkAnswersLabelKey: 'steps.asylum_history.check_answers_label',
+		includeInCheckAnswers: true,
 		back: 'residence-start',
 		next: 'five-month-stay',
 		options: [
-			{ value: 'yes', label: 'Yes' },
-			{ value: 'no', label: 'No' },
-			{ value: 'not_sure', label: "I'm not sure" }
+			{ value: 'yes', labelKey: 'steps.common.options.yes' },
+			{ value: 'no', labelKey: 'steps.common.options.no' },
+			{ value: 'not_sure', labelKey: 'steps.common.options.not_sure' }
 		]
 	},
 	{
@@ -126,19 +144,21 @@ const steps: JourneyStepDefinition[] = [
 		slug: 'five-month-stay',
 		field: 'fiveMonthStay',
 		adapter: 'single-choice',
-		eyebrow: 'Core eligibility',
-		title: 'Have you been living in Spain during the last 5 months?',
-		body: 'Have you been in Spain during the last 5 months?',
-		hint: 'Short trips away do not always matter.',
-		checkAnswersLabel: 'Have you been in Spain during the last 5 months?',
+		eyebrowKey: 'eyebrows.eligibility',
+		titleKey: 'steps.five_month_stay.title',
+		bodyKey: 'steps.five_month_stay.body',
+		hintKey: 'steps.five_month_stay.hint',
+		errorKey: 'steps.five_month_stay.error',
+		checkAnswersLabelKey: 'steps.five_month_stay.check_answers_label',
+		includeInCheckAnswers: true,
 		back: 'asylum-history',
 		next: (answers) =>
 			answers.asylumBeforeCutoff === 'yes' ? 'asylum-documents' : 'non-asylum-route',
 		options: [
-			{ value: 'yes', label: 'Yes' },
-			{ value: 'mostly_yes', label: 'Mostly yes, with short absences' },
-			{ value: 'no', label: 'No' },
-			{ value: 'not_sure', label: "I'm not sure" }
+			{ value: 'yes', labelKey: 'steps.common.options.yes' },
+			{ value: 'mostly_yes', labelKey: 'steps.five_month_stay.options.mostly_yes' },
+			{ value: 'no', labelKey: 'steps.common.options.no' },
+			{ value: 'not_sure', labelKey: 'steps.common.options.not_sure' }
 		]
 	},
 	{
@@ -146,19 +166,21 @@ const steps: JourneyStepDefinition[] = [
 		slug: 'asylum-documents',
 		field: 'asylumCaseDocuments',
 		adapter: 'single-choice',
-		eyebrow: 'Route-specific: asylum',
-		title: 'Do you have any documents about your asylum or protection case?',
-		body: 'Do you have any documents about your asylum or protection case?',
-		hint: 'For example, a filing receipt, case document, letter or notification.',
-		checkAnswersLabel: 'Documents about your asylum or protection case',
+		eyebrowKey: 'eyebrows.route_asylum',
+		titleKey: 'steps.asylum_documents.title',
+		bodyKey: 'steps.asylum_documents.body',
+		hintKey: 'steps.asylum_documents.hint',
+		errorKey: 'steps.asylum_documents.error',
+		checkAnswersLabelKey: 'steps.asylum_documents.check_answers_label',
+		includeInCheckAnswers: true,
 		back: 'five-month-stay',
 		next: 'identity-documents',
 		guard: (answers) => answers.asylumBeforeCutoff === 'yes',
 		redirectIfGuardFails: 'non-asylum-route',
 		options: [
-			{ value: 'yes', label: 'Yes' },
-			{ value: 'no', label: 'No' },
-			{ value: 'not_sure', label: "I'm not sure" }
+			{ value: 'yes', labelKey: 'steps.common.options.yes' },
+			{ value: 'no', labelKey: 'steps.common.options.no' },
+			{ value: 'not_sure', labelKey: 'steps.common.options.not_sure' }
 		]
 	},
 	{
@@ -166,27 +188,32 @@ const steps: JourneyStepDefinition[] = [
 		slug: 'non-asylum-route',
 		field: 'nonAsylumGrounds',
 		adapter: 'multi-choice',
-		eyebrow: 'Route-specific: non-asylum',
-		title: 'Which of these sounds like you?',
-		body: 'Which of these sounds like you?',
-		hint: 'Choose all that apply.',
-		checkAnswersLabel: 'Which of these sounds like you?',
+		eyebrowKey: 'eyebrows.route_non_asylum',
+		titleKey: 'steps.non_asylum_route.title',
+		bodyKey: 'steps.non_asylum_route.body',
+		hintKey: 'steps.non_asylum_route.hint',
+		errorKey: 'steps.non_asylum_route.error',
+		checkAnswersLabelKey: 'steps.non_asylum_route.check_answers_label',
+		includeInCheckAnswers: true,
 		back: 'five-month-stay',
 		next: 'identity-documents',
 		guard: (answers) => answers.asylumBeforeCutoff !== 'yes',
 		redirectIfGuardFails: 'asylum-documents',
 		options: [
-			{ value: 'worked_in_spain', label: "I've worked in Spain" },
+			{
+				value: 'worked_in_spain',
+				labelKey: 'steps.non_asylum_route.options.worked_in_spain'
+			},
 			{
 				value: 'close_family_relevant',
-				label: 'I have close family here who may be relevant to this process'
+				labelKey: 'steps.non_asylum_route.options.close_family_relevant'
 			},
 			{
 				value: 'vulnerable_situation',
-				label: 'I may need support because of a difficult or vulnerable situation'
+				labelKey: 'steps.non_asylum_route.options.vulnerable_situation'
 			},
-			{ value: 'none', label: 'None of these' },
-			{ value: 'not_sure', label: "I'm not sure" }
+			{ value: 'none', labelKey: 'steps.non_asylum_route.options.none' },
+			{ value: 'not_sure', labelKey: 'steps.common.options.not_sure' }
 		]
 	},
 	{
@@ -194,24 +221,38 @@ const steps: JourneyStepDefinition[] = [
 		slug: 'identity-documents',
 		field: 'identityDocuments',
 		adapter: 'multi-choice',
-		eyebrow: 'Identity readiness',
-		title: 'Which identity papers do you have?',
-		body: 'Which identity papers do you have?',
-		hint: 'Choose all that apply.',
-		checkAnswersLabel: 'Identity papers',
+		eyebrowKey: 'eyebrows.identity',
+		titleKey: 'steps.identity_documents.title',
+		bodyKey: 'steps.identity_documents.body',
+		hintKey: 'steps.identity_documents.hint',
+		errorKey: 'steps.identity_documents.error',
+		checkAnswersLabelKey: 'steps.identity_documents.check_answers_label',
+		includeInCheckAnswers: true,
 		back: (answers) =>
 			answers.asylumBeforeCutoff === 'yes' ? 'asylum-documents' : 'non-asylum-route',
 		next: 'evidence-before-cutoff',
 		options: [
-			{ value: 'current_passport', label: 'Current passport' },
-			{ value: 'expired_passport', label: 'Expired passport' },
-			{ value: 'national_identity_card', label: 'National identity card' },
-			{ value: 'travel_document', label: 'Travel document' },
+			{
+				value: 'current_passport',
+				labelKey: 'steps.identity_documents.options.current_passport'
+			},
+			{
+				value: 'expired_passport',
+				labelKey: 'steps.identity_documents.options.expired_passport'
+			},
+			{
+				value: 'national_identity_card',
+				labelKey: 'steps.identity_documents.options.national_identity_card'
+			},
+			{
+				value: 'travel_document',
+				labelKey: 'steps.identity_documents.options.travel_document'
+			},
 			{
 				value: 'no_identity_documents_now',
-				label: 'I do not have any identity documents with me now'
+				labelKey: 'steps.identity_documents.options.no_identity_documents_now'
 			},
-			{ value: 'not_sure', label: "I'm not sure" }
+			{ value: 'not_sure', labelKey: 'steps.common.options.not_sure' }
 		]
 	},
 	{
@@ -219,31 +260,47 @@ const steps: JourneyStepDefinition[] = [
 		slug: 'evidence-before-cutoff',
 		field: 'evidenceBeforeCutoff',
 		adapter: 'multi-choice',
-		eyebrow: 'Evidence: cut-off date',
-		title:
-			'Do you have any documents that could help show you were already living in Spain before January 2026?',
-		body: 'Do you have any documents that could help show you were already living in Spain before January 2026?',
-		hint: 'Choose all that apply.',
-		checkAnswersLabel: 'Papers that may show residence before January 2026',
+		eyebrowKey: 'eyebrows.evidence_cutoff',
+		titleKey: 'steps.evidence_before_cutoff.title',
+		bodyKey: 'steps.evidence_before_cutoff.body',
+		hintKey: 'steps.evidence_before_cutoff.hint',
+		errorKey: 'steps.evidence_before_cutoff.error',
+		checkAnswersLabelKey: 'steps.evidence_before_cutoff.check_answers_label',
+		includeInCheckAnswers: true,
 		back: 'identity-documents',
 		next: 'evidence-recent-months',
 		options: [
-			{ value: 'padron_or_registration', label: 'Registration or padrón' },
-			{ value: 'housing_papers', label: 'Housing papers' },
-			{ value: 'health_or_pharmacy', label: 'Health or pharmacy papers' },
-			{ value: 'school_or_childcare', label: 'School or childcare papers' },
-			{ value: 'work_papers', label: 'Work papers' },
+			{
+				value: 'padron_or_registration',
+				labelKey: 'steps.evidence_before_cutoff.options.padron_or_registration'
+			},
+			{
+				value: 'housing_papers',
+				labelKey: 'steps.evidence_before_cutoff.options.housing_papers'
+			},
+			{
+				value: 'health_or_pharmacy',
+				labelKey: 'steps.evidence_before_cutoff.options.health_or_pharmacy'
+			},
+			{
+				value: 'school_or_childcare',
+				labelKey: 'steps.evidence_before_cutoff.options.school_or_childcare'
+			},
+			{ value: 'work_papers', labelKey: 'steps.evidence_before_cutoff.options.work_papers' },
 			{
 				value: 'organisation_or_church_letter',
-				label: 'Letters from an organisation, church, or social worker'
+				labelKey: 'steps.evidence_before_cutoff.options.organisation_or_church_letter'
 			},
-			{ value: 'travel_or_transport', label: 'Travel or transport papers' },
+			{
+				value: 'travel_or_transport',
+				labelKey: 'steps.evidence_before_cutoff.options.travel_or_transport'
+			},
 			{
 				value: 'something_else_dated_named',
-				label: 'Something else with a date and my name on it'
+				labelKey: 'steps.evidence_before_cutoff.options.something_else_dated_named'
 			},
-			{ value: 'none_yet', label: 'I do not have any of these yet' },
-			{ value: 'not_sure', label: "I'm not sure" }
+			{ value: 'none_yet', labelKey: 'steps.evidence_before_cutoff.options.none_yet' },
+			{ value: 'not_sure', labelKey: 'steps.common.options.not_sure' }
 		]
 	},
 	{
@@ -251,31 +308,50 @@ const steps: JourneyStepDefinition[] = [
 		slug: 'evidence-recent-months',
 		field: 'evidenceRecentMonths',
 		adapter: 'multi-choice',
-		eyebrow: 'Evidence: recent months',
-		title:
-			'Do you have any documents from the last 5 months that could help show you’ve been living here recently?',
-		body: 'Do you have any documents from the last 5 months that could help show you’ve been living here recently?',
-		hint: 'Choose all that apply.',
-		checkAnswersLabel: 'Papers from the last 5 months',
+		eyebrowKey: 'eyebrows.evidence_recent',
+		titleKey: 'steps.evidence_recent_months.title',
+		bodyKey: 'steps.evidence_recent_months.body',
+		hintKey: 'steps.evidence_recent_months.hint',
+		errorKey: 'steps.evidence_recent_months.error',
+		checkAnswersLabelKey: 'steps.evidence_recent_months.check_answers_label',
+		includeInCheckAnswers: true,
 		back: 'evidence-before-cutoff',
 		next: 'specialist-flags',
 		options: [
-			{ value: 'housing_papers', label: 'Housing papers' },
-			{ value: 'health_or_pharmacy', label: 'Health or pharmacy papers' },
-			{ value: 'school_or_childcare', label: 'School or childcare papers' },
-			{ value: 'work_papers', label: 'Work papers' },
+			{
+				value: 'housing_papers',
+				labelKey: 'steps.evidence_recent_months.options.housing_papers'
+			},
+			{
+				value: 'health_or_pharmacy',
+				labelKey: 'steps.evidence_recent_months.options.health_or_pharmacy'
+			},
+			{
+				value: 'school_or_childcare',
+				labelKey: 'steps.evidence_recent_months.options.school_or_childcare'
+			},
+			{
+				value: 'work_papers',
+				labelKey: 'steps.evidence_recent_months.options.work_papers'
+			},
 			{
 				value: 'organisation_or_church_letter',
-				label: 'Letters from an organisation, church, or social worker'
+				labelKey: 'steps.evidence_recent_months.options.organisation_or_church_letter'
 			},
-			{ value: 'bank_or_money_transfer', label: 'Bank or money transfer records' },
-			{ value: 'travel_or_dated_receipts', label: 'Travel or dated receipts' },
+			{
+				value: 'bank_or_money_transfer',
+				labelKey: 'steps.evidence_recent_months.options.bank_or_money_transfer'
+			},
+			{
+				value: 'travel_or_dated_receipts',
+				labelKey: 'steps.evidence_recent_months.options.travel_or_dated_receipts'
+			},
 			{
 				value: 'something_else_dated_named',
-				label: 'Something else with a date and my name on it'
+				labelKey: 'steps.evidence_recent_months.options.something_else_dated_named'
 			},
-			{ value: 'none_yet', label: 'I do not have any of these yet' },
-			{ value: 'not_sure', label: "I'm not sure" }
+			{ value: 'none_yet', labelKey: 'steps.evidence_recent_months.options.none_yet' },
+			{ value: 'not_sure', labelKey: 'steps.common.options.not_sure' }
 		]
 	},
 	{
@@ -283,24 +359,32 @@ const steps: JourneyStepDefinition[] = [
 		slug: 'specialist-flags',
 		field: 'specialistFlags',
 		adapter: 'multi-choice',
-		eyebrow: 'Specialist flag',
-		title: 'Is there anything that might mean you need specialist advice before applying?',
-		body: 'Is there anything that might mean you need specialist advice before applying?',
-		checkAnswersLabel: 'Anything that may need specialist advice',
+		eyebrowKey: 'eyebrows.specialist',
+		titleKey: 'steps.specialist_flags.title',
+		bodyKey: 'steps.specialist_flags.body',
+		errorKey: 'steps.specialist_flags.error',
+		checkAnswersLabelKey: 'steps.specialist_flags.check_answers_label',
+		includeInCheckAnswers: true,
 		back: 'evidence-recent-months',
 		next: 'province',
 		options: [
 			{
 				value: 'criminal_record_worry',
-				label: "I'm worried about a criminal record or criminal case"
+				labelKey: 'steps.specialist_flags.options.criminal_record_worry'
 			},
 			{
 				value: 'identity_missing_or_mismatch',
-				label: 'My identity papers are missing or do not match'
+				labelKey: 'steps.specialist_flags.options.identity_missing_or_mismatch'
 			},
-			{ value: 'asylum_case_not_clear', label: "I'm not sure what happened with my asylum case" },
-			{ value: 'want_specialist', label: "I'd rather talk this through with a specialist" },
-			{ value: 'none', label: 'None of these' }
+			{
+				value: 'asylum_case_not_clear',
+				labelKey: 'steps.specialist_flags.options.asylum_case_not_clear'
+			},
+			{
+				value: 'want_specialist',
+				labelKey: 'steps.specialist_flags.options.want_specialist'
+			},
+			{ value: 'none', labelKey: 'steps.specialist_flags.options.none' }
 		]
 	},
 	{
@@ -308,24 +392,113 @@ const steps: JourneyStepDefinition[] = [
 		slug: 'province',
 		field: 'province',
 		adapter: 'select',
-		eyebrow: 'Routing',
-		title: 'Which province are you in?',
-		body: 'Which province are you in?',
-		hint: 'This helps us show support options near you.',
-		checkAnswersLabel: 'Province',
+		eyebrowKey: 'eyebrows.routing',
+		titleKey: 'steps.province.title',
+		bodyKey: 'steps.province.body',
+		hintKey: 'steps.province.hint',
+		errorKey: 'steps.province.error',
+		checkAnswersLabelKey: 'steps.province.check_answers_label',
+		includeInCheckAnswers: true,
 		back: 'specialist-flags',
 		next: '/check-answers',
 		options: [
-			{ value: 'madrid', label: 'Madrid' },
-			{ value: 'barcelona', label: 'Barcelona' },
-			{ value: 'valencia', label: 'Valencia' },
-			{ value: 'sevilla', label: 'Sevilla' },
-			{ value: 'malaga', label: 'Málaga' },
-			{ value: 'alicante', label: 'Alicante' },
-			{ value: 'bizkaia', label: 'Bizkaia' },
-			{ value: 'zaragoza', label: 'Zaragoza' },
-			{ value: 'murcia', label: 'Murcia' },
-			{ value: 'other', label: 'Another province' }
+			{ value: 'madrid', labelKey: 'steps.province.options.madrid' },
+			{ value: 'barcelona', labelKey: 'steps.province.options.barcelona' },
+			{ value: 'valencia', labelKey: 'steps.province.options.valencia' },
+			{ value: 'sevilla', labelKey: 'steps.province.options.sevilla' },
+			{ value: 'malaga', labelKey: 'steps.province.options.malaga' },
+			{ value: 'alicante', labelKey: 'steps.province.options.alicante' },
+			{ value: 'bizkaia', labelKey: 'steps.province.options.bizkaia' },
+			{ value: 'zaragoza', labelKey: 'steps.province.options.zaragoza' },
+			{ value: 'murcia', labelKey: 'steps.province.options.murcia' },
+			{ value: 'other', labelKey: 'steps.province.options.other' }
+		]
+	},
+	{
+		id: 'referral',
+		slug: 'referral',
+		field: 'referralChoice',
+		adapter: 'single-choice',
+		eyebrowKey: 'eyebrows.referral',
+		titleKey: 'steps.referral.title',
+		bodyKey: 'steps.referral.body',
+		hintKey: 'steps.referral.hint',
+		errorKey: 'steps.referral.error',
+		includeInCheckAnswers: false,
+		back: '/result',
+		next: (answers) =>
+			answers.referralChoice === 'contact_me' || answers.referralChoice === 'show_options'
+				? 'support-needs'
+				: '/confirmation',
+		options: [
+			{ value: 'contact_me', labelKey: 'steps.referral.options.contact_me' },
+			{ value: 'show_options', labelKey: 'steps.referral.options.show_options' },
+			{ value: 'no_thanks', labelKey: 'steps.referral.options.no_thanks' }
+		]
+	},
+	{
+		id: 'support-needs',
+		slug: 'support-needs',
+		field: 'supportNeeds',
+		adapter: 'multi-choice',
+		eyebrowKey: 'eyebrows.support',
+		titleKey: 'steps.support_needs.title',
+		bodyKey: 'steps.support_needs.body',
+		hintKey: 'steps.support_needs.hint',
+		errorKey: 'steps.support_needs.error',
+		includeInCheckAnswers: false,
+		back: 'referral',
+		next: 'contact',
+		options: [
+			{
+				value: 'another_language',
+				labelKey: 'steps.support_needs.options.another_language'
+			},
+			{ value: 'in_person_help', labelKey: 'steps.support_needs.options.in_person_help' },
+			{
+				value: 'help_using_phone_or_computer',
+				labelKey: 'steps.support_needs.options.help_using_phone_or_computer'
+			},
+			{
+				value: 'help_scanning_or_printing',
+				labelKey: 'steps.support_needs.options.help_scanning_or_printing'
+			},
+			{
+				value: 'help_gathering_papers',
+				labelKey: 'steps.support_needs.options.help_gathering_papers'
+			},
+			{
+				value: 'specialist_advice',
+				labelKey: 'steps.support_needs.options.specialist_advice'
+			},
+			{ value: 'not_sure', labelKey: 'steps.common.options.not_sure' }
+		]
+	},
+	{
+		id: 'contact',
+		slug: 'contact',
+		field: 'contactMethod',
+		adapter: 'contact-preference',
+		eyebrowKey: 'eyebrows.contact',
+		titleKey: 'steps.contact.title',
+		bodyKey: 'steps.contact.body',
+		hintKey: 'steps.contact.hint',
+		errorKey: 'steps.contact.error',
+		includeInCheckAnswers: false,
+		back: 'support-needs',
+		next: '/confirmation',
+		guard: (answers) =>
+			answers.referralChoice === 'contact_me' || answers.referralChoice === 'show_options',
+		redirectIfGuardFails: '/confirmation',
+		options: [
+			{ value: 'sms', labelKey: 'steps.contact.options.sms' },
+			{ value: 'whatsapp', labelKey: 'steps.contact.options.whatsapp' },
+			{ value: 'phone', labelKey: 'steps.contact.options.phone' },
+			{ value: 'email', labelKey: 'steps.contact.options.email' },
+			{
+				value: 'through_organisation',
+				labelKey: 'steps.contact.options.through_organisation'
+			}
 		]
 	}
 ]

@@ -1,7 +1,8 @@
 <script lang="ts">
 import ChoiceGroup from '$lib/components/questions/ChoiceGroup.svelte'
 import QuestionPage from '$lib/components/questions/QuestionPage.svelte'
-import { MONTH_LABELS, MONTH_VALUES } from '$lib/journey/types'
+import { t } from '$lib/content'
+import { MONTH_VALUES } from '$lib/journey/types'
 
 let { data, form } = $props()
 
@@ -37,6 +38,17 @@ const residenceValue = $derived.by<ResidenceStartFormValue>(() => {
 const showMonthField = $derived(
 	data.step.adapter === 'residence-start' && residenceValue.yearBucket === '2025'
 )
+
+const contactValue = $derived.by(() => {
+	if (!isRecord(rawValue)) {
+		return { contactMethod: '', contactValue: '' }
+	}
+
+	return {
+		contactMethod: typeof rawValue.contactMethod === 'string' ? rawValue.contactMethod : '',
+		contactValue: typeof rawValue.contactValue === 'string' ? rawValue.contactValue : ''
+	}
+})
 </script>
 
 <QuestionPage
@@ -66,7 +78,7 @@ const showMonthField = $derived(
 		<label class="field">
 			<span class="sr-only">{data.step.title}</span>
 			<select name={data.step.field}>
-				<option value="">Choose an option</option>
+				<option value="">{t('common.choose_an_option')}</option>
 				{#each data.step.options as option}
 					<option value={option.value} selected={scalarValue === option.value}>
 						{option.label}
@@ -76,15 +88,18 @@ const showMonthField = $derived(
 		</label>
 	{:else if data.step.adapter === 'residence-start'}
 		<fieldset class="question-group" aria-describedby="residence-start-hint">
-			<legend>Choose one answer</legend>
+			<legend>{t('common.choose_one_answer')}</legend>
 			<ChoiceGroup
 				type="radio"
 				name="yearBucket"
 				options={[
-					{ value: '2024_or_earlier', label: 'In 2024 or earlier' },
-					{ value: '2025', label: 'In 2025' },
-					{ value: '2026', label: 'In 2026' },
-					{ value: 'not_sure', label: "I'm not sure" }
+					{
+						value: '2024_or_earlier',
+						label: t('steps.residence_start.options.2024_or_earlier')
+					},
+					{ value: '2025', label: t('steps.residence_start.options.2025') },
+					{ value: '2026', label: t('steps.residence_start.options.2026') },
+					{ value: 'not_sure', label: t('steps.residence_start.options.not_sure') }
 				]}
 				value={residenceValue.yearBucket}
 			/>
@@ -92,12 +107,12 @@ const showMonthField = $derived(
 			{#if showMonthField}
 				<div class="card stack inline-subsection">
 					<label class="field">
-						<span>Which month was that, roughly?</span>
+						<span>{t('steps.residence_start.month_prompt')}</span>
 						<select name="month" autocomplete="bday-month">
-							<option value="">Choose month</option>
+							<option value="">{t('common.choose_month')}</option>
 							{#each MONTH_VALUES as month}
 								<option value={month} selected={residenceValue.month === month}>
-									{MONTH_LABELS[month]}
+									{t(`months.${month}` as import('$lib/content').MessageKey)}
 								</option>
 							{/each}
 						</select>
@@ -105,10 +120,25 @@ const showMonthField = $derived(
 
 					<label class="option">
 						<input type="checkbox" name="monthUnknown" checked={residenceValue.monthUnknown}>
-						<span>I'm not sure about the month</span>
+						<span>{t('steps.residence_start.month_unknown')}</span>
 					</label>
 				</div>
 			{/if}
 		</fieldset>
+	{:else if data.step.adapter === 'contact-preference'}
+		<div class="stack">
+			<ChoiceGroup
+				type="radio"
+				name="contactMethod"
+				options={data.step.options}
+				value={contactValue.contactMethod}
+			/>
+			{#if contactValue.contactMethod && contactValue.contactMethod !== 'through_organisation'}
+				<label class="field">
+					<span>{t('steps.contact.detail_label')}</span>
+					<input type="text" name="contactValue" value={contactValue.contactValue}>
+				</label>
+			{/if}
+		</div>
 	{/if}
 </QuestionPage>

@@ -1,4 +1,5 @@
 import { redirect } from '@sveltejs/kit'
+import { renderReference, t } from '$lib/content'
 import { journeySteps } from '$lib/journey/config'
 import { fieldAdapters } from '$lib/journey/field-adapters'
 import { getJourneyState } from '$lib/server/journey'
@@ -11,10 +12,15 @@ export const load: PageServerLoad = ({ cookies }) => {
 	}
 
 	const answers = journeySteps
-		.filter((step) => !step.guard || step.guard(state.answers))
+		.filter(
+			(step) => step.includeInCheckAnswers !== false && (!step.guard || step.guard(state.answers))
+		)
 		.map((step) => ({
-			label: step.checkAnswersLabel,
-			value: fieldAdapters[step.adapter].format(state.answers, step),
+			label: step.checkAnswersLabelKey ? t(step.checkAnswersLabelKey) : '',
+			value: fieldAdapters[step.adapter]
+				.format(state.answers, step)
+				.map(renderReference)
+				.join(', '),
 			changeHref: `/${step.slug}?returnTo=/check-answers`
 		}))
 

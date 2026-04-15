@@ -1,4 +1,5 @@
 import { error, fail, redirect } from '@sveltejs/kit'
+import { t } from '$lib/content'
 import type { ChoiceStepDefinition } from '$lib/journey/config'
 import { getJourneyStep, resolveStepTarget } from '$lib/journey/config'
 import { fieldAdapters } from '$lib/journey/field-adapters'
@@ -50,17 +51,21 @@ export const load: PageServerLoad = ({ cookies, params, url }) => {
 
 	const returnTo = getSafeReturnTo(url, resolveStepTarget(step.next, state.answers))
 	const adapter = fieldAdapters[step.adapter]
+	const options: Array<{ value: string; label: string }> =
+		'options' in step
+			? step.options.map((option) => ({ value: option.value, label: t(option.labelKey) }))
+			: []
 
 	return {
 		step: {
 			slug: step.slug,
 			field: step.field,
 			adapter: step.adapter,
-			eyebrow: step.eyebrow,
-			title: step.title,
-			body: step.body,
-			hint: step.hint,
-			options: 'options' in step ? step.options : []
+			eyebrow: step.eyebrowKey ? t(step.eyebrowKey) : undefined,
+			title: t(step.titleKey),
+			body: step.bodyKey ? t(step.bodyKey) : undefined,
+			hint: step.hintKey ? t(step.hintKey) : undefined,
+			options
 		},
 		value: adapter.getFormValue(state.answers, step),
 		returnTo,
@@ -82,7 +87,7 @@ export const actions: Actions = {
 
 		if (!parsed.ok) {
 			return fail(400, {
-				error: parsed.error,
+				error: t(parsed.errorKey),
 				value: parsed.formValue
 			})
 		}
