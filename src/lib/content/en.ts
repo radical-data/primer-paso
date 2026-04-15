@@ -1,6 +1,62 @@
 export const en = {
 	'common.not_answered': 'Not answered',
 	'common.choose_an_option': 'Choose an option',
+	'chrome.app_title': 'Regularisation intake screener',
+	'chrome.meta_description':
+		"An intake screener for Spain's 2026 extraordinary regularisation process.",
+	'chrome.brand': 'Regularisation intake',
+	'chrome.language_switcher_label': 'Language switcher',
+	'pages.start.eyebrow': 'Milestone 1',
+	'pages.start.title': 'Check what support you may need for the regularisation process',
+	'pages.start.lead': 'Use this checker to understand your likely next step.',
+	'pages.start.not_official': 'This is not the official government application.',
+	'pages.start.window_open': 'The official application window is open until 30 June 2026.',
+	'pages.start.resume': 'You can stop and come back later.',
+	'pages.start.what_to_expect_title': 'What to expect',
+	'pages.start.expectation.duration': 'about 5 to 8 minutes',
+	'pages.start.expectation.one_question': 'one question at a time',
+	'pages.start.expectation.review': 'a review step before the result',
+	'pages.start.expectation.timeline': 'a rough idea of when you started living in Spain',
+	'pages.start.start_now': 'Start now',
+	'pages.check_answers.eyebrow': 'Review',
+	'pages.check_answers.title': 'Check your answers',
+	'pages.check_answers.hint': 'Check these answers before you continue. You can change any answer.',
+	'pages.check_answers.change': 'Change',
+	'pages.check_answers.see_result': 'See result',
+	'pages.check_answers.back': 'Back',
+	'pages.result.eyebrow': 'Result',
+	'pages.result.why_title': 'Why we’re saying this',
+	'pages.result.meaning_title': 'What this means',
+	'pages.result.gather_title': 'What to gather next',
+	'pages.result.gather.before_cutoff':
+		'Dated papers that show you were living in Spain before January 2026',
+	'pages.result.gather.recent': 'Recent papers from the last 5 months',
+	'pages.result.gather.identity': 'Identity papers you already have',
+	'pages.result.how_to_apply_title': 'How to apply',
+	'pages.result.how_to_apply.body':
+		'Use the official government application channel and do not leave it until the last minute.',
+	'pages.result.how_to_apply.hint': 'The official application window is open until 30 June 2026.',
+	'pages.result.support_title': 'Get support',
+	'pages.result.support.body':
+		'This checker is not legal advice. Support near you may depend on your province: {province}.',
+	'pages.result.flags_title': 'Flags raised',
+	'pages.result.reference_title': 'Keep this reference',
+	'pages.result.reference_body': 'Reference number: {sessionId}',
+	'pages.result.reference_hint':
+		'Use print, save, email or a screenshot to keep a copy of this result.',
+	'pages.result.action.help': 'Do you want help with the next step?',
+	'pages.result.action.back_to_answers': 'Back to answers',
+	'pages.result.action.start_again': 'Start again',
+	'pages.confirmation.eyebrow': 'Confirmation',
+	'pages.confirmation.title': 'Your result is ready',
+	'pages.confirmation.body':
+		'Keep this page. It includes your reference number and a copy of your answers.',
+	'pages.confirmation.reference_number': 'Reference number',
+	'pages.confirmation.updated': 'Updated',
+	'pages.confirmation.hint': 'Save, print, or screenshot this page.',
+	'pages.confirmation.action.view_answers': 'View your answers',
+	'pages.confirmation.action.back_to_result': 'Back to result',
+	'pages.confirmation.action.start_again': 'Start again',
 	'common.choose_month': 'Choose month',
 	'common.choose_one_answer': 'Choose one answer',
 	'eyebrows.session_setup': 'Session setup',
@@ -211,5 +267,19 @@ export const en = {
 	'answers.residence_start.2025': '2025',
 	'answers.residence_start.2025_month_unknown': '2025 — month not sure',
 	'answers.residence_start.2025_month': '{month} 2025',
-	'answers.contact.with_value': '{method}: {value}'
+	'answers.contact.with_value': '{method}: {value}',
+	'result.title.likely_in_scope': 'Likely in scope',
+	'result.title.possible_but_needs_more_evidence':
+		'This route may fit, but you may need more papers first',
+	'result.title.needs_specialist_review': 'Needs specialist review',
+	'result.title.another_route_may_fit_better': 'This probably is not the right route for you',
+	'result.title.not_enough_information_yet':
+		'We need a bit more information before suggesting a next step',
+	'result.lead.likely_in_scope': 'You may be able to use this route',
+	'result.lead.possible_but_needs_more_evidence':
+		'This route may fit, but you may need more papers first',
+	'result.lead.needs_specialist_review': 'You may need specialist help before applying',
+	'result.lead.not_enough_information_yet':
+		'We need a bit more information before suggesting a next step',
+	'result.lead.another_route_may_fit_better': 'This probably is not the right route for you'
 } as const

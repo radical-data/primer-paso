@@ -1,4 +1,6 @@
 <script lang="ts">
+import { t } from '$lib/content'
+
 let { children } = $props()
 
 const languages = [
@@ -10,18 +12,15 @@ const languages = [
 </script>
 
 <svelte:head>
-	<title>Regularisation intake screener</title>
-	<meta
-		name="description"
-		content="A cautious intake screener for Spain's 2026 extraordinary regularisation process."
-	>
+	<title>{t('chrome.app_title')}</title>
+	<meta name="description" content={t('chrome.meta_description')}>
 </svelte:head>
 
 <div class="app-shell">
 	<header class="site-header">
 		<div class="site-width header-row">
-			<a class="brand" href="/start">Regularisation intake</a>
-			<nav aria-label="Language switcher">
+			<a class="brand" href="/start">{t('chrome.brand')}</a>
+			<nav aria-label={t('chrome.language_switcher_label')}>
 				<ul class="language-list">
 					{#each languages as language}
 						<li><a href={`/language?set=${language.value}`}>{language.label}</a></li>

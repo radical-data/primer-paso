@@ -1,22 +1,26 @@
+<script lang="ts">
+import { t } from '$lib/content'
+</script>
+
 <section class="stack">
-	<p class="eyebrow">Milestone 1</p>
+	<p class="eyebrow">{t('pages.start.eyebrow')}</p>
 	<div class="card stack">
-		<h1>Check what support you may need for the regularisation process</h1>
-		<p>Use this checker to understand your likely next step.</p>
-		<p>This is not the official government application.</p>
-		<p>The official application window is open until 30 June 2026.</p>
-		<p>You can stop and come back later.</p>
+		<h1>{t('pages.start.title')}</h1>
+		<p>{t('pages.start.lead')}</p>
+		<p>{t('pages.start.not_official')}</p>
+		<p>{t('pages.start.window_open')}</p>
+		<p>{t('pages.start.resume')}</p>
 
 		<div class="stack">
-			<h2>What to expect</h2>
+			<h2>{t('pages.start.what_to_expect_title')}</h2>
 			<ul>
-				<li>about 5 to 8 minutes</li>
-				<li>one question at a time</li>
-				<li>a review step before the result</li>
-				<li>a rough idea of when you started living in Spain</li>
+				<li>{t('pages.start.expectation.duration')}</li>
+				<li>{t('pages.start.expectation.one_question')}</li>
+				<li>{t('pages.start.expectation.review')}</li>
+				<li>{t('pages.start.expectation.timeline')}</li>
 			</ul>
 		</div>
 
-		<div class="actions"><a class="button" href="/language">Start now</a></div>
+		<div class="actions"><a class="button" href="/language">{t('pages.start.start_now')}</a></div>
 	</div>
 </section>

@@ -1,21 +1,28 @@
 <script lang="ts">
+import { t } from '$lib/content'
+
 let { data } = $props()
 </script>
 
 <section class="stack">
-	<p class="eyebrow">Confirmation</p>
+	<p class="eyebrow">{t('pages.confirmation.eyebrow')}</p>
 	<div class="card stack">
-		<h1>Your result is ready</h1>
-		<p>Keep this page. It includes your reference number and a copy of your answers.</p>
+		<h1>{t('pages.confirmation.title')}</h1>
+		<p>{t('pages.confirmation.body')}</p>
 		<div class="stack">
-			<p><strong>Reference number:</strong> {data.sessionId}</p>
-			<p><strong>Updated:</strong> {new Date(data.submittedAt).toLocaleString()}</p>
+			<p><strong>{t('pages.confirmation.reference_number')}:</strong> {data.sessionId}</p>
+			<p>
+				<strong>{t('pages.confirmation.updated')}:</strong>
+				{new Date(data.submittedAt).toLocaleString()}
+			</p>
 		</div>
-		<p class="hint">Save, print, or screenshot this page.</p>
+		<p class="hint">{t('pages.confirmation.hint')}</p>
 		<div class="actions">
-			<a class="button" href="/check-answers">View your answers</a>
-			<a class="button secondary" href="/result">Back to result</a>
-			<a class="button secondary" href="/start?new=1">Start again</a>
+			<a class="button" href="/check-answers">{t('pages.confirmation.action.view_answers')}</a>
+			<a class="button secondary" href="/result">{t('pages.confirmation.action.back_to_result')}</a>
+			<a class="button secondary" href="/start?new=1"
+				>{t('pages.confirmation.action.start_again')}</a
+			>
 		</div>
 	</div>
 </section>
