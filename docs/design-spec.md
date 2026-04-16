@@ -1,4 +1,4 @@
-# Design specification: regularisation intake screener
+# Design specification
 
 ## Summary
 

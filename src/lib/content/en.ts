@@ -5,10 +5,10 @@ export const en = {
 	'common.continue': 'Continue',
 	'common.back': 'Back',
 	'common.problem': 'There is a problem',
-	'chrome.app_title': 'Regularisation intake screener',
+	'chrome.app_title': 'Primer Paso',
 	'chrome.meta_description':
-		"An intake screener for Spain's 2026 extraordinary regularisation process.",
-	'chrome.brand': 'Regularisation intake',
+		"Primer Paso is an intake screener for Spain's 2026 extraordinary regularisation process. Hosted at primerpaso.org.",
+	'chrome.brand': 'Primer Paso',
 	'chrome.language_switcher_label': 'Language switcher',
 	'pages.start.eyebrow': 'Milestone 1',
 	'pages.start.title': 'Check what support you may need for the regularisation process',

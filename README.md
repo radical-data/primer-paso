@@ -1,4 +1,4 @@
-# regularisation-intake
+# Primer Paso
 
 A SvelteKit app for a multilingual, server-first intake screener for Spain's 2026 extraordinary regularisation process.
 

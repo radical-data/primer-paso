@@ -9,10 +9,10 @@ export const es = {
 	'common.continue': 'Continuar',
 	'common.back': 'Volver',
 	'common.problem': 'Hay un problema',
-	'chrome.app_title': 'Cuestionario de regularización',
+	'chrome.app_title': 'Primer Paso',
 	'chrome.meta_description':
-		'Un cuestionario inicial para el proceso extraordinario de regularización de España de 2026.',
-	'chrome.brand': 'Regularización',
+		'Primer Paso es un cuestionario inicial para el proceso extraordinario de regularización de España de 2026. Está alojado en primerpaso.org.',
+	'chrome.brand': 'Primer Paso',
 	'chrome.language_switcher_label': 'Cambio de idioma',
 	'pages.start.eyebrow': 'Hito 1',
 	'pages.start.title': 'Revisa qué apoyo podrías necesitar para el proceso de regularización',

@@ -9,10 +9,10 @@ export const fr = {
 	'common.continue': 'Continuer',
 	'common.back': 'Retour',
 	'common.problem': 'Il y a un problème',
-	'chrome.app_title': 'Questionnaire de régularisation',
+	'chrome.app_title': 'Primer Paso',
 	'chrome.meta_description':
-		"Un questionnaire d’accueil pour la procédure extraordinaire de régularisation en Espagne en 2026.",
-	'chrome.brand': 'Régularisation',
+		"Primer Paso est un questionnaire d’accueil pour la procédure extraordinaire de régularisation en Espagne en 2026. Hébergé sur primerpaso.org.",
+	'chrome.brand': 'Primer Paso',
 	'chrome.language_switcher_label': 'Sélecteur de langue',
 	'pages.start.eyebrow': 'Étape 1',
 	'pages.start.title':
