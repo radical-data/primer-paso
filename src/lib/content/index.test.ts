@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
+import { en } from './en'
+import { es } from './es'
 import { getTextDirection, renderReference, resolveLocale, translate } from './index'
 
 describe('content localisation', () => {
@@ -35,5 +37,9 @@ describe('content localisation', () => {
 		expect(translate('es', 'steps.support_needs.options.child_or_dependant_support')).toBe(
 			'Ayuda también para niños, niñas o personas dependientes'
 		)
+	})
+
+	it('fully implements the Spanish translation set', () => {
+		expect(Object.keys(es).sort()).toEqual(Object.keys(en).sort())
 	})
 })
