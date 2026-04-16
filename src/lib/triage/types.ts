@@ -7,14 +7,31 @@ export type ResultState =
 	| 'another_route_may_fit_better'
 	| 'not_enough_information_yet'
 
+export type RecommendedRoute = 'official_portal' | 'collaborating_organisation'
+
+export interface PreparationChecklist {
+	alreadyHave: MessageKey[]
+	stillNeed: MessageKey[]
+	discussWithSupport: MessageKey[]
+	unresolved: MessageKey[]
+}
+
+export interface ResultSummary {
+	eligibilityKey: MessageKey
+	nextStepKey: MessageKey
+}
+
 export interface TriageResult {
 	resultState: ResultState
+	recommendedRoute: RecommendedRoute
 	flags: MessageKey[]
 	reasonKey?: MessageKey
 	evidenceStrength: 'strong' | 'thin' | 'unknown'
 	showHowToApply: boolean
 	showSupportCta: boolean
 	showDocumentCta: boolean
+	summary: ResultSummary
+	checklist: PreparationChecklist
 	explanationKey: MessageKey
 	nextStepKeys: MessageKey[]
 	humanReviewRecommended: boolean

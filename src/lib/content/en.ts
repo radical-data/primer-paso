@@ -27,15 +27,52 @@ export const en = {
 	'pages.check_answers.change': 'Change',
 	'pages.check_answers.see_result': 'See result',
 	'pages.check_answers.back': 'Back',
+	'pages.handover.eyebrow': 'Handover',
+	'pages.handover.summary_title': 'Summary',
+	'pages.handover.title': 'Summary for support or for your records',
+	'pages.handover.body':
+		'You can print this page, save it, or share it with a trusted support worker or collaborating organisation.',
+	'pages.handover.reference': 'Reference number: {sessionId}',
+	'pages.handover.generated_at': 'Generated: {generatedAt}',
+	'pages.handover.next_step_title': 'Recommended next step',
+	'pages.handover.checklist_title': 'Preparation checklist',
+	'pages.handover.answers_title': 'Answers given',
+	'pages.handover.flags_title': 'Flags raised',
+	'pages.handover.action.print': 'Print this summary',
+	'pages.handover.action.back_to_result': 'Back to result',
 	'pages.result.eyebrow': 'Result',
+	'pages.result.eligibility_title': 'Likely eligibility',
+	'pages.result.eligibility.likely_in_scope':
+		'Based on your answers, you may be eligible for this regularisation route.',
+	'pages.result.eligibility.possible_but_needs_more_evidence':
+		'Based on your answers, this route may fit, but you may need more evidence before applying.',
+	'pages.result.eligibility.needs_specialist_review':
+		'Based on your answers, this route may still fit, but it should be reviewed with support before you apply.',
+	'pages.result.eligibility.not_enough_information_yet':
+		'It is not yet clear whether this route fits, because some important information is still missing or uncertain.',
+	'pages.result.eligibility.another_route_may_fit_better':
+		'Based on your answers, this regularisation route may not be the best fit.',
+	'pages.result.next_step_title': 'Your next step',
+	'pages.result.next_step.official_portal':
+		'Use the official regularisation portal when you are ready.',
+	'pages.result.next_step.collaborating_organisation':
+		'Take this summary to a collaborating organisation before you continue.',
+	'pages.result.next_step.collaborating_organisation_hint':
+		'Use the official list to find a collaborating organisation that can help you review your case and next steps.',
 	'pages.result.why_title': 'Why we’re saying this',
-	'pages.result.meaning_title': 'What this means',
-	'pages.result.gather_title': 'What to gather next',
-	'pages.result.gather.before_cutoff':
-		'Dated papers that show you were living in Spain before January 2026',
-	'pages.result.gather.recent': 'Recent papers from the last 5 months',
-	'pages.result.gather.identity': 'Identity papers you already have',
-	'pages.result.how_to_apply_title': 'How to apply',
+	'pages.result.checklist_title': 'Preparation checklist',
+	'pages.result.checklist.already_have': 'You already seem to have',
+	'pages.result.checklist.still_need': 'You may still need',
+	'pages.result.checklist.discuss_with_support': 'It may help to talk to support about',
+	'pages.result.checklist.unresolved': 'Questions still unclear',
+	'pages.result.route.official_portal_body':
+		'Use the official government portal for the regularisation process. If you need help first, you can also take this summary to a collaborating organisation.',
+	'pages.result.route.collaborating_organisation_body':
+		'Start with the official list of collaborating organisations. Take this summary with you so they do not have to start again from the beginning.',
+	'pages.result.handover_title': 'Handover and records',
+	'pages.result.handover.body':
+		'Print or save a handover summary to keep a copy of your answers or share them with a trusted support worker.',
+	'pages.result.how_to_apply_title': 'Before you apply',
 	'pages.result.how_to_apply.body':
 		'Use the official government application channel and do not leave it until the last minute.',
 	'pages.result.how_to_apply.hint': 'The official application window is open until 30 June 2026.',
@@ -45,9 +82,12 @@ export const en = {
 	'pages.result.flags_title': 'Flags raised',
 	'pages.result.reference_title': 'Keep this reference',
 	'pages.result.reference_body': 'Reference number: {sessionId}',
-	'pages.result.reference_hint':
-		'Use print, save, email or a screenshot to keep a copy of this result.',
-	'pages.result.action.help': 'Do you want help with the next step?',
+	'pages.result.action.official_portal': 'Use official regularisation portal',
+	'pages.result.action.open_official_portal': 'Open official regularisation portal',
+	'pages.result.action.open_collaborators_pdf': 'Open official list of collaborating organisations',
+	'pages.result.action.collaborators_pdf': 'See official list of collaborating organisations',
+	'pages.result.action.print_handover': 'Print or save handover summary',
+	'pages.result.action.download_handover_json': 'Download handover JSON',
 	'pages.result.action.back_to_answers': 'Back to answers',
 	'pages.result.action.start_again': 'Start again',
 	'pages.confirmation.eyebrow': 'Confirmation',
@@ -61,6 +101,8 @@ export const en = {
 	'pages.confirmation.action.back_to_result': 'Back to result',
 	'pages.confirmation.action.start_again': 'Start again',
 	'common.choose_month': 'Choose month',
+	'common.choose_one_answer': 'Choose one answer',
+	'common.choose_all_that_apply': 'Choose all that apply',
 	'eyebrows.session_setup': 'Getting started',
 	'eyebrows.eligibility': 'Eligibility',
 	'eyebrows.route_split': 'Your situation',
@@ -261,7 +303,11 @@ export const en = {
 	'result.reason.not_in_spain_now': 'You said you are not in Spain now.',
 	'result.reason.after_cutoff': 'You said you started living in Spain in 2026.',
 	'result.reason.specialist_review':
-		'One or more answers suggest that a specialist should review the next step.',
+		'Some of your answers suggest you may need help before applying.',
+	'result.reason.specialist_review_criminal_record':
+		'You said you may have a criminal record concern, so it would be safer to review this with support before applying.',
+	'result.reason.specialist_review_identity':
+		'You said there may be missing or mismatched identity details, so it would be safer to review this with support before applying.',
 	'result.reason.not_enough_information': 'Some of the key timeline answers are still uncertain.',
 	'result.reason.more_evidence':
 		'Your route and timing may fit, but the evidence looks thin so far.',
@@ -308,6 +354,40 @@ export const en = {
 	'result.flag.missing_identity_documents': 'Missing identity documents',
 	'result.flag.continuity_concern': 'Continuity concern',
 	'result.flag.family_support_needs': 'Family or dependant support needs',
+	'result.checklist.item.identity_document_available':
+		'You already identified at least one identity document.',
+	'result.checklist.item.asylum_case_documents_available':
+		'You already identified documents about your asylum or protection case.',
+	'result.checklist.item.before_cutoff_evidence_available':
+		'You already identified papers that may help show residence in Spain before January 2026.',
+	'result.checklist.item.recent_evidence_available':
+		'You already identified papers from the last 5 months.',
+	'result.checklist.item.continuity_answer_positive':
+		'You answered that you have been living in Spain during the last 5 months, or mostly so.',
+	'result.checklist.item.identity_document_needed':
+		'Check which identity document you can use and keep it ready for review.',
+	'result.checklist.item.before_cutoff_evidence_needed':
+		'Try to gather dated papers that show you were living in Spain before January 2026.',
+	'result.checklist.item.recent_evidence_needed':
+		'Try to gather papers from the last 5 months that show you have been living in Spain recently.',
+	'result.checklist.item.asylum_case_documents_needed':
+		'If your asylum or protection history matters here, gather any case papers, receipts, letters, or notifications you still have.',
+	'result.checklist.item.official_document_requirements':
+		'Check the official portal for the latest document requirements, including criminal record documents where required.',
+	'result.checklist.item.practical_support_helpful':
+		'Support may help with language, digital access, scanning, printing, or understanding which papers matter most.',
+	'result.checklist.item.complex_case_review':
+		'Any concerns about documents, evidence, asylum history, or safety online.',
+	'result.checklist.item.another_route_advice':
+		'A collaborating organisation may help you understand whether another immigration route fits better.',
+	'result.checklist.item.confirm_timeline':
+		'Try to confirm roughly when you started living in Spain and whether you have been here during the last 5 months.',
+	'result.checklist.item.continuity_concern':
+		'Be ready to explain any gaps or absences during the last 5 months.',
+	'result.checklist.item.identity_issue_to_explain':
+		'Be ready to explain any missing identity papers or mismatched personal details.',
+	'result.checklist.item.asylum_history_to_explain':
+		'Be ready to explain what happened with any asylum or protection process in Spain.',
 	'result.title.likely_in_scope': 'Likely in scope',
 	'result.title.possible_but_needs_more_evidence':
 		'This route may fit, but you may need more papers first',

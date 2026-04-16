@@ -4,6 +4,8 @@ export const es = {
 	'common.not_answered': 'Sin responder',
 	'common.choose_an_option': 'Elige una opción',
 	'common.choose_month': 'Elige un mes',
+	'common.choose_one_answer': 'Elige una respuesta',
+	'common.choose_all_that_apply': 'Elige todas las que correspondan',
 	'common.continue': 'Continuar',
 	'common.back': 'Volver',
 	'common.problem': 'Hay un problema',
@@ -32,15 +34,52 @@ export const es = {
 	'pages.check_answers.change': 'Cambiar',
 	'pages.check_answers.see_result': 'Ver resultado',
 	'pages.check_answers.back': 'Volver',
+	'pages.handover.eyebrow': 'Resumen',
+	'pages.handover.summary_title': 'Resumen',
+	'pages.handover.title': 'Resumen para apoyo o para tus registros',
+	'pages.handover.body':
+		'Puedes imprimir esta página, guardarla o compartirla con una persona de apoyo de confianza o una entidad colaboradora.',
+	'pages.handover.reference': 'Número de referencia: {sessionId}',
+	'pages.handover.generated_at': 'Generado: {generatedAt}',
+	'pages.handover.next_step_title': 'Siguiente paso recomendado',
+	'pages.handover.checklist_title': 'Lista de preparación',
+	'pages.handover.answers_title': 'Respuestas dadas',
+	'pages.handover.flags_title': 'Alertas detectadas',
+	'pages.handover.action.print': 'Imprimir este resumen',
+	'pages.handover.action.back_to_result': 'Volver al resultado',
 	'pages.result.eyebrow': 'Resultado',
+	'pages.result.eligibility_title': 'Elegibilidad probable',
+	'pages.result.eligibility.likely_in_scope':
+		'Según tus respuestas, podrías ser elegible para esta vía de regularización.',
+	'pages.result.eligibility.possible_but_needs_more_evidence':
+		'Según tus respuestas, esta vía podría encajar, pero quizá necesites más pruebas antes de solicitar.',
+	'pages.result.eligibility.needs_specialist_review':
+		'Según tus respuestas, esta vía podría seguir encajando, pero conviene revisarla con apoyo antes de solicitar.',
+	'pages.result.eligibility.not_enough_information_yet':
+		'Aún no está claro si esta vía encaja, porque falta información importante o sigue siendo incierta.',
+	'pages.result.eligibility.another_route_may_fit_better':
+		'Según tus respuestas, esta vía de regularización quizá no sea la más adecuada.',
+	'pages.result.next_step_title': 'Tu siguiente paso',
+	'pages.result.next_step.official_portal':
+		'Usa el portal oficial de regularización cuando estés preparado/a.',
+	'pages.result.next_step.collaborating_organisation':
+		'Lleva este resumen a una entidad colaboradora antes de continuar.',
+	'pages.result.next_step.collaborating_organisation_hint':
+		'Usa la lista oficial para encontrar una entidad colaboradora que pueda ayudarte a revisar tu caso y los siguientes pasos.',
 	'pages.result.why_title': 'Por qué te mostramos esto',
-	'pages.result.meaning_title': 'Qué significa',
-	'pages.result.gather_title': 'Qué reunir ahora',
-	'pages.result.gather.before_cutoff':
-		'Documentos con fecha que muestren que ya vivías en España antes de enero de 2026',
-	'pages.result.gather.recent': 'Documentos recientes de los últimos 5 meses',
-	'pages.result.gather.identity': 'Tus documentos de identidad',
-	'pages.result.how_to_apply_title': 'Cómo solicitar',
+	'pages.result.checklist_title': 'Lista de preparación',
+	'pages.result.checklist.already_have': 'Parece que ya tienes',
+	'pages.result.checklist.still_need': 'Puede que aún necesites',
+	'pages.result.checklist.discuss_with_support': 'Puede ayudar hablarlo con apoyo sobre',
+	'pages.result.checklist.unresolved': 'Preguntas que siguen sin aclararse',
+	'pages.result.route.official_portal_body':
+		'Usa el portal oficial del gobierno para el proceso de regularización. Si primero necesitas ayuda, también puedes llevar este resumen a una entidad colaboradora.',
+	'pages.result.route.collaborating_organisation_body':
+		'Empieza por la lista oficial de entidades colaboradoras. Lleva este resumen para que no tengan que empezar de cero.',
+	'pages.result.handover_title': 'Resumen y registros',
+	'pages.result.handover.body':
+		'Imprime o guarda un resumen de entrega para conservar una copia de tus respuestas o compartirlas con una persona de apoyo de confianza.',
+	'pages.result.how_to_apply_title': 'Antes de solicitar',
 	'pages.result.how_to_apply.body':
 		'Usa el canal oficial del gobierno y no lo dejes para el último momento.',
 	'pages.result.how_to_apply.hint':
@@ -51,9 +90,12 @@ export const es = {
 	'pages.result.flags_title': 'Alertas detectadas',
 	'pages.result.reference_title': 'Guarda esta referencia',
 	'pages.result.reference_body': 'Número de referencia: {sessionId}',
-	'pages.result.reference_hint':
-		'Usa imprimir, guardar, enviar por correo o una captura de pantalla para conservar una copia.',
-	'pages.result.action.help': '¿Quieres ayuda con el siguiente paso?',
+	'pages.result.action.official_portal': 'Usar el portal oficial de regularización',
+	'pages.result.action.open_official_portal': 'Abrir el portal oficial de regularización',
+	'pages.result.action.open_collaborators_pdf': 'Abrir la lista oficial de entidades colaboradoras',
+	'pages.result.action.collaborators_pdf': 'Ver la lista oficial de entidades colaboradoras',
+	'pages.result.action.print_handover': 'Imprimir o guardar resumen de entrega',
+	'pages.result.action.download_handover_json': 'Descargar JSON del resumen',
 	'pages.result.action.back_to_answers': 'Volver a las respuestas',
 	'pages.result.action.start_again': 'Empezar de nuevo',
 	'pages.confirmation.eyebrow': 'Confirmación',
@@ -270,7 +312,11 @@ export const es = {
 	'result.reason.not_in_spain_now': 'Dijiste que ahora no estás en España.',
 	'result.reason.after_cutoff': 'Dijiste que empezaste a vivir en España en 2026.',
 	'result.reason.specialist_review':
-		'Una o más respuestas sugieren que una persona especialista debería revisar el siguiente paso.',
+		'Algunas de tus respuestas sugieren que podrías necesitar ayuda antes de solicitar.',
+	'result.reason.specialist_review_criminal_record':
+		'Dijiste que podrías tener una preocupación por antecedentes penales; sería más seguro revisarlo con apoyo antes de solicitar.',
+	'result.reason.specialist_review_identity':
+		'Dijiste que podrían faltar datos de identidad o no coincidir; sería más seguro revisarlo con apoyo antes de solicitar.',
 	'result.reason.not_enough_information':
 		'Algunas de las respuestas clave sobre fechas siguen siendo inciertas.',
 	'result.reason.more_evidence':
@@ -319,6 +365,40 @@ export const es = {
 	'result.flag.missing_identity_documents': 'Faltan documentos de identidad',
 	'result.flag.continuity_concern': 'Preocupación por continuidad',
 	'result.flag.family_support_needs': 'Necesidades de apoyo para familia o personas dependientes',
+	'result.checklist.item.identity_document_available':
+		'Ya identificaste al menos un documento de identidad.',
+	'result.checklist.item.asylum_case_documents_available':
+		'Ya identificaste documentos sobre tu caso de asilo o protección.',
+	'result.checklist.item.before_cutoff_evidence_available':
+		'Ya identificaste documentos que pueden ayudar a mostrar residencia en España antes de enero de 2026.',
+	'result.checklist.item.recent_evidence_available':
+		'Ya identificaste documentos de los últimos 5 meses.',
+	'result.checklist.item.continuity_answer_positive':
+		'Respondiste que has vivido en España durante los últimos 5 meses, o en su mayor parte.',
+	'result.checklist.item.identity_document_needed':
+		'Comprueba qué documento de identidad puedes usar y tenlo listo para revisión.',
+	'result.checklist.item.before_cutoff_evidence_needed':
+		'Intenta reunir documentos fechados que muestren que vivías en España antes de enero de 2026.',
+	'result.checklist.item.recent_evidence_needed':
+		'Intenta reunir documentos de los últimos 5 meses que muestren que has vivido en España recientemente.',
+	'result.checklist.item.asylum_case_documents_needed':
+		'Si tu historial de asilo o protección importa aquí, reúne cualquier documento del expediente, recibos, cartas o notificaciones que aún tengas.',
+	'result.checklist.item.official_document_requirements':
+		'Consulta el portal oficial para los requisitos documentales más recientes, incluidos los antecedentes penales cuando proceda.',
+	'result.checklist.item.practical_support_helpful':
+		'El apoyo puede ayudar con idioma, acceso digital, escaneo, impresión o a entender qué documentos importan más.',
+	'result.checklist.item.complex_case_review':
+		'Cualquier preocupación sobre documentos, pruebas, historial de asilo o seguridad en línea.',
+	'result.checklist.item.another_route_advice':
+		'Una entidad colaboradora puede ayudarte a entender si otra vía de inmigración encaja mejor con tu situación.',
+	'result.checklist.item.confirm_timeline':
+		'Intenta confirmar aproximadamente cuándo empezaste a vivir en España y si has estado aquí durante los últimos 5 meses.',
+	'result.checklist.item.continuity_concern':
+		'Prepárate para explicar lagunas o ausencias durante los últimos 5 meses.',
+	'result.checklist.item.identity_issue_to_explain':
+		'Prepárate para explicar documentos de identidad faltantes o datos personales que no coinciden.',
+	'result.checklist.item.asylum_history_to_explain':
+		'Prepárate para explicar qué ocurrió con cualquier proceso de asilo o protección en España.',
 	'result.title.likely_in_scope': 'Probablemente dentro del alcance',
 	'result.title.possible_but_needs_more_evidence':
 		'Esta vía podría encajar, pero quizá necesites más documentos primero',

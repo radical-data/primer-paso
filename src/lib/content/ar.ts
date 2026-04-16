@@ -32,14 +32,51 @@ export const ar = {
 	'pages.check_answers.change': 'تغيير',
 	'pages.check_answers.see_result': 'عرض النتيجة',
 	'pages.check_answers.back': 'رجوع',
+	'pages.handover.eyebrow': 'التسليم',
+	'pages.handover.summary_title': 'الملخص',
+	'pages.handover.title': 'ملخص للدعم أو لسجلاتك',
+	'pages.handover.body':
+		'يمكنك طباعة هذه الصفحة أو حفظها أو مشاركتها مع عامل دعم موثوق أو منظمة متعاونة.',
+	'pages.handover.reference': 'رقم المرجع: {sessionId}',
+	'pages.handover.generated_at': 'تاريخ الإنشاء: {generatedAt}',
+	'pages.handover.next_step_title': 'الخطوة التالية الموصى بها',
+	'pages.handover.checklist_title': 'قائمة تحضير',
+	'pages.handover.answers_title': 'الإجابات المعطاة',
+	'pages.handover.flags_title': 'الإشارات التي ظهرت',
+	'pages.handover.action.print': 'طباعة هذا الملخص',
+	'pages.handover.action.back_to_result': 'العودة إلى النتيجة',
 	'pages.result.eyebrow': 'النتيجة',
+	'pages.result.eligibility_title': 'الأهلية المحتملة',
+	'pages.result.eligibility.likely_in_scope':
+		'استناداً إلى إجاباتك، قد تكون مؤهلاً لهذا مسار التسوية.',
+	'pages.result.eligibility.possible_but_needs_more_evidence':
+		'استناداً إلى إجاباتك، قد يناسبك هذا المسار، لكنك قد تحتاج إلى مزيد من الأدلة قبل التقديم.',
+	'pages.result.eligibility.needs_specialist_review':
+		'استناداً إلى إجاباتك، قد يظل هذا المسار مناسباً، لكن ينبغي مراجعته مع الدعم قبل التقديم.',
+	'pages.result.eligibility.not_enough_information_yet':
+		'ليس واضحاً بعد ما إذا كان هذا المسار مناسباً، لأن بعض المعلومات المهمة لا تزال مفقودة أو غير مؤكدة.',
+	'pages.result.eligibility.another_route_may_fit_better':
+		'استناداً إلى إجاباتك، قد لا يكون هذا مسار التسوية الأنسب.',
+	'pages.result.next_step_title': 'خطوتك التالية',
+	'pages.result.next_step.official_portal': 'استخدم بوابة التسوية الرسمية عندما تكون مستعداً.',
+	'pages.result.next_step.collaborating_organisation':
+		'خذ هذا الملخص إلى منظمة متعاونة قبل المتابعة.',
+	'pages.result.next_step.collaborating_organisation_hint':
+		'استخدم القائمة الرسمية للعثور على منظمة متعاونة يمكنها مساعدتك في مراجعة حالتك والخطوات التالية.',
 	'pages.result.why_title': 'لماذا نعرض لك هذا',
-	'pages.result.meaning_title': 'ماذا يعني هذا',
-	'pages.result.gather_title': 'ما الذي ينبغي جمعه الآن',
-	'pages.result.gather.before_cutoff': 'مستندات مؤرخة تُظهر أنك كنت تعيش في إسبانيا قبل يناير 2026',
-	'pages.result.gather.recent': 'مستندات حديثة من آخر 5 أشهر',
-	'pages.result.gather.identity': 'وثائق الهوية التي لديك بالفعل',
-	'pages.result.how_to_apply_title': 'كيفية التقديم',
+	'pages.result.checklist_title': 'قائمة تحضير',
+	'pages.result.checklist.already_have': 'يبدو أن لديك بالفعل',
+	'pages.result.checklist.still_need': 'قد تحتاج بعد ذلك إلى',
+	'pages.result.checklist.discuss_with_support': 'قد يفيد الحديث مع الدعم عن',
+	'pages.result.checklist.unresolved': 'أسئلة لا تزال غير واضحة',
+	'pages.result.route.official_portal_body':
+		'استخدم البوابة الحكومية الرسمية لعملية التسوية. إذا احتجت إلى مساعدة أولاً، يمكنك أيضاً أخذ هذا الملخص إلى منظمة متعاونة.',
+	'pages.result.route.collaborating_organisation_body':
+		'ابدأ بالقائمة الرسمية للمنظمات المتعاونة. خذ هذا الملخص معك حتى لا يضطروا للبدء من الصفر.',
+	'pages.result.handover_title': 'التسليم والسجلات',
+	'pages.result.handover.body':
+		'اطبع أو احفظ ملخص تسليم للاحتفاظ بنسخة من إجاباتك أو مشاركتها مع عامل دعم موثوق.',
+	'pages.result.how_to_apply_title': 'قبل التقديم',
 	'pages.result.how_to_apply.body':
 		'استخدم قناة التقديم الحكومية الرسمية ولا تنتظر حتى اللحظة الأخيرة.',
 	'pages.result.how_to_apply.hint': 'فترة التقديم الرسمية مفتوحة حتى 30 يونيو 2026.',
@@ -49,9 +86,12 @@ export const ar = {
 	'pages.result.flags_title': 'الإشارات التي ظهرت',
 	'pages.result.reference_title': 'احتفِظ بهذا المرجع',
 	'pages.result.reference_body': 'رقم المرجع: {sessionId}',
-	'pages.result.reference_hint':
-		'استخدم الطباعة أو الحفظ أو البريد الإلكتروني أو لقطة الشاشة للاحتفاظ بنسخة.',
-	'pages.result.action.help': 'هل تريد مساعدة في الخطوة التالية؟',
+	'pages.result.action.official_portal': 'استخدام بوابة التسوية الرسمية',
+	'pages.result.action.open_official_portal': 'فتح بوابة التسوية الرسمية',
+	'pages.result.action.open_collaborators_pdf': 'فتح القائمة الرسمية للمنظمات المتعاونة',
+	'pages.result.action.collaborators_pdf': 'عرض القائمة الرسمية للمنظمات المتعاونة',
+	'pages.result.action.print_handover': 'طباعة أو حفظ ملخص التسليم',
+	'pages.result.action.download_handover_json': 'تنزيل ملف JSON للتسليم',
 	'pages.result.action.back_to_answers': 'العودة إلى الإجابات',
 	'pages.result.action.start_again': 'ابدأ من جديد',
 	'pages.confirmation.eyebrow': 'تأكيد',
@@ -89,7 +129,6 @@ export const ar = {
 	'months.november': 'نوفمبر',
 	'months.december': 'ديسمبر',
 	'steps.language.title': 'اختر لغة',
-	'steps.language.body': 'ما اللغة التي تريد استخدامها؟',
 	'steps.language.hint': 'يمكنك تغيير اللغة في أي وقت من دون فقدان إجاباتك.',
 	'steps.language.check_answers_label': 'اللغة',
 	'steps.language.error': 'اختر لغة.',
@@ -98,7 +137,6 @@ export const ar = {
 	'steps.language.options.ar': 'العربية',
 	'steps.language.options.fr': 'Français',
 	'steps.completion_mode.title': 'لمن تملأ هذا الاستبيان؟',
-	'steps.completion_mode.body': 'لمن تملأ هذا الاستبيان؟',
 	'steps.completion_mode.hint': 'اختر الخيار الذي يطابق هذه الجلسة بأفضل شكل.',
 	'steps.completion_mode.check_answers_label': 'الشخص الذي تملأ له هذا الاستبيان',
 	'steps.completion_mode.error': 'اختر لمن تملأ هذا الاستبيان.',
@@ -106,7 +144,6 @@ export const ar = {
 	'steps.completion_mode.options.someone_else': 'لشخص آخر، بإذنه',
 	'steps.completion_mode.options.support_worker': 'أنا عامل دعم أو متطوع',
 	'steps.in_spain_now.title': 'هل أنت في إسبانيا الآن؟',
-	'steps.in_spain_now.body': 'هل أنت في إسبانيا الآن؟',
 	'steps.in_spain_now.check_answers_label': 'هل أنت في إسبانيا الآن؟',
 	'steps.in_spain_now.error': 'اختر ما إذا كنت في إسبانيا الآن.',
 	'steps.common.options.yes': 'نعم',
@@ -124,13 +161,9 @@ export const ar = {
 	'steps.residence_start.month_prompt': 'أي شهر تقريباً؟',
 	'steps.residence_start.month_unknown': 'لست متأكداً من الشهر',
 	'steps.asylum_history.title': 'هل قدمت طلب لجوء أو حماية دولية في إسبانيا؟',
-	'steps.asylum_history.body': 'هل قدمت طلب لجوء أو حماية دولية في إسبانيا؟',
-	'steps.asylum_history.hint': 'اختر إجابة واحدة.',
 	'steps.asylum_history.check_answers_label': 'اللجوء أو الحماية الدولية في إسبانيا',
 	'steps.asylum_history.error': 'اختر ما إذا كنت قد قدمت طلب لجوء أو حماية دولية في إسبانيا.',
 	'steps.asylum_before_cutoff.title': 'هل كان ذلك الطلب قبل 1 يناير 2026؟',
-	'steps.asylum_before_cutoff.body': 'هل كان ذلك الطلب قبل 1 يناير 2026؟',
-	'steps.asylum_before_cutoff.hint': 'اختر إجابة واحدة.',
 	'steps.asylum_before_cutoff.check_answers_label': 'اللجوء أو الحماية الدولية قبل 1 يناير 2026',
 	'steps.asylum_before_cutoff.error': 'اختر ما إذا كان ذلك الطلب قبل 1 يناير 2026.',
 	'steps.five_month_stay.title': 'هل كنت تعيش في إسبانيا خلال الأشهر الخمسة الماضية؟',
@@ -140,14 +173,11 @@ export const ar = {
 	'steps.five_month_stay.error': 'اختر ما إذا كنت في إسبانيا خلال الأشهر الخمسة الماضية.',
 	'steps.five_month_stay.options.mostly_yes': 'في الغالب نعم، مع غيابات قصيرة',
 	'steps.asylum_documents.title': 'هل لديك أي مستندات بشأن قضية اللجوء أو الحماية الخاصة بك؟',
-	'steps.asylum_documents.body': 'هل لديك أي مستندات بشأن قضية اللجوء أو الحماية الخاصة بك؟',
 	'steps.asylum_documents.hint': 'مثل إيصال تقديم أو مستند من الملف أو رسالة أو إشعار.',
 	'steps.asylum_documents.check_answers_label': 'مستندات بشأن قضية اللجوء أو الحماية الخاصة بك',
 	'steps.asylum_documents.error':
 		'اختر ما إذا كانت لديك مستندات بشأن قضية اللجوء أو الحماية الخاصة بك.',
 	'steps.non_asylum_route.title': 'أي من هذه الخيارات يبدو أقرب إلى وضعك؟',
-	'steps.non_asylum_route.body': 'أي من هذه الخيارات يبدو أقرب إلى وضعك؟',
-	'steps.non_asylum_route.hint': 'اختر كل ما ينطبق.',
 	'steps.non_asylum_route.check_answers_label': 'ما الذي يبدو أقرب إلى وضعك',
 	'steps.non_asylum_route.error': 'اختر خياراً واحداً على الأقل.',
 	'steps.non_asylum_route.options.worked_in_spain': 'لقد عملت في إسبانيا',
@@ -156,8 +186,6 @@ export const ar = {
 	'steps.non_asylum_route.options.vulnerable_situation': 'قد أحتاج إلى دعم بسبب وضع صعب أو هش',
 	'steps.non_asylum_route.options.none': 'لا شيء من ذلك',
 	'steps.identity_documents.title': 'ما وثائق الهوية التي لديك؟',
-	'steps.identity_documents.body': 'ما وثائق الهوية التي لديك؟',
-	'steps.identity_documents.hint': 'اختر كل ما ينطبق.',
 	'steps.identity_documents.check_answers_label': 'وثائق الهوية',
 	'steps.identity_documents.error': 'اختر خياراً واحداً على الأقل.',
 	'steps.identity_documents.options.current_passport': 'جواز سفر ساري',
@@ -169,9 +197,6 @@ export const ar = {
 	'steps.identity_documents.options.prefer_not_to_say': 'أفضل عدم الإجابة',
 	'steps.evidence_before_cutoff.title':
 		'هل لديك أي مستندات يمكن أن تساعد في إثبات أنك كنت تعيش بالفعل في إسبانيا قبل يناير 2026؟',
-	'steps.evidence_before_cutoff.body':
-		'هل لديك أي مستندات يمكن أن تساعد في إثبات أنك كنت تعيش بالفعل في إسبانيا قبل يناير 2026؟',
-	'steps.evidence_before_cutoff.hint': 'اختر كل ما ينطبق.',
 	'steps.evidence_before_cutoff.check_answers_label': 'مستندات قد تُظهر الإقامة قبل يناير 2026',
 	'steps.evidence_before_cutoff.error': 'اختر خياراً واحداً على الأقل.',
 	'steps.evidence_before_cutoff.options.padron_or_registration': 'تسجيل أو padrón',
@@ -186,9 +211,6 @@ export const ar = {
 	'steps.evidence_before_cutoff.options.none_yet': 'لا أملك أياً من هذه بعد',
 	'steps.evidence_recent_months.title':
 		'هل لديك أي مستندات من الأشهر الخمسة الماضية يمكن أن تساعد في إظهار أنك كنت تعيش هنا مؤخراً؟',
-	'steps.evidence_recent_months.body':
-		'هل لديك أي مستندات من الأشهر الخمسة الماضية يمكن أن تساعد في إظهار أنك كنت تعيش هنا مؤخراً؟',
-	'steps.evidence_recent_months.hint': 'اختر كل ما ينطبق.',
 	'steps.evidence_recent_months.check_answers_label': 'مستندات من آخر 5 أشهر',
 	'steps.evidence_recent_months.error': 'اختر خياراً واحداً على الأقل.',
 	'steps.evidence_recent_months.options.housing_papers': 'مستندات سكن',
@@ -202,7 +224,6 @@ export const ar = {
 	'steps.evidence_recent_months.options.something_else_dated_named': 'شيء آخر يحمل تاريخاً واسمي',
 	'steps.evidence_recent_months.options.none_yet': 'لا أملك أياً من هذه بعد',
 	'steps.specialist_flags.title': 'هل هناك أي شيء قد يعني أنك تحتاج إلى مشورة متخصصة قبل التقديم؟',
-	'steps.specialist_flags.body': 'هل هناك أي شيء قد يعني أنك تحتاج إلى مشورة متخصصة قبل التقديم؟',
 	'steps.specialist_flags.check_answers_label': 'أمور قد تتطلب مشورة متخصصة',
 	'steps.specialist_flags.error': 'اختر خياراً واحداً على الأقل.',
 	'steps.specialist_flags.options.criminal_record_worry':
@@ -219,8 +240,6 @@ export const ar = {
 	'steps.specialist_flags.options.want_specialist': 'أفضل التحدث مع مختص حول هذا الأمر',
 	'steps.specialist_flags.options.none': 'لا شيء من ذلك',
 	'steps.support_needs.title': 'ما نوع المساعدة الأكثر فائدة لك؟',
-	'steps.support_needs.body': 'ما نوع المساعدة الأكثر فائدة لك؟',
-	'steps.support_needs.hint': 'اختر كل ما ينطبق.',
 	'steps.support_needs.error': 'اختر خياراً واحداً على الأقل.',
 	'steps.support_needs.check_answers_label': 'الدعم المطلوب',
 	'steps.support_needs.options.another_language': 'مساعدة بلغة أخرى',
@@ -235,7 +254,6 @@ export const ar = {
 		'مساعدة أيضاً للأطفال أو الأشخاص المعالين',
 	'steps.support_needs.options.specialist_advice': 'مشورة متخصصة',
 	'steps.province.title': 'في أي مقاطعة أنت؟',
-	'steps.province.body': 'في أي مقاطعة أنت؟',
 	'steps.province.hint': 'يساعدنا هذا في عرض خيارات الدعم القريبة منك.',
 	'steps.province.check_answers_label': 'المقاطعة',
 	'steps.province.error': 'اختر مقاطعة.',
@@ -252,13 +270,11 @@ export const ar = {
 	'steps.referral.title': 'هل تريد مساعدة في الخطوة التالية؟',
 	'steps.referral.body':
 		'بناءً على نتيجتك، قد ترغب في المساعدة على جمع المستندات أو التحدث مع مختص أو تقديم الطلب.',
-	'steps.referral.hint': 'قد تكون الخطوة التالية هي جمع المستندات أو التحدث مع مختص أو التقديم.',
 	'steps.referral.error': 'اختر نوع المساعدة التي تريدها بعد ذلك.',
 	'steps.referral.options.contact_me': 'نعم، أود أن يتواصل معي أحد',
 	'steps.referral.options.show_options': 'نعم، اعرض لي خيارات الدعم القريبة مني',
 	'steps.referral.options.no_thanks': 'لا، سأحتفظ بهذا الآن',
 	'steps.contact.title': 'كيف ينبغي أن نتواصل معك؟',
-	'steps.contact.body': 'كيف ينبغي أن نتواصل معك؟',
 	'steps.contact.hint': 'اختر الطريقة الأكثر أماناً.',
 	'steps.contact.error': 'اختر كيف ينبغي أن نتواصل معك.',
 	'steps.contact.detail_required_error': 'أدخل بيانات التواصل للطريقة التي اخترتها.',
@@ -278,8 +294,11 @@ export const ar = {
 	'answers.contact.with_value': '{method}: {value}',
 	'result.reason.not_in_spain_now': 'ذكرت أنك لست في إسبانيا الآن.',
 	'result.reason.after_cutoff': 'ذكرت أنك بدأت العيش في إسبانيا في 2026.',
-	'result.reason.specialist_review':
-		'تشير إجابة واحدة أو أكثر إلى أن مختصاً ينبغي أن يراجع الخطوة التالية.',
+	'result.reason.specialist_review': 'تشير بعض إجاباتك إلى أنك قد تحتاج إلى مساعدة قبل التقديم.',
+	'result.reason.specialist_review_criminal_record':
+		'ذكرت أنك قد تقلق بشأن السجل الجنائي؛ من الأسلم مراجعة ذلك مع الدعم قبل التقديم.',
+	'result.reason.specialist_review_identity':
+		'ذكرت أن تفاصيل الهوية قد تكون مفقودة أو غير متطابقة؛ من الأسلم مراجعة ذلك مع الدعم قبل التقديم.',
 	'result.reason.not_enough_information':
 		'لا تزال بعض الإجابات الأساسية المتعلقة بالمدة الزمنية غير واضحة.',
 	'result.reason.more_evidence': 'قد يكون مسارك وتوقيتك مناسبين، لكن الأدلة تبدو محدودة حتى الآن.',
@@ -318,6 +337,38 @@ export const ar = {
 	'result.flag.missing_identity_documents': 'وثائق الهوية مفقودة',
 	'result.flag.continuity_concern': 'قلق بشأن الاستمرارية',
 	'result.flag.family_support_needs': 'احتياجات دعم للأسرة أو المعالين',
+	'result.checklist.item.identity_document_available': 'حددت بالفعل وثيقة هوية واحدة على الأقل.',
+	'result.checklist.item.asylum_case_documents_available':
+		'حددت بالفعل مستندات تتعلق بحالة اللجوء أو الحماية الخاصة بك.',
+	'result.checklist.item.before_cutoff_evidence_available':
+		'حددت بالفعل أوراقاً قد تساعد في إثبات الإقامة في إسبانيا قبل يناير 2026.',
+	'result.checklist.item.recent_evidence_available': 'حددت بالفعل أوراقاً من آخر 5 أشهر.',
+	'result.checklist.item.continuity_answer_positive':
+		'أجبت أنك كنت تعيش في إسبانيا خلال الأشهر الخمسة الماضية، أو في الغالب كذلك.',
+	'result.checklist.item.identity_document_needed':
+		'تحقق من وثيقة الهوية التي يمكنك استخدامها واحتفظ بها جاهزة للمراجعة.',
+	'result.checklist.item.before_cutoff_evidence_needed':
+		'حاول جمع أوراق مؤرخة تُظهر أنك كنت تعيش في إسبانيا قبل يناير 2026.',
+	'result.checklist.item.recent_evidence_needed':
+		'حاول جمع أوراق من آخر 5 أشهر تُظهر أنك كنت تعيش في إسبانيا مؤخراً.',
+	'result.checklist.item.asylum_case_documents_needed':
+		'إذا كانت خلفية اللجوء أو الحماية مهمة هنا، فاجمع أي أوراق ملف أو إيصالات أو رسائل أو إشعارات لا تزال لديك.',
+	'result.checklist.item.official_document_requirements':
+		'راجع البوابة الرسمية لأحدث متطلبات المستندات، بما في ذلك مستندات السجل الجنائي حيث يلزم.',
+	'result.checklist.item.practical_support_helpful':
+		'قد يساعد الدعم في اللغة أو الوصول الرقمي أو المسح الضوئي أو الطباعة أو فهم الأوراق الأكثر أهمية.',
+	'result.checklist.item.complex_case_review':
+		'أي مخاوف بشأن المستندات أو الأدلة أو تاريخ اللجوء أو الأمان على الإنترنت.',
+	'result.checklist.item.another_route_advice':
+		'قد تساعدك منظمة متعاونة على فهم ما إذا كان مسار هجرة آخر أنسب لوضعك.',
+	'result.checklist.item.confirm_timeline':
+		'حاول التأكد تقريباً من موعد بدء إقامتك في إسبانيا وما إذا كنت قد كنت هنا خلال الأشهر الخمسة الماضية.',
+	'result.checklist.item.continuity_concern':
+		'كن مستعداً لشرح أي فجوات أو غياب خلال الأشهر الخمسة الماضية.',
+	'result.checklist.item.identity_issue_to_explain':
+		'كن مستعداً لشرح أي وثائق هوية مفقودة أو بيانات شخصية غير متطابقة.',
+	'result.checklist.item.asylum_history_to_explain':
+		'كن مستعداً لشرح ما حدث في أي إجراء لجوء أو حماية في إسبانيا.',
 	'result.title.likely_in_scope': 'على الأرجح ضمن النطاق',
 	'result.title.possible_but_needs_more_evidence':
 		'قد يكون هذا المسار مناسباً، لكنك قد تحتاج إلى مزيد من المستندات أولاً',
