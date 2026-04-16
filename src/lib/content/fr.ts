@@ -29,7 +29,7 @@ export const fr = {
 	'pages.start.expectation.review': 'une étape de vérification avant le résultat',
 	'pages.start.expectation.timeline':
 		'une idée approximative de la date à laquelle vous avez commencé à vivre en Espagne',
-	'pages.start.start_now': 'Commencer',
+	'pages.start.start_now': 'Commencer le questionnaire',
 	'pages.check_answers.eyebrow': 'Vérification',
 	'pages.check_answers.title': 'Vérifiez vos réponses',
 	'pages.check_answers.hint':

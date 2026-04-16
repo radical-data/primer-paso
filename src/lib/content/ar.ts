@@ -25,7 +25,7 @@ export const ar = {
 	'pages.start.expectation.one_question': 'سؤال واحد في كل مرة',
 	'pages.start.expectation.review': 'خطوة مراجعة قبل النتيجة',
 	'pages.start.expectation.timeline': 'فكرة تقريبية عن موعد بدء إقامتك في إسبانيا',
-	'pages.start.start_now': 'ابدأ الآن',
+	'pages.start.start_now': 'ابدأ الاستبيان',
 	'pages.check_answers.eyebrow': 'مراجعة',
 	'pages.check_answers.title': 'راجع إجاباتك',
 	'pages.check_answers.hint': 'راجع هذه الإجابات قبل المتابعة. يمكنك تغيير أي إجابة.',

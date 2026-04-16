@@ -26,7 +26,7 @@ export const es = {
 	'pages.start.expectation.one_question': 'una pregunta a la vez',
 	'pages.start.expectation.review': 'un paso de revisión antes del resultado',
 	'pages.start.expectation.timeline': 'una idea aproximada de cuándo empezaste a vivir en España',
-	'pages.start.start_now': 'Empezar',
+	'pages.start.start_now': 'Empezar el cuestionario',
 	'pages.check_answers.eyebrow': 'Revisión',
 	'pages.check_answers.title': 'Revisa tus respuestas',
 	'pages.check_answers.hint':

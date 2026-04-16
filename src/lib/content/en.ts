@@ -21,7 +21,7 @@ export const en = {
 	'pages.start.expectation.one_question': 'one question at a time',
 	'pages.start.expectation.review': 'a review step before the result',
 	'pages.start.expectation.timeline': 'a rough idea of when you started living in Spain',
-	'pages.start.start_now': 'Start now',
+	'pages.start.start_now': 'Start the questionnaire',
 	'pages.check_answers.eyebrow': 'Review',
 	'pages.check_answers.title': 'Check your answers',
 	'pages.check_answers.hint': 'Check these answers before you continue. You can change any answer.',
