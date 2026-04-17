@@ -28,7 +28,7 @@ export const fr = {
 	'pages.start.expectation.one_question': 'une question à la fois',
 	'pages.start.expectation.review': 'une étape de vérification avant le résultat',
 	'pages.start.expectation.timeline':
-		'si vous étiez en Espagne avant le 1er janvier 2026 et au cours des 5 derniers mois',
+		'si vous étiez déjà en Espagne avant le 1er janvier 2026 et si vous y êtes resté·e pendant toute la période de 5 mois avant de déposer votre demande',
 	'pages.start.start_now': 'Commencer le questionnaire',
 	'pages.check_answers.eyebrow': 'Vérification',
 	'pages.check_answers.title': 'Vérifiez vos réponses',
@@ -155,9 +155,6 @@ export const fr = {
 	'steps.completion_mode.options.self': 'Pour moi',
 	'steps.completion_mode.options.someone_else': 'Pour une autre personne, avec son autorisation',
 	'steps.completion_mode.options.support_worker': 'Je suis travailleur·euse social·e ou bénévole',
-	'steps.in_spain_now.title': 'Êtes-vous actuellement en Espagne ?',
-	'steps.in_spain_now.check_answers_label': 'Présence actuelle en Espagne',
-	'steps.in_spain_now.error': 'Choisissez si vous êtes actuellement en Espagne.',
 	'steps.presence_before_cutoff.title':
 		'Viviez-vous déjà en Espagne avant le 1er janvier 2026 ?',
 	'steps.presence_before_cutoff.hint':
@@ -193,13 +190,14 @@ export const fr = {
 		'Asile ou protection internationale avant le 1er janvier 2026',
 	'steps.asylum_before_cutoff.error':
 		'Choisissez si cette demande a été déposée avant le 1er janvier 2026.',
-	'steps.five_month_stay.title': 'Avez-vous vécu en Espagne pendant les 5 derniers mois ?',
-	'steps.five_month_stay.body': 'Avez-vous été en Espagne pendant les 5 derniers mois ?',
-	'steps.five_month_stay.hint': 'Les courts déplacements ne comptent pas toujours.',
-	'steps.five_month_stay.check_answers_label': 'Présence en Espagne pendant les 5 derniers mois',
-	'steps.five_month_stay.error':
-		'Choisissez si vous avez été en Espagne pendant les 5 derniers mois.',
-	'steps.five_month_stay.options.mostly_yes': 'Globalement oui, avec de courtes absences',
+	'steps.five_month_stay.title':
+		'Dans les 5 mois précédant la date à laquelle vous prévoyez de déposer votre demande, avez-vous été en Espagne en permanence ?',
+	'steps.five_month_stay.body':
+		'Répondez en pensant aux 5 mois précédant la date à laquelle vous prévoyez de déposer votre demande.',
+	'steps.five_month_stay.check_answers_label':
+		'Présence continue en Espagne pendant toute la période de 5 mois',
+	'steps.five_month_stay.error': 'Choisissez la réponse qui correspond le mieux à votre situation.',
+	'steps.five_month_stay.options.left_spain': 'Non, j’ai quitté l’Espagne à un moment donné',
 	'steps.asylum_documents.title':
 		'Avez-vous des documents concernant votre dossier d’asile ou de protection ?',
 	'steps.asylum_documents.hint':
@@ -208,15 +206,23 @@ export const fr = {
 		'Documents concernant votre dossier d’asile ou de protection',
 	'steps.asylum_documents.error':
 		'Choisissez si vous avez des documents concernant votre dossier d’asile ou de protection.',
-	'steps.non_asylum_route.title': 'Laquelle de ces situations ressemble le plus à la vôtre ?',
-	'steps.non_asylum_route.check_answers_label': 'Situation la plus proche de la vôtre',
-	'steps.non_asylum_route.error': 'Choisissez au moins une option.',
-	'steps.non_asylum_route.options.worked_in_spain': 'J’ai travaillé en Espagne',
-	'steps.non_asylum_route.options.close_family_relevant':
-		'J’ai ici des proches qui pourraient être pertinents pour cette procédure',
-	'steps.non_asylum_route.options.vulnerable_situation':
-		'Je pourrais avoir besoin d’aide en raison d’une situation difficile ou de vulnérabilité',
-	'steps.non_asylum_route.options.none': 'Aucune de ces réponses',
+	'steps.work_situation.title': 'L’un de ces éléments décrit-il votre situation professionnelle ?',
+	'steps.work_situation.check_answers_label': 'Situation professionnelle',
+	'steps.work_situation.error': 'Choisissez au moins une option.',
+	'steps.work_situation.options.worked_in_spain': 'J’ai travaillé en Espagne',
+	'steps.work_situation.options.job_offer': 'J’ai une offre d’emploi',
+	'steps.work_situation.options.want_to_work_for_myself': 'Je veux travailler à mon compte',
+	'steps.work_situation.options.none': 'Aucune de ces réponses',
+	'steps.family_situation.title':
+		'L’un de ces éléments décrit-il votre situation familiale en Espagne ?',
+	'steps.family_situation.check_answers_label': 'Situation familiale en Espagne',
+	'steps.family_situation.error': 'Choisissez au moins une option.',
+	'steps.family_situation.options.child_under_18':
+		'Je vis avec mon enfant de moins de 18 ans',
+	'steps.family_situation.options.adult_child_support_needs':
+		'Je vis avec mon enfant adulte qui a besoin de beaucoup d’aide en raison d’un handicap ou de problèmes de santé',
+	'steps.family_situation.options.mother_or_father': 'Je vis avec ma mère ou mon père',
+	'steps.family_situation.options.none': 'Aucune de ces réponses',
 	'steps.identity_documents.title': 'Quels documents d’identité avez-vous ?',
 	'steps.identity_documents.check_answers_label': 'Documents d’identité',
 	'steps.identity_documents.error': 'Choisissez au moins une option.',
@@ -337,8 +343,6 @@ export const fr = {
 	'answers.residence_start.2025_month_unknown': '2025 — mois inconnu',
 	'answers.residence_start.2025_month': '{month} 2025',
 	'answers.contact.with_value': '{method} : {value}',
-	'result.reason.not_in_spain_now':
-		'Vous avez indiqué que vous n’êtes pas actuellement en Espagne.',
 	'result.reason.after_cutoff':
 		'Vous avez indiqué que vous ne viviez pas encore en Espagne avant le 1er janvier 2026.',
 	'result.reason.specialist_review':
@@ -353,8 +357,6 @@ export const fr = {
 		'Vos réponses pourraient correspondre à cette voie, mais il vous faudra peut-être davantage de documents pour appuyer votre demande.',
 	'result.reason.likely_in_scope':
 		'Vos réponses suggèrent que vos dates et vos documents pourraient correspondre à cette voie.',
-	'result.explanation.not_in_spain_now':
-		'D’après vos réponses, ce n’est probablement pas la bonne voie pour vous en ce moment.',
 	'result.explanation.after_cutoff':
 		'D’après vos réponses, cette voie n’est probablement pas la plus adaptée, car la date limite risque de ne pas être respectée.',
 	'result.explanation.specialist_review':
@@ -376,7 +378,7 @@ export const fr = {
 	'result.next_step.keep_papers_together':
 		'Gardez ensemble vos pièces d’identité et toutes les preuves datées pour qu’elles puissent être examinées.',
 	'result.next_step.confirm_timeline':
-		'Essayez de confirmer approximativement quand vous avez commencé à vivre en Espagne et si vous y avez vécu pendant les 5 derniers mois.',
+		'Essayez de confirmer si vous étiez déjà en Espagne avant le 1er janvier 2026 et si vous y êtes resté·e pendant toute la période de 5 mois avant de déposer votre demande.',
 	'result.next_step.ask_for_help_if_unsure':
 		'Si vous n’êtes pas sûr·e, utilisez le mode accompagné ou demandez de l’aide à une organisation de soutien.',
 	'result.next_step.gather_before_cutoff':
@@ -385,7 +387,6 @@ export const fr = {
 		'Rassemblez aussi, si possible, des documents récents des 5 derniers mois.',
 	'result.next_step.use_official_channel':
 		'Utilisez le canal officiel de dépôt des demandes avant le 30 juin 2026.',
-	'result.flag.not_in_spain_now': 'Vous n’êtes pas actuellement en Espagne',
 	'result.flag.uncertain_timeline': 'La chronologie est incertaine',
 	'result.flag.five_month_requirement_risk': 'Risque possible concernant la continuité',
 	'result.flag.hard_gate_after_cutoff': 'Le début de résidence est postérieur à la date limite',
@@ -421,7 +422,7 @@ export const fr = {
 	'result.checklist.item.another_route_advice':
 		'La question de savoir si une autre voie d’immigration pourrait mieux convenir.',
 	'result.checklist.item.confirm_timeline':
-		'Quand vous avez commencé à vivre en Espagne, et si vous y avez été pendant les 5 derniers mois.',
+		'Si vous étiez déjà en Espagne avant le 1er janvier 2026 et si vous y êtes resté·e pendant toute la période de 5 mois avant de déposer votre demande.',
 	'result.checklist.item.continuity_concern':
 		'Toute interruption ou absence pendant les 5 derniers mois.',
 	'result.checklist.item.identity_issue_to_explain':

@@ -72,29 +72,11 @@ const steps: JourneyStepDefinition[] = [
 		checkAnswersLabelKey: 'steps.completion_mode.check_answers_label',
 		includeInCheckAnswers: true,
 		back: 'language',
-		next: 'in-spain-now',
+		next: 'presence-before-cutoff',
 		options: [
 			{ value: 'self', labelKey: 'steps.completion_mode.options.self' },
 			{ value: 'someone_else', labelKey: 'steps.completion_mode.options.someone_else' },
 			{ value: 'support_worker', labelKey: 'steps.completion_mode.options.support_worker' }
-		]
-	},
-	{
-		id: 'in-spain-now',
-		slug: 'in-spain-now',
-		field: 'inSpainNow',
-		adapter: 'single-choice',
-		eyebrowKey: 'eyebrows.eligibility',
-		titleKey: 'steps.in_spain_now.title',
-		errorKey: 'steps.in_spain_now.error',
-		checkAnswersLabelKey: 'steps.in_spain_now.check_answers_label',
-		includeInCheckAnswers: true,
-		back: 'completion-mode',
-		next: 'presence-before-cutoff',
-		options: [
-			{ value: 'yes', labelKey: 'steps.common.options.yes' },
-			{ value: 'no', labelKey: 'steps.common.options.no' },
-			{ value: 'not_sure', labelKey: 'steps.common.options.not_sure' }
 		]
 	},
 	{
@@ -108,7 +90,7 @@ const steps: JourneyStepDefinition[] = [
 		errorKey: 'steps.presence_before_cutoff.error',
 		checkAnswersLabelKey: 'steps.presence_before_cutoff.check_answers_label',
 		includeInCheckAnswers: true,
-		back: 'in-spain-now',
+		back: 'completion-mode',
 		next: 'five-month-stay',
 		options: [
 			{ value: 'yes', labelKey: 'steps.common.options.yes' },
@@ -124,7 +106,6 @@ const steps: JourneyStepDefinition[] = [
 		eyebrowKey: 'eyebrows.eligibility',
 		titleKey: 'steps.five_month_stay.title',
 		bodyKey: 'steps.five_month_stay.body',
-		hintKey: 'steps.five_month_stay.hint',
 		errorKey: 'steps.five_month_stay.error',
 		checkAnswersLabelKey: 'steps.five_month_stay.check_answers_label',
 		includeInCheckAnswers: true,
@@ -132,8 +113,7 @@ const steps: JourneyStepDefinition[] = [
 		next: 'asylum-history',
 		options: [
 			{ value: 'yes', labelKey: 'steps.common.options.yes' },
-			{ value: 'mostly_yes', labelKey: 'steps.five_month_stay.options.mostly_yes' },
-			{ value: 'no', labelKey: 'steps.common.options.no' },
+			{ value: 'left_spain', labelKey: 'steps.five_month_stay.options.left_spain' },
 			{ value: 'not_sure', labelKey: 'steps.common.options.not_sure' }
 		]
 	},
@@ -149,7 +129,7 @@ const steps: JourneyStepDefinition[] = [
 		includeInCheckAnswers: true,
 		back: 'five-month-stay',
 		next: (answers) =>
-			answers.asylumHistory === 'yes' ? 'asylum-before-cutoff' : 'non-asylum-route',
+			answers.asylumHistory === 'yes' ? 'asylum-before-cutoff' : 'work-situation',
 		options: [
 			{ value: 'yes', labelKey: 'steps.common.options.yes' },
 			{ value: 'no', labelKey: 'steps.common.options.no' },
@@ -168,9 +148,9 @@ const steps: JourneyStepDefinition[] = [
 		includeInCheckAnswers: true,
 		back: 'asylum-history',
 		next: (answers) =>
-			answers.asylumBeforeCutoff === 'yes' ? 'identity-documents' : 'non-asylum-route',
+			answers.asylumBeforeCutoff === 'yes' ? 'identity-documents' : 'work-situation',
 		guard: (answers) => answers.asylumHistory === 'yes',
-		redirectIfGuardFails: 'non-asylum-route',
+		redirectIfGuardFails: 'work-situation',
 		options: [
 			{ value: 'yes', labelKey: 'steps.common.options.yes' },
 			{ value: 'no', labelKey: 'steps.common.options.no' },
@@ -178,34 +158,65 @@ const steps: JourneyStepDefinition[] = [
 		]
 	},
 	{
-		id: 'non-asylum-route',
-		slug: 'non-asylum-route',
-		field: 'nonAsylumGrounds',
+		id: 'work-situation',
+		slug: 'work-situation',
+		field: 'workSituation',
 		adapter: 'multi-choice',
 		eyebrowKey: 'eyebrows.eligibility',
-		titleKey: 'steps.non_asylum_route.title',
-		errorKey: 'steps.non_asylum_route.error',
-		checkAnswersLabelKey: 'steps.non_asylum_route.check_answers_label',
+		titleKey: 'steps.work_situation.title',
+		errorKey: 'steps.work_situation.error',
+		checkAnswersLabelKey: 'steps.work_situation.check_answers_label',
 		includeInCheckAnswers: true,
 		back: (answers) =>
 			answers.asylumHistory === 'yes' ? 'asylum-before-cutoff' : 'asylum-history',
-		next: 'identity-documents',
+		next: 'family-situation',
 		guard: (answers) => answers.asylumHistory !== 'yes' || answers.asylumBeforeCutoff !== 'yes',
 		redirectIfGuardFails: 'identity-documents',
 		options: [
 			{
 				value: 'worked_in_spain',
-				labelKey: 'steps.non_asylum_route.options.worked_in_spain'
+				labelKey: 'steps.work_situation.options.worked_in_spain'
 			},
 			{
-				value: 'close_family_relevant',
-				labelKey: 'steps.non_asylum_route.options.close_family_relevant'
+				value: 'job_offer',
+				labelKey: 'steps.work_situation.options.job_offer'
 			},
 			{
-				value: 'vulnerable_situation',
-				labelKey: 'steps.non_asylum_route.options.vulnerable_situation'
+				value: 'want_to_work_for_myself',
+				labelKey: 'steps.work_situation.options.want_to_work_for_myself'
 			},
-			{ value: 'none', labelKey: 'steps.non_asylum_route.options.none' },
+			{ value: 'none', labelKey: 'steps.work_situation.options.none' },
+			{ value: 'not_sure', labelKey: 'steps.common.options.not_sure' }
+		]
+	},
+	{
+		id: 'family-situation',
+		slug: 'family-situation',
+		field: 'familySituation',
+		adapter: 'multi-choice',
+		eyebrowKey: 'eyebrows.eligibility',
+		titleKey: 'steps.family_situation.title',
+		errorKey: 'steps.family_situation.error',
+		checkAnswersLabelKey: 'steps.family_situation.check_answers_label',
+		includeInCheckAnswers: true,
+		back: 'work-situation',
+		next: 'identity-documents',
+		guard: (answers) => answers.asylumHistory !== 'yes' || answers.asylumBeforeCutoff !== 'yes',
+		redirectIfGuardFails: 'identity-documents',
+		options: [
+			{
+				value: 'child_under_18',
+				labelKey: 'steps.family_situation.options.child_under_18'
+			},
+			{
+				value: 'adult_child_support_needs',
+				labelKey: 'steps.family_situation.options.adult_child_support_needs'
+			},
+			{
+				value: 'mother_or_father',
+				labelKey: 'steps.family_situation.options.mother_or_father'
+			},
+			{ value: 'none', labelKey: 'steps.family_situation.options.none' },
 			{ value: 'not_sure', labelKey: 'steps.common.options.not_sure' }
 		]
 	},
@@ -220,7 +231,7 @@ const steps: JourneyStepDefinition[] = [
 		checkAnswersLabelKey: 'steps.identity_documents.check_answers_label',
 		includeInCheckAnswers: true,
 		back: (answers) =>
-			answers.asylumBeforeCutoff === 'yes' ? 'asylum-before-cutoff' : 'non-asylum-route',
+			answers.asylumBeforeCutoff === 'yes' ? 'asylum-before-cutoff' : 'family-situation',
 		next: 'evidence-before-cutoff',
 		options: [
 			{

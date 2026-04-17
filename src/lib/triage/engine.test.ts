@@ -3,19 +3,8 @@ import { describe, expect, it } from 'vitest'
 import { runTriage } from './engine'
 
 describe('runTriage', () => {
-	it('routes out when the person is not in Spain now', () => {
-		const result = runTriage({
-			inSpainNow: 'no',
-			presentBeforeCutoff: 'yes'
-		})
-
-		expect(result.resultState).toBe('another_route_may_fit_better')
-		expect(result.flags).toContain('result.flag.not_in_spain_now')
-	})
-
 	it('routes out when the person was not living in Spain before the cutoff', () => {
 		const result = runTriage({
-			inSpainNow: 'yes',
 			presentBeforeCutoff: 'no'
 		})
 
@@ -24,7 +13,6 @@ describe('runTriage', () => {
 
 	it('returns not enough information when the core timeline is uncertain', () => {
 		const result = runTriage({
-			inSpainNow: 'not_sure',
 			presentBeforeCutoff: 'not_sure',
 			asylumBeforeCutoff: 'not_sure',
 			fiveMonthStay: 'not_sure'
@@ -34,9 +22,21 @@ describe('runTriage', () => {
 		expect(result.flags).toContain('result.flag.uncertain_timeline')
 	})
 
+	it('returns specialist review when the person left Spain during the 5-month period', () => {
+		const result = runTriage({
+			presentBeforeCutoff: 'yes',
+			asylumBeforeCutoff: 'no',
+			fiveMonthStay: 'left_spain',
+			identityDocuments: ['current_passport'],
+			evidenceBeforeCutoff: ['padron_or_registration'],
+			evidenceRecentMonths: ['housing_papers']
+		})
+		expect(result.resultState).toBe('needs_specialist_review')
+		expect(result.flags).toContain('result.flag.five_month_requirement_risk')
+		expect(result.flags).toContain('result.flag.continuity_concern')
+	})
 	it('returns specialist review for criminal record concern', () => {
 		const result = runTriage({
-			inSpainNow: 'yes',
 			presentBeforeCutoff: 'yes',
 			asylumBeforeCutoff: 'no',
 			fiveMonthStay: 'yes',
@@ -48,7 +48,6 @@ describe('runTriage', () => {
 
 	it('adds a family-support flag when extra dependant support is needed', () => {
 		const result = runTriage({
-			inSpainNow: 'yes',
 			presentBeforeCutoff: 'yes',
 			asylumBeforeCutoff: 'no',
 			fiveMonthStay: 'yes',
@@ -64,7 +63,6 @@ describe('runTriage', () => {
 
 	it('returns specialist review for safeguarding and urgent-support flags', () => {
 		const result = runTriage({
-			inSpainNow: 'yes',
 			presentBeforeCutoff: 'yes',
 			asylumBeforeCutoff: 'no',
 			fiveMonthStay: 'yes',
@@ -76,7 +74,6 @@ describe('runTriage', () => {
 
 	it('returns evidence weak when timing fits but papers are thin', () => {
 		const result = runTriage({
-			inSpainNow: 'yes',
 			presentBeforeCutoff: 'yes',
 			asylumBeforeCutoff: 'no',
 			fiveMonthStay: 'yes',
@@ -90,7 +87,6 @@ describe('runTriage', () => {
 
 	it('returns likely in scope when the person was in Spain before the cutoff and has strong evidence', () => {
 		const result = runTriage({
-			inSpainNow: 'yes',
 			presentBeforeCutoff: 'yes',
 			asylumBeforeCutoff: 'no',
 			fiveMonthStay: 'yes',

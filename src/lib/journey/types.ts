@@ -7,17 +7,25 @@ export type CompletionModeValue = (typeof COMPLETION_MODE_VALUES)[number]
 export const YES_NO_NOT_SURE_VALUES = ['yes', 'no', 'not_sure'] as const
 export type YesNoNotSureValue = (typeof YES_NO_NOT_SURE_VALUES)[number]
 
-export const FIVE_MONTH_STAY_VALUES = ['yes', 'mostly_yes', 'no', 'not_sure'] as const
+export const FIVE_MONTH_STAY_VALUES = ['yes', 'left_spain', 'not_sure'] as const
 export type FiveMonthStayValue = (typeof FIVE_MONTH_STAY_VALUES)[number]
 
-export const NON_ASYLUM_GROUND_VALUES = [
+export const WORK_SITUATION_VALUES = [
 	'worked_in_spain',
-	'close_family_relevant',
-	'vulnerable_situation',
+	'job_offer',
+	'want_to_work_for_myself',
 	'none',
 	'not_sure'
 ] as const
-export type NonAsylumGroundValue = (typeof NON_ASYLUM_GROUND_VALUES)[number]
+export type WorkSituationValue = (typeof WORK_SITUATION_VALUES)[number]
+export const FAMILY_SITUATION_VALUES = [
+	'child_under_18',
+	'adult_child_support_needs',
+	'mother_or_father',
+	'none',
+	'not_sure'
+] as const
+export type FamilySituationValue = (typeof FAMILY_SITUATION_VALUES)[number]
 
 export const IDENTITY_DOCUMENT_VALUES = [
 	'current_passport',
@@ -101,13 +109,13 @@ export type SupportNeedValue = (typeof SUPPORT_NEED_VALUES)[number]
 export interface JourneyAnswers {
 	language?: LanguageValue
 	completionMode?: CompletionModeValue
-	inSpainNow?: YesNoNotSureValue
 	presentBeforeCutoff?: YesNoNotSureValue
 	asylumHistory?: YesNoNotSureValue
 	asylumBeforeCutoff?: YesNoNotSureValue
 	fiveMonthStay?: FiveMonthStayValue
 	asylumCaseDocuments?: YesNoNotSureValue
-	nonAsylumGrounds?: NonAsylumGroundValue[]
+	workSituation?: WorkSituationValue[]
+	familySituation?: FamilySituationValue[]
 	identityDocuments?: IdentityDocumentValue[]
 	evidenceBeforeCutoff?: EvidenceBeforeCutoffValue[]
 	evidenceRecentMonths?: EvidenceRecentValue[]

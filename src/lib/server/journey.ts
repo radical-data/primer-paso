@@ -9,11 +9,11 @@ import type {
 	JourneyAnswers,
 	JourneyState,
 	LanguageValue,
-	NonAsylumGroundValue,
+	WorkSituationValue,
+	FamilySituationValue,
 	ProvinceValue,
 	SpecialistFlagValue,
-	SupportNeedValue,
-	YesNoNotSureValue
+	SupportNeedValue
 } from '$lib/journey/types'
 
 import {
@@ -23,10 +23,11 @@ import {
 	FIVE_MONTH_STAY_VALUES,
 	IDENTITY_DOCUMENT_VALUES,
 	LANGUAGE_VALUES,
-	NON_ASYLUM_GROUND_VALUES,
+	FAMILY_SITUATION_VALUES,
 	PROVINCE_VALUES,
 	SPECIALIST_FLAG_VALUES,
 	SUPPORT_NEED_VALUES,
+	WORK_SITUATION_VALUES,
 	YES_NO_NOT_SURE_VALUES
 } from '$lib/journey/types'
 
@@ -60,7 +61,8 @@ const isLanguageValue = isEnumValue(LANGUAGE_VALUES)
 const isCompletionModeValue = isEnumValue(COMPLETION_MODE_VALUES)
 const isYesNoNotSureValue = isEnumValue(YES_NO_NOT_SURE_VALUES)
 const isFiveMonthStayValue = isEnumValue(FIVE_MONTH_STAY_VALUES)
-const isNonAsylumGroundValue = isEnumValue(NON_ASYLUM_GROUND_VALUES)
+const isWorkSituationValue = isEnumValue(WORK_SITUATION_VALUES)
+const isFamilySituationValue = isEnumValue(FAMILY_SITUATION_VALUES)
 const isIdentityDocumentValue = isEnumValue(IDENTITY_DOCUMENT_VALUES)
 const isEvidenceBeforeCutoffValue = isEnumValue(EVIDENCE_BEFORE_CUTOFF_VALUES)
 const isEvidenceRecentValue = isEnumValue(EVIDENCE_RECENT_VALUES)
@@ -92,7 +94,6 @@ const isJourneyState = (value: unknown): value is JourneyState => {
 		(candidate.answers === undefined || typeof candidate.answers === 'object') &&
 		(answers.language === undefined || isLanguageValue(answers.language)) &&
 		(answers.completionMode === undefined || isCompletionModeValue(answers.completionMode)) &&
-		(answers.inSpainNow === undefined || isYesNoNotSureValue(answers.inSpainNow)) &&
 		(answers.presentBeforeCutoff === undefined ||
 			isYesNoNotSureValue(answers.presentBeforeCutoff)) &&
 		(answers.asylumHistory === undefined || isYesNoNotSureValue(answers.asylumHistory)) &&
@@ -100,8 +101,10 @@ const isJourneyState = (value: unknown): value is JourneyState => {
 		(answers.fiveMonthStay === undefined || isFiveMonthStayValue(answers.fiveMonthStay)) &&
 		(answers.asylumCaseDocuments === undefined ||
 			isYesNoNotSureValue(answers.asylumCaseDocuments)) &&
-		(answers.nonAsylumGrounds === undefined ||
-			isStringArrayOf(answers.nonAsylumGrounds, isNonAsylumGroundValue)) &&
+		(answers.workSituation === undefined ||
+			isStringArrayOf(answers.workSituation, isWorkSituationValue)) &&
+		(answers.familySituation === undefined ||
+			isStringArrayOf(answers.familySituation, isFamilySituationValue)) &&
 		(answers.identityDocuments === undefined ||
 			isStringArrayOf(answers.identityDocuments, isIdentityDocumentValue)) &&
 		(answers.evidenceBeforeCutoff === undefined ||
@@ -183,27 +186,34 @@ export const formatCompletionModeAnswer = labelMap<CompletionModeValue>({
 	support_worker: "I'm a support worker or volunteer"
 })
 
-export const formatYesNoNotSureAnswer = labelMap<YesNoNotSureValue>({
-	yes: 'Yes',
-	no: 'No',
-	not_sure: "I'm not sure"
-})
-
 export const formatFiveMonthStayAnswer = labelMap<FiveMonthStayValue>({
 	yes: 'Yes',
-	mostly_yes: 'Mostly yes, with short absences',
-	no: 'No',
+	left_spain: 'No, I left Spain at some point',
 	not_sure: "I'm not sure"
 })
 
-export const formatNonAsylumGroundsAnswer = (values?: NonAsylumGroundValue[]) =>
+export const formatWorkSituationAnswer = (values?: WorkSituationValue[]) =>
 	formatList(
 		(values ?? []).map(
 			(value) =>
 				({
 					worked_in_spain: "I've worked in Spain",
-					close_family_relevant: 'I have close family here who may be relevant to this process',
-					vulnerable_situation: 'I may need support because of a difficult or vulnerable situation',
+					job_offer: 'I have a job offer',
+					want_to_work_for_myself: 'I want to work for myself',
+					none: 'None of these',
+					not_sure: "I'm not sure"
+				})[value]
+		)
+	)
+export const formatFamilySituationAnswer = (values?: FamilySituationValue[]) =>
+	formatList(
+		(values ?? []).map(
+			(value) =>
+				({
+					child_under_18: 'I live with my child who is under 18',
+					adult_child_support_needs:
+						'I live with my adult child who needs a lot of support because of disability or health needs',
+					mother_or_father: 'I live with my mother or father',
 					none: 'None of these',
 					not_sure: "I'm not sure"
 				})[value]

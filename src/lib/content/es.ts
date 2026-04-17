@@ -26,7 +26,7 @@ export const es = {
 	'pages.start.expectation.one_question': 'una pregunta a la vez',
 	'pages.start.expectation.review': 'un paso de revisión antes del resultado',
 	'pages.start.expectation.timeline':
-		'si estabas en España antes del 1 de enero de 2026 y durante los últimos 5 meses',
+		'si estabas en España antes del 1 de enero de 2026 y permaneciste en España durante todo el periodo de 5 meses antes de presentar la solicitud',
 	'pages.start.start_now': 'Empezar el cuestionario',
 	'pages.check_answers.eyebrow': 'Revisión',
 	'pages.check_answers.title': 'Revisa tus respuestas',
@@ -150,9 +150,6 @@ export const es = {
 	'steps.completion_mode.options.self': 'Para mí',
 	'steps.completion_mode.options.someone_else': 'Para otra persona, con su permiso',
 	'steps.completion_mode.options.support_worker': 'Soy trabajador/a de apoyo o voluntario/a',
-	'steps.in_spain_now.title': '¿Estás en España ahora?',
-	'steps.in_spain_now.check_answers_label': 'Si estás en España ahora',
-	'steps.in_spain_now.error': 'Elige si estás en España ahora.',
 	'steps.presence_before_cutoff.title': '¿Ya vivías en España antes del 1 de enero de 2026?',
 	'steps.presence_before_cutoff.hint':
 		'Responde según si ya vivías en España antes de la fecha límite',
@@ -180,27 +177,32 @@ export const es = {
 	'steps.asylum_before_cutoff.check_answers_label':
 		'Asilo o protección internacional antes del 1 de enero de 2026',
 	'steps.asylum_before_cutoff.error': 'Elige si esa solicitud fue antes del 1 de enero de 2026.',
-	'steps.five_month_stay.title': '¿Has estado viviendo en España durante los últimos 5 meses?',
-	'steps.five_month_stay.body': '¿Has estado en España durante los últimos 5 meses?',
-	'steps.five_month_stay.hint': 'Las salidas cortas no siempre importan.',
-	'steps.five_month_stay.check_answers_label':
-		'Si has estado en España durante los últimos 5 meses',
-	'steps.five_month_stay.error': 'Elige si has estado en España durante los últimos 5 meses.',
-	'steps.five_month_stay.options.mostly_yes': 'Casi siempre sí, con ausencias cortas',
+	'steps.five_month_stay.title':
+		'En los 5 meses antes de que pienses presentar la solicitud, ¿has permanecido en España todo el tiempo?',
+	'steps.five_month_stay.body': 'Responde sobre los 5 meses anteriores a la fecha en que esperas presentar.',
+	'steps.five_month_stay.check_answers_label': 'Permanecí en España durante todo el periodo de 5 meses',
+	'steps.five_month_stay.error': 'Elige la respuesta que mejor encaje con tu situación.',
+	'steps.five_month_stay.options.left_spain': 'No, en algún momento salí de España',
 	'steps.asylum_documents.title': '¿Tienes algún documento sobre tu caso de asilo o protección?',
 	'steps.asylum_documents.hint':
 		'Por ejemplo, un resguardo de presentación, documento del caso, carta o notificación.',
 	'steps.asylum_documents.check_answers_label': 'Documentos sobre tu caso de asilo o protección',
 	'steps.asylum_documents.error': 'Elige si tienes documentos sobre tu caso de asilo o protección.',
-	'steps.non_asylum_route.title': '¿Cuál de estas opciones se parece más a tu situación?',
-	'steps.non_asylum_route.check_answers_label': 'Qué opciones se parecen a tu situación',
-	'steps.non_asylum_route.error': 'Elige al menos una opción.',
-	'steps.non_asylum_route.options.worked_in_spain': 'He trabajado en España',
-	'steps.non_asylum_route.options.close_family_relevant':
-		'Tengo familiares cercanos aquí que podrían ser relevantes para este proceso',
-	'steps.non_asylum_route.options.vulnerable_situation':
-		'Podría necesitar apoyo por una situación difícil o de vulnerabilidad',
-	'steps.non_asylum_route.options.none': 'Ninguna de estas',
+	'steps.work_situation.title': '¿Alguna de estas opciones describe tu situación laboral?',
+	'steps.work_situation.check_answers_label': 'Situación laboral',
+	'steps.work_situation.error': 'Elige al menos una opción.',
+	'steps.work_situation.options.worked_in_spain': 'He trabajado en España',
+	'steps.work_situation.options.job_offer': 'Tengo una oferta de trabajo',
+	'steps.work_situation.options.want_to_work_for_myself': 'Quiero trabajar por cuenta propia',
+	'steps.work_situation.options.none': 'Ninguna de estas',
+	'steps.family_situation.title': '¿Alguna de estas opciones describe tu situación familiar en España?',
+	'steps.family_situation.check_answers_label': 'Situación familiar en España',
+	'steps.family_situation.error': 'Elige al menos una opción.',
+	'steps.family_situation.options.child_under_18': 'Vivo con mi hijo o hija menor de 18 años',
+	'steps.family_situation.options.adult_child_support_needs':
+		'Vivo con mi hijo o hija adulto/a que necesita mucho apoyo por discapacidad o problemas de salud',
+	'steps.family_situation.options.mother_or_father': 'Vivo con mi madre o mi padre',
+	'steps.family_situation.options.none': 'Ninguna de estas',
 	'steps.identity_documents.title': '¿Qué documentos de identidad tienes?',
 	'steps.identity_documents.check_answers_label': 'Documentos de identidad',
 	'steps.identity_documents.error': 'Elige al menos una opción.',
@@ -317,7 +319,6 @@ export const es = {
 	'answers.residence_start.2025_month_unknown': '2025 — mes no seguro',
 	'answers.residence_start.2025_month': '{month} de 2025',
 	'answers.contact.with_value': '{method}: {value}',
-	'result.reason.not_in_spain_now': 'Dijiste que ahora no estás en España.',
 	'result.reason.after_cutoff':
 		'Dijiste que aún no vivías en España antes del 1 de enero de 2026.',
 	'result.reason.specialist_review':
@@ -332,8 +333,6 @@ export const es = {
 		'Tus respuestas podrían encajar con esta vía, pero quizá necesites más documentos para respaldar la solicitud.',
 	'result.reason.likely_in_scope':
 		'Tus respuestas sugieren que tus fechas y tus documentos podrían encajar con esta vía.',
-	'result.explanation.not_in_spain_now':
-		'Según tus respuestas, probablemente esta no sea la vía adecuada para ti en este momento.',
 	'result.explanation.after_cutoff':
 		'Según tus respuestas, probablemente esta vía no sea la mejor opción porque es posible que no se cumpla la fecha límite.',
 	'result.explanation.specialist_review':
@@ -355,7 +354,7 @@ export const es = {
 	'result.next_step.keep_papers_together':
 		'Mantén juntos tus documentos de identidad y cualquier prueba fechada para la revisión.',
 	'result.next_step.confirm_timeline':
-		'Intenta confirmar aproximadamente cuándo empezaste a vivir en España y si has estado viviendo aquí durante los últimos 5 meses.',
+		'Intenta confirmar si ya estabas en España antes del 1 de enero de 2026 y si permaneciste en España durante todo el periodo de 5 meses antes de presentar la solicitud.',
 	'result.next_step.ask_for_help_if_unsure':
 		'Si no estás seguro/a, usa la modalidad asistida o pide ayuda a una organización de apoyo.',
 	'result.next_step.gather_before_cutoff':
@@ -364,7 +363,6 @@ export const es = {
 		'También reúne, si puedes, documentos recientes de los últimos 5 meses.',
 	'result.next_step.use_official_channel':
 		'Usa el canal oficial del gobierno antes del 30 de junio de 2026.',
-	'result.flag.not_in_spain_now': 'No estás en España ahora',
 	'result.flag.uncertain_timeline': 'La cronología es incierta',
 	'result.flag.five_month_requirement_risk': 'Posible riesgo de continuidad',
 	'result.flag.hard_gate_after_cutoff': 'El inicio de residencia es posterior a la fecha límite',
@@ -398,7 +396,7 @@ export const es = {
 		'Cualquier preocupación sobre antecedentes penales, identidad, historial de asilo o compartir información de forma segura.',
 	'result.checklist.item.another_route_advice': 'Si otra vía de inmigración podría encajar mejor.',
 	'result.checklist.item.confirm_timeline':
-		'Cuándo empezaste a vivir en España y si has estado aquí durante los últimos 5 meses.',
+		'Si ya estabas en España antes del 1 de enero de 2026 y si permaneciste en España durante todo el periodo de 5 meses antes de presentar la solicitud.',
 	'result.checklist.item.continuity_concern':
 		'Cualquier laguna o ausencia durante los últimos 5 meses.',
 	'result.checklist.item.identity_issue_to_explain':

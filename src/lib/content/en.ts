@@ -20,7 +20,7 @@ export const en = {
 	'pages.start.expectation.one_question': 'one question at a time',
 	'pages.start.expectation.review': 'a review step before the result',
 	'pages.start.expectation.timeline':
-		'whether you were in Spain before 1 January 2026 and during the last 5 months',
+		'whether you were in Spain before 1 January 2026 and stayed in Spain for the whole 5-month period before applying',
 	'pages.start.start_now': 'Start the questionnaire',
 	'pages.check_answers.eyebrow': 'Review',
 	'pages.check_answers.title': 'Check your answers',
@@ -145,9 +145,6 @@ export const en = {
 	'steps.completion_mode.options.self': 'Myself',
 	'steps.completion_mode.options.someone_else': 'Someone else, with their permission',
 	'steps.completion_mode.options.support_worker': "I'm a support worker or volunteer",
-	'steps.in_spain_now.title': 'Are you in Spain now?',
-	'steps.in_spain_now.check_answers_label': 'Are you in Spain now?',
-	'steps.in_spain_now.error': 'Choose whether you are in Spain now.',
 	'steps.presence_before_cutoff.title': 'Were you already living in Spain before 1 January 2026?',
 	'steps.presence_before_cutoff.hint':
 		'Answer based on whether you were already living in Spain before the cut-off date',
@@ -178,27 +175,35 @@ export const en = {
 	'steps.asylum_before_cutoff.check_answers_label':
 		'Asylum or international protection before 1 January 2026',
 	'steps.asylum_before_cutoff.error': 'Choose whether that application was before 1 January 2026.',
-	'steps.five_month_stay.title': 'Have you been living in Spain during the last 5 months?',
-	'steps.five_month_stay.body': 'Have you been in Spain during the last 5 months?',
-	'steps.five_month_stay.hint': 'Short trips away do not always matter.',
-	'steps.five_month_stay.check_answers_label': 'Have you been in Spain during the last 5 months?',
-	'steps.five_month_stay.error': 'Choose whether you have been in Spain during the last 5 months.',
-	'steps.five_month_stay.options.mostly_yes': 'Mostly yes, with short absences',
+	'steps.five_month_stay.title':
+		'In the 5 months before you plan to apply, did you stay in Spain the whole time?',
+	'steps.five_month_stay.body': 'Answer about the 5 months before you expect to apply.',
+	'steps.five_month_stay.check_answers_label': 'Stayed in Spain for the whole 5-month period',
+	'steps.five_month_stay.error': 'Choose the answer that fits your situation best.',
+	'steps.five_month_stay.options.left_spain': 'No, I left Spain at some point',
 	'steps.asylum_documents.title': 'Do you have any documents about your asylum or protection case?',
 	'steps.asylum_documents.hint':
 		'For example, a filing receipt, case document, letter or notification.',
 	'steps.asylum_documents.check_answers_label': 'Documents about your asylum or protection case',
 	'steps.asylum_documents.error':
 		'Choose whether you have documents about your asylum or protection case.',
-	'steps.non_asylum_route.title': 'Which of these sounds like you?',
-	'steps.non_asylum_route.check_answers_label': 'Which of these sounds like you?',
-	'steps.non_asylum_route.error': 'Choose at least one option.',
-	'steps.non_asylum_route.options.worked_in_spain': "I've worked in Spain",
-	'steps.non_asylum_route.options.close_family_relevant':
-		'I have close family here who may be relevant to this process',
-	'steps.non_asylum_route.options.vulnerable_situation':
-		'I may need support because of a difficult or vulnerable situation',
-	'steps.non_asylum_route.options.none': 'None of these',
+	'steps.work_situation.title': 'Does any of this describe your work situation?',
+	'steps.work_situation.check_answers_label': 'Work situation',
+	'steps.work_situation.error': 'Choose at least one option.',
+	'steps.work_situation.options.worked_in_spain': "I've worked in Spain",
+	'steps.work_situation.options.job_offer': 'I have a job offer',
+	'steps.work_situation.options.want_to_work_for_myself': 'I want to work for myself',
+	'steps.work_situation.options.none': 'None of these',
+	'steps.family_situation.title': 'Does any of this describe your family situation in Spain?',
+	'steps.family_situation.check_answers_label': 'Family situation in Spain',
+	'steps.family_situation.error': 'Choose at least one option.',
+	'steps.family_situation.options.child_under_18':
+		'I live with my child who is under 18',
+	'steps.family_situation.options.adult_child_support_needs':
+		'I live with my adult child who needs a lot of support because of disability or health needs',
+	'steps.family_situation.options.mother_or_father':
+		'I live with my mother or father',
+	'steps.family_situation.options.none': 'None of these',
 	'steps.identity_documents.title': 'Which identity papers do you have?',
 	'steps.identity_documents.check_answers_label': 'Identity papers',
 	'steps.identity_documents.error': 'Choose at least one option.',
@@ -309,7 +314,6 @@ export const en = {
 	'answers.residence_start.2025_month_unknown': '2025 — month not sure',
 	'answers.residence_start.2025_month': '{month} 2025',
 	'answers.contact.with_value': '{method}: {value}',
-	'result.reason.not_in_spain_now': 'You said you are not in Spain now.',
 	'result.reason.after_cutoff': 'You said you were not yet living in Spain before 1 January 2026.',
 	'result.reason.specialist_review':
 		'One or more of your answers suggests that it would be safer to get support before you apply.',
@@ -323,8 +327,6 @@ export const en = {
 		'Your answers may fit this route, but you may need more documents to support your application.',
 	'result.reason.likely_in_scope':
 		'Your answers suggest that your timeline and documents may fit this route.',
-	'result.explanation.not_in_spain_now':
-		'Based on your answers, this probably is not the right route for you right now.',
 	'result.explanation.after_cutoff':
 		'Based on your answers, this route probably is not the best fit because the cut-off date may not be met.',
 	'result.explanation.specialist_review':
@@ -346,7 +348,7 @@ export const en = {
 	'result.next_step.keep_papers_together':
 		'Keep your identity papers and any dated evidence together for review.',
 	'result.next_step.confirm_timeline':
-		'Try to confirm roughly when you started living in Spain and whether you have been living here during the last 5 months.',
+		'Try to confirm whether you were already in Spain before 1 January 2026 and whether you stayed in Spain for the whole 5-month period before applying.',
 	'result.next_step.ask_for_help_if_unsure':
 		'If you are unsure, use assisted completion or ask a support organisation to help you.',
 	'result.next_step.gather_before_cutoff':
@@ -354,7 +356,6 @@ export const en = {
 	'result.next_step.gather_recent': 'Also gather recent papers from the last 5 months if you can.',
 	'result.next_step.use_official_channel':
 		'Use the official application channel before 30 June 2026.',
-	'result.flag.not_in_spain_now': 'Not in Spain now',
 	'result.flag.uncertain_timeline': 'Timeline is uncertain',
 	'result.flag.five_month_requirement_risk': 'Possible continuity risk',
 	'result.flag.hard_gate_after_cutoff': 'Residence start is after the cut-off',
@@ -387,7 +388,7 @@ export const en = {
 		'Any concern about criminal records, identity, asylum history or sharing information safely.',
 	'result.checklist.item.another_route_advice': 'Whether another immigration route may fit better.',
 	'result.checklist.item.confirm_timeline':
-		'When you started living in Spain, and whether you have been here during the last 5 months.',
+		'Whether you were already in Spain before 1 January 2026, and whether you stayed in Spain for the whole 5-month period before applying.',
 	'result.checklist.item.continuity_concern': 'Any gaps or absences during the last 5 months.',
 	'result.checklist.item.identity_issue_to_explain':
 		'Any missing identity papers or details that do not match.',

@@ -25,7 +25,7 @@ export const ar = {
 	'pages.start.expectation.one_question': 'سؤال واحد في كل مرة',
 	'pages.start.expectation.review': 'خطوة مراجعة قبل النتيجة',
 	'pages.start.expectation.timeline':
-		'ما إذا كنت في إسبانيا قبل 1 يناير 2026 وخلال الأشهر الخمسة الماضية',
+		'ما إذا كنت في إسبانيا قبل 1 يناير 2026 وما إذا بقيت في إسبانيا طوال فترة الـ5 أشهر قبل تقديم الطلب',
 	'pages.start.start_now': 'ابدأ الاستبيان',
 	'pages.check_answers.eyebrow': 'مراجعة',
 	'pages.check_answers.title': 'راجع إجاباتك',
@@ -146,9 +146,6 @@ export const ar = {
 	'steps.completion_mode.options.self': 'لنفسي',
 	'steps.completion_mode.options.someone_else': 'لشخص آخر، بإذنه',
 	'steps.completion_mode.options.support_worker': 'أنا عامل دعم أو متطوع',
-	'steps.in_spain_now.title': 'هل أنت في إسبانيا الآن؟',
-	'steps.in_spain_now.check_answers_label': 'هل أنت في إسبانيا الآن؟',
-	'steps.in_spain_now.error': 'اختر ما إذا كنت في إسبانيا الآن.',
 	'steps.presence_before_cutoff.title': 'هل كنت تعيش بالفعل في إسبانيا قبل 1 يناير 2026؟',
 	'steps.presence_before_cutoff.hint':
 		'أجب بناءً على ما إذا كنت تعيش بالفعل في إسبانيا قبل تاريخ الحد',
@@ -175,25 +172,32 @@ export const ar = {
 	'steps.asylum_before_cutoff.title': 'هل كان ذلك الطلب قبل 1 يناير 2026؟',
 	'steps.asylum_before_cutoff.check_answers_label': 'اللجوء أو الحماية الدولية قبل 1 يناير 2026',
 	'steps.asylum_before_cutoff.error': 'اختر ما إذا كان ذلك الطلب قبل 1 يناير 2026.',
-	'steps.five_month_stay.title': 'هل كنت تعيش في إسبانيا خلال الأشهر الخمسة الماضية؟',
-	'steps.five_month_stay.body': 'هل كنت في إسبانيا خلال الأشهر الخمسة الماضية؟',
-	'steps.five_month_stay.hint': 'الرحلات القصيرة إلى الخارج لا تكون دائماً مهمة.',
-	'steps.five_month_stay.check_answers_label': 'هل كنت في إسبانيا خلال الأشهر الخمسة الماضية؟',
-	'steps.five_month_stay.error': 'اختر ما إذا كنت في إسبانيا خلال الأشهر الخمسة الماضية.',
-	'steps.five_month_stay.options.mostly_yes': 'في الغالب نعم، مع غيابات قصيرة',
+	'steps.five_month_stay.title':
+		'في الأشهر الخمسة السابقة لتاريخ تقديم الطلب الذي تخطط له، هل بقيت في إسبانيا طوال الوقت؟',
+	'steps.five_month_stay.body': 'أجب عن الأشهر الخمسة السابقة لتاريخ تقديم الطلب الذي تتوقعه.',
+	'steps.five_month_stay.check_answers_label': 'البقاء في إسبانيا طوال فترة الـ5 أشهر',
+	'steps.five_month_stay.error': 'اختر الإجابة الأنسب لوضعك.',
+	'steps.five_month_stay.options.left_spain': 'لا، غادرت إسبانيا في وقت ما',
 	'steps.asylum_documents.title': 'هل لديك أي مستندات بشأن قضية اللجوء أو الحماية الخاصة بك؟',
 	'steps.asylum_documents.hint': 'مثل إيصال تقديم أو مستند من الملف أو رسالة أو إشعار.',
 	'steps.asylum_documents.check_answers_label': 'مستندات بشأن قضية اللجوء أو الحماية الخاصة بك',
 	'steps.asylum_documents.error':
 		'اختر ما إذا كانت لديك مستندات بشأن قضية اللجوء أو الحماية الخاصة بك.',
-	'steps.non_asylum_route.title': 'أي من هذه الخيارات يبدو أقرب إلى وضعك؟',
-	'steps.non_asylum_route.check_answers_label': 'ما الذي يبدو أقرب إلى وضعك',
-	'steps.non_asylum_route.error': 'اختر خياراً واحداً على الأقل.',
-	'steps.non_asylum_route.options.worked_in_spain': 'لقد عملت في إسبانيا',
-	'steps.non_asylum_route.options.close_family_relevant':
-		'لدي أفراد أسرة مقربون هنا قد تكون حالتهم ذات صلة بهذه العملية',
-	'steps.non_asylum_route.options.vulnerable_situation': 'قد أحتاج إلى دعم بسبب وضع صعب أو هش',
-	'steps.non_asylum_route.options.none': 'لا شيء من ذلك',
+	'steps.work_situation.title': 'هل يصف أي مما يلي وضعك في العمل؟',
+	'steps.work_situation.check_answers_label': 'الوضع في العمل',
+	'steps.work_situation.error': 'اختر خياراً واحداً على الأقل.',
+	'steps.work_situation.options.worked_in_spain': 'لقد عملت في إسبانيا',
+	'steps.work_situation.options.job_offer': 'لدي عرض عمل',
+	'steps.work_situation.options.want_to_work_for_myself': 'أريد العمل لحسابي الخاص',
+	'steps.work_situation.options.none': 'لا شيء من ذلك',
+	'steps.family_situation.title': 'هل يصف أي مما يلي وضعك العائلي في إسبانيا؟',
+	'steps.family_situation.check_answers_label': 'الوضع العائلي في إسبانيا',
+	'steps.family_situation.error': 'اختر خياراً واحداً على الأقل.',
+	'steps.family_situation.options.child_under_18': 'أعيش مع طفلي دون سن 18',
+	'steps.family_situation.options.adult_child_support_needs':
+		'أعيش مع طفلي البالغ الذي يحتاج إلى دعم كبير بسبب إعاقة أو احتياجات صحية',
+	'steps.family_situation.options.mother_or_father': 'أعيش مع أمي أو أبي',
+	'steps.family_situation.options.none': 'لا شيء من ذلك',
 	'steps.identity_documents.title': 'ما وثائق الهوية التي لديك؟',
 	'steps.identity_documents.check_answers_label': 'وثائق الهوية',
 	'steps.identity_documents.error': 'اختر خياراً واحداً على الأقل.',
@@ -301,7 +305,6 @@ export const ar = {
 	'answers.residence_start.2025_month_unknown': '2025 — الشهر غير معروف',
 	'answers.residence_start.2025_month': '{month} 2025',
 	'answers.contact.with_value': '{method}: {value}',
-	'result.reason.not_in_spain_now': 'ذكرت أنك لست في إسبانيا الآن.',
 	'result.reason.after_cutoff':
 		'ذكرت أنك لم تكن تعيش بعد في إسبانيا قبل 1 يناير 2026.',
 	'result.reason.specialist_review':
@@ -316,8 +319,6 @@ export const ar = {
 		'قد تتوافق إجاباتك مع هذا المسار، لكنك قد تحتاج إلى مزيد من المستندات لدعم طلبك.',
 	'result.reason.likely_in_scope':
 		'تشير إجاباتك إلى أن التواريخ والمستندات التي لديك قد تتوافق مع هذا المسار.',
-	'result.explanation.not_in_spain_now':
-		'استناداً إلى إجاباتك، فغالباً ليس هذا هو المسار المناسب لك الآن.',
 	'result.explanation.after_cutoff':
 		'استناداً إلى إجاباتك، فغالباً لا يكون هذا المسار الأنسب لأن تاريخ الحد قد لا يكون مستوفى.',
 	'result.explanation.specialist_review':
@@ -333,14 +334,13 @@ export const ar = {
 	'result.next_step.speak_to_specialist': 'تحدث مع منظمة دعم متخصصة قبل أن تقدّم الطلب.',
 	'result.next_step.keep_papers_together': 'احتفِظ بوثائق هويتك وأي أدلة مؤرخة معاً من أجل المراجعة.',
 	'result.next_step.confirm_timeline':
-		'حاول التأكد تقريباً من موعد بدء إقامتك في إسبانيا وما إذا كنت قد عشت هنا خلال الأشهر الخمسة الماضية.',
+		'حاول التأكد مما إذا كنت بالفعل في إسبانيا قبل 1 يناير 2026 ومما إذا بقيت في إسبانيا طوال فترة الـ5 أشهر قبل تقديم الطلب.',
 	'result.next_step.ask_for_help_if_unsure':
 		'إذا لم تكن متأكداً، فاستخدم الإكمال بمساعدة أو اطلب المساعدة من منظمة دعم.',
 	'result.next_step.gather_before_cutoff':
 		'حاول جمع مستندات مؤرخة تُظهر أنك كنت تعيش في إسبانيا قبل يناير 2026.',
 	'result.next_step.gather_recent': 'واجمع أيضاً، إن أمكن، مستندات حديثة من آخر 5 أشهر.',
 	'result.next_step.use_official_channel': 'استخدم قناة التقديم الرسمية قبل 30 يونيو 2026.',
-	'result.flag.not_in_spain_now': 'لست في إسبانيا الآن',
 	'result.flag.uncertain_timeline': 'المدة الزمنية غير مؤكدة',
 	'result.flag.five_month_requirement_risk': 'احتمال وجود مشكلة في الاستمرارية',
 	'result.flag.hard_gate_after_cutoff': 'بدء الإقامة كان بعد التاريخ الفاصل',
@@ -372,7 +372,7 @@ export const ar = {
 		'أي قلق يتعلق بالسجل الجنائي أو الهوية أو تاريخ اللجوء أو مشاركة المعلومات بأمان.',
 	'result.checklist.item.another_route_advice': 'ما إذا كان مسار هجرة آخر قد يكون أنسب.',
 	'result.checklist.item.confirm_timeline':
-		'موعد بدء عيشك في إسبانيا، وما إذا كنت هنا خلال الأشهر الخمسة الماضية.',
+		'ما إذا كنت بالفعل في إسبانيا قبل 1 يناير 2026، وما إذا بقيت في إسبانيا طوال فترة الـ5 أشهر قبل تقديم الطلب.',
 	'result.checklist.item.continuity_concern': 'أي فجوات أو غياب خلال الأشهر الخمسة الماضية.',
 	'result.checklist.item.identity_issue_to_explain': 'أي وثائق هوية مفقودة أو تفاصيل لا تتطابق.',
 	'result.checklist.item.asylum_history_to_explain':

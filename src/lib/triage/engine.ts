@@ -49,7 +49,6 @@ const buildChecklist = (
 		].includes(value)
 	)
 	const timelineUncertain =
-		answers.inSpainNow === 'not_sure' ||
 		answers.presentBeforeCutoff === 'not_sure' ||
 		answers.presentBeforeCutoff === undefined ||
 		answers.asylumHistory === 'not_sure' ||
@@ -63,7 +62,7 @@ const buildChecklist = (
 		alreadyHave.add('result.checklist.item.before_cutoff_evidence_available')
 	if (hasAnyStrongRecentEvidence(evidenceRecentMonths))
 		alreadyHave.add('result.checklist.item.recent_evidence_available')
-	if (answers.fiveMonthStay === 'yes' || answers.fiveMonthStay === 'mostly_yes') {
+	if (answers.fiveMonthStay === 'yes') {
 		alreadyHave.add('result.checklist.item.continuity_answer_positive')
 	}
 
@@ -95,7 +94,8 @@ const buildChecklist = (
 		discussWithSupport.add('result.checklist.item.another_route_advice')
 
 	if (timelineUncertain) unresolved.add('result.checklist.item.confirm_timeline')
-	if (answers.fiveMonthStay === 'no') unresolved.add('result.checklist.item.continuity_concern')
+	if (answers.fiveMonthStay === 'left_spain')
+		unresolved.add('result.checklist.item.continuity_concern')
 	if (specialistFlags.includes('identity_missing_or_mismatch'))
 		unresolved.add('result.checklist.item.identity_issue_to_explain')
 	if (specialistFlags.includes('asylum_case_not_clear'))
@@ -151,7 +151,6 @@ const getReasonKey = (answers: JourneyAnswers, fallback: MessageKey): MessageKey
 
 export const runTriage = (answers: JourneyAnswers): TriageResult => {
 	const flags = new Set<MessageKey>()
-	const inSpainNow = answers.inSpainNow
 	const presentBeforeCutoff = answers.presentBeforeCutoff
 	const asylumHistory = answers.asylumHistory
 	const asylumBeforeCutoff = answers.asylumBeforeCutoff
@@ -174,28 +173,7 @@ export const runTriage = (answers: JourneyAnswers): TriageResult => {
 				? 'strong'
 				: 'thin'
 
-	if (inSpainNow === 'no') {
-		const resultState = 'another_route_may_fit_better'
-		const recommendedRoute = 'collaborating_organisation'
-		return {
-			resultState,
-			recommendedRoute,
-			flags: ['result.flag.not_in_spain_now'],
-			reasonKey: 'result.reason.not_in_spain_now',
-			evidenceStrength,
-			showHowToApply: false,
-			showSupportCta: true,
-			showDocumentCta: false,
-			summary: getResultSummary(resultState, recommendedRoute),
-			checklist: getChecklist(answers, resultState, recommendedRoute),
-			explanationKey: 'result.explanation.not_in_spain_now',
-			nextStepKeys: ['result.next_step.other_route_advice', 'result.next_step.try_again_later'],
-			humanReviewRecommended: false
-		}
-	}
-
 	if (
-		inSpainNow === 'not_sure' ||
 		presentBeforeCutoff === undefined ||
 		presentBeforeCutoff === 'not_sure' ||
 		asylumHistory === 'not_sure' ||
@@ -205,7 +183,7 @@ export const runTriage = (answers: JourneyAnswers): TriageResult => {
 		flags.add('result.flag.uncertain_timeline')
 	}
 
-	if (fiveMonthStay === 'no') {
+	if (fiveMonthStay === 'left_spain') {
 		flags.add('result.flag.five_month_requirement_risk')
 	}
 
@@ -241,7 +219,7 @@ export const runTriage = (answers: JourneyAnswers): TriageResult => {
 		specialistFlags.includes('urgent_human_support') ||
 		specialistFlags.includes('want_specialist') ||
 		identityDocuments.includes('no_identity_documents_now') ||
-		fiveMonthStay === 'no' ||
+		fiveMonthStay === 'left_spain' ||
 		(asylumBeforeCutoff === 'yes' && asylumCaseDocuments !== 'yes')
 	) {
 		const resultState = 'needs_specialist_review'
@@ -266,7 +244,9 @@ export const runTriage = (answers: JourneyAnswers): TriageResult => {
 				...(identityDocuments.includes('no_identity_documents_now')
 					? (['result.flag.missing_identity_documents'] as MessageKey[])
 					: []),
-				...(fiveMonthStay === 'no' ? (['result.flag.continuity_concern'] as MessageKey[]) : [])
+				...(fiveMonthStay === 'left_spain'
+					? (['result.flag.continuity_concern'] as MessageKey[])
+					: [])
 			],
 			reasonKey: getReasonKey(answers, 'result.reason.specialist_review'),
 			evidenceStrength,
