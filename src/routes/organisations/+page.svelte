@@ -24,7 +24,7 @@ type DirectoryData = {
 let { data }: { data: DirectoryData } = $props()
 const tt = $derived(getTranslator(data.locale ?? 'es'))
 
-const resultLabel = $derived(
+const resultLabel = $derived.by(() =>
 	tt(
 		data.summary.total === 1
 			? 'pages.organisations.summary.one'
@@ -73,17 +73,8 @@ const resultLabel = $derived(
 			</div>
 		</form>
 
-		<div class="directory-meta">
+		<div class="directory-meta" aria-live="polite">
 			<Badge variant="outline">{resultLabel}</Badge>
-			<Badge variant="outline">
-				{tt('pages.organisations.summary.with_website', { count: String(data.summary.withWebsite) })}
-			</Badge>
-			<Badge variant="outline">
-				{tt('pages.organisations.summary.with_phone', { count: String(data.summary.withPhone) })}
-			</Badge>
-			<Badge variant="outline">
-				{tt('pages.organisations.summary.with_email', { count: String(data.summary.withEmail) })}
-			</Badge>
 		</div>
 
 		{#if data.organisations.length > 0}
@@ -123,20 +114,7 @@ const resultLabel = $derived(
 								</div>
 							</div>
 						</CardHeader>
-						<CardContent>
-							<div class="directory-meta">
-								{#if organisation.website}
-									<Badge variant="outline">{tt('pages.organisations.badge.website')}</Badge>
-								{/if}
-								{#if organisation.phone}
-									<Badge variant="outline">{tt('pages.organisations.badge.phone')}</Badge>
-								{/if}
-								{#if organisation.email}
-									<Badge variant="outline">{tt('pages.organisations.badge.email')}</Badge>
-								{/if}
-							</div>
-						</CardContent>
-						<CardFooter class="gap-3">
+						<CardFooter class="gap-3 px-6 pb-4">
 							{#if organisation.website}
 								<Button
 									href={organisation.website}
