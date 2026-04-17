@@ -1,5 +1,6 @@
 <script lang="ts">
 import Building2Icon from '@lucide/svelte/icons/building-2'
+import Clock3Icon from '@lucide/svelte/icons/clock-3'
 import GlobeIcon from '@lucide/svelte/icons/globe'
 import MailIcon from '@lucide/svelte/icons/mail'
 import MapPinIcon from '@lucide/svelte/icons/map-pin'
@@ -34,6 +35,28 @@ const resultLabel = $derived.by(() =>
 		}
 	)
 )
+
+const weekdayDates = [
+	new Date(Date.UTC(2026, 0, 5)),
+	new Date(Date.UTC(2026, 0, 6)),
+	new Date(Date.UTC(2026, 0, 7)),
+	new Date(Date.UTC(2026, 0, 8)),
+	new Date(Date.UTC(2026, 0, 9)),
+	new Date(Date.UTC(2026, 0, 10)),
+	new Date(Date.UTC(2026, 0, 11))
+]
+
+const formatWeekday = (dayIndex: number) =>
+	new Intl.DateTimeFormat(data.locale ?? 'es', { weekday: 'short', timeZone: 'UTC' }).format(
+		weekdayDates[dayIndex]
+	)
+
+const formatOpeningHoursLabel = (startDay: number, endDay: number) =>
+	startDay === endDay
+		? formatWeekday(startDay)
+		: `${formatWeekday(startDay)}–${formatWeekday(endDay)}`
+
+const formatTimeRanges = (value: string) => value.replace(/(\d{2}:\d{2})-(\d{2}:\d{2})/g, '$1–$2')
 </script>
 
 <svelte:head>
@@ -107,8 +130,20 @@ const resultLabel = $derived.by(() =>
 												<span>{organisation.email}</span>
 											</p>
 										{/if}
-										{#if organisation.openingHours}
-											<p class="supporting-text">{organisation.openingHours}</p>
+										{#if organisation.openingHours.length > 0}
+											<div class="directory-hours">
+												{#each organisation.openingHours as row (`${organisation.id}-${row.startDay}-${row.endDay}-${row.hours}`)}
+													<p class="supporting-text directory-hours-row">
+														<span class="directory-hours-icon" aria-hidden="true">
+															<Clock3Icon class="size-4" />
+														</span>
+														<span class="directory-hours-label">
+															{formatOpeningHoursLabel(row.startDay, row.endDay)}
+														</span>
+														<span>{formatTimeRanges(row.hours)}</span>
+													</p>
+												{/each}
+											</div>
 										{/if}
 									</div>
 								</div>

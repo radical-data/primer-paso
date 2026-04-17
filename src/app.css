@@ -628,6 +628,19 @@
 	.directory-card-list {
 		@apply grid gap-2;
 	}
+	.directory-hours {
+		@apply grid gap-1.5 pt-1;
+	}
+	.directory-hours-row {
+		@apply grid items-start gap-2;
+		grid-template-columns: auto 4.5rem minmax(0, 1fr);
+	}
+	.directory-hours-icon {
+		@apply text-muted-foreground mt-1 inline-flex items-center;
+	}
+	.directory-hours-label {
+		@apply text-foreground font-medium;
+	}
 }
 
 @layer utilities {
