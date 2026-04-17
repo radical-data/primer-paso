@@ -24,8 +24,7 @@ export const ar = {
 		'يمكنك استخدام الأداة لمعرفة الخطوة التالية أو الذهاب مباشرة إلى دليل الجهات المتعاونة.',
 	'pages.home.choose': 'اختر خياراً',
 	'pages.home.quiz_title': 'معرفة الخطوة التالية',
-	'pages.home.quiz_body':
-		'أجب عن بعض الأسئلة للحصول على توجيه حذر حول المسار الذي قد يناسب حالتك.',
+	'pages.home.quiz_body': 'أجب عن بعض الأسئلة للحصول على توجيه حذر حول المسار الذي قد يناسب حالتك.',
 	'pages.home.quiz_action': 'ابدأ الأداة',
 	'pages.home.directory_title': 'البحث عن جهة متعاونة',
 	'pages.home.directory_body':

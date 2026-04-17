@@ -1,8 +1,16 @@
 <script lang="ts">
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '$lib/components/ui/card'
 import { Button } from '$lib/components/ui/button'
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardFooter,
+	CardHeader,
+	CardTitle
+} from '$lib/components/ui/card'
 import type { Locale } from '$lib/content'
 import { getTranslator } from '$lib/content'
+
 let { data } = $props()
 const tt = $derived(getTranslator((data.locale ?? 'es') as Locale))
 </script>
@@ -23,9 +31,7 @@ const tt = $derived(getTranslator((data.locale ?? 'es') as Locale))
 						<CardDescription>{tt('pages.home.quiz_body')}</CardDescription>
 					</CardHeader>
 					<CardContent />
-					<CardFooter>
-						<Button href="/start">{tt('pages.home.quiz_action')}</Button>
-					</CardFooter>
+					<CardFooter> <Button href="/start">{tt('pages.home.quiz_action')}</Button> </CardFooter>
 				</Card>
 				<Card class="task-card">
 					<CardHeader>

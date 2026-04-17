@@ -95,7 +95,8 @@ const heroTone = $derived.by(() => {
 		<section class="panel section-block">
 			<h2 class="section-title">Find a collaborating organisation</h2>
 			<p class="lead-text">
-				Browse the public directory of collaborating organisations without repeating the questionnaire.
+				Browse the public directory of collaborating organisations without repeating the
+				questionnaire.
 			</p>
 			<div class="actions">
 				<Button
@@ -107,12 +108,7 @@ const heroTone = $derived.by(() => {
 					Open organisations directory
 				</Button>
 				{#if data.result.recommendedRoute === 'official_portal'}
-					<Button
-						href={data.officialPortalUrl}
-						target="_blank"
-						rel="noreferrer"
-						variant="outline"
-					>
+					<Button href={data.officialPortalUrl} target="_blank" rel="noreferrer" variant="outline">
 						Open official portal
 					</Button>
 				{/if}

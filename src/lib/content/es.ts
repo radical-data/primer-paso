@@ -43,7 +43,8 @@ export const es = {
 	'pages.organisations.lead':
 		'Explora el directorio público sin completar el orientador. Busca por nombre, ubicación o datos de contacto.',
 	'pages.organisations.search_label': 'Buscar',
-	'pages.organisations.search_placeholder': 'Buscar por nombre, lugar, teléfono, correo o sitio web',
+	'pages.organisations.search_placeholder':
+		'Buscar por nombre, lugar, teléfono, correo o sitio web',
 	'pages.organisations.apply_filters': 'Aplicar filtros',
 	'pages.organisations.clear': 'Limpiar',
 	'pages.organisations.summary.one': '{count} organización encontrada',
@@ -55,7 +56,8 @@ export const es = {
 	'pages.organisations.badge.phone': 'teléfono disponible',
 	'pages.organisations.badge.email': 'correo disponible',
 	'pages.organisations.empty_title': 'Ninguna organización coincide con estos filtros',
-	'pages.organisations.empty_body': 'Prueba una búsqueda más amplia o revisa el directorio completo.',
+	'pages.organisations.empty_body':
+		'Prueba una búsqueda más amplia o revisa el directorio completo.',
 	'pages.organisations.guidance_title': '¿Necesitas orientación personalizada primero?',
 	'pages.organisations.guidance_body':
 		'Si no tienes claro por dónde empezar, usa el orientador y después vuelve al directorio.',

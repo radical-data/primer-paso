@@ -17,6 +17,6 @@ export const load: PageServerLoad = ({ cookies }) => {
 		officialPortalUrl: OFFICIAL_PORTAL_URL,
 		organisationsHref: '/organisations',
 		handoverHref: '/handover',
-		handoverJsonHref: '/handover.json',
+		handoverJsonHref: '/handover.json'
 	}
 }

@@ -1,11 +1,10 @@
 <script lang="ts">
+import Building2Icon from '@lucide/svelte/icons/building-2'
+import GlobeIcon from '@lucide/svelte/icons/globe'
 import MailIcon from '@lucide/svelte/icons/mail'
 import MapPinIcon from '@lucide/svelte/icons/map-pin'
 import PhoneIcon from '@lucide/svelte/icons/phone'
 import SearchIcon from '@lucide/svelte/icons/search'
-import GlobeIcon from '@lucide/svelte/icons/globe'
-import Building2Icon from '@lucide/svelte/icons/building-2'
-import type { OrganisationRecord } from '$lib/organisations/types'
 import { Badge } from '$lib/components/ui/badge'
 import { Button } from '$lib/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '$lib/components/ui/card'
@@ -13,6 +12,7 @@ import { Input } from '$lib/components/ui/input'
 import { Label } from '$lib/components/ui/label'
 import type { Locale } from '$lib/content'
 import { getTranslator } from '$lib/content'
+import type { OrganisationRecord } from '$lib/organisations/types'
 
 type DirectoryData = {
 	locale?: Locale
@@ -25,15 +25,20 @@ let { data }: { data: DirectoryData } = $props()
 const tt = $derived(getTranslator(data.locale ?? 'es'))
 
 const resultLabel = $derived(
-	tt(data.summary.total === 1 ? 'pages.organisations.summary.one' : 'pages.organisations.summary.many', {
-		count: String(data.summary.total)
-	})
+	tt(
+		data.summary.total === 1
+			? 'pages.organisations.summary.one'
+			: 'pages.organisations.summary.many',
+		{
+			count: String(data.summary.total)
+		}
+	)
 )
 </script>
 
 <svelte:head>
 	<title>{tt('pages.organisations.meta_title')} | Primer Paso</title>
-	<meta name="description" content={tt('pages.organisations.meta_description')} />
+	<meta name="description" content={tt('pages.organisations.meta_description')}>
 </svelte:head>
 
 <section class="stack">
@@ -41,9 +46,7 @@ const resultLabel = $derived(
 	<div class="app-card stack">
 		<div class="section-block">
 			<h1 class="page-title">{tt('pages.organisations.title')}</h1>
-			<p class="lead-text">
-				{tt('pages.organisations.lead')}
-			</p>
+			<p class="lead-text">{tt('pages.organisations.lead')}</p>
 		</div>
 
 		<form class="directory-toolbar" method="GET" action="/organisations">
@@ -135,7 +138,12 @@ const resultLabel = $derived(
 						</CardContent>
 						<CardFooter class="gap-3">
 							{#if organisation.website}
-								<Button href={organisation.website} target="_blank" rel="noreferrer" variant="secondary">
+								<Button
+									href={organisation.website}
+									target="_blank"
+									rel="noreferrer"
+									variant="secondary"
+								>
 									{tt('pages.organisations.action.visit_website')}
 									<GlobeIcon class="size-4" />
 								</Button>
@@ -157,9 +165,7 @@ const resultLabel = $derived(
 		{:else}
 			<div class="panel-subtle section-block">
 				<h2 class="section-title">{tt('pages.organisations.empty_title')}</h2>
-				<p class="supporting-text">
-					{tt('pages.organisations.empty_body')}
-				</p>
+				<p class="supporting-text">{tt('pages.organisations.empty_body')}</p>
 				<div class="actions">
 					<Button href="/organisations" variant="outline">
 						{tt('pages.organisations.action.browse_all')}
@@ -170,9 +176,7 @@ const resultLabel = $derived(
 
 		<div class="panel-subtle section-block">
 			<h2 class="section-title">{tt('pages.organisations.guidance_title')}</h2>
-			<p class="supporting-text">
-				{tt('pages.organisations.guidance_body')}
-			</p>
+			<p class="supporting-text">{tt('pages.organisations.guidance_body')}</p>
 			<div class="actions">
 				<Button href="/start">{tt('pages.organisations.action.start_screener')}</Button>
 			</div>

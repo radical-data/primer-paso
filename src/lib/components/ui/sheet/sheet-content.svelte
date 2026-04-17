@@ -1,31 +1,30 @@
 <script lang="ts" module>
-	export type Side = "top" | "right" | "bottom" | "left";
+export type Side = 'top' | 'right' | 'bottom' | 'left'
 </script>
 
 <script lang="ts">
-	import { Dialog as SheetPrimitive } from "bits-ui";
-	import type { Snippet } from "svelte";
-	import SheetPortal from "./sheet-portal.svelte";
-	import SheetOverlay from "./sheet-overlay.svelte";
-	import { Button } from "$lib/components/ui/button/index.js";
-	import XIcon from '@lucide/svelte/icons/x';
-	import { cn, type WithoutChildrenOrChild } from "$lib/utils.js";
-	import type { ComponentProps } from "svelte";
+import XIcon from '@lucide/svelte/icons/x'
+import { Dialog as SheetPrimitive } from 'bits-ui'
+import type { ComponentProps, Snippet } from 'svelte'
+import { Button } from '$lib/components/ui/button/index.js'
+import { cn, type WithoutChildrenOrChild } from '$lib/utils.js'
+import SheetOverlay from './sheet-overlay.svelte'
+import SheetPortal from './sheet-portal.svelte'
 
-	let {
-		ref = $bindable(null),
-		class: className,
-		side = "right",
-		showCloseButton = true,
-		portalProps,
-		children,
-		...restProps
-	}: WithoutChildrenOrChild<SheetPrimitive.ContentProps> & {
-		portalProps?: WithoutChildrenOrChild<ComponentProps<typeof SheetPortal>>;
-		side?: Side;
-		showCloseButton?: boolean;
-		children: Snippet;
-	} = $props();
+let {
+	ref = $bindable(null),
+	class: className,
+	side = 'right',
+	showCloseButton = true,
+	portalProps,
+	children,
+	...restProps
+}: WithoutChildrenOrChild<SheetPrimitive.ContentProps> & {
+	portalProps?: WithoutChildrenOrChild<ComponentProps<typeof SheetPortal>>
+	side?: Side
+	showCloseButton?: boolean
+	children: Snippet
+} = $props()
 </script>
 
 <SheetPortal {...portalProps}>
@@ -45,7 +44,7 @@
 			<SheetPrimitive.Close data-slot="sheet-close">
 				{#snippet child({ props })}
 					<Button variant="ghost" class="absolute top-4 right-4" size="icon-sm" {...props}>
-						<XIcon  />
+						<XIcon />
 						<span class="sr-only">Close</span>
 					</Button>
 				{/snippet}

@@ -1,1514 +1,1514 @@
 [
-  {
-    "id": "aculco-asociacion-socio-cultural-y-de-cooperacion",
-    "name": "ACULCO \"ASOCIACIÓN SOCIO-CULTURAL Y DE COOPERACIÓN\"",
-    "website": "https://aculco.org/",
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "agencia-adventista-para-el-desarrollo-y-recursos-asistenciales",
-    "name": "AGENCIA ADVENTISTA PARA EL DESARROLLO Y RECURSOS ASISTENCIALES",
-    "website": "https://adra-es.org/",
-    "location": "Calle Fernando Rey, 3,, 28223 Pozuelo de Alarcón",
-    "phone": "+34 911 964 949",
-    "email": "adra@adra-es.org",
-    "opening_hours": null
-  },
-  {
-    "id": "algeciras-acoge",
-    "name": "ALGECIRAS ACOGE",
-    "website": "https://algeciras-acoge.org/",
-    "location": "Calle Sevilla, nº 35, bajo, 11201 - Algeciras (Cádiz)",
-    "phone": "+34 697 441 425",
-    "email": "algeciras@acoge.org",
-    "opening_hours": null
-  },
-  {
-    "id": "arcopoli",
-    "name": "ARCÓPOLI",
-    "website": "https://arcopoli.org/",
-    "location": "Calle Batalla del Salado 37, 1º D, Madrid CP: 28045",
-    "phone": null,
-    "email": "buzon@arcopoli.org",
-    "opening_hours": null
-  },
-  {
-    "id": "asoc-oleum-chiclana-ibn-america-espana-solidaridad-y-cooperacion-aesco",
-    "name": "ASOC OLEUM CHICLANA IBN AMÉRICA, ESPAÑA, SOLIDARIDAD Y COOPERACIÓN (AESCO)",
-    "website": "https://ong-aesco.com/",
-    "location": null,
-    "phone": "+34 698 123 456",
-    "email": "ejemplo@dominio.com",
-    "opening_hours": null
-  },
-  {
-    "id": "asoc-cooperacion-y-desarrollo-con-el-norte-de-africa-codenaf",
-    "name": "ASOC. COOPERACIÓN Y DESARROLLO CON EL NORTE DE ÁFRICA (CODENAF)",
-    "website": "https://www.codenaf.org/",
-    "location": "Avda. Sánchez Pizjuán, 9, local sótano. 41009, Sevilla",
-    "phone": "+34 667 053 588",
-    "email": "codenafsevilla@codenaf.org",
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-alba",
-    "name": "ASOCIACION ALBA",
-    "website": null,
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-el-olivar",
-    "name": "ASOCIACION EL OLIVAR",
-    "website": "https://www.asociacionelolivar.org/",
-    "location": "Calle del Mar Amarillo, 21, 28033, Madrid",
-    "phone": null,
-    "email": "asoc.elolivar@gmail.com",
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-mujeres-progresistas-la-mitad-del-cielo",
-    "name": "ASOCIACION MUJERES PROGRESISTAS LA MITAD DEL CIELO",
-    "website": "https://mitaddelcielo.org/",
-    "location": null,
-    "phone": "+34 952 602 727",
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-ruminahui",
-    "name": "ASOCIACION RUMIÑAHUI",
-    "website": "https://www.ruminahui.org/",
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-accion-triangulo",
-    "name": "ASOCIACIÓN ACCIÓN TRIÁNGULO",
-    "website": "https://acciontriangulo.org/",
-    "location": "Mercado de San Fernando, Local SS1, entrada por el callejón de la calle Tribulete 18-20, 28012, Madrid, España. (Metro: Lavapiés o Embajadores)",
-    "phone": "+34 641 035 204",
-    "email": "info@acciontriangulo.org",
-    "opening_hours": "Horario Lunes a viernes 11:00h – 19:00h Sábado 10:00h – 14:00h Domingo Cerrado Suscríbete a nuestro boletín de noticias Deja vacío este campo si eres humano: Conecta con nosotros: jo Twitter o YouTube Contáctanos Mercado de San Fernando, Lo"
-  },
-  {
-    "id": "asociacion-almeria-acoge",
-    "name": "ASOCIACIÓN ALMERÍA ACOGE",
-    "website": "https://www.almeriaacoge.org/",
-    "location": "Avenida del Largo Caballero 52, 04008 Almeria",
-    "phone": "+34 950 271 575",
-    "email": "nijar@almeriaacoge.org",
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-amar-dragoste",
-    "name": "ASOCIACIÓN AMAR DRAGOSTE",
-    "website": "https://amardragoste.org/",
-    "location": "Travesía de Castro, 6 - Las Margaritas, Getafe - 28903 Madrid",
-    "phone": "+34 912 883 637",
-    "email": "contacto@amardragoste.org",
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-apoyo",
-    "name": "ASOCIACIÓN APOYO",
-    "website": "https://asociacionapoyo.blogspot.com/",
-    "location": "Calle Corregidor Diego de Valderrábano 45. Madrid 28030",
-    "phone": "+34 645 660 487",
-    "email": "apoyo@asociacionapoyo.org",
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-arraianas",
-    "name": "ASOCIACIÓN ARRAIANAS",
-    "website": "https://www.arraianas.org/es",
-    "location": "15701 Santiago de Compostela",
-    "phone": "+34 981 936 034",
-    "email": "arraianas@arraianas.org",
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-arrats",
-    "name": "ASOCIACIÓN ARRATS",
-    "website": "https://www.arrats.org/",
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-asistencial-nahia",
-    "name": "ASOCIACIÓN ASISTENCIAL NAHIA",
-    "website": "https://www.asociacionnahia.org/",
-    "location": null,
-    "phone": "+34 623 378 500",
-    "email": "asociacionnahia@yahoo.es",
-    "opening_hours": "HORARIO Lu – Vi 09:00 am – 08:00 pm Sa – Do Cerrado FORMULARIO DE CONTACTO Name * Este campo es obligatorio Message Política de cookies * Este campo es obligatorio Aviso legal * Este campo es obligatorio Politica de Privacidad * Este campo"
-  },
-  {
-    "id": "asociacion-at-tawba",
-    "name": "ASOCIACIÓN AT-TAWBA",
-    "website": null,
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-baizara",
-    "name": "ASOCIACIÓN BAIZARA",
-    "website": "https://baizara.org/",
-    "location": null,
-    "phone": null,
-    "email": "info@baizara.org",
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-benefica-canoa-solidaria",
-    "name": "ASOCIACIÓN BENÉFICA CANOA SOLIDARIA",
-    "website": "https://canoasolidaria.org/es/Pagina-de-inicio/",
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-canaria-de-mediadores-interculturales",
-    "name": "ASOCIACIÓN CANARIA DE MEDIADORES INTERCULTURALES",
-    "website": "https://www.acamei.org/",
-    "location": "Calle Aguadulce, 44, 35004 - Las Palmas de Gran Canaria",
-    "phone": "+34 928 114 315",
-    "email": "asociacion@acamei.org",
-    "opening_hours": "Horario de apertura Lunes a Jueves: 9:00 a 14:00 y de 16:30-19:00 horas Viernes: 9:00-14:00 Fines de semana: CERRADO. Teléfonos Fijo: 928 058 588 Móvil: 658 588 603 Localización en mapa Sede ACAMEI La trastienda de ACAMEI Envíanos un mensaj"
-  },
-  {
-    "id": "asociacion-catnova",
-    "name": "ASOCIACIÓN CATNOVA",
-    "website": "https://www.catnova.cat/",
-    "location": "Carrer Provença 385, 1º, 1ª, Barcelona 08025",
-    "phone": "+34 936 817 710",
-    "email": "youremailaddress@mail.com",
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-cesal",
-    "name": "ASOCIACIÓN CESAL",
-    "website": "https://www.cesal.org/",
-    "location": "Carrer de la República Argentina, 22, Algirós, 46021, Valencia",
-    "phone": null,
-    "email": "colaboradores@cesal.org",
-    "opening_hours": "Horario: L - 9:00-14:00 ; 16:00-18:00hs M - 9:00-14:00 ; 16:00-18:00hs X - 9:00-14:00 ; 16:00-18:00hs J - 9:00-14:00 ; 16:00-18:00hs V - 9:00-14:00 ; 16:00-18:00hs Visita nuestras últimas noticias Cesal © 2026 Contacto Canal de denuncias A"
-  },
-  {
-    "id": "asociacion-claretiana-para-el-desarrollo-humano-sortarazi",
-    "name": "ASOCIACIÓN CLARETIANA PARA EL DESARROLLO HUMANO SORTARAZI",
-    "website": "https://sortarazi.org/",
-    "location": "Polígono Ibarrabarri D2, 48940 Leioa",
-    "phone": "+34 946 545 983",
-    "email": "sortarazi@sortarazi.org",
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-colectivo-agar-espacio-de-invetigacion-y-encuentro-desde-la-diversida",
-    "name": "ASOCIACIÓN COLECTIVO AGAR ESPACIO DE INVETIGACIÓN Y ENCUENTRO DESDE LA DIVERSIDAD",
-    "website": null,
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-columbares",
-    "name": "ASOCIACIÓN COLUMBARES",
-    "website": "https://columbares.org/",
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-creando-huellas",
-    "name": "ASOCIACIÓN CREANDO HUELLAS",
-    "website": "https://creandohuellas.org/",
-    "location": "C/ Peña Ubiña 3, Loc. 28053 Madrid",
-    "phone": "+34 911 941 004",
-    "email": "hola@creandohuellas.org",
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-de-colombianos-y-colombianas-en-el-pais-vasco",
-    "name": "ASOCIACIÓN DE COLOMBIANOS Y COLOMBIANAS EN EL PAÍS VASCO",
-    "website": "https://asocolvas.es/",
-    "location": "Dirección:, Enekuri Etorb., 4, Entreplanta Izq, 48014 Bilbao, Bizkaia",
-    "phone": "+34 944 335 215",
-    "email": null,
-    "opening_hours": "Horario Lunes - Jueves: 10:00 - 14:00 17:00 - 19:00 Viernes 10:00 - 14:00 Rellena el siguiente formulario y nos pondremos en contacto contigo lo antes posible! Nombre * Nombre Apellidos Correo electrónico * Tipo de Servicio Asesoria Jurídic"
-  },
-  {
-    "id": "asociacion-de-desarrollo-comunitario-buenos-aires-asdecoba",
-    "name": "ASOCIACIÓN DE DESARROLLO COMUNITARIO BUENOS AIRES (ASDECOBA)",
-    "website": null,
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-de-descendientes-de-espanoles-en-el-mundo-adem",
-    "name": "ASOCIACIÓN DE DESCENDIENTES DE ESPAÑOLES EN EL MUNDO (ADEM)",
-    "website": "https://www.soydescendiente.es",
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-de-familias-solidarias-para-el-desarrollo",
-    "name": "ASOCIACIÓN DE FAMILIAS SOLIDARIAS PARA EL DESARROLLO",
-    "website": "https://familiasolidarias.org/",
-    "location": "Calle Mistral, 10. 11130. Chiclana de la Frontera, Cádiz",
-    "phone": "+34 661 308 866",
-    "email": "coordinacion@familiasolidarias.org",
-    "opening_hours": "Horario de Atención. Lunes a Viernes 8h – 16h Email. coordinacion@familiasolidarias.org Teléfono . +34 661 30 88 66 Nombre Email Subject Phone Message Enviar Contacto Delegaciones. ALMERÍA. CARRETERA ALHADRA, 181, 2C. 04009 Almería. Teléfon"
-  },
-  {
-    "id": "asociacion-de-movilidad-humana",
-    "name": "ASOCIACIÓN DE MOVILIDAD HUMANA",
-    "website": "https://mhumana.org/",
-    "location": "Dirección: C/ Velázquez – nº44 – 1º, 15404-FERROL",
-    "phone": "+34 881 932 069",
-    "email": "info@mhumana.org",
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-de-mujeres-empresarias-iberoamericanas-ameib-pachamama",
-    "name": "ASOCIACIÓN DE MUJERES EMPRESARIAS IBEROAMERICANAS AMEIB PACHAMAMA",
-    "website": "https://www.asociacionpachamama.org/",
-    "location": "Dirección: Avenida de Asturias, 45, Bajo Local, 28029, Madrid – Metro: Plaza Castilla o Ventilla",
-    "phone": "+34 622 310 849",
-    "email": "info@ameib.org",
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-de-mujeres-hegoak-eta-sustraiak-alas-y-raices",
-    "name": "ASOCIACIÓN DE MUJERES HEGOAK ETA SUSTRAIAK/ALAS Y RAÍCES",
-    "website": "https://alasyraicesbilbao.org/",
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-de-mujeres-latrebede",
-    "name": "ASOCIACIÓN DE MUJERES LATRÉBEDE",
-    "website": "https://latrebede.wordpress.com",
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-de-reinsercion-social-sartu-alava",
-    "name": "ASOCIACIÓN DE REINSERCIÓN SOCIAL SARTU-ÁLAVA",
-    "website": "https://alava.sartu.net",
-    "location": "Sede central, Portal del Rey, 20 Bajo 01001 Vitoria-Gasteiz",
-    "phone": "+34 945 158 178",
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-eslabon-iniciativas-de-promocion-de-empleo",
-    "name": "ASOCIACIÓN ESLABÓN INICIATIVAS DE PROMOCIÓN DE EMPLEO",
-    "website": "https://eslabon.org/",
-    "location": "Calle de Ntra. Sra. de la Luz, 44, 28025 Madrid",
-    "phone": "+34 912 960 857",
-    "email": "eslabon@eslabon.org",
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-fisa-boa-vida",
-    "name": "ASOCIACIÓN FISA BOA VIDA",
-    "website": "https://boavida.org/",
-    "location": "36002 Pontevedra",
-    "phone": "+34 986 101 116",
-    "email": "comunicacion@boavida.org",
-    "opening_hours": "Horario Luns a venres: 9:00 a 13:30 h Cómo chegar Tendas solidarias PONTEVEDRA Rúa Santa Clara 35 36002 Pontevedra T. 986 848 159 Horario Luns a venres: 10:00 a 20:30 Sábados: 10:00 a 14:00 Domingos e festivos pechado Cómo chegar PONTEVEDR"
-  },
-  {
-    "id": "asociacion-intercultural-candombe",
-    "name": "ASOCIACIÓN INTERCULTURAL CANDOMBE",
-    "website": "https://www.candombe.org.es/",
-    "location": "Calle Brasil,38, 46018 Valencia (España)",
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-intercultural-de-profesionales-del-hogar-y-de-los-cuidados",
-    "name": "ASOCIACIÓN INTERCULTURAL DE PROFESIONALES DEL HOGAR Y DE LOS CUIDADOS",
-    "website": "https://aiphyc.org/",
-    "location": null,
-    "phone": null,
-    "email": "profesionaleshogarcuidados@gmail.com",
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-itxaropen-gune",
-    "name": "ASOCIACIÓN ITXAROPEN GUNE",
-    "website": "https://www.itxaropengune.org/",
-    "location": null,
-    "phone": "+34 948 226 675",
-    "email": "itxaropengune@yahoo.es",
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-jorge-adolfo-freytter-romero",
-    "name": "ASOCIACIÓN JORGE ADOLFO FREYTTER ROMERO",
-    "website": "https://www.freytter.eus/",
-    "location": "K/ La Casilla, 6 local 2, 48012 Bilbao (Bizkaia)",
-    "phone": null,
-    "email": "web@freytter.eus",
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-jovesolides",
-    "name": "ASOCIACIÓN JOVESÓLIDES",
-    "website": "https://jovesolides.org/",
-    "location": "Dirección: C/ Silla, nº 10, 46980, Paterna (València)",
-    "phone": "+34 965 555 120",
-    "email": "info@jovesolides.org",
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-kuentame-atencion-centrada-en-la-persona",
-    "name": "ASOCIACIÓN KUÉNTAME ATENCIÓN CENTRADA EN LA PERSONA",
-    "website": "https://kuentame.weebly.com/",
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-marroqui-para-la-integracion-de-los-inmigrantes",
-    "name": "ASOCIACIÓN MARROQUÍ PARA LA INTEGRACIÓN DE LOS INMIGRANTES",
-    "website": "https://www.asociacionmarroqui.com/",
-    "location": "C/ Manuel Fal Conde, 4. (",
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-melilla-acoge",
-    "name": "ASOCIACIÓN MELILLA ACOGE",
-    "website": "https://acoge.org/melilla-acoge/",
-    "location": "C/ Cabeza del Rey Don Pedro, 9. Bajo. 41004 SEVILLA",
-    "phone": "+34 954 900 773",
-    "email": "acoge@acoge.org",
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-mujeres-con-voz",
-    "name": "ASOCIACIÓN MUJERES CON VOZ",
-    "website": "https://mujeresyvoces.blogspot.com/",
-    "location": null,
-    "phone": "+34 946 522 133",
-    "email": "regularizacion@mujeresconvoz.com",
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-mujeres-palante",
-    "name": "ASOCIACIÓN MUJERES PALANTE",
-    "website": "https://www.mujerespalante.org/",
-    "location": "C/ Creu Roja, 8. Local",
-    "phone": "+34 653 367 983",
-    "email": null,
-    "opening_hours": "jueves de 16:00 a 17:00"
-  },
-  {
-    "id": "asociacion-muyeres-pachamama",
-    "name": "ASOCIACIÓN MUYERES PACHAMAMA",
-    "website": null,
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-nueva-ciudadania-por-la-interculturalidad",
-    "name": "ASOCIACIÓN NUEVA CIUDADANÍA POR LA INTERCULTURALIDAD",
-    "website": "https://asnuci.org/inicio",
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-para-a-promocion-social-a-insercion-laboral-plataforma-polo-emprego",
-    "name": "ASOCIACIÓN PARA A PROMOCIÓN SOCIAL A INSERCIÓN LABORAL PLATAFORMA POLO EMPREGO",
-    "website": "https://www.plataformapoloemprego.org/",
-    "location": null,
-    "phone": null,
-    "email": "info@plataformapoloemprego.org",
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-para-el-desarrollo-economico-y-social-rayuela",
-    "name": "ASOCIACIÓN PARA EL DESARROLLO ECONÓMICO Y SOCIAL RAYUELA",
-    "website": "https://asociacionrayuela.com/",
-    "location": "su oficina se encuentra en la Calle Herradores, nº 45, 1ª Planta (Oficina 1º Derecho), CP 38201, con el teléfono 922.29.35.24",
-    "phone": "+34 922 321 971",
-    "email": "info@asociacionrayuela.com",
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-para-la-cooperacion-entre-comunidades",
-    "name": "ASOCIACIÓN PARA LA COOPERACIÓN ENTRE COMUNIDADES",
-    "website": "https://www.cvongd.org/es/entidades/acoec/",
-    "location": "C/ Moro Zeit, 9 bajo-izquierda, 46001 Valencia",
-    "phone": "+34 652 547 328",
-    "email": "info@cvongd.org",
-    "opening_hours": "Horario: De 16:00 a 20:00 h. EVES (Escuela Valencia de Estudios para la Salud) València Convoca: ACOEC, Asociación para la Cooperación entre comunidades Justicia Alimentaria Formación Formación “Intervención comunitaria con enfoque de salud"
-  },
-  {
-    "id": "asociacion-para-la-insercion-laboral-y-fomento-de-la-economia-social-actua",
-    "name": "ASOCIACIÓN PARA LA INSERCIÓN LABORAL Y FOMENTO DE LA ECONOMÍA SOCIAL ACTÚA",
-    "website": "https://www.tenerifeislasolidaria.org/portfolio_page/asociacion-para-la-insercion-laboral-y-fomento-de-la-economia-social-actua/",
-    "location": "Centro Insular de Entidades de Voluntariado C/ JUAN RUMEU GARCÍA Nº 28, 38008 Santa Cruz de Tenerife",
-    "phone": "+34 922 882 325",
-    "email": "info@tenerifeislasolidaria.org",
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-para-la-integracion-social-alietxea",
-    "name": "ASOCIACIÓN PARA LA INTEGRACIÓN SOCIAL ALIETXEA",
-    "website": null,
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-plataforma-intercultural-de-espana",
-    "name": "ASOCIACIÓN PLATAFORMA INTERCULTURAL DE ESPAÑA",
-    "website": "https://plataformaintercultural.es/",
-    "location": "Calle Santo Tomás, 10 – 46003 – Barrio del Carmen – Valencia – España",
-    "phone": "+34 663 186 636",
-    "email": "infoplataformaintercultural@gmail.com",
-    "opening_hours": "Lunes a Jueves 16:00 h – 19:00 h"
-  },
-  {
-    "id": "asociacion-por-el-desarrollo-sostenible-de-albacete",
-    "name": "ASOCIACIÓN POR EL DESARROLLO SOSTENIBLE DE ALBACETE",
-    "website": "https://adesalbacete.wordpress.com/",
-    "location": "Calle Blasco Ibañéz, 40 Albacete",
-    "phone": "+34 967 664 581",
-    "email": "adesalbacete@gmail.com",
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-por-ti-mujer",
-    "name": "ASOCIACIÓN POR TI MUJER",
-    "website": "https://asociacionportimujer.org/",
-    "location": "C/ Alfonso de Córdoba, 12 – bajo",
-    "phone": "+34 963 476 774",
-    "email": "contacto@asociacionportimujer.org",
-    "opening_hours": "miércoles 10:00-13:00"
-  },
-  {
-    "id": "asociacion-posthac-entidad-social-por-el-empleo",
-    "name": "ASOCIACIÓN POSTHAC, ENTIDAD SOCIAL POR EL EMPLEO",
-    "website": "https://posthac.org/",
-    "location": "C/ Manuel de Falla, nº 12, Bajo, 31005 Pamplona",
-    "phone": "+34 948 789 766",
-    "email": "info@posthac.org",
-    "opening_hours": "de lunes a viernes, en horario flexible, principalmente, por las mañanas. Contáctanos: 948 789 766 / 644 370 570 txikiposthac@posthac.org Posthac en Redes Sociales Si quieres estar al día y conocer todas nuestras NOVEDADES , síguenos en Red"
-  },
-  {
-    "id": "asociacion-pro-derechos-humanos-de-andalucia",
-    "name": "ASOCIACIÓN PRO DERECHOS HUMANOS DE ANDALUCIA",
-    "website": "https://www.apdha.org/",
-    "location": "Calle Dora Reyes nº 7, 1º., 11009 Cádiz",
-    "phone": "+34 690 019 644",
-    "email": "andalucia@apdha.org",
-    "opening_hours": "Jueves 5 de febrero&#x23f0; 19:00-20:30h"
-  },
-  {
-    "id": "asociacion-proyecto-jaen-solidario",
-    "name": "ASOCIACIÓN PROYECTO JAÉN SOLIDARIO",
-    "website": "https://jaensolidario.es/",
-    "location": "C/ Muñoz Garnica, 12, 23001, Jaén",
-    "phone": "+34 615 927 481",
-    "email": "jaensolidario@gmail.com",
-    "opening_hours": "lunes a jueves de 17.00 a 19.30 h"
-  },
-  {
-    "id": "asociacion-radioclub-ceres",
-    "name": "ASOCIACIÓN RADIOCLUB CERES",
-    "website": null,
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-san-nikolas-zabalik",
-    "name": "ASOCIACIÓN SAN NIKOLAS ZABALIK",
-    "website": "https://www.sannikolaszabalik.wordpress.com",
-    "location": "Avda. Basagoiti 68, 48991 Getxo",
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-sare",
-    "name": "ASOCIACIÓN SARE",
-    "website": "https://sare-vih.org/",
-    "location": "31014 Contacto",
-    "phone": "+34 948 384 149",
-    "email": "sare@pangea.org",
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-servicio-domestico-activo-sedoac",
-    "name": "ASOCIACIÓN SERVICIO DOMÉSTICO ACTIVO - SEDOAC",
-    "website": "https://sedoac.es/",
-    "location": null,
-    "phone": null,
-    "email": "informacion@sedoac.org",
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-social-solidaridad-venezuela",
-    "name": "ASOCIACIÓN SOCIAL SOLIDARIDAD VENEZUELA",
-    "website": null,
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-social-sanitaria-cultural-educativo-cientifico-y-deportivo-acciones-u",
-    "name": "ASOCIACIÓN SOCIAL, SANITARIA, CULTURAL, EDUCATIVO, CIENTIFICO Y DEPORTIVO ACCIONES UNIDAS",
-    "website": "https://www.asociacionaccionesunidas.com/",
-    "location": "Calle Doctor Juan Negrín, 49, bajo, 35500 Arrecife",
-    "phone": "+34 828 136 849",
-    "email": "info@asociacionaccionesunidas.com",
-    "opening_hours": "Horario de atención para inscripciones: de lunes a viernes, de 9:00 a 13:00 y de 15:00 a 17:00 📲 Información 666 96 22 45 📝 Documentación necesaria: • Fotocopia del DNI/NIE o pasaporte del niño/a • Fotocopia del DNI/NIE o pasaporte del padr"
-  },
-  {
-    "id": "asociacion-sociocultural-alto-jalon",
-    "name": "ASOCIACIÓN SOCIOCULTURAL ALTO JALÓN",
-    "website": "https://www.asociacionaltojalon.wixsite.com",
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-solidarios-sport",
-    "name": "ASOCIACIÓN SOLIDARIOS SPORT",
-    "website": null,
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-somcustodia",
-    "name": "ASOCIACIÓN SOMCUSTÒDIA",
-    "website": "https://somcustodia.org/",
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "asociacion-vecinal-union-esgueva",
-    "name": "ASOCIACIÓN VECINAL UNIÓN ESGUEVA",
-    "website": "https://unionesgueva.com/",
-    "location": "C/ Conde Arteche s/n, 47010 Valladolid",
-    "phone": "+34 983 268 433",
-    "email": "unionesgueva@gmail.com",
-    "opening_hours": null
-  },
-  {
-    "id": "asovedra",
-    "name": "ASOVEDRA",
-    "website": "https://asovedra.org/",
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "associacio-coordinadora-obrim-fronteres",
-    "name": "ASSOCIACIÓ COORDINADORA OBRIM FRONTERES",
-    "website": "https://coordinadoraobrimfronteres.org/",
-    "location": null,
-    "phone": null,
-    "email": "coordinadora.obrim.fronteres@gmail.com",
-    "opening_hours": null
-  },
-  {
-    "id": "associacio-cultural-l-aleta",
-    "name": "ASSOCIACIÓ CULTURAL L'ALETA",
-    "website": null,
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "associacio-de-veins-la-florida",
-    "name": "ASSOCIACIÓ DE VEÏNS LA FLORIDA",
-    "website": null,
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "associacio-eccit",
-    "name": "ASSOCIACIÓ ECCIT",
-    "website": "https://www.eccit.org/",
-    "location": null,
-    "phone": null,
-    "email": "info@eccit.org",
-    "opening_hours": null
-  },
-  {
-    "id": "associacio-fruita-amb-justicia-social",
-    "name": "ASSOCIACIÓ FRUITA AMB JUSTÍCIA SOCIAL",
-    "website": "https://fruitaambjusticia.cat/",
-    "location": null,
-    "phone": "+34 644 694 801",
-    "email": "info@fruitaambjusticia.cat",
-    "opening_hours": null
-  },
-  {
-    "id": "associacio-noves-vies",
-    "name": "ASSOCIACIÓ NOVES VIES",
-    "website": "https://www.novesvies.com/",
-    "location": "Carrer Mossèn Anton Romeu, 75-77",
-    "phone": null,
-    "email": "info@novesvies.org",
-    "opening_hours": null
-  },
-  {
-    "id": "associacio-quilometrezero",
-    "name": "ASSOCIACIÓ QUILÒMETREZERO",
-    "website": "https://quilometrezero.cat/",
-    "location": "o en la dirección: Via Imperi Romà, 11, C.P. 43003 – Tarragona (Tarragona)",
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "associacio-reus-refugi",
-    "name": "ASSOCIACIÓ REUS REFUGI",
-    "website": "https://reusrefugi.cat/",
-    "location": "Carrer: PUBILL ORIOL, 25. (ESPLAI ALBADA), 43201, REUS. TARRAGONA",
-    "phone": "+34 623 784 152",
-    "email": "info@reusrefugi.cat",
-    "opening_hours": null
-  },
-  {
-    "id": "associacio-social-project-4-0",
-    "name": "ASSOCIACIÓ SOCIAL PROJECT 4.0",
-    "website": "https://socialproject.cat/",
-    "location": null,
-    "phone": "+34 624 161 499",
-    "email": "info@socialproject.cat",
-    "opening_hours": null
-  },
-  {
-    "id": "associacio-socioeducativa-nousol",
-    "name": "ASSOCIACIÓ SOCIOEDUCATIVA NOUSOL",
-    "website": "https://nousol.org/",
-    "location": "C/ Rutlla 20-22. 17002 Girona (Girona, ESPAÑA)",
-    "phone": "+34 722 844 528",
-    "email": "info@nousol.org",
-    "opening_hours": null
-  },
-  {
-    "id": "bumei-galicia-buenas-practicas-mujer-empleo-inclusion",
-    "name": "BUMEI GALICIA: BUENAS PRÁCTICAS, MUJER, EMPLEO, INCLUSIÓN",
-    "website": "https://www.bumeigalicia.com/inicio",
-    "location": "Rúa Pardo Bazán, 9. Bajos de la Casa del Mar. Burela - 27880 - Lugo",
-    "phone": "+34 609 837 645",
-    "email": "bumei@bumeigalicia.com",
-    "opening_hours": null
-  },
-  {
-    "id": "ceain-centro-de-acogida-de-inmigrantes",
-    "name": "CEAIN (CENTRO DE ACOGIDA DE INMIGRANTES)",
-    "website": "https://ceain.acoge.org/",
-    "location": "C/ Vicario, 16 Jerez",
-    "phone": "+34 956 349 585",
-    "email": "info@ceain.org",
-    "opening_hours": "Horario: 09:00 – 14:00 © Copyright CEAIN 2024"
-  },
-  {
-    "id": "centre-de-desenvolupament-rural-alt-maestrat",
-    "name": "CENTRE DE DESENVOLUPAMENT RURAL ALT MAESTRAT",
-    "website": "https://www.cdraltmaestrat.org/",
-    "location": "C/ 8 de Març nº5, 12140 Albocàsser, Castelló",
-    "phone": null,
-    "email": "info@cdraltmaestrat.org",
-    "opening_hours": null
-  },
-  {
-    "id": "centro-de-desarrollo-rural-carrion-de-los-condess",
-    "name": "CENTRO DE DESARROLLO RURAL \"CARRIÓN DE LOS CONDESS",
-    "website": "https://cdrcarriondeloscondes.org/",
-    "location": null,
-    "phone": "+34 979 880 534",
-    "email": "contacto@cdrcarriondeloscondes.org",
-    "opening_hours": null
-  },
-  {
-    "id": "centro-de-desarrollo-rural-la-safor",
-    "name": "CENTRO DE DESARROLLO RURAL LA SAFOR",
-    "website": "https://cdrlasafor.org/",
-    "location": "Carrer Major, 7, 46716 Rafelcofer (València)",
-    "phone": "+34 960 437 498",
-    "email": "cdr@cdrlasafor.org",
-    "opening_hours": null
-  },
-  {
-    "id": "centro-de-desarrollo-rural-o-viso",
-    "name": "CENTRO DE DESARROLLO RURAL O VISO",
-    "website": "https://www.cdroviso.org/",
-    "location": "32696 Lodoselo",
-    "phone": "+34 988 454 408",
-    "email": "cdroviso@cdroviso.org",
-    "opening_hours": null
-  },
-  {
-    "id": "centro-sociocultural-zaidin",
-    "name": "CENTRO SOCIOCULTURAL ZAIDIN",
-    "website": "https://csczaidin.wordpress.com",
-    "location": "Calle Zurbarán nº 8, C.P. 18007, Granada",
-    "phone": "+34 958 136 876",
-    "email": "csazaidin@yahoo.es",
-    "opening_hours": null
-  },
-  {
-    "id": "coag-almeria",
-    "name": "COAG ALMERÍA",
-    "website": "https://coagalmeria.com/",
-    "location": "C/ Zurgena, 4. 04738 Vícar (Almería)",
-    "phone": null,
-    "email": "almeria@coagalmeria.com",
-    "opening_hours": "Horario Lunes-Viernes: 9:00 - 15:00 Oficina Comarcal de Adra - Balanegra - Berja Dirección C/ El Salvador, 6 bajo 04770 Adra Teléfono Tel: 950 40 23 24 WhatsApp Tel: 687 37 24 57 E-mail adra@coagalmeria.com Horario Lunes-Viernes: 9:00 - 15"
-  },
-  {
-    "id": "comision-espanola-de-ayuda-al-refugiado-cear",
-    "name": "COMISIÓN ESPAÑOLA DE AYUDA AL REFUGIADO (CEAR)",
-    "website": "https://www.cear.es/",
-    "location": "Avenida de Asturias 33, Bajo, 28029",
-    "phone": "+34 950 968 626",
-    "email": null,
-    "opening_hours": "horario de lunes a jueves, de 9:00 a 14:00 horas, a través del Programa de Información y Orientación a personas migrantes. Email de contacto: [email protected] GETAFE Carta de Servicios CEAR – CEMI Getafe Centro de Acogida Juan José Rodrígu"
-  },
-  {
-    "id": "comision-para-la-investigacion-de-malos-tratos-a-mujeres",
-    "name": "COMISIÓN PARA LA INVESTIGACIÓN DE MALOS TRATOS A MUJERES",
-    "website": "https://malostratos.org/",
-    "location": "C. de Sebastián Herrera, 15, Arganzuela, 28012 Madrid",
-    "phone": null,
-    "email": "comision@malostratos.org",
-    "opening_hours": "martes 21 de abril, de 18:30 a 20:30 h"
-  },
-  {
-    "id": "comite-de-apoyo-a-las-trabajadoras-del-sexo-cats",
-    "name": "COMITÉ DE APOYO A LAS TRABAJADORAS DEL SEXO (CATS)",
-    "website": "https://www.asociacioncats.es/",
-    "location": "C/Alfande, 1, bajo (esquina Pintor sobejano 12), 30004 Murcia",
-    "phone": "+34 695 790 423",
-    "email": "info@asociacioncats.org",
-    "opening_hours": "Horario de apertura: Lunes a Jueves de 10 a 14h Ubicación Si deseas contactar con CATS, rellena el siguiente formulario: Nombre * Email Teléfono Móvil Consulta Enviar Borrar reCAPTCHA Copyright © 2026 Comite de Apoyo a las Trabajadoras del"
-  },
-  {
-    "id": "confederacion-de-comisiones-obreras",
-    "name": "CONFEDERACION DE COMISIONES OBRERAS",
-    "website": "https://www.ccoo.es/",
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "caritas-diocesana-de-bilbao",
-    "name": "CÁRITAS DIOCESANA DE BILBAO",
-    "website": "https://www.caritasbi.org/",
-    "location": "Si quieres más información sobre algún tema, puedes encontrarnos en Erribera Kalea 8, 48005 Bilbao o en el",
-    "phone": "+34 944 020 099",
-    "email": "caritasbi@caritasbi.org",
-    "opening_hours": null
-  },
-  {
-    "id": "caritas-diocesana-de-salamanca",
-    "name": "CÁRITAS DIOCESANA DE SALAMANCA",
-    "website": "https://www.caritasalamanca.org/",
-    "location": "C/ Maestro Soler, 15 37008 Salamanca",
-    "phone": "+34 676 609 594",
-    "email": "info@caritasalamanca.org",
-    "opening_hours": null
-  },
-  {
-    "id": "caritas-diocesana-de-san-sebastian",
-    "name": "CÁRITAS DIOCESANA DE SAN SEBASTIÁN",
-    "website": "https://www.caritasgipuzkoa.org/es/inicio",
-    "location": "Paseo Salamanca nº 2, 20003-Donostia |",
-    "phone": "+34 943 440 744",
-    "email": "idazkari@caritasgi.org",
-    "opening_hours": null
-  },
-  {
-    "id": "elkarri-laguntza-apoyo-mutuo",
-    "name": "ELKARRI LAGUNTZA-APOYO MUTUO",
-    "website": null,
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "empresa-comunitarias-asociativa-de-trabajo-solidarios-de-espana-ong-emcat",
-    "name": "EMPRESA COMUNITARIAS ASOCIATIVA DE TRABAJO SOLIDARIOS DE ESPAÑA ONG EMCAT",
-    "website": "https://emcatsolidaridad.org/",
-    "location": "Dirección: Calle José Soto Micó, 29 bajo derecha , 46017 – Valencia",
-    "phone": "+34 963 570 778",
-    "email": "emcatong@hotmail.com",
-    "opening_hours": null
-  },
-  {
-    "id": "espai-obert-el-maritim",
-    "name": "ESPAI OBERT EL MARÍTIM",
-    "website": "https://www.espaiobertelmaritim.com/",
-    "location": null,
-    "phone": "+34 640 205 000",
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "federacion-andalucia-acoge-sur-acoge",
-    "name": "FEDERACIÓN ANDALUCÍA ACOGE - SUR ACOGE",
-    "website": "https://acoge.org/",
-    "location": "C/ Cabeza del Rey Don Pedro, 9. Bajo. 41004 SEVILLA",
-    "phone": "+34 954 900 773",
-    "email": "acoge@acoge.org",
-    "opening_hours": null
-  },
-  {
-    "id": "federacion-de-migrantes-en-lanzarote-fedemilanz",
-    "name": "FEDERACIÓN DE MIGRANTES EN LANZAROTE- FEDEMILANZ",
-    "website": "https://fedemilanz.com/",
-    "location": null,
-    "phone": "+34 928 075 903",
-    "email": "info.fedemilanz@gmail.com",
-    "opening_hours": null
-  },
-  {
-    "id": "fundacio-ciutadania-multicultural-mescladis",
-    "name": "FUNDACIO CIUTADANIA MULTICULTURAL - MESCLADIS",
-    "website": "https://mescladis-org.b.iwith.org/es/",
-    "location": "c/Carders 35, 08003 Bcn // Tlf: 933198732",
-    "phone": "+34 933 198 732",
-    "email": "info@mescladis.org",
-    "opening_hours": null
-  },
-  {
-    "id": "fundacion-koine-aequalitas",
-    "name": "FUNDACION KOINE AEQUALITAS",
-    "website": "https://www.koine-aequalitas.org/",
-    "location": "Avda. de Guipúzcoa, 61, 31013 Berriozar, Navarra",
-    "phone": "+34 948 199 775",
-    "email": "fundacion@koine-aequalitas.org",
-    "opening_hours": null
-  },
-  {
-    "id": "fundacio-mifas",
-    "name": "FUNDACIÓ MIFAS",
-    "website": "https://www.mifas.cat/ca/",
-    "location": "C/ Pla de l'Estany, 11, 17740 Vilafant",
-    "phone": null,
-    "email": "mifas@mifas.cat",
-    "opening_hours": "dilluns a divendres de 7:30h a 15:30h"
-  },
-  {
-    "id": "fundacio-moli-d-en-puigvert",
-    "name": "FUNDACIÓ MOLÍ D'EN PUIGVERT",
-    "website": "https://www.fundaciomoli.org/",
-    "location": "C/ Gorg El Moli d’en Puigvert, 1, 08389 Palafolls (Barcelona)",
-    "phone": "+34 931 155 060",
-    "email": "info@fundaciomoli.org",
-    "opening_hours": "horari laboral de 09 a 16 h. També a la nostra botiga outlet de Jack & Jones (C/ Ramon Turró, 31, Palafolls), en horari comercial (de dilluns a dimecres de 10 a 13.30 h i de 17 a 20.30 h i de dijous a dissabte de 10 a 20.30 h). Per a qualse"
-  },
-  {
-    "id": "fundacio-privada-gune",
-    "name": "FUNDACIÓ PRIVADA GUNÉ",
-    "website": "https://fundaciogune.org/",
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "fundacion-agricultores-solidarios",
-    "name": "FUNDACIÓN AGRICULTORES SOLIDARIOS",
-    "website": "https://www.pagesossolidaris.org/es/",
-    "location": "Calle Riu Besós, n.º 22, 25001 Lleida",
-    "phone": "+34 973 288 202",
-    "email": "pagesossolidaris@pagesossolidaris.org",
-    "opening_hours": null
-  },
-  {
-    "id": "fundacion-altius-espana",
-    "name": "FUNDACIÓN ALTIUS ESPAÑA",
-    "website": "https://www.fundacionaltius.org/",
-    "location": "28005 Madrid",
-    "phone": null,
-    "email": "info@fundacionaltius.org",
-    "opening_hours": null
-  },
-  {
-    "id": "fundacion-cepaim-accion-integral-con-migrantes",
-    "name": "FUNDACIÓN CEPAIM ACCIÓN INTEGRAL CON MIGRANTES",
-    "website": "https://www.cepaim.org/",
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "fundacion-claret-enea",
-    "name": "FUNDACIÓN CLARET ENEA",
-    "website": "https://claretenea.org/",
-    "location": "Plaza Corazón de María 1, 48003 BILBAO (BIZKAIA)",
-    "phone": null,
-    "email": "claretenea@claretenea.org",
-    "opening_hours": null
-  },
-  {
-    "id": "fundacion-cruz-blanca",
-    "name": "FUNDACIÓN CRUZ BLANCA",
-    "website": "https://www.fundacioncruzblanca.org/",
-    "location": "C/ Ayul Lachandani 1, 6-A., 52004 Melilla",
-    "phone": "+34 952 713 861",
-    "email": "c.melilla@fundacioncruzblanca.org",
-    "opening_hours": "horario de 10.00 h a 18.00 h. Programas que desarrolla: Datos de contacto: María Zambrano, 3 - CP. 40001 Segovia Teléfono: 921460074 Persona de contacto: . cf-segovia@cruzblanca.org Centro Granada Descripción: Centro Granada Programas que"
-  },
-  {
-    "id": "fundacion-europea-para-la-cooperacion-norte-sur",
-    "name": "FUNDACIÓN EUROPEA PARA LA COOPERACIÓN NORTE SUR",
-    "website": "https://fecons.org/",
-    "location": "c/ Pérez Galdós, 106. 21002 Huelva",
-    "phone": "+34 959 285 378",
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "fundacion-federico-ozanam",
-    "name": "FUNDACIÓN FEDERICO OZANAM",
-    "website": "https://www.ozanam.es/",
-    "location": "Calle Ramón Pignatelli, 17, 50004 · Zaragoza",
-    "phone": null,
-    "email": "fundacion@ozanam.com",
-    "opening_hours": "Horario Lunes a jueves de 8:00 a 14:00 y de 16:00 a 18:00 Viernes de 8:00 a 15:00 Sede Ozanam Calle Ramón Pignatelli 17 50004 Zaragoza Información Contacta con Ozanam Selecciona un área Personas Mayores Formación y Empleo Infancia y Familia"
-  },
-  {
-    "id": "fundacion-harribide",
-    "name": "FUNDACIÓN HARRIBIDE",
-    "website": "https://harribide.org/es/inicio-4/",
-    "location": "Acceso a la Iglesia, 2, 48450. Etxebarri, Bizkaia",
-    "phone": null,
-    "email": "info@harribide.org",
-    "opening_hours": "Lunes a jueves 09:00 &#8211; 16:00 Viernes 09:00-14:00"
-  },
-  {
-    "id": "fundacion-ibn-battuta",
-    "name": "FUNDACIÓN IBN BATTUTA",
-    "website": "https://www.fundacioibnbattuta.org/?lang=es",
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "fundacion-indian-culture-centre",
-    "name": "FUNDACIÓN INDIAN CULTURE CENTRE",
-    "website": "https://culturaindia.cat/es/",
-    "location": "Calle Vilamarí, 31 – 08011 Barcelona",
-    "phone": null,
-    "email": "indianculturebcn@gmail.com",
-    "opening_hours": "Lunes 20:00h – 21:30h"
-  },
-  {
-    "id": "fundacion-juanjo-torrejon",
-    "name": "FUNDACIÓN JUANJO TORREJÓN",
-    "website": "https://fundacionjuanjotorrejon.org/",
-    "location": "Carrera de Andalucía, 59, 28300 Aranjuez",
-    "phone": "+34 691 415 098",
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "fundacion-la-merced-migraciones",
-    "name": "FUNDACIÓN LA MERCED MIGRACIONES",
-    "website": "https://lamercedmigraciones.org/",
-    "location": "Calle Castelar 21, 28028, Madrid",
-    "phone": "+34 913 555 550",
-    "email": "lamerced@lamercedmigraciones.org",
-    "opening_hours": null
-  },
-  {
-    "id": "fundacion-para-la-innovacion-investigacion-formacion-y-el-desarrollo-comunitario",
-    "name": "FUNDACIÓN PARA LA INNOVACIÓN, INVESTIGACIÓN, FORMACIÓN Y EL DESARROLLO COMUNITARIO (FÜNDEC)",
-    "website": "https://www.fundec.es/",
-    "location": "Calle la Hoyita, 22, 38611. San Isidro, S/C de Tenerife",
-    "phone": null,
-    "email": null,
-    "opening_hours": "Miércoles 23 de julio de 09:00 a 15:00H"
-  },
-  {
-    "id": "fundacion-privada-ficat",
-    "name": "FUNDACIÓN PRIVADA FICAT",
-    "website": "https://www.ficat.org/es/",
-    "location": "C/ Viladomat, 217 – Ent.D - 08029 Barcelona",
-    "phone": null,
-    "email": "info@fundacioficat.org",
-    "opening_hours": null
-  },
-  {
-    "id": "fundacion-prolibertas",
-    "name": "FUNDACIÓN PROLIBERTAS",
-    "website": "https://www.prolibertas.org/",
-    "location": "C/ Cruz Blanca, 25, 29200 Antequera",
-    "phone": null,
-    "email": "info@prolibertas.org",
-    "opening_hours": null
-  },
-  {
-    "id": "fundacion-red-incola",
-    "name": "FUNDACIÓN RED ÍNCOLA",
-    "website": "https://redincola.org/",
-    "location": "C/ Olmo, 63 – 47010 Valladolid",
-    "phone": "+34 983 307 083",
-    "email": "info@redincola.org",
-    "opening_hours": null
-  },
-  {
-    "id": "fundacion-ruy-lopez",
-    "name": "FUNDACIÓN RUY LÓPEZ",
-    "website": "https://fruylopez.blogspot.com/",
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "fundacion-san-ezequiel-moreno",
-    "name": "FUNDACIÓN SAN EZEQUIEL MORENO",
-    "website": "https://fundacionsanezequiel.org/",
-    "location": "C/ Yagüe de Salas, 16 - 3º, 44001 TERUEL",
-    "phone": "+34 976 158 219",
-    "email": "info@fundacionsanezequiel.org",
-    "opening_hours": "Horario de Atención ZARAGOZA Lunes a Viernes de 9:00 a 14:00h. Martes y Jueves de 9:00 a 14:00h. 15:30 a 17:30h. HUESCA Lunes a Viernes de 9:00 a 14:00h. Martes de 9:00 a 14:00h. 15:30 a 17:30h. TERUEL Lunes a Viernes de 9:00 a 14:00h. Mart"
-  },
-  {
-    "id": "fundacion-social-ignacio-ellacuria",
-    "name": "FUNDACIÓN SOCIAL IGNACIO ELLACURIA",
-    "website": "https://fundacionellacuria.org/",
-    "location": "Arrupe Etxea C/ Padre Lojendio, 2 – 1º Derecha –, 48008 BILBAO",
-    "phone": "+34 944 465 992",
-    "email": "info@fundacionellacuria.org",
-    "opening_hours": null
-  },
-  {
-    "id": "fundacion-ambit-prevencio",
-    "name": "FUNDACIÓN ÀMBIT PREVENCIÓ",
-    "website": "https://fambitprevencio.org/",
-    "location": null,
-    "phone": "+34 933 177 059",
-    "email": "info@fambitprevencio.org",
-    "opening_hours": null
-  },
-  {
-    "id": "gaztaroa-sartu-koop-elk-de-iniciativa-social",
-    "name": "GAZTAROA SARTU KOOP ELK DE INICIATIVA SOCIAL",
-    "website": "https://gaztaroa-sartu.eus/",
-    "location": "La Laguna, 5, 48003 Bilbao",
-    "phone": "+34 944 160 420",
-    "email": "gaztaroa@sartu.org",
-    "opening_hours": null
-  },
-  {
-    "id": "granada-acoge",
-    "name": "GRANADA ACOGE",
-    "website": "https://www.granadaacoge.com/",
-    "location": "Calle Almona de San Juan de Dios, 12, 18001, Granada",
-    "phone": "+34 958 200 836",
-    "email": "granada@gracoge.org",
-    "opening_hours": "Horarios de atención: Lunes a jueves: de 09:00 a 14:00 h. y de 17:00 a 19:00 h. Viernes: de 09:00 a 14:00 h. Las citas para atenciones individuales se solicitan los jueves por teléfono a partir de las 09:00 h. Teléfono de contacto: 958 200"
-  },
-  {
-    "id": "grans-projectes-solidaris",
-    "name": "GRANS PROJECTES SOLIDARIS",
-    "website": "https://coopcamp.cat/entitat/grans-projectes-solidaries/",
-    "location": "Espai Tabacalera, C/ del Cardenal Vidal i Barraquer, S/N, 43005 Tarragona",
-    "phone": "+34 693 818 303",
-    "email": "info@coopcamp.cat",
-    "opening_hours": null
-  },
-  {
-    "id": "haurralde-fundazioa",
-    "name": "HAURRALDE FUNDAZIOA",
-    "website": "https://haurraldefundazioa.org/",
-    "location": "Oficinas Centrales, Paseo de Colón, nº 50 bajo – Gros ∙ 20002 –",
-    "phone": null,
-    "email": "ong@haurraldefundazioa.org",
-    "opening_hours": null
-  },
-  {
-    "id": "hermanas-oblatas-del-stsmo-redentor",
-    "name": "HERMANAS OBLATAS DEL STSMO REDENTOR",
-    "website": "https://hermanasoblatas.org/",
-    "location": "calle Cartagena, 116,, 28002 Madrid (Madrid)",
-    "phone": null,
-    "email": "info@hermanasoblatas.org",
-    "opening_hours": null
-  },
-  {
-    "id": "huelva-acoge",
-    "name": "HUELVA ACOGE",
-    "website": "https://huelvaacoge.org/",
-    "location": null,
-    "phone": null,
-    "email": "huelva@acoge.org",
-    "opening_hours": "De Lunes a Viernes de 9:00 a 14:00 Servicio de atención Psicológica Sólo con cita previa Martes de 9:30 a 13:30 Servicio de Intervención Social Sólo con cita previa Miércoles 9:30 a 13:00 Servicio de Promoción Laboral Sólo con cita previa L"
-  },
-  {
-    "id": "humanitarios-sin-fronteras",
-    "name": "HUMANITARIOS SIN FRONTERAS",
-    "website": "https://humanitariossinfronteras.com/",
-    "location": "Calle Valle Inclán, 9. Roquetas de Mar, Almería. 04740",
-    "phone": "+34 722 141 578",
-    "email": "empleohsf@humanitariossinfronteras.es",
-    "opening_hours": null
-  },
-  {
-    "id": "irsearaba-s-coop",
-    "name": "IRSEARABA S.COOP",
-    "website": "https://www.irsearaba.eus/",
-    "location": "C/ Canciller Ayala nº 8, Bajo, 01004 Vitoria-Gasteiz , Álava",
-    "phone": null,
-    "email": "info@irsearaba.eus",
-    "opening_hours": null
-  },
-  {
-    "id": "izangai-elkartea",
-    "name": "IZANGAI ELKARTEA",
-    "website": "https://www.izangai.org/",
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "kolectivo-jovenes-parke",
-    "name": "KOLECTIVO JOVENES PARKE",
-    "website": "https://kolectivosparke.org/",
-    "location": "Pl. Poeta Miguel Hernández 14 L2, 46910 Alfafar",
-    "phone": "+34 963 760 019",
-    "email": "n@kolectivosparke.org",
-    "opening_hours": null
-  },
-  {
-    "id": "la-rueca-asociacion",
-    "name": "LA RUECA ASOCIACIÓN",
-    "website": "https://larueca.org/",
-    "location": "Calle Virgen de Lluc 38, 28027",
-    "phone": "+34 664 853 411",
-    "email": "larueca@larueca.org",
-    "opening_hours": null
-  },
-  {
-    "id": "lafundicio-sccl",
-    "name": "LAFUNDICIO, SCCL",
-    "website": "https://lafundicio.net/",
-    "location": "Prat, 11 Bajos, 08907 L’Hospitalet",
-    "phone": "+34 654 465 108",
-    "email": "hola@lafundicio.net",
-    "opening_hours": null
-  },
-  {
-    "id": "malen-etxea-asociacion-de-mujeres-inmigrantes",
-    "name": "MALEN ETXEA, ASOCIACIÓN DE MUJERES INMIGRANTES",
-    "website": "https://malenetxea.org/",
-    "location": "14, 20750 Zumaia, Gipuzkoa",
-    "phone": "+34 943 576 095",
-    "email": "contacto@malenetxea.org",
-    "opening_hours": null
-  },
-  {
-    "id": "movimiento-de-mujeres-migrantes-de-extremadura",
-    "name": "MOVIMIENTO DE MUJERES MIGRANTES DE EXTREMADURA",
-    "website": "https://lasmigrantas.org/",
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "movimiento-por-la-paz-el-desarme-y-la-libertad",
-    "name": "MOVIMIENTO POR LA PAZ, EL DESARME Y LA LIBERTAD",
-    "website": "https://www.mpdl.org/",
-    "location": "c/ Martos, 15. 28053 Madrid",
-    "phone": null,
-    "email": "mpdl@mpdl.org",
-    "opening_hours": null
-  },
-  {
-    "id": "mujeres-unidas-entre-tierras",
-    "name": "MUJERES UNIDAS ENTRE TIERRAS",
-    "website": "https://mujeresunidasentretierras.org/",
-    "location": "C. D,PLANTA 4,PUERTA 4 08038 BARCELONA",
-    "phone": null,
-    "email": "mujeresunidasentretierras@gmail.com",
-    "opening_hours": null
-  },
-  {
-    "id": "mundo-en-movimiento",
-    "name": "MUNDO EN MOVIMIENTO",
-    "website": "https://www.mundoenmovimiento.org/",
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "malaga-acoge",
-    "name": "MÁLAGA ACOGE",
-    "website": "https://malaga.acoge.org/",
-    "location": null,
-    "phone": null,
-    "email": "malaga@malagaacoge.org",
-    "opening_hours": null
-  },
-  {
-    "id": "oficinas-de-derechos-sociales-de-sevilla",
-    "name": "OFICINAS DE DERECHOS SOCIALES DE SEVILLA",
-    "website": "https://ods-sevilla.com/",
-    "location": "Plaza Pumarejo Nro. 3. 41003 – Sevilla",
-    "phone": "+34 658 647 986",
-    "email": "ods.sevilla.ods@gmail.com",
-    "opening_hours": null
-  },
-  {
-    "id": "ong-mestura",
-    "name": "ONG MESTURA",
-    "website": "https://www.ongmestura.es/",
-    "location": "Avenida de Vilaboa, 158 Bajo Izquierda, 15174 A Corveira – Culleredo",
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "ong-rescate-internacional",
-    "name": "ONG RESCATE INTERNACIONAL",
-    "website": "https://ongrescate.org/",
-    "location": "Planta 3. Oficina A, Madrid 28026",
-    "phone": "+34 914 472 872",
-    "email": "rescate@ongrescate.org",
-    "opening_hours": null
-  },
-  {
-    "id": "patronato-concepcion-arenal",
-    "name": "PATRONATO CONCEPCIÓN ARENAL",
-    "website": null,
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "prodiversa-progreso-y-diversidad",
-    "name": "PRODIVERSA.PROGRESO Y DIVERSIDAD",
-    "website": "https://prodiversa.eu/",
-    "location": "Calle Huerto de los Claveles, 8, 29013 MÃ¡laga",
-    "phone": "+34 952 608 624",
-    "email": "comunicacion@prodiversa.eu",
-    "opening_hours": null
-  },
-  {
-    "id": "provivienda",
-    "name": "PROVIVIENDA",
-    "website": "https://provivienda.org/",
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "psicologos-sin-fronteras",
-    "name": "PSICÓLOGOS SIN FRONTERAS",
-    "website": "https://psicologassinfronteras.org/",
-    "location": "Carrer de les Tres Forques, 116, Bajo, L'Olivereta, 46014 València",
-    "phone": "+34 960 450 230",
-    "email": "ahumanitaria3@psicologassinfronteras.org",
-    "opening_hours": null
-  },
-  {
-    "id": "red-acoge",
-    "name": "RED ACOGE",
-    "website": "https://redacoge.org/",
-    "location": "Calle Cea Bermúdez, 43, 3ºB 28003, Madrid España",
-    "phone": null,
-    "email": "acoge@redacoge.org",
-    "opening_hours": "Horario de atención telefónica Lunes-Miércoles-Viernes: 8:30-15:30 Martes-Jueves: 8:30-18:00 Dirección Calle Cea Bermúdez, 43, 3ºB 28003, Madrid España. Escríbenos Escríbenos un mensaje y te responderemos lo antes posible. Nombre * Email *"
-  },
-  {
-    "id": "red-de-acogida-del-puerto-de-santa-aria",
-    "name": "RED DE ACOGIDA DEL PUERTO DE SANTA ARÍA",
-    "website": null,
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "red-sos-refugiados-europa",
-    "name": "RED SOS REFUGIADOS EUROPA",
-    "website": "https://sosrefugiados.org/",
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "refugiados-bienvenidos-espana",
-    "name": "REFUGIADOS BIENVENIDOS ESPAÑA",
-    "website": "https://refugees-welcome.es/",
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "san-ricardo-pampuri",
-    "name": "SAN RICARDO PAMPURI",
-    "website": "https://www.casadesanantonio.es/",
-    "location": "Calle de Andalucía 8, 28945 Fuenlabrada",
-    "phone": "+34 910 529 405",
-    "email": "info@casadesanantonio.es",
-    "opening_hours": "Horario de 9:00 a 19:00 Direccion Calle Andalucía 8, Fuenlabrada Telefono 910 529 405 Correo info@casadesanantonio.es Nuestros programas Sostenimiento alimentario Intentamos paliar la situación de aquellas familias en situación de extrema n"
-  },
-  {
-    "id": "servicio-capuchino-para-el-desarrollo-y-la-solidaridad",
-    "name": "SERVICIO CAPUCHINO PARA EL DESARROLLO Y LA SOLIDARIDAD",
-    "website": "https://www.sercade.org/",
-    "location": "Calle Lope de Vega, 45. 28014 Madrid",
-    "phone": "+34 913 690 000",
-    "email": "donaciones@sercade.org",
-    "opening_hours": null
-  },
-  {
-    "id": "servicio-jesuita-a-migrantes-espana",
-    "name": "SERVICIO JESUITA A MIGRANTES-ESPAÑA",
-    "website": "https://sjme.org/",
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "sindihogar",
-    "name": "SINDIHOGAR",
-    "website": "https://sindihogar.org/",
-    "location": "Carrer Sant Pere Més Baix, 7, Barcelona, 08003",
-    "phone": null,
-    "email": "info@sindihogar.org",
-    "opening_hours": null
-  },
-  {
-    "id": "sos-racismo-galicia",
-    "name": "SOS RACISMO GALICIA",
-    "website": "https://sosracismo.eu/sos-racismo-galicia/",
-    "location": "C/ Duque de Mandas 36. 20012 Donostia",
-    "phone": "+34 943 321 811",
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "txingudiko-elkarte-feminista",
-    "name": "TXINGUDIKO ELKARTE FEMINISTA",
-    "website": "https://www.irun.org/es/entidades-servicios/25-asociacion-txingudiko-elkarte-feminista?iden=7334",
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "union-de-pequenos-agricultores-y-ganaderos-de-castilla-la-mancha-upa-clm",
-    "name": "UNION DE PEQUEÑOS AGRICULTORES Y GANADEROS DE CASTILLA-LA MANCHA (UPA CLM)",
-    "website": null,
-    "location": null,
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  },
-  {
-    "id": "union-de-pequenos-agricultores-y-ganaderos-de-jaen",
-    "name": "UNIÓN DE PEQUEÑOS AGRICULTORES Y GANADEROS DE JAÉN",
-    "website": "https://upa.es/jaen/",
-    "location": "Paseo de la Estación, 30, bajo",
-    "phone": "+34 953 270 728",
-    "email": "upajaen@upa.es",
-    "opening_hours": null
-  },
-  {
-    "id": "viraventos",
-    "name": "VIRAVENTOS",
-    "website": "https://viraventos.org/",
-    "location": "Rúa: Mosteiro de Caaveiro, 4. Baixo, Codp: 15010, A Coruña. Galicia",
-    "phone": "+34 881 889 460",
-    "email": "info@viraventos.org",
-    "opening_hours": null
-  },
-  {
-    "id": "xega-colectivo-lgtbiaq-de-asturias",
-    "name": "XEGA (COLECTIVO LGTBIAQ+ DE ASTURIAS)",
-    "website": "https://www.xega.org/",
-    "location": "Avenida Manuel Llaneza 68, 33208 de Gijón",
-    "phone": "+34 621 052 483",
-    "email": "info@xega.org",
-    "opening_hours": null
-  },
-  {
-    "id": "zabaltzen-sartu-koop-elk",
-    "name": "ZABALTZEN-SARTU KOOP. ELK.",
-    "website": "https://zabaltzensartu.org/es/",
-    "location": null,
-    "phone": null,
-    "email": "zabaltzen@zabaltzen.sartu.org",
-    "opening_hours": null
-  },
-  {
-    "id": "zehar-errefuxiatuekin",
-    "name": "ZEHAR-ERREFUXIATUEKIN",
-    "website": "https://zehar.eus/",
-    "location": "Bilbao: C/Baiona 1-3, 48012 (Entrada por la Plaza Urizar)",
-    "phone": null,
-    "email": null,
-    "opening_hours": null
-  }
+	{
+		"id": "aculco-asociacion-socio-cultural-y-de-cooperacion",
+		"name": "ACULCO \"ASOCIACIÓN SOCIO-CULTURAL Y DE COOPERACIÓN\"",
+		"website": "https://aculco.org/",
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "agencia-adventista-para-el-desarrollo-y-recursos-asistenciales",
+		"name": "AGENCIA ADVENTISTA PARA EL DESARROLLO Y RECURSOS ASISTENCIALES",
+		"website": "https://adra-es.org/",
+		"location": "Calle Fernando Rey, 3,, 28223 Pozuelo de Alarcón",
+		"phone": "+34 911 964 949",
+		"email": "adra@adra-es.org",
+		"openingHours": null
+	},
+	{
+		"id": "algeciras-acoge",
+		"name": "ALGECIRAS ACOGE",
+		"website": "https://algeciras-acoge.org/",
+		"location": "Calle Sevilla, nº 35, bajo, 11201 - Algeciras (Cádiz)",
+		"phone": "+34 697 441 425",
+		"email": "algeciras@acoge.org",
+		"openingHours": null
+	},
+	{
+		"id": "arcopoli",
+		"name": "ARCÓPOLI",
+		"website": "https://arcopoli.org/",
+		"location": "Calle Batalla del Salado 37, 1º D, Madrid CP: 28045",
+		"phone": null,
+		"email": "buzon@arcopoli.org",
+		"openingHours": null
+	},
+	{
+		"id": "asoc-oleum-chiclana-ibn-america-espana-solidaridad-y-cooperacion-aesco",
+		"name": "ASOC OLEUM CHICLANA IBN AMÉRICA, ESPAÑA, SOLIDARIDAD Y COOPERACIÓN (AESCO)",
+		"website": "https://ong-aesco.com/",
+		"location": null,
+		"phone": "+34 698 123 456",
+		"email": "ejemplo@dominio.com",
+		"openingHours": null
+	},
+	{
+		"id": "asoc-cooperacion-y-desarrollo-con-el-norte-de-africa-codenaf",
+		"name": "ASOC. COOPERACIÓN Y DESARROLLO CON EL NORTE DE ÁFRICA (CODENAF)",
+		"website": "https://www.codenaf.org/",
+		"location": "Avda. Sánchez Pizjuán, 9, local sótano. 41009, Sevilla",
+		"phone": "+34 667 053 588",
+		"email": "codenafsevilla@codenaf.org",
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-alba",
+		"name": "ASOCIACION ALBA",
+		"website": null,
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-el-olivar",
+		"name": "ASOCIACION EL OLIVAR",
+		"website": "https://www.asociacionelolivar.org/",
+		"location": "Calle del Mar Amarillo, 21, 28033, Madrid",
+		"phone": null,
+		"email": "asoc.elolivar@gmail.com",
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-mujeres-progresistas-la-mitad-del-cielo",
+		"name": "ASOCIACION MUJERES PROGRESISTAS LA MITAD DEL CIELO",
+		"website": "https://mitaddelcielo.org/",
+		"location": null,
+		"phone": "+34 952 602 727",
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-ruminahui",
+		"name": "ASOCIACION RUMIÑAHUI",
+		"website": "https://www.ruminahui.org/",
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-accion-triangulo",
+		"name": "ASOCIACIÓN ACCIÓN TRIÁNGULO",
+		"website": "https://acciontriangulo.org/",
+		"location": "Mercado de San Fernando, Local SS1, entrada por el callejón de la calle Tribulete 18-20, 28012, Madrid, España. (Metro: Lavapiés o Embajadores)",
+		"phone": "+34 641 035 204",
+		"email": "info@acciontriangulo.org",
+		"openingHours": "Horario Lunes a viernes 11:00h – 19:00h Sábado 10:00h – 14:00h Domingo Cerrado Suscríbete a nuestro boletín de noticias Deja vacío este campo si eres humano: Conecta con nosotros: jo Twitter o YouTube Contáctanos Mercado de San Fernando, Lo"
+	},
+	{
+		"id": "asociacion-almeria-acoge",
+		"name": "ASOCIACIÓN ALMERÍA ACOGE",
+		"website": "https://www.almeriaacoge.org/",
+		"location": "Avenida del Largo Caballero 52, 04008 Almeria",
+		"phone": "+34 950 271 575",
+		"email": "nijar@almeriaacoge.org",
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-amar-dragoste",
+		"name": "ASOCIACIÓN AMAR DRAGOSTE",
+		"website": "https://amardragoste.org/",
+		"location": "Travesía de Castro, 6 - Las Margaritas, Getafe - 28903 Madrid",
+		"phone": "+34 912 883 637",
+		"email": "contacto@amardragoste.org",
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-apoyo",
+		"name": "ASOCIACIÓN APOYO",
+		"website": "https://asociacionapoyo.blogspot.com/",
+		"location": "Calle Corregidor Diego de Valderrábano 45. Madrid 28030",
+		"phone": "+34 645 660 487",
+		"email": "apoyo@asociacionapoyo.org",
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-arraianas",
+		"name": "ASOCIACIÓN ARRAIANAS",
+		"website": "https://www.arraianas.org/es",
+		"location": "15701 Santiago de Compostela",
+		"phone": "+34 981 936 034",
+		"email": "arraianas@arraianas.org",
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-arrats",
+		"name": "ASOCIACIÓN ARRATS",
+		"website": "https://www.arrats.org/",
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-asistencial-nahia",
+		"name": "ASOCIACIÓN ASISTENCIAL NAHIA",
+		"website": "https://www.asociacionnahia.org/",
+		"location": null,
+		"phone": "+34 623 378 500",
+		"email": "asociacionnahia@yahoo.es",
+		"openingHours": "HORARIO Lu – Vi 09:00 am – 08:00 pm Sa – Do Cerrado FORMULARIO DE CONTACTO Name * Este campo es obligatorio Message Política de cookies * Este campo es obligatorio Aviso legal * Este campo es obligatorio Politica de Privacidad * Este campo"
+	},
+	{
+		"id": "asociacion-at-tawba",
+		"name": "ASOCIACIÓN AT-TAWBA",
+		"website": null,
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-baizara",
+		"name": "ASOCIACIÓN BAIZARA",
+		"website": "https://baizara.org/",
+		"location": null,
+		"phone": null,
+		"email": "info@baizara.org",
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-benefica-canoa-solidaria",
+		"name": "ASOCIACIÓN BENÉFICA CANOA SOLIDARIA",
+		"website": "https://canoasolidaria.org/es/Pagina-de-inicio/",
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-canaria-de-mediadores-interculturales",
+		"name": "ASOCIACIÓN CANARIA DE MEDIADORES INTERCULTURALES",
+		"website": "https://www.acamei.org/",
+		"location": "Calle Aguadulce, 44, 35004 - Las Palmas de Gran Canaria",
+		"phone": "+34 928 114 315",
+		"email": "asociacion@acamei.org",
+		"openingHours": "Horario de apertura Lunes a Jueves: 9:00 a 14:00 y de 16:30-19:00 horas Viernes: 9:00-14:00 Fines de semana: CERRADO. Teléfonos Fijo: 928 058 588 Móvil: 658 588 603 Localización en mapa Sede ACAMEI La trastienda de ACAMEI Envíanos un mensaj"
+	},
+	{
+		"id": "asociacion-catnova",
+		"name": "ASOCIACIÓN CATNOVA",
+		"website": "https://www.catnova.cat/",
+		"location": "Carrer Provença 385, 1º, 1ª, Barcelona 08025",
+		"phone": "+34 936 817 710",
+		"email": "youremailaddress@mail.com",
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-cesal",
+		"name": "ASOCIACIÓN CESAL",
+		"website": "https://www.cesal.org/",
+		"location": "Carrer de la República Argentina, 22, Algirós, 46021, Valencia",
+		"phone": null,
+		"email": "colaboradores@cesal.org",
+		"openingHours": "Horario: L - 9:00-14:00 ; 16:00-18:00hs M - 9:00-14:00 ; 16:00-18:00hs X - 9:00-14:00 ; 16:00-18:00hs J - 9:00-14:00 ; 16:00-18:00hs V - 9:00-14:00 ; 16:00-18:00hs Visita nuestras últimas noticias Cesal © 2026 Contacto Canal de denuncias A"
+	},
+	{
+		"id": "asociacion-claretiana-para-el-desarrollo-humano-sortarazi",
+		"name": "ASOCIACIÓN CLARETIANA PARA EL DESARROLLO HUMANO SORTARAZI",
+		"website": "https://sortarazi.org/",
+		"location": "Polígono Ibarrabarri D2, 48940 Leioa",
+		"phone": "+34 946 545 983",
+		"email": "sortarazi@sortarazi.org",
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-colectivo-agar-espacio-de-invetigacion-y-encuentro-desde-la-diversida",
+		"name": "ASOCIACIÓN COLECTIVO AGAR ESPACIO DE INVETIGACIÓN Y ENCUENTRO DESDE LA DIVERSIDAD",
+		"website": null,
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-columbares",
+		"name": "ASOCIACIÓN COLUMBARES",
+		"website": "https://columbares.org/",
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-creando-huellas",
+		"name": "ASOCIACIÓN CREANDO HUELLAS",
+		"website": "https://creandohuellas.org/",
+		"location": "C/ Peña Ubiña 3, Loc. 28053 Madrid",
+		"phone": "+34 911 941 004",
+		"email": "hola@creandohuellas.org",
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-de-colombianos-y-colombianas-en-el-pais-vasco",
+		"name": "ASOCIACIÓN DE COLOMBIANOS Y COLOMBIANAS EN EL PAÍS VASCO",
+		"website": "https://asocolvas.es/",
+		"location": "Dirección:, Enekuri Etorb., 4, Entreplanta Izq, 48014 Bilbao, Bizkaia",
+		"phone": "+34 944 335 215",
+		"email": null,
+		"openingHours": "Horario Lunes - Jueves: 10:00 - 14:00 17:00 - 19:00 Viernes 10:00 - 14:00 Rellena el siguiente formulario y nos pondremos en contacto contigo lo antes posible! Nombre * Nombre Apellidos Correo electrónico * Tipo de Servicio Asesoria Jurídic"
+	},
+	{
+		"id": "asociacion-de-desarrollo-comunitario-buenos-aires-asdecoba",
+		"name": "ASOCIACIÓN DE DESARROLLO COMUNITARIO BUENOS AIRES (ASDECOBA)",
+		"website": null,
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-de-descendientes-de-espanoles-en-el-mundo-adem",
+		"name": "ASOCIACIÓN DE DESCENDIENTES DE ESPAÑOLES EN EL MUNDO (ADEM)",
+		"website": "https://www.soydescendiente.es",
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-de-familias-solidarias-para-el-desarrollo",
+		"name": "ASOCIACIÓN DE FAMILIAS SOLIDARIAS PARA EL DESARROLLO",
+		"website": "https://familiasolidarias.org/",
+		"location": "Calle Mistral, 10. 11130. Chiclana de la Frontera, Cádiz",
+		"phone": "+34 661 308 866",
+		"email": "coordinacion@familiasolidarias.org",
+		"openingHours": "Horario de Atención. Lunes a Viernes 8h – 16h Email. coordinacion@familiasolidarias.org Teléfono . +34 661 30 88 66 Nombre Email Subject Phone Message Enviar Contacto Delegaciones. ALMERÍA. CARRETERA ALHADRA, 181, 2C. 04009 Almería. Teléfon"
+	},
+	{
+		"id": "asociacion-de-movilidad-humana",
+		"name": "ASOCIACIÓN DE MOVILIDAD HUMANA",
+		"website": "https://mhumana.org/",
+		"location": "Dirección: C/ Velázquez – nº44 – 1º, 15404-FERROL",
+		"phone": "+34 881 932 069",
+		"email": "info@mhumana.org",
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-de-mujeres-empresarias-iberoamericanas-ameib-pachamama",
+		"name": "ASOCIACIÓN DE MUJERES EMPRESARIAS IBEROAMERICANAS AMEIB PACHAMAMA",
+		"website": "https://www.asociacionpachamama.org/",
+		"location": "Dirección: Avenida de Asturias, 45, Bajo Local, 28029, Madrid – Metro: Plaza Castilla o Ventilla",
+		"phone": "+34 622 310 849",
+		"email": "info@ameib.org",
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-de-mujeres-hegoak-eta-sustraiak-alas-y-raices",
+		"name": "ASOCIACIÓN DE MUJERES HEGOAK ETA SUSTRAIAK/ALAS Y RAÍCES",
+		"website": "https://alasyraicesbilbao.org/",
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-de-mujeres-latrebede",
+		"name": "ASOCIACIÓN DE MUJERES LATRÉBEDE",
+		"website": "https://latrebede.wordpress.com",
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-de-reinsercion-social-sartu-alava",
+		"name": "ASOCIACIÓN DE REINSERCIÓN SOCIAL SARTU-ÁLAVA",
+		"website": "https://alava.sartu.net",
+		"location": "Sede central, Portal del Rey, 20 Bajo 01001 Vitoria-Gasteiz",
+		"phone": "+34 945 158 178",
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-eslabon-iniciativas-de-promocion-de-empleo",
+		"name": "ASOCIACIÓN ESLABÓN INICIATIVAS DE PROMOCIÓN DE EMPLEO",
+		"website": "https://eslabon.org/",
+		"location": "Calle de Ntra. Sra. de la Luz, 44, 28025 Madrid",
+		"phone": "+34 912 960 857",
+		"email": "eslabon@eslabon.org",
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-fisa-boa-vida",
+		"name": "ASOCIACIÓN FISA BOA VIDA",
+		"website": "https://boavida.org/",
+		"location": "36002 Pontevedra",
+		"phone": "+34 986 101 116",
+		"email": "comunicacion@boavida.org",
+		"openingHours": "Horario Luns a venres: 9:00 a 13:30 h Cómo chegar Tendas solidarias PONTEVEDRA Rúa Santa Clara 35 36002 Pontevedra T. 986 848 159 Horario Luns a venres: 10:00 a 20:30 Sábados: 10:00 a 14:00 Domingos e festivos pechado Cómo chegar PONTEVEDR"
+	},
+	{
+		"id": "asociacion-intercultural-candombe",
+		"name": "ASOCIACIÓN INTERCULTURAL CANDOMBE",
+		"website": "https://www.candombe.org.es/",
+		"location": "Calle Brasil,38, 46018 Valencia (España)",
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-intercultural-de-profesionales-del-hogar-y-de-los-cuidados",
+		"name": "ASOCIACIÓN INTERCULTURAL DE PROFESIONALES DEL HOGAR Y DE LOS CUIDADOS",
+		"website": "https://aiphyc.org/",
+		"location": null,
+		"phone": null,
+		"email": "profesionaleshogarcuidados@gmail.com",
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-itxaropen-gune",
+		"name": "ASOCIACIÓN ITXAROPEN GUNE",
+		"website": "https://www.itxaropengune.org/",
+		"location": null,
+		"phone": "+34 948 226 675",
+		"email": "itxaropengune@yahoo.es",
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-jorge-adolfo-freytter-romero",
+		"name": "ASOCIACIÓN JORGE ADOLFO FREYTTER ROMERO",
+		"website": "https://www.freytter.eus/",
+		"location": "K/ La Casilla, 6 local 2, 48012 Bilbao (Bizkaia)",
+		"phone": null,
+		"email": "web@freytter.eus",
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-jovesolides",
+		"name": "ASOCIACIÓN JOVESÓLIDES",
+		"website": "https://jovesolides.org/",
+		"location": "Dirección: C/ Silla, nº 10, 46980, Paterna (València)",
+		"phone": "+34 965 555 120",
+		"email": "info@jovesolides.org",
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-kuentame-atencion-centrada-en-la-persona",
+		"name": "ASOCIACIÓN KUÉNTAME ATENCIÓN CENTRADA EN LA PERSONA",
+		"website": "https://kuentame.weebly.com/",
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-marroqui-para-la-integracion-de-los-inmigrantes",
+		"name": "ASOCIACIÓN MARROQUÍ PARA LA INTEGRACIÓN DE LOS INMIGRANTES",
+		"website": "https://www.asociacionmarroqui.com/",
+		"location": "C/ Manuel Fal Conde, 4. (",
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-melilla-acoge",
+		"name": "ASOCIACIÓN MELILLA ACOGE",
+		"website": "https://acoge.org/melilla-acoge/",
+		"location": "C/ Cabeza del Rey Don Pedro, 9. Bajo. 41004 SEVILLA",
+		"phone": "+34 954 900 773",
+		"email": "acoge@acoge.org",
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-mujeres-con-voz",
+		"name": "ASOCIACIÓN MUJERES CON VOZ",
+		"website": "https://mujeresyvoces.blogspot.com/",
+		"location": null,
+		"phone": "+34 946 522 133",
+		"email": "regularizacion@mujeresconvoz.com",
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-mujeres-palante",
+		"name": "ASOCIACIÓN MUJERES PALANTE",
+		"website": "https://www.mujerespalante.org/",
+		"location": "C/ Creu Roja, 8. Local",
+		"phone": "+34 653 367 983",
+		"email": null,
+		"openingHours": "jueves de 16:00 a 17:00"
+	},
+	{
+		"id": "asociacion-muyeres-pachamama",
+		"name": "ASOCIACIÓN MUYERES PACHAMAMA",
+		"website": null,
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-nueva-ciudadania-por-la-interculturalidad",
+		"name": "ASOCIACIÓN NUEVA CIUDADANÍA POR LA INTERCULTURALIDAD",
+		"website": "https://asnuci.org/inicio",
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-para-a-promocion-social-a-insercion-laboral-plataforma-polo-emprego",
+		"name": "ASOCIACIÓN PARA A PROMOCIÓN SOCIAL A INSERCIÓN LABORAL PLATAFORMA POLO EMPREGO",
+		"website": "https://www.plataformapoloemprego.org/",
+		"location": null,
+		"phone": null,
+		"email": "info@plataformapoloemprego.org",
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-para-el-desarrollo-economico-y-social-rayuela",
+		"name": "ASOCIACIÓN PARA EL DESARROLLO ECONÓMICO Y SOCIAL RAYUELA",
+		"website": "https://asociacionrayuela.com/",
+		"location": "su oficina se encuentra en la Calle Herradores, nº 45, 1ª Planta (Oficina 1º Derecho), CP 38201, con el teléfono 922.29.35.24",
+		"phone": "+34 922 321 971",
+		"email": "info@asociacionrayuela.com",
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-para-la-cooperacion-entre-comunidades",
+		"name": "ASOCIACIÓN PARA LA COOPERACIÓN ENTRE COMUNIDADES",
+		"website": "https://www.cvongd.org/es/entidades/acoec/",
+		"location": "C/ Moro Zeit, 9 bajo-izquierda, 46001 Valencia",
+		"phone": "+34 652 547 328",
+		"email": "info@cvongd.org",
+		"openingHours": "Horario: De 16:00 a 20:00 h. EVES (Escuela Valencia de Estudios para la Salud) València Convoca: ACOEC, Asociación para la Cooperación entre comunidades Justicia Alimentaria Formación Formación “Intervención comunitaria con enfoque de salud"
+	},
+	{
+		"id": "asociacion-para-la-insercion-laboral-y-fomento-de-la-economia-social-actua",
+		"name": "ASOCIACIÓN PARA LA INSERCIÓN LABORAL Y FOMENTO DE LA ECONOMÍA SOCIAL ACTÚA",
+		"website": "https://www.tenerifeislasolidaria.org/portfolio_page/asociacion-para-la-insercion-laboral-y-fomento-de-la-economia-social-actua/",
+		"location": "Centro Insular de Entidades de Voluntariado C/ JUAN RUMEU GARCÍA Nº 28, 38008 Santa Cruz de Tenerife",
+		"phone": "+34 922 882 325",
+		"email": "info@tenerifeislasolidaria.org",
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-para-la-integracion-social-alietxea",
+		"name": "ASOCIACIÓN PARA LA INTEGRACIÓN SOCIAL ALIETXEA",
+		"website": null,
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-plataforma-intercultural-de-espana",
+		"name": "ASOCIACIÓN PLATAFORMA INTERCULTURAL DE ESPAÑA",
+		"website": "https://plataformaintercultural.es/",
+		"location": "Calle Santo Tomás, 10 – 46003 – Barrio del Carmen – Valencia – España",
+		"phone": "+34 663 186 636",
+		"email": "infoplataformaintercultural@gmail.com",
+		"openingHours": "Lunes a Jueves 16:00 h – 19:00 h"
+	},
+	{
+		"id": "asociacion-por-el-desarrollo-sostenible-de-albacete",
+		"name": "ASOCIACIÓN POR EL DESARROLLO SOSTENIBLE DE ALBACETE",
+		"website": "https://adesalbacete.wordpress.com/",
+		"location": "Calle Blasco Ibañéz, 40 Albacete",
+		"phone": "+34 967 664 581",
+		"email": "adesalbacete@gmail.com",
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-por-ti-mujer",
+		"name": "ASOCIACIÓN POR TI MUJER",
+		"website": "https://asociacionportimujer.org/",
+		"location": "C/ Alfonso de Córdoba, 12 – bajo",
+		"phone": "+34 963 476 774",
+		"email": "contacto@asociacionportimujer.org",
+		"openingHours": "miércoles 10:00-13:00"
+	},
+	{
+		"id": "asociacion-posthac-entidad-social-por-el-empleo",
+		"name": "ASOCIACIÓN POSTHAC, ENTIDAD SOCIAL POR EL EMPLEO",
+		"website": "https://posthac.org/",
+		"location": "C/ Manuel de Falla, nº 12, Bajo, 31005 Pamplona",
+		"phone": "+34 948 789 766",
+		"email": "info@posthac.org",
+		"openingHours": "de lunes a viernes, en horario flexible, principalmente, por las mañanas. Contáctanos: 948 789 766 / 644 370 570 txikiposthac@posthac.org Posthac en Redes Sociales Si quieres estar al día y conocer todas nuestras NOVEDADES , síguenos en Red"
+	},
+	{
+		"id": "asociacion-pro-derechos-humanos-de-andalucia",
+		"name": "ASOCIACIÓN PRO DERECHOS HUMANOS DE ANDALUCIA",
+		"website": "https://www.apdha.org/",
+		"location": "Calle Dora Reyes nº 7, 1º., 11009 Cádiz",
+		"phone": "+34 690 019 644",
+		"email": "andalucia@apdha.org",
+		"openingHours": "Jueves 5 de febrero&#x23f0; 19:00-20:30h"
+	},
+	{
+		"id": "asociacion-proyecto-jaen-solidario",
+		"name": "ASOCIACIÓN PROYECTO JAÉN SOLIDARIO",
+		"website": "https://jaensolidario.es/",
+		"location": "C/ Muñoz Garnica, 12, 23001, Jaén",
+		"phone": "+34 615 927 481",
+		"email": "jaensolidario@gmail.com",
+		"openingHours": "lunes a jueves de 17.00 a 19.30 h"
+	},
+	{
+		"id": "asociacion-radioclub-ceres",
+		"name": "ASOCIACIÓN RADIOCLUB CERES",
+		"website": null,
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-san-nikolas-zabalik",
+		"name": "ASOCIACIÓN SAN NIKOLAS ZABALIK",
+		"website": "https://www.sannikolaszabalik.wordpress.com",
+		"location": "Avda. Basagoiti 68, 48991 Getxo",
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-sare",
+		"name": "ASOCIACIÓN SARE",
+		"website": "https://sare-vih.org/",
+		"location": "31014 Contacto",
+		"phone": "+34 948 384 149",
+		"email": "sare@pangea.org",
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-servicio-domestico-activo-sedoac",
+		"name": "ASOCIACIÓN SERVICIO DOMÉSTICO ACTIVO - SEDOAC",
+		"website": "https://sedoac.es/",
+		"location": null,
+		"phone": null,
+		"email": "informacion@sedoac.org",
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-social-solidaridad-venezuela",
+		"name": "ASOCIACIÓN SOCIAL SOLIDARIDAD VENEZUELA",
+		"website": null,
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-social-sanitaria-cultural-educativo-cientifico-y-deportivo-acciones-u",
+		"name": "ASOCIACIÓN SOCIAL, SANITARIA, CULTURAL, EDUCATIVO, CIENTIFICO Y DEPORTIVO ACCIONES UNIDAS",
+		"website": "https://www.asociacionaccionesunidas.com/",
+		"location": "Calle Doctor Juan Negrín, 49, bajo, 35500 Arrecife",
+		"phone": "+34 828 136 849",
+		"email": "info@asociacionaccionesunidas.com",
+		"openingHours": "Horario de atención para inscripciones: de lunes a viernes, de 9:00 a 13:00 y de 15:00 a 17:00 📲 Información 666 96 22 45 📝 Documentación necesaria: • Fotocopia del DNI/NIE o pasaporte del niño/a • Fotocopia del DNI/NIE o pasaporte del padr"
+	},
+	{
+		"id": "asociacion-sociocultural-alto-jalon",
+		"name": "ASOCIACIÓN SOCIOCULTURAL ALTO JALÓN",
+		"website": "https://www.asociacionaltojalon.wixsite.com",
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-solidarios-sport",
+		"name": "ASOCIACIÓN SOLIDARIOS SPORT",
+		"website": null,
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-somcustodia",
+		"name": "ASOCIACIÓN SOMCUSTÒDIA",
+		"website": "https://somcustodia.org/",
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "asociacion-vecinal-union-esgueva",
+		"name": "ASOCIACIÓN VECINAL UNIÓN ESGUEVA",
+		"website": "https://unionesgueva.com/",
+		"location": "C/ Conde Arteche s/n, 47010 Valladolid",
+		"phone": "+34 983 268 433",
+		"email": "unionesgueva@gmail.com",
+		"openingHours": null
+	},
+	{
+		"id": "asovedra",
+		"name": "ASOVEDRA",
+		"website": "https://asovedra.org/",
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "associacio-coordinadora-obrim-fronteres",
+		"name": "ASSOCIACIÓ COORDINADORA OBRIM FRONTERES",
+		"website": "https://coordinadoraobrimfronteres.org/",
+		"location": null,
+		"phone": null,
+		"email": "coordinadora.obrim.fronteres@gmail.com",
+		"openingHours": null
+	},
+	{
+		"id": "associacio-cultural-l-aleta",
+		"name": "ASSOCIACIÓ CULTURAL L'ALETA",
+		"website": null,
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "associacio-de-veins-la-florida",
+		"name": "ASSOCIACIÓ DE VEÏNS LA FLORIDA",
+		"website": null,
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "associacio-eccit",
+		"name": "ASSOCIACIÓ ECCIT",
+		"website": "https://www.eccit.org/",
+		"location": null,
+		"phone": null,
+		"email": "info@eccit.org",
+		"openingHours": null
+	},
+	{
+		"id": "associacio-fruita-amb-justicia-social",
+		"name": "ASSOCIACIÓ FRUITA AMB JUSTÍCIA SOCIAL",
+		"website": "https://fruitaambjusticia.cat/",
+		"location": null,
+		"phone": "+34 644 694 801",
+		"email": "info@fruitaambjusticia.cat",
+		"openingHours": null
+	},
+	{
+		"id": "associacio-noves-vies",
+		"name": "ASSOCIACIÓ NOVES VIES",
+		"website": "https://www.novesvies.com/",
+		"location": "Carrer Mossèn Anton Romeu, 75-77",
+		"phone": null,
+		"email": "info@novesvies.org",
+		"openingHours": null
+	},
+	{
+		"id": "associacio-quilometrezero",
+		"name": "ASSOCIACIÓ QUILÒMETREZERO",
+		"website": "https://quilometrezero.cat/",
+		"location": "o en la dirección: Via Imperi Romà, 11, C.P. 43003 – Tarragona (Tarragona)",
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "associacio-reus-refugi",
+		"name": "ASSOCIACIÓ REUS REFUGI",
+		"website": "https://reusrefugi.cat/",
+		"location": "Carrer: PUBILL ORIOL, 25. (ESPLAI ALBADA), 43201, REUS. TARRAGONA",
+		"phone": "+34 623 784 152",
+		"email": "info@reusrefugi.cat",
+		"openingHours": null
+	},
+	{
+		"id": "associacio-social-project-4-0",
+		"name": "ASSOCIACIÓ SOCIAL PROJECT 4.0",
+		"website": "https://socialproject.cat/",
+		"location": null,
+		"phone": "+34 624 161 499",
+		"email": "info@socialproject.cat",
+		"openingHours": null
+	},
+	{
+		"id": "associacio-socioeducativa-nousol",
+		"name": "ASSOCIACIÓ SOCIOEDUCATIVA NOUSOL",
+		"website": "https://nousol.org/",
+		"location": "C/ Rutlla 20-22. 17002 Girona (Girona, ESPAÑA)",
+		"phone": "+34 722 844 528",
+		"email": "info@nousol.org",
+		"openingHours": null
+	},
+	{
+		"id": "bumei-galicia-buenas-practicas-mujer-empleo-inclusion",
+		"name": "BUMEI GALICIA: BUENAS PRÁCTICAS, MUJER, EMPLEO, INCLUSIÓN",
+		"website": "https://www.bumeigalicia.com/inicio",
+		"location": "Rúa Pardo Bazán, 9. Bajos de la Casa del Mar. Burela - 27880 - Lugo",
+		"phone": "+34 609 837 645",
+		"email": "bumei@bumeigalicia.com",
+		"openingHours": null
+	},
+	{
+		"id": "ceain-centro-de-acogida-de-inmigrantes",
+		"name": "CEAIN (CENTRO DE ACOGIDA DE INMIGRANTES)",
+		"website": "https://ceain.acoge.org/",
+		"location": "C/ Vicario, 16 Jerez",
+		"phone": "+34 956 349 585",
+		"email": "info@ceain.org",
+		"openingHours": "Horario: 09:00 – 14:00 © Copyright CEAIN 2024"
+	},
+	{
+		"id": "centre-de-desenvolupament-rural-alt-maestrat",
+		"name": "CENTRE DE DESENVOLUPAMENT RURAL ALT MAESTRAT",
+		"website": "https://www.cdraltmaestrat.org/",
+		"location": "C/ 8 de Març nº5, 12140 Albocàsser, Castelló",
+		"phone": null,
+		"email": "info@cdraltmaestrat.org",
+		"openingHours": null
+	},
+	{
+		"id": "centro-de-desarrollo-rural-carrion-de-los-condess",
+		"name": "CENTRO DE DESARROLLO RURAL \"CARRIÓN DE LOS CONDESS",
+		"website": "https://cdrcarriondeloscondes.org/",
+		"location": null,
+		"phone": "+34 979 880 534",
+		"email": "contacto@cdrcarriondeloscondes.org",
+		"openingHours": null
+	},
+	{
+		"id": "centro-de-desarrollo-rural-la-safor",
+		"name": "CENTRO DE DESARROLLO RURAL LA SAFOR",
+		"website": "https://cdrlasafor.org/",
+		"location": "Carrer Major, 7, 46716 Rafelcofer (València)",
+		"phone": "+34 960 437 498",
+		"email": "cdr@cdrlasafor.org",
+		"openingHours": null
+	},
+	{
+		"id": "centro-de-desarrollo-rural-o-viso",
+		"name": "CENTRO DE DESARROLLO RURAL O VISO",
+		"website": "https://www.cdroviso.org/",
+		"location": "32696 Lodoselo",
+		"phone": "+34 988 454 408",
+		"email": "cdroviso@cdroviso.org",
+		"openingHours": null
+	},
+	{
+		"id": "centro-sociocultural-zaidin",
+		"name": "CENTRO SOCIOCULTURAL ZAIDIN",
+		"website": "https://csczaidin.wordpress.com",
+		"location": "Calle Zurbarán nº 8, C.P. 18007, Granada",
+		"phone": "+34 958 136 876",
+		"email": "csazaidin@yahoo.es",
+		"openingHours": null
+	},
+	{
+		"id": "coag-almeria",
+		"name": "COAG ALMERÍA",
+		"website": "https://coagalmeria.com/",
+		"location": "C/ Zurgena, 4. 04738 Vícar (Almería)",
+		"phone": null,
+		"email": "almeria@coagalmeria.com",
+		"openingHours": "Horario Lunes-Viernes: 9:00 - 15:00 Oficina Comarcal de Adra - Balanegra - Berja Dirección C/ El Salvador, 6 bajo 04770 Adra Teléfono Tel: 950 40 23 24 WhatsApp Tel: 687 37 24 57 E-mail adra@coagalmeria.com Horario Lunes-Viernes: 9:00 - 15"
+	},
+	{
+		"id": "comision-espanola-de-ayuda-al-refugiado-cear",
+		"name": "COMISIÓN ESPAÑOLA DE AYUDA AL REFUGIADO (CEAR)",
+		"website": "https://www.cear.es/",
+		"location": "Avenida de Asturias 33, Bajo, 28029",
+		"phone": "+34 950 968 626",
+		"email": null,
+		"openingHours": "horario de lunes a jueves, de 9:00 a 14:00 horas, a través del Programa de Información y Orientación a personas migrantes. Email de contacto: [email protected] GETAFE Carta de Servicios CEAR – CEMI Getafe Centro de Acogida Juan José Rodrígu"
+	},
+	{
+		"id": "comision-para-la-investigacion-de-malos-tratos-a-mujeres",
+		"name": "COMISIÓN PARA LA INVESTIGACIÓN DE MALOS TRATOS A MUJERES",
+		"website": "https://malostratos.org/",
+		"location": "C. de Sebastián Herrera, 15, Arganzuela, 28012 Madrid",
+		"phone": null,
+		"email": "comision@malostratos.org",
+		"openingHours": "martes 21 de abril, de 18:30 a 20:30 h"
+	},
+	{
+		"id": "comite-de-apoyo-a-las-trabajadoras-del-sexo-cats",
+		"name": "COMITÉ DE APOYO A LAS TRABAJADORAS DEL SEXO (CATS)",
+		"website": "https://www.asociacioncats.es/",
+		"location": "C/Alfande, 1, bajo (esquina Pintor sobejano 12), 30004 Murcia",
+		"phone": "+34 695 790 423",
+		"email": "info@asociacioncats.org",
+		"openingHours": "Horario de apertura: Lunes a Jueves de 10 a 14h Ubicación Si deseas contactar con CATS, rellena el siguiente formulario: Nombre * Email Teléfono Móvil Consulta Enviar Borrar reCAPTCHA Copyright © 2026 Comite de Apoyo a las Trabajadoras del"
+	},
+	{
+		"id": "confederacion-de-comisiones-obreras",
+		"name": "CONFEDERACION DE COMISIONES OBRERAS",
+		"website": "https://www.ccoo.es/",
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "caritas-diocesana-de-bilbao",
+		"name": "CÁRITAS DIOCESANA DE BILBAO",
+		"website": "https://www.caritasbi.org/",
+		"location": "Si quieres más información sobre algún tema, puedes encontrarnos en Erribera Kalea 8, 48005 Bilbao o en el",
+		"phone": "+34 944 020 099",
+		"email": "caritasbi@caritasbi.org",
+		"openingHours": null
+	},
+	{
+		"id": "caritas-diocesana-de-salamanca",
+		"name": "CÁRITAS DIOCESANA DE SALAMANCA",
+		"website": "https://www.caritasalamanca.org/",
+		"location": "C/ Maestro Soler, 15 37008 Salamanca",
+		"phone": "+34 676 609 594",
+		"email": "info@caritasalamanca.org",
+		"openingHours": null
+	},
+	{
+		"id": "caritas-diocesana-de-san-sebastian",
+		"name": "CÁRITAS DIOCESANA DE SAN SEBASTIÁN",
+		"website": "https://www.caritasgipuzkoa.org/es/inicio",
+		"location": "Paseo Salamanca nº 2, 20003-Donostia |",
+		"phone": "+34 943 440 744",
+		"email": "idazkari@caritasgi.org",
+		"openingHours": null
+	},
+	{
+		"id": "elkarri-laguntza-apoyo-mutuo",
+		"name": "ELKARRI LAGUNTZA-APOYO MUTUO",
+		"website": null,
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "empresa-comunitarias-asociativa-de-trabajo-solidarios-de-espana-ong-emcat",
+		"name": "EMPRESA COMUNITARIAS ASOCIATIVA DE TRABAJO SOLIDARIOS DE ESPAÑA ONG EMCAT",
+		"website": "https://emcatsolidaridad.org/",
+		"location": "Dirección: Calle José Soto Micó, 29 bajo derecha , 46017 – Valencia",
+		"phone": "+34 963 570 778",
+		"email": "emcatong@hotmail.com",
+		"openingHours": null
+	},
+	{
+		"id": "espai-obert-el-maritim",
+		"name": "ESPAI OBERT EL MARÍTIM",
+		"website": "https://www.espaiobertelmaritim.com/",
+		"location": null,
+		"phone": "+34 640 205 000",
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "federacion-andalucia-acoge-sur-acoge",
+		"name": "FEDERACIÓN ANDALUCÍA ACOGE - SUR ACOGE",
+		"website": "https://acoge.org/",
+		"location": "C/ Cabeza del Rey Don Pedro, 9. Bajo. 41004 SEVILLA",
+		"phone": "+34 954 900 773",
+		"email": "acoge@acoge.org",
+		"openingHours": null
+	},
+	{
+		"id": "federacion-de-migrantes-en-lanzarote-fedemilanz",
+		"name": "FEDERACIÓN DE MIGRANTES EN LANZAROTE- FEDEMILANZ",
+		"website": "https://fedemilanz.com/",
+		"location": null,
+		"phone": "+34 928 075 903",
+		"email": "info.fedemilanz@gmail.com",
+		"openingHours": null
+	},
+	{
+		"id": "fundacio-ciutadania-multicultural-mescladis",
+		"name": "FUNDACIO CIUTADANIA MULTICULTURAL - MESCLADIS",
+		"website": "https://mescladis-org.b.iwith.org/es/",
+		"location": "c/Carders 35, 08003 Bcn // Tlf: 933198732",
+		"phone": "+34 933 198 732",
+		"email": "info@mescladis.org",
+		"openingHours": null
+	},
+	{
+		"id": "fundacion-koine-aequalitas",
+		"name": "FUNDACION KOINE AEQUALITAS",
+		"website": "https://www.koine-aequalitas.org/",
+		"location": "Avda. de Guipúzcoa, 61, 31013 Berriozar, Navarra",
+		"phone": "+34 948 199 775",
+		"email": "fundacion@koine-aequalitas.org",
+		"openingHours": null
+	},
+	{
+		"id": "fundacio-mifas",
+		"name": "FUNDACIÓ MIFAS",
+		"website": "https://www.mifas.cat/ca/",
+		"location": "C/ Pla de l'Estany, 11, 17740 Vilafant",
+		"phone": null,
+		"email": "mifas@mifas.cat",
+		"openingHours": "dilluns a divendres de 7:30h a 15:30h"
+	},
+	{
+		"id": "fundacio-moli-d-en-puigvert",
+		"name": "FUNDACIÓ MOLÍ D'EN PUIGVERT",
+		"website": "https://www.fundaciomoli.org/",
+		"location": "C/ Gorg El Moli d’en Puigvert, 1, 08389 Palafolls (Barcelona)",
+		"phone": "+34 931 155 060",
+		"email": "info@fundaciomoli.org",
+		"openingHours": "horari laboral de 09 a 16 h. També a la nostra botiga outlet de Jack & Jones (C/ Ramon Turró, 31, Palafolls), en horari comercial (de dilluns a dimecres de 10 a 13.30 h i de 17 a 20.30 h i de dijous a dissabte de 10 a 20.30 h). Per a qualse"
+	},
+	{
+		"id": "fundacio-privada-gune",
+		"name": "FUNDACIÓ PRIVADA GUNÉ",
+		"website": "https://fundaciogune.org/",
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "fundacion-agricultores-solidarios",
+		"name": "FUNDACIÓN AGRICULTORES SOLIDARIOS",
+		"website": "https://www.pagesossolidaris.org/es/",
+		"location": "Calle Riu Besós, n.º 22, 25001 Lleida",
+		"phone": "+34 973 288 202",
+		"email": "pagesossolidaris@pagesossolidaris.org",
+		"openingHours": null
+	},
+	{
+		"id": "fundacion-altius-espana",
+		"name": "FUNDACIÓN ALTIUS ESPAÑA",
+		"website": "https://www.fundacionaltius.org/",
+		"location": "28005 Madrid",
+		"phone": null,
+		"email": "info@fundacionaltius.org",
+		"openingHours": null
+	},
+	{
+		"id": "fundacion-cepaim-accion-integral-con-migrantes",
+		"name": "FUNDACIÓN CEPAIM ACCIÓN INTEGRAL CON MIGRANTES",
+		"website": "https://www.cepaim.org/",
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "fundacion-claret-enea",
+		"name": "FUNDACIÓN CLARET ENEA",
+		"website": "https://claretenea.org/",
+		"location": "Plaza Corazón de María 1, 48003 BILBAO (BIZKAIA)",
+		"phone": null,
+		"email": "claretenea@claretenea.org",
+		"openingHours": null
+	},
+	{
+		"id": "fundacion-cruz-blanca",
+		"name": "FUNDACIÓN CRUZ BLANCA",
+		"website": "https://www.fundacioncruzblanca.org/",
+		"location": "C/ Ayul Lachandani 1, 6-A., 52004 Melilla",
+		"phone": "+34 952 713 861",
+		"email": "c.melilla@fundacioncruzblanca.org",
+		"openingHours": "horario de 10.00 h a 18.00 h. Programas que desarrolla: Datos de contacto: María Zambrano, 3 - CP. 40001 Segovia Teléfono: 921460074 Persona de contacto: . cf-segovia@cruzblanca.org Centro Granada Descripción: Centro Granada Programas que"
+	},
+	{
+		"id": "fundacion-europea-para-la-cooperacion-norte-sur",
+		"name": "FUNDACIÓN EUROPEA PARA LA COOPERACIÓN NORTE SUR",
+		"website": "https://fecons.org/",
+		"location": "c/ Pérez Galdós, 106. 21002 Huelva",
+		"phone": "+34 959 285 378",
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "fundacion-federico-ozanam",
+		"name": "FUNDACIÓN FEDERICO OZANAM",
+		"website": "https://www.ozanam.es/",
+		"location": "Calle Ramón Pignatelli, 17, 50004 · Zaragoza",
+		"phone": null,
+		"email": "fundacion@ozanam.com",
+		"openingHours": "Horario Lunes a jueves de 8:00 a 14:00 y de 16:00 a 18:00 Viernes de 8:00 a 15:00 Sede Ozanam Calle Ramón Pignatelli 17 50004 Zaragoza Información Contacta con Ozanam Selecciona un área Personas Mayores Formación y Empleo Infancia y Familia"
+	},
+	{
+		"id": "fundacion-harribide",
+		"name": "FUNDACIÓN HARRIBIDE",
+		"website": "https://harribide.org/es/inicio-4/",
+		"location": "Acceso a la Iglesia, 2, 48450. Etxebarri, Bizkaia",
+		"phone": null,
+		"email": "info@harribide.org",
+		"openingHours": "Lunes a jueves 09:00 &#8211; 16:00 Viernes 09:00-14:00"
+	},
+	{
+		"id": "fundacion-ibn-battuta",
+		"name": "FUNDACIÓN IBN BATTUTA",
+		"website": "https://www.fundacioibnbattuta.org/?lang=es",
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "fundacion-indian-culture-centre",
+		"name": "FUNDACIÓN INDIAN CULTURE CENTRE",
+		"website": "https://culturaindia.cat/es/",
+		"location": "Calle Vilamarí, 31 – 08011 Barcelona",
+		"phone": null,
+		"email": "indianculturebcn@gmail.com",
+		"openingHours": "Lunes 20:00h – 21:30h"
+	},
+	{
+		"id": "fundacion-juanjo-torrejon",
+		"name": "FUNDACIÓN JUANJO TORREJÓN",
+		"website": "https://fundacionjuanjotorrejon.org/",
+		"location": "Carrera de Andalucía, 59, 28300 Aranjuez",
+		"phone": "+34 691 415 098",
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "fundacion-la-merced-migraciones",
+		"name": "FUNDACIÓN LA MERCED MIGRACIONES",
+		"website": "https://lamercedmigraciones.org/",
+		"location": "Calle Castelar 21, 28028, Madrid",
+		"phone": "+34 913 555 550",
+		"email": "lamerced@lamercedmigraciones.org",
+		"openingHours": null
+	},
+	{
+		"id": "fundacion-para-la-innovacion-investigacion-formacion-y-el-desarrollo-comunitario",
+		"name": "FUNDACIÓN PARA LA INNOVACIÓN, INVESTIGACIÓN, FORMACIÓN Y EL DESARROLLO COMUNITARIO (FÜNDEC)",
+		"website": "https://www.fundec.es/",
+		"location": "Calle la Hoyita, 22, 38611. San Isidro, S/C de Tenerife",
+		"phone": null,
+		"email": null,
+		"openingHours": "Miércoles 23 de julio de 09:00 a 15:00H"
+	},
+	{
+		"id": "fundacion-privada-ficat",
+		"name": "FUNDACIÓN PRIVADA FICAT",
+		"website": "https://www.ficat.org/es/",
+		"location": "C/ Viladomat, 217 – Ent.D - 08029 Barcelona",
+		"phone": null,
+		"email": "info@fundacioficat.org",
+		"openingHours": null
+	},
+	{
+		"id": "fundacion-prolibertas",
+		"name": "FUNDACIÓN PROLIBERTAS",
+		"website": "https://www.prolibertas.org/",
+		"location": "C/ Cruz Blanca, 25, 29200 Antequera",
+		"phone": null,
+		"email": "info@prolibertas.org",
+		"openingHours": null
+	},
+	{
+		"id": "fundacion-red-incola",
+		"name": "FUNDACIÓN RED ÍNCOLA",
+		"website": "https://redincola.org/",
+		"location": "C/ Olmo, 63 – 47010 Valladolid",
+		"phone": "+34 983 307 083",
+		"email": "info@redincola.org",
+		"openingHours": null
+	},
+	{
+		"id": "fundacion-ruy-lopez",
+		"name": "FUNDACIÓN RUY LÓPEZ",
+		"website": "https://fruylopez.blogspot.com/",
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "fundacion-san-ezequiel-moreno",
+		"name": "FUNDACIÓN SAN EZEQUIEL MORENO",
+		"website": "https://fundacionsanezequiel.org/",
+		"location": "C/ Yagüe de Salas, 16 - 3º, 44001 TERUEL",
+		"phone": "+34 976 158 219",
+		"email": "info@fundacionsanezequiel.org",
+		"openingHours": "Horario de Atención ZARAGOZA Lunes a Viernes de 9:00 a 14:00h. Martes y Jueves de 9:00 a 14:00h. 15:30 a 17:30h. HUESCA Lunes a Viernes de 9:00 a 14:00h. Martes de 9:00 a 14:00h. 15:30 a 17:30h. TERUEL Lunes a Viernes de 9:00 a 14:00h. Mart"
+	},
+	{
+		"id": "fundacion-social-ignacio-ellacuria",
+		"name": "FUNDACIÓN SOCIAL IGNACIO ELLACURIA",
+		"website": "https://fundacionellacuria.org/",
+		"location": "Arrupe Etxea C/ Padre Lojendio, 2 – 1º Derecha –, 48008 BILBAO",
+		"phone": "+34 944 465 992",
+		"email": "info@fundacionellacuria.org",
+		"openingHours": null
+	},
+	{
+		"id": "fundacion-ambit-prevencio",
+		"name": "FUNDACIÓN ÀMBIT PREVENCIÓ",
+		"website": "https://fambitprevencio.org/",
+		"location": null,
+		"phone": "+34 933 177 059",
+		"email": "info@fambitprevencio.org",
+		"openingHours": null
+	},
+	{
+		"id": "gaztaroa-sartu-koop-elk-de-iniciativa-social",
+		"name": "GAZTAROA SARTU KOOP ELK DE INICIATIVA SOCIAL",
+		"website": "https://gaztaroa-sartu.eus/",
+		"location": "La Laguna, 5, 48003 Bilbao",
+		"phone": "+34 944 160 420",
+		"email": "gaztaroa@sartu.org",
+		"openingHours": null
+	},
+	{
+		"id": "granada-acoge",
+		"name": "GRANADA ACOGE",
+		"website": "https://www.granadaacoge.com/",
+		"location": "Calle Almona de San Juan de Dios, 12, 18001, Granada",
+		"phone": "+34 958 200 836",
+		"email": "granada@gracoge.org",
+		"openingHours": "Horarios de atención: Lunes a jueves: de 09:00 a 14:00 h. y de 17:00 a 19:00 h. Viernes: de 09:00 a 14:00 h. Las citas para atenciones individuales se solicitan los jueves por teléfono a partir de las 09:00 h. Teléfono de contacto: 958 200"
+	},
+	{
+		"id": "grans-projectes-solidaris",
+		"name": "GRANS PROJECTES SOLIDARIS",
+		"website": "https://coopcamp.cat/entitat/grans-projectes-solidaries/",
+		"location": "Espai Tabacalera, C/ del Cardenal Vidal i Barraquer, S/N, 43005 Tarragona",
+		"phone": "+34 693 818 303",
+		"email": "info@coopcamp.cat",
+		"openingHours": null
+	},
+	{
+		"id": "haurralde-fundazioa",
+		"name": "HAURRALDE FUNDAZIOA",
+		"website": "https://haurraldefundazioa.org/",
+		"location": "Oficinas Centrales, Paseo de Colón, nº 50 bajo – Gros ∙ 20002 –",
+		"phone": null,
+		"email": "ong@haurraldefundazioa.org",
+		"openingHours": null
+	},
+	{
+		"id": "hermanas-oblatas-del-stsmo-redentor",
+		"name": "HERMANAS OBLATAS DEL STSMO REDENTOR",
+		"website": "https://hermanasoblatas.org/",
+		"location": "calle Cartagena, 116,, 28002 Madrid (Madrid)",
+		"phone": null,
+		"email": "info@hermanasoblatas.org",
+		"openingHours": null
+	},
+	{
+		"id": "huelva-acoge",
+		"name": "HUELVA ACOGE",
+		"website": "https://huelvaacoge.org/",
+		"location": null,
+		"phone": null,
+		"email": "huelva@acoge.org",
+		"openingHours": "De Lunes a Viernes de 9:00 a 14:00 Servicio de atención Psicológica Sólo con cita previa Martes de 9:30 a 13:30 Servicio de Intervención Social Sólo con cita previa Miércoles 9:30 a 13:00 Servicio de Promoción Laboral Sólo con cita previa L"
+	},
+	{
+		"id": "humanitarios-sin-fronteras",
+		"name": "HUMANITARIOS SIN FRONTERAS",
+		"website": "https://humanitariossinfronteras.com/",
+		"location": "Calle Valle Inclán, 9. Roquetas de Mar, Almería. 04740",
+		"phone": "+34 722 141 578",
+		"email": "empleohsf@humanitariossinfronteras.es",
+		"openingHours": null
+	},
+	{
+		"id": "irsearaba-s-coop",
+		"name": "IRSEARABA S.COOP",
+		"website": "https://www.irsearaba.eus/",
+		"location": "C/ Canciller Ayala nº 8, Bajo, 01004 Vitoria-Gasteiz , Álava",
+		"phone": null,
+		"email": "info@irsearaba.eus",
+		"openingHours": null
+	},
+	{
+		"id": "izangai-elkartea",
+		"name": "IZANGAI ELKARTEA",
+		"website": "https://www.izangai.org/",
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "kolectivo-jovenes-parke",
+		"name": "KOLECTIVO JOVENES PARKE",
+		"website": "https://kolectivosparke.org/",
+		"location": "Pl. Poeta Miguel Hernández 14 L2, 46910 Alfafar",
+		"phone": "+34 963 760 019",
+		"email": "n@kolectivosparke.org",
+		"openingHours": null
+	},
+	{
+		"id": "la-rueca-asociacion",
+		"name": "LA RUECA ASOCIACIÓN",
+		"website": "https://larueca.org/",
+		"location": "Calle Virgen de Lluc 38, 28027",
+		"phone": "+34 664 853 411",
+		"email": "larueca@larueca.org",
+		"openingHours": null
+	},
+	{
+		"id": "lafundicio-sccl",
+		"name": "LAFUNDICIO, SCCL",
+		"website": "https://lafundicio.net/",
+		"location": "Prat, 11 Bajos, 08907 L’Hospitalet",
+		"phone": "+34 654 465 108",
+		"email": "hola@lafundicio.net",
+		"openingHours": null
+	},
+	{
+		"id": "malen-etxea-asociacion-de-mujeres-inmigrantes",
+		"name": "MALEN ETXEA, ASOCIACIÓN DE MUJERES INMIGRANTES",
+		"website": "https://malenetxea.org/",
+		"location": "14, 20750 Zumaia, Gipuzkoa",
+		"phone": "+34 943 576 095",
+		"email": "contacto@malenetxea.org",
+		"openingHours": null
+	},
+	{
+		"id": "movimiento-de-mujeres-migrantes-de-extremadura",
+		"name": "MOVIMIENTO DE MUJERES MIGRANTES DE EXTREMADURA",
+		"website": "https://lasmigrantas.org/",
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "movimiento-por-la-paz-el-desarme-y-la-libertad",
+		"name": "MOVIMIENTO POR LA PAZ, EL DESARME Y LA LIBERTAD",
+		"website": "https://www.mpdl.org/",
+		"location": "c/ Martos, 15. 28053 Madrid",
+		"phone": null,
+		"email": "mpdl@mpdl.org",
+		"openingHours": null
+	},
+	{
+		"id": "mujeres-unidas-entre-tierras",
+		"name": "MUJERES UNIDAS ENTRE TIERRAS",
+		"website": "https://mujeresunidasentretierras.org/",
+		"location": "C. D,PLANTA 4,PUERTA 4 08038 BARCELONA",
+		"phone": null,
+		"email": "mujeresunidasentretierras@gmail.com",
+		"openingHours": null
+	},
+	{
+		"id": "mundo-en-movimiento",
+		"name": "MUNDO EN MOVIMIENTO",
+		"website": "https://www.mundoenmovimiento.org/",
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "malaga-acoge",
+		"name": "MÁLAGA ACOGE",
+		"website": "https://malaga.acoge.org/",
+		"location": null,
+		"phone": null,
+		"email": "malaga@malagaacoge.org",
+		"openingHours": null
+	},
+	{
+		"id": "oficinas-de-derechos-sociales-de-sevilla",
+		"name": "OFICINAS DE DERECHOS SOCIALES DE SEVILLA",
+		"website": "https://ods-sevilla.com/",
+		"location": "Plaza Pumarejo Nro. 3. 41003 – Sevilla",
+		"phone": "+34 658 647 986",
+		"email": "ods.sevilla.ods@gmail.com",
+		"openingHours": null
+	},
+	{
+		"id": "ong-mestura",
+		"name": "ONG MESTURA",
+		"website": "https://www.ongmestura.es/",
+		"location": "Avenida de Vilaboa, 158 Bajo Izquierda, 15174 A Corveira – Culleredo",
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "ong-rescate-internacional",
+		"name": "ONG RESCATE INTERNACIONAL",
+		"website": "https://ongrescate.org/",
+		"location": "Planta 3. Oficina A, Madrid 28026",
+		"phone": "+34 914 472 872",
+		"email": "rescate@ongrescate.org",
+		"openingHours": null
+	},
+	{
+		"id": "patronato-concepcion-arenal",
+		"name": "PATRONATO CONCEPCIÓN ARENAL",
+		"website": null,
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "prodiversa-progreso-y-diversidad",
+		"name": "PRODIVERSA.PROGRESO Y DIVERSIDAD",
+		"website": "https://prodiversa.eu/",
+		"location": "Calle Huerto de los Claveles, 8, 29013 MÃ¡laga",
+		"phone": "+34 952 608 624",
+		"email": "comunicacion@prodiversa.eu",
+		"openingHours": null
+	},
+	{
+		"id": "provivienda",
+		"name": "PROVIVIENDA",
+		"website": "https://provivienda.org/",
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "psicologos-sin-fronteras",
+		"name": "PSICÓLOGOS SIN FRONTERAS",
+		"website": "https://psicologassinfronteras.org/",
+		"location": "Carrer de les Tres Forques, 116, Bajo, L'Olivereta, 46014 València",
+		"phone": "+34 960 450 230",
+		"email": "ahumanitaria3@psicologassinfronteras.org",
+		"openingHours": null
+	},
+	{
+		"id": "red-acoge",
+		"name": "RED ACOGE",
+		"website": "https://redacoge.org/",
+		"location": "Calle Cea Bermúdez, 43, 3ºB 28003, Madrid España",
+		"phone": null,
+		"email": "acoge@redacoge.org",
+		"openingHours": "Horario de atención telefónica Lunes-Miércoles-Viernes: 8:30-15:30 Martes-Jueves: 8:30-18:00 Dirección Calle Cea Bermúdez, 43, 3ºB 28003, Madrid España. Escríbenos Escríbenos un mensaje y te responderemos lo antes posible. Nombre * Email *"
+	},
+	{
+		"id": "red-de-acogida-del-puerto-de-santa-aria",
+		"name": "RED DE ACOGIDA DEL PUERTO DE SANTA ARÍA",
+		"website": null,
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "red-sos-refugiados-europa",
+		"name": "RED SOS REFUGIADOS EUROPA",
+		"website": "https://sosrefugiados.org/",
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "refugiados-bienvenidos-espana",
+		"name": "REFUGIADOS BIENVENIDOS ESPAÑA",
+		"website": "https://refugees-welcome.es/",
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "san-ricardo-pampuri",
+		"name": "SAN RICARDO PAMPURI",
+		"website": "https://www.casadesanantonio.es/",
+		"location": "Calle de Andalucía 8, 28945 Fuenlabrada",
+		"phone": "+34 910 529 405",
+		"email": "info@casadesanantonio.es",
+		"openingHours": "Horario de 9:00 a 19:00 Direccion Calle Andalucía 8, Fuenlabrada Telefono 910 529 405 Correo info@casadesanantonio.es Nuestros programas Sostenimiento alimentario Intentamos paliar la situación de aquellas familias en situación de extrema n"
+	},
+	{
+		"id": "servicio-capuchino-para-el-desarrollo-y-la-solidaridad",
+		"name": "SERVICIO CAPUCHINO PARA EL DESARROLLO Y LA SOLIDARIDAD",
+		"website": "https://www.sercade.org/",
+		"location": "Calle Lope de Vega, 45. 28014 Madrid",
+		"phone": "+34 913 690 000",
+		"email": "donaciones@sercade.org",
+		"openingHours": null
+	},
+	{
+		"id": "servicio-jesuita-a-migrantes-espana",
+		"name": "SERVICIO JESUITA A MIGRANTES-ESPAÑA",
+		"website": "https://sjme.org/",
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "sindihogar",
+		"name": "SINDIHOGAR",
+		"website": "https://sindihogar.org/",
+		"location": "Carrer Sant Pere Més Baix, 7, Barcelona, 08003",
+		"phone": null,
+		"email": "info@sindihogar.org",
+		"openingHours": null
+	},
+	{
+		"id": "sos-racismo-galicia",
+		"name": "SOS RACISMO GALICIA",
+		"website": "https://sosracismo.eu/sos-racismo-galicia/",
+		"location": "C/ Duque de Mandas 36. 20012 Donostia",
+		"phone": "+34 943 321 811",
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "txingudiko-elkarte-feminista",
+		"name": "TXINGUDIKO ELKARTE FEMINISTA",
+		"website": "https://www.irun.org/es/entidades-servicios/25-asociacion-txingudiko-elkarte-feminista?iden=7334",
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "union-de-pequenos-agricultores-y-ganaderos-de-castilla-la-mancha-upa-clm",
+		"name": "UNION DE PEQUEÑOS AGRICULTORES Y GANADEROS DE CASTILLA-LA MANCHA (UPA CLM)",
+		"website": null,
+		"location": null,
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	},
+	{
+		"id": "union-de-pequenos-agricultores-y-ganaderos-de-jaen",
+		"name": "UNIÓN DE PEQUEÑOS AGRICULTORES Y GANADEROS DE JAÉN",
+		"website": "https://upa.es/jaen/",
+		"location": "Paseo de la Estación, 30, bajo",
+		"phone": "+34 953 270 728",
+		"email": "upajaen@upa.es",
+		"openingHours": null
+	},
+	{
+		"id": "viraventos",
+		"name": "VIRAVENTOS",
+		"website": "https://viraventos.org/",
+		"location": "Rúa: Mosteiro de Caaveiro, 4. Baixo, Codp: 15010, A Coruña. Galicia",
+		"phone": "+34 881 889 460",
+		"email": "info@viraventos.org",
+		"openingHours": null
+	},
+	{
+		"id": "xega-colectivo-lgtbiaq-de-asturias",
+		"name": "XEGA (COLECTIVO LGTBIAQ+ DE ASTURIAS)",
+		"website": "https://www.xega.org/",
+		"location": "Avenida Manuel Llaneza 68, 33208 de Gijón",
+		"phone": "+34 621 052 483",
+		"email": "info@xega.org",
+		"openingHours": null
+	},
+	{
+		"id": "zabaltzen-sartu-koop-elk",
+		"name": "ZABALTZEN-SARTU KOOP. ELK.",
+		"website": "https://zabaltzensartu.org/es/",
+		"location": null,
+		"phone": null,
+		"email": "zabaltzen@zabaltzen.sartu.org",
+		"openingHours": null
+	},
+	{
+		"id": "zehar-errefuxiatuekin",
+		"name": "ZEHAR-ERREFUXIATUEKIN",
+		"website": "https://zehar.eus/",
+		"location": "Bilbao: C/Baiona 1-3, 48012 (Entrada por la Plaza Urizar)",
+		"phone": null,
+		"email": null,
+		"openingHours": null
+	}
 ]
