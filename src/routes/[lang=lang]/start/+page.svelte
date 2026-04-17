@@ -1,6 +1,7 @@
 <script lang="ts">
 import { Button } from '$lib/components/ui/button'
 import { getTranslator } from '$lib/content'
+import { localiseHref } from '$lib/i18n/routing'
 
 let { data } = $props()
 
@@ -28,6 +29,10 @@ const tt = $derived(getTranslator(data.locale ?? 'es'))
 				<li>{tt('pages.start.expectation.timeline')}</li>
 			</ul>
 		</div>
-		<div class="actions"><Button href="/language">{tt('pages.start.start_now')}</Button></div>
+		<div class="actions">
+			<Button href={localiseHref(data.locale ?? 'es', '/language')}
+				>{tt('pages.start.start_now')}</Button
+			>
+		</div>
 	</div>
 </section>

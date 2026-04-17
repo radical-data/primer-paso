@@ -11,6 +11,7 @@ import {
 } from '$lib/components/ui/card'
 import type { Locale } from '$lib/content'
 import { getTranslator } from '$lib/content'
+import { localiseHref } from '$lib/i18n/routing'
 
 let { data } = $props()
 const locale = $derived((data.locale ?? 'es') as Locale)
@@ -20,7 +21,7 @@ const structuredData = $derived(
 		'@context': 'https://schema.org',
 		'@type': 'WebSite',
 		name: 'Primer Paso',
-		url: 'https://primerpaso.org/',
+		url: `https://primerpaso.org${localiseHref(locale, '/')}`,
 		description: tt('pages.home.meta_description'),
 		inLanguage: locale
 	})
@@ -32,7 +33,7 @@ const structuredData = $derived(
 	<meta property="og:title" content={tt('pages.home.meta_title')}>
 	<meta property="og:description" content={tt('pages.home.meta_description')}>
 	<meta property="og:type" content="website">
-	<meta property="og:url" content="https://primerpaso.org/">
+	<meta property="og:url" content={`https://primerpaso.org${localiseHref(locale, '/')}`}>
 	<meta name="twitter:title" content={tt('pages.home.meta_title')}>
 	<meta name="twitter:description" content={tt('pages.home.meta_description')}>
 	<script type="application/ld+json">{structuredData}</script>
@@ -53,7 +54,9 @@ const structuredData = $derived(
 						<CardDescription>{tt('pages.home.quiz_body')}</CardDescription>
 					</CardHeader>
 					<CardContent />
-					<CardFooter> <Button href="/start">{tt('pages.home.quiz_action')}</Button> </CardFooter>
+					<CardFooter>
+						<Button href={localiseHref(locale, '/start')}>{tt('pages.home.quiz_action')}</Button>
+					</CardFooter>
 				</Card>
 				<Card class="task-card">
 					<CardHeader>
@@ -62,7 +65,7 @@ const structuredData = $derived(
 					</CardHeader>
 					<CardContent />
 					<CardFooter>
-						<Button href="/organisations" variant="secondary">
+						<Button href={localiseHref(locale, '/organisations')} variant="secondary">
 							{tt('pages.home.directory_action')}
 						</Button>
 					</CardFooter>
@@ -94,7 +97,7 @@ const structuredData = $derived(
 			<h2 class="section-title">{tt('pages.home.seo_support_title')}</h2>
 			<p class="supporting-text">{tt('pages.home.seo_support_body')}</p>
 			<div class="actions">
-				<Button href="/organisations" variant="secondary"
+				<Button href={localiseHref(locale, '/organisations')} variant="secondary"
 					>{tt('pages.home.directory_action')}</Button
 				>
 				<Button href="https://inclusion.gob.es/regularizacion" target="_blank" rel="noreferrer">

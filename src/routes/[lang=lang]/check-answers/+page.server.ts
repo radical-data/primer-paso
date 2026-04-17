@@ -1,13 +1,14 @@
-import { getTranslator, renderReference, resolveLocale } from '$lib/content'
+import { getTranslator, renderReference } from '$lib/content'
+import { localiseHref } from '$lib/i18n/routing'
 import { journeySteps } from '$lib/journey/config'
 import { fieldAdapters } from '$lib/journey/field-adapters'
 import { getJourneyState } from '$lib/server/journey'
 import type { PageServerLoad } from './$types'
 
-export const load: PageServerLoad = ({ cookies }) => {
+export const load: PageServerLoad = ({ cookies, params }) => {
 	const state = getJourneyState(cookies)
 
-	const locale = resolveLocale(state.answers.language)
+	const locale = params.lang
 	const tt = getTranslator(locale)
 
 	const answers = journeySteps
@@ -20,7 +21,7 @@ export const load: PageServerLoad = ({ cookies }) => {
 				.format(state.answers, step)
 				.map((reference) => renderReference(reference, locale))
 				.join(', '),
-			changeHref: `/${step.slug}?returnTo=/check-answers`
+			changeHref: `${localiseHref(locale, `/${step.slug}`)}?returnTo=${encodeURIComponent(localiseHref(locale, '/check-answers'))}`
 		}))
 
 	const previousStep = journeySteps
@@ -32,6 +33,8 @@ export const load: PageServerLoad = ({ cookies }) => {
 	return {
 		answers,
 		locale,
-		backHref: previousStep ? `/${previousStep.slug}` : '/start'
+		backHref: previousStep
+			? localiseHref(locale, `/${previousStep.slug}`)
+			: localiseHref(locale, '/start')
 	}
 }

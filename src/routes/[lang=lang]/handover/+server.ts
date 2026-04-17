@@ -1,12 +1,11 @@
-import { resolveLocale } from '$lib/content'
 import { buildHandoverPacket } from '$lib/server/handover'
 import { buildHandoverPdf } from '$lib/server/handover-pdf'
 import { getJourneyState } from '$lib/server/journey'
 import type { RequestHandler } from './$types'
 
-export const GET: RequestHandler = async ({ cookies }) => {
+export const GET: RequestHandler = async ({ cookies, params }) => {
 	const state = getJourneyState(cookies)
-	const locale = resolveLocale(state.answers.language)
+	const locale = params.lang
 	const packet = buildHandoverPacket(state, locale)
 	const pdfBytes = await buildHandoverPdf(packet, locale)
 	const body = new Blob([new Uint8Array(pdfBytes)], { type: 'application/pdf' })

@@ -13,6 +13,7 @@ import { Input } from '$lib/components/ui/input'
 import { Label } from '$lib/components/ui/label'
 import type { Locale } from '$lib/content'
 import { getTranslator } from '$lib/content'
+import { localiseHref } from '$lib/i18n/routing'
 import type { OrganisationRecord } from '$lib/organisations/types'
 
 type DirectoryData = {
@@ -72,7 +73,11 @@ const formatTimeRanges = (value: string) => value.replace(/(\d{2}:\d{2})-(\d{2}:
 			<p class="lead-text">{tt('pages.organisations.lead')}</p>
 		</div>
 
-		<form class="directory-toolbar" method="GET" action="/organisations">
+		<form
+			class="directory-toolbar"
+			method="GET"
+			action={localiseHref(data.locale ?? 'es', '/organisations')}
+		>
 			<div class="form-field">
 				<Label for="directory-search">{tt('pages.organisations.search_label')}</Label>
 				<div class="relative">
@@ -92,7 +97,9 @@ const formatTimeRanges = (value: string) => value.replace(/(\d{2}:\d{2})-(\d{2}:
 
 			<div class="directory-toolbar-actions">
 				<Button type="submit">{tt('pages.organisations.apply_filters')}</Button>
-				<Button href="/organisations" variant="outline">{tt('pages.organisations.clear')}</Button>
+				<Button href={localiseHref(data.locale ?? 'es', '/organisations')} variant="outline"
+					>{tt('pages.organisations.clear')}</Button
+				>
 			</div>
 		</form>
 
@@ -150,7 +157,10 @@ const formatTimeRanges = (value: string) => value.replace(/(\d{2}:\d{2})-(\d{2}:
 							</div>
 						</CardHeader>
 						<CardFooter class="gap-3 px-6 pb-4">
-							<Button href={`/organisations/${organisation.slug}`} variant="outline">
+							<Button
+								href={localiseHref(data.locale ?? 'es', `/organisations/${organisation.slug}`)}
+								variant="outline"
+							>
 								{tt('pages.organisations.action.view_details')}
 							</Button>
 							{#if organisation.website}
@@ -183,7 +193,7 @@ const formatTimeRanges = (value: string) => value.replace(/(\d{2}:\d{2})-(\d{2}:
 				<h2 class="section-title">{tt('pages.organisations.empty_title')}</h2>
 				<p class="supporting-text">{tt('pages.organisations.empty_body')}</p>
 				<div class="actions">
-					<Button href="/organisations" variant="outline">
+					<Button href={localiseHref(data.locale ?? 'es', '/organisations')} variant="outline">
 						{tt('pages.organisations.action.browse_all')}
 					</Button>
 				</div>
@@ -194,7 +204,9 @@ const formatTimeRanges = (value: string) => value.replace(/(\d{2}:\d{2})-(\d{2}:
 			<h2 class="section-title">{tt('pages.organisations.guidance_title')}</h2>
 			<p class="supporting-text">{tt('pages.organisations.guidance_body')}</p>
 			<div class="actions">
-				<Button href="/start">{tt('pages.organisations.action.start_screener')}</Button>
+				<Button href={localiseHref(data.locale ?? 'es', '/start')}
+					>{tt('pages.organisations.action.start_screener')}</Button
+				>
 			</div>
 		</div>
 	</div>

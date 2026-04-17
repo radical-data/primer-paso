@@ -1,11 +1,9 @@
 import { error } from '@sveltejs/kit'
-import { resolveLocale } from '$lib/content'
+import { localiseHref } from '$lib/i18n/routing'
 import { getOrganisationBySlug } from '$lib/organisations/repository'
-import { getJourneyState } from '$lib/server/journey'
 import type { PageServerLoad } from './$types'
 
-export const load: PageServerLoad = ({ cookies, params }) => {
-	const locale = resolveLocale(getJourneyState(cookies).answers.language)
+export const load: PageServerLoad = ({ params }) => {
 	const organisation = getOrganisationBySlug(params.slug)
 
 	if (!organisation) {
@@ -13,8 +11,8 @@ export const load: PageServerLoad = ({ cookies, params }) => {
 	}
 
 	return {
-		locale,
+		locale: params.lang,
 		organisation,
-		backHref: '/organisations'
+		backHref: localiseHref(params.lang, '/organisations')
 	}
 }

@@ -5,6 +5,7 @@ import ListChecksIcon from '@lucide/svelte/icons/list-checks'
 import { Badge } from '$lib/components/ui/badge'
 import { Button } from '$lib/components/ui/button'
 import { getTranslator } from '$lib/content'
+import { localiseHref } from '$lib/i18n/routing'
 
 let { data } = $props()
 
@@ -191,10 +192,10 @@ const heroTone = $derived.by(() => {
 
 		<section class="panel-subtle">
 			<div class="actions">
-				<Button href="/check-answers" variant="outline"
+				<Button href={localiseHref(data.locale ?? 'es', '/check-answers')} variant="outline"
 					>{tt('pages.result.action.back_to_answers')}</Button
 				>
-				<Button href="/start?new=1" variant="outline"
+				<Button href={localiseHref(data.locale ?? 'es', '/start?new=1')} variant="outline"
 					>{tt('pages.result.action.start_again')}</Button
 				>
 			</div>

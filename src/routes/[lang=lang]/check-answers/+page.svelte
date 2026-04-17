@@ -2,6 +2,7 @@
 import { Button } from '$lib/components/ui/button'
 import type { Locale } from '$lib/content'
 import { getTranslator } from '$lib/content'
+import { localiseHref } from '$lib/i18n/routing'
 
 let {
 	data
@@ -38,7 +39,9 @@ const tt = $derived(getTranslator(data.locale ?? 'es'))
 		</div>
 
 		<div class="actions">
-			<Button href="/result">{tt('pages.check_answers.see_result')}</Button>
+			<Button href={localiseHref(data.locale ?? 'es', '/result')}
+				>{tt('pages.check_answers.see_result')}</Button
+			>
 			<Button href={data.backHref} variant="outline">{tt('pages.check_answers.back')}</Button>
 		</div>
 	</div>

@@ -5,6 +5,7 @@ import { fr } from './fr'
 
 export type MessageKey = keyof typeof en
 export type Locale = 'en' | 'es' | 'fr' | 'ar'
+export const SUPPORTED_LOCALES = ['es', 'en', 'fr', 'ar'] as const
 
 export interface MessageReference {
 	type: 'message'
@@ -30,11 +31,13 @@ const RTL_LOCALES = new Set<Locale>(['ar'])
 
 export const DEFAULT_LOCALE: Locale = 'es'
 
+export const isLocale = (value?: string | null): value is Locale =>
+	value === 'es' || value === 'en' || value === 'fr' || value === 'ar'
+
 export const resolveLocale = (value?: string | null): Locale => {
-	if (value === 'es' || value === 'en' || value === 'fr' || value === 'ar') {
+	if (isLocale(value)) {
 		return value
 	}
-
 	return DEFAULT_LOCALE
 }
 

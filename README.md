@@ -9,6 +9,7 @@ A SvelteKit app for a multilingual, server-first intake screener for Spain's 202
 - shows a check-answers step before the result
 - runs triage rules to produce a cautious next-step outcome
 - supports assisted completion and language switching
+- uses locale-prefixed URLs for every public route (`/es/...`, `/en/...`, `/fr/...`, `/ar/...`)
 
 ## Development
 

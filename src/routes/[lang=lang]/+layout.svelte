@@ -1,63 +1,57 @@
 <script lang="ts">
 import ExternalLinkIcon from '@lucide/svelte/icons/external-link'
 import LanguagesIcon from '@lucide/svelte/icons/languages'
-import '../app.css'
-import { browser } from '$app/environment'
-import { invalidateAll } from '$app/navigation'
+import '../../app.css'
 import { resolve } from '$app/paths'
 import { page } from '$app/state'
 import faviconUrl from '$lib/assets/favicon.svg?url'
-import { getTranslator } from '$lib/content'
+import { getTranslator, type Locale } from '$lib/content'
+import {
+	getAlternateLocaleHrefs,
+	getDefaultLocaleHref,
+	localiseHref,
+	replaceLocaleInHref
+} from '$lib/i18n/routing'
 
 let { children, data } = $props()
 
 const locale = $derived(data.locale ?? 'es')
 const siteUrl = 'https://primerpaso.org'
 const canonicalUrl = $derived(`${siteUrl}${page.url.pathname}`)
-const textDirection = $derived(data.textDirection ?? 'ltr')
 const tt = $derived(getTranslator(locale))
 const currentPath = $derived(data.currentPath ?? '/start')
+const currentHref = $derived(`${page.url.pathname}${page.url.search}`)
 const radicalDataUrl = 'https://radicaldata.org'
 
-$effect(() => {
-	if (!browser) return
-	document.documentElement.lang = locale
-	document.documentElement.dir = textDirection
-})
-
-const languages = [
+const languages: { value: Locale; label: string }[] = [
 	{ value: 'es', label: 'Español' },
 	{ value: 'en', label: 'English' },
 	{ value: 'ar', label: 'العربية' },
 	{ value: 'fr', label: 'Français' }
 ]
 
-const getLanguageHref = (languageValue: string) =>
-	`${resolve('/language')}?set=${languageValue}&returnTo=${encodeURIComponent(currentPath)}`
-
-const navigationItems = $derived([
-	{ href: '/', label: tt('chrome.nav.home') },
-	{ href: '/start', label: tt('chrome.nav.start') },
-	{ href: '/organisations', label: tt('chrome.nav.organisations') }
-])
-
-const isCurrentNavItem = (href: string) => {
-	if (href === '/') return page.url.pathname === '/'
-	return page.url.pathname === href || page.url.pathname.startsWith(`${href}/`)
+const getLanguageHref = (languageValue: Locale) => {
+	const languagePage = localiseHref(locale, '/language')
+	const returnTo = replaceLocaleInHref(currentPath, languageValue)
+	return `${languagePage}?set=${languageValue}&returnTo=${encodeURIComponent(returnTo)}`
 }
 
-const switchLanguage = async (event: MouseEvent, languageValue: string) => {
-	if (!browser) return
-	if (languageValue === locale) return
-	event.preventDefault()
-	const href = getLanguageHref(languageValue)
-	try {
-		const response = await fetch(href, { method: 'GET', credentials: 'same-origin' })
-		if (!response.ok) throw new Error(`Language switch failed: ${response.status}`)
-		await invalidateAll()
-	} catch {
-		window.location.href = href
-	}
+const navigationItems = $derived([
+	{ href: localiseHref(locale, '/'), label: tt('chrome.nav.home') },
+	{ href: localiseHref(locale, '/start'), label: tt('chrome.nav.start') },
+	{ href: localiseHref(locale, '/organisations'), label: tt('chrome.nav.organisations') }
+])
+
+const alternateLinks = $derived(
+	getAlternateLocaleHrefs(currentHref).map(({ locale, href }) => ({
+		locale,
+		href: `${siteUrl}${href}`
+	}))
+)
+
+const isCurrentNavItem = (href: string) => {
+	if (href === localiseHref(locale, '/')) return page.url.pathname === href
+	return page.url.pathname === href || page.url.pathname.startsWith(`${href}/`)
 }
 </script>
 
@@ -67,9 +61,19 @@ const switchLanguage = async (event: MouseEvent, languageValue: string) => {
 	<link rel="apple-touch-icon" href={faviconUrl}>
 	<link rel="mask-icon" href={faviconUrl} color="#315ec7">
 	<link rel="canonical" href={canonicalUrl}>
+	<link
+		rel="alternate"
+		hreflang="x-default"
+		href={`${siteUrl}${getDefaultLocaleHref(currentHref)}`}
+	>
+	{#each alternateLinks as link (link.locale)}
+		<link rel="alternate" hreflang={link.locale} href={link.href}>
+	{/each}
 	<meta property="og:site_name" content="Primer Paso">
 	<meta name="twitter:card" content="summary">
 </svelte:head>
+
+<svelte:body />
 
 <div class="app-shell">
 	<a class="skip-link" href="#main-content">{tt('chrome.skip_to_main')}</a>
@@ -114,7 +118,6 @@ const switchLanguage = async (event: MouseEvent, languageValue: string) => {
 									class="language-link"
 									href={getLanguageHref(language.value)}
 									aria-current={language.value === locale ? 'true' : undefined}
-									onclick={(event) => switchLanguage(event, language.value)}
 									rel="nofollow"
 									>{language.label}</a
 								>
