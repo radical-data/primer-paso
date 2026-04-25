@@ -1,11 +1,9 @@
 import { error, fail, redirect } from '@sveltejs/kit'
 import type { Locale } from '$lib/content'
 import { getTranslator } from '$lib/content'
-import { localiseHref, replaceLocaleInHref } from '$lib/i18n/routing'
-import type { ChoiceStepDefinition } from '$lib/journey/config'
+import { localiseHref } from '$lib/i18n/routing'
 import { getJourneyStep, resolveStepTarget } from '$lib/journey/config'
 import { fieldAdapters } from '$lib/journey/field-adapters'
-import type { LanguageValue } from '$lib/journey/types'
 import {
 	getJourneyState,
 	getSafeReturnTo,
@@ -13,9 +11,6 @@ import {
 	updateJourneyAnswers
 } from '$lib/server/journey'
 import type { Actions, PageServerLoad } from './$types'
-
-const hasOptions = (step: ReturnType<typeof getJourneyStep>): step is ChoiceStepDefinition =>
-	Boolean(step && 'options' in step)
 
 const getBackHref = (returnTo: string, backHref: string, locale: Locale) =>
 	returnTo.includes('/check-answers') ? localiseHref(locale, '/check-answers') : backHref
@@ -28,17 +23,6 @@ export const load: PageServerLoad = ({ cookies, params, url }) => {
 	}
 
 	const locale = params.lang as Locale
-
-	if (step.slug === 'language') {
-		const set = url.searchParams.get('set')
-
-		if (set && hasOptions(step) && step.options.some((option) => option.value === set)) {
-			updateJourneyAnswers(cookies, { language: set as LanguageValue })
-			const fallback = localiseHref(set as Locale, '/screener')
-			const returnTo = getSafeReturnTo(url, localiseHref(locale, '/screener'))
-			redirect(303, replaceLocaleInHref(returnTo, set as Locale) || fallback)
-		}
-	}
 
 	const state = getJourneyState(cookies)
 	const tt = getTranslator(locale)

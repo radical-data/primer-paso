@@ -29,7 +29,6 @@ describe('getSitemapEntries', () => {
 		expect(entries.some((entry) => entry.url.includes('/check-answers'))).toBe(false)
 		expect(entries.some((entry) => entry.url.includes('/result'))).toBe(false)
 		expect(entries.some((entry) => entry.url.includes('/handover'))).toBe(false)
-		expect(entries.some((entry) => entry.url.includes('/language'))).toBe(false)
 	})
 })
 
