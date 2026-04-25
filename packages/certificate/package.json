@@ -10,7 +10,8 @@
 		"check": "biome check .",
 		"typecheck": "tsc --noEmit",
 		"test": "vitest run",
-		"export:sample-pdf": "tsx scripts/export-sample-pdf.ts"
+		"export:sample-pdf": "tsx scripts/export-sample-pdf.ts",
+		"template:field": "tsx scripts/create-fielded-template.ts"
 	},
 	"dependencies": {
 		"pdf-lib": "^1.17.1"
