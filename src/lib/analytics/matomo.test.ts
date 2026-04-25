@@ -35,6 +35,6 @@ describe('getRouteGroup', () => {
 		expect(getRouteGroup('/es/result')).toBe('result')
 		expect(getRouteGroup('/es/organisations')).toBe('organisations')
 		expect(getRouteGroup('/es/organisations/example-org')).toBe('organisation_detail')
-		expect(getRouteGroup('/es/language')).toBe('question')
+		expect(getRouteGroup('/es/completion-mode')).toBe('question')
 	})
 })

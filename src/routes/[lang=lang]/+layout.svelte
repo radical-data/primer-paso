@@ -31,11 +31,7 @@ const languages: { value: Locale; label: string }[] = [
 	{ value: 'fr', label: 'Français' }
 ]
 
-const getLanguageHref = (languageValue: Locale) => {
-	const languagePage = localiseHref(locale, '/language')
-	const returnTo = replaceLocaleInHref(currentPath, languageValue)
-	return `${languagePage}?set=${languageValue}&returnTo=${encodeURIComponent(returnTo)}`
-}
+const getLanguageHref = (languageValue: Locale) => replaceLocaleInHref(currentPath, languageValue)
 
 const navigationItems = $derived([
 	{ href: localiseHref(locale, '/'), label: tt('chrome.nav.home') },

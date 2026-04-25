@@ -32,7 +32,7 @@ const tt = $derived(getTranslator(data.locale ?? 'es'))
 		</div>
 		<div class="actions">
 			<Button
-				href={localiseHref(data.locale ?? 'es', '/language')}
+				href={localiseHref(data.locale ?? 'es', '/completion-mode')}
 				onclick={() => trackEvent('Journey', 'Start screener')}
 				>{tt('pages.start.start_now')}</Button
 			>
