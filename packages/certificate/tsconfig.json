@@ -6,7 +6,9 @@
 		"strict": true,
 		"declaration": true,
 		"skipLibCheck": true,
-		"noEmit": true
+		"noEmit": true,
+		"resolveJsonModule": true,
+		"allowSyntheticDefaultImports": true
 	},
 	"include": ["src/**/*.ts"]
 }
