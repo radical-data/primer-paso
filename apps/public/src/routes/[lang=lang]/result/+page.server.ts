@@ -16,6 +16,7 @@ export const load: PageServerLoad = ({ cookies, params }) => {
 		sessionId: state.sessionId,
 		officialPortalUrl: OFFICIAL_PORTAL_URL,
 		organisationsHref: localiseHref(params.lang, '/organisations'),
+		certificateHref: localiseHref(params.lang, '/certificate'),
 		handoverHref: localiseHref(params.lang, '/handover'),
 		handoverJsonHref: localiseHref(params.lang, '/handover.json')
 	}

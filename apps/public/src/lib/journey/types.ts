@@ -1,4 +1,5 @@
 import type { ProvinceValue } from '$lib/generated/provinces'
+import type { PublicCertificateDraftState } from '$lib/server/certificate'
 
 export const LANGUAGE_VALUES = ['es', 'en', 'ar', 'fr'] as const
 export type LanguageValue = (typeof LANGUAGE_VALUES)[number]
@@ -116,4 +117,5 @@ export interface JourneyState {
 	sessionId: string
 	answers: JourneyAnswers
 	updatedAt: string
+	certificateDraft?: PublicCertificateDraftState
 }

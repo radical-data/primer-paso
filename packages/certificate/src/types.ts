@@ -7,26 +7,19 @@ export const GENDER_MARKER_VALUES = ['female', 'male', 'non_binary', 'not_specif
 export type GenderMarker = (typeof GENDER_MARKER_VALUES)[number]
 
 export const VULNERABILITY_REASON_VALUES = [
-	'family_responsibilities',
-	'health_or_disability',
-	'gender_based_violence',
-	'homelessness_or_housing_insecurity',
-	'labour_exploitation_or_abuse',
-	'trafficking_or_exploitation_risk',
-	'minor_or_dependant_support',
-	'other'
+	'social_isolation_or_lack_of_support_network',
+	'homelessness_or_precarious_housing',
+	'discrimination_or_social_exclusion',
+	'insufficient_income',
+	'poverty_or_economic_exclusion_risk',
+	'difficulty_accessing_employment',
+	'dependants',
+	'vulnerable_family_unit',
+	'single_parent_precarity',
+	'psychosocial_risks',
+	'exploitation_or_abuse'
 ] as const
 export type VulnerabilityReason = (typeof VULNERABILITY_REASON_VALUES)[number]
-
-export const LOCATION_EVIDENCE_TYPE_VALUES = [
-	'padron',
-	'housing_document',
-	'health_record',
-	'school_or_childcare_record',
-	'organisation_letter',
-	'other'
-] as const
-export type LocationEvidenceType = (typeof LOCATION_EVIDENCE_TYPE_VALUES)[number]
 
 export interface PersonIdentity {
 	givenNames: string
@@ -52,22 +45,14 @@ export interface PersonLocation {
 	postalCode?: string
 }
 
-export interface LocationEvidence {
-	type: LocationEvidenceType
-	description?: string
-	checkedByUser: boolean
-}
-
 export interface VulnerabilityStatement {
 	reasons: VulnerabilityReason[]
-	freeText?: string
 }
 
 export interface CertificateDraftUserData {
 	identity: PersonIdentity
 	contact: PersonContact
 	location: PersonLocation
-	locationEvidence: LocationEvidence[]
 	vulnerability: VulnerabilityStatement
 }
 
@@ -103,7 +88,6 @@ export interface OrganisationSigner {
 
 export interface VerificationChecks {
 	passportOrIdentityDocumentChecked: boolean
-	locationEvidenceChecked: boolean
 	userInformationConfirmed: boolean
 	vulnerabilityInformationReviewed: boolean
 }

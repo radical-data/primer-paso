@@ -22,6 +22,7 @@ jobs:
       PUBLIC_MATOMO_SITE_ID_TEST: '2'
       PUBLIC_MATOMO_LOCAL_ANALYTICS: 'off'
       PUBLIC_MATOMO_PRODUCTION_HOSTS: primerpaso.org,www.primerpaso.org
+      PUBLIC_CERTIFICATE_HANDOFF_ENABLED: 'false'
 
     steps:
       - name: Check out repository

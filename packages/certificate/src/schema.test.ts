@@ -7,6 +7,7 @@ import {
 	validateCertificateDraft,
 	validateCertificateIssueRequest
 } from './schema'
+import { VULNERABILITY_REASON_VALUES } from './types'
 
 describe('certificate schema', () => {
 	it('exports draft and issue request schema metadata', () => {
@@ -43,5 +44,67 @@ describe('certificate schema', () => {
 
 		expect(result.ok).toBe(false)
 		expect(result.ok ? [] : result.issues.map((issue) => issue.path)).toContain('userData.identity')
+	})
+
+	it('accepts every supported PDF-aligned vulnerability reason', () => {
+		const result = validateCertificateDraft({
+			...fixture.draft,
+			userData: {
+				...fixture.draft.userData,
+				vulnerability: {
+					reasons: [...VULNERABILITY_REASON_VALUES]
+				}
+			}
+		})
+
+		expect(result.ok).toBe(true)
+	})
+
+	it.each([
+		'family_responsibilities',
+		'health_or_disability',
+		'gender_based_violence',
+		'homelessness_or_housing_insecurity',
+		'labour_exploitation_or_abuse',
+		'trafficking_or_exploitation_risk',
+		'minor_or_dependant_support'
+	])('rejects legacy vulnerability reason %s', (reason) => {
+		const result = validateCertificateDraft({
+			...fixture.draft,
+			userData: {
+				...fixture.draft.userData,
+				vulnerability: {
+					reasons: [reason]
+				}
+			}
+		})
+
+		expect(result.ok).toBe(false)
+		expect(result.ok ? [] : result.issues.map((issue) => issue.path)).toContain(
+			'userData.vulnerability.reasons.0'
+		)
+	})
+
+	it('rejects a draft with a generic other vulnerability reason', () => {
+		const result = validateCertificateDraft({
+			...fixture.draft,
+			userData: {
+				...fixture.draft.userData,
+				vulnerability: {
+					reasons: ['other']
+				}
+			}
+		})
+
+		expect(result.ok).toBe(false)
+		expect(result.ok ? [] : result.issues.map((issue) => issue.path)).toContain(
+			'userData.vulnerability.reasons.0'
+		)
+	})
+
+	it('does not require location evidence in certificate drafts', () => {
+		const result = validateCertificateDraft(fixture.draft)
+
+		expect(result.ok).toBe(true)
 	})
 })

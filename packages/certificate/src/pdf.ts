@@ -72,32 +72,41 @@ export const generateVulnerabilityCertificatePdf = async (
 	setText(form, 'person.province', location.province)
 
 	const reasons = vulnerability.reasons
-	setCheck(form, 'vulnerability.socialIsolation', false)
+	setCheck(
+		form,
+		'vulnerability.socialIsolation',
+		hasReason(reasons, 'social_isolation_or_lack_of_support_network')
+	)
 	setCheck(
 		form,
 		'vulnerability.homelessnessOrPrecariousHousing',
-		hasReason(reasons, 'homelessness_or_housing_insecurity')
+		hasReason(reasons, 'homelessness_or_precarious_housing')
 	)
-	setCheck(form, 'vulnerability.discriminationOrSocialExclusion', false)
-	setCheck(form, 'vulnerability.insufficientIncome', false)
-	setCheck(form, 'vulnerability.povertyOrEconomicExclusionRisk', false)
-	setCheck(form, 'vulnerability.difficultyAccessingEmployment', false)
-	setCheck(form, 'vulnerability.dependants', hasReason(reasons, 'minor_or_dependant_support'))
 	setCheck(
 		form,
-		'vulnerability.vulnerableFamilyUnit',
-		hasReason(reasons, 'family_responsibilities')
+		'vulnerability.discriminationOrSocialExclusion',
+		hasReason(reasons, 'discrimination_or_social_exclusion')
 	)
-	setCheck(form, 'vulnerability.singleParentPrecarity', false)
-	setCheck(form, 'vulnerability.psychosocialRisks', hasReason(reasons, 'health_or_disability'))
+	setCheck(form, 'vulnerability.insufficientIncome', hasReason(reasons, 'insufficient_income'))
 	setCheck(
 		form,
-		'vulnerability.exploitationOrAbuse',
-		hasReason(reasons, 'labour_exploitation_or_abuse') ||
-			hasReason(reasons, 'trafficking_or_exploitation_risk')
+		'vulnerability.povertyOrEconomicExclusionRisk',
+		hasReason(reasons, 'poverty_or_economic_exclusion_risk')
 	)
-	setCheck(form, 'vulnerability.other', hasReason(reasons, 'other'))
-	setText(form, 'vulnerability.otherText', vulnerability.freeText)
+	setCheck(
+		form,
+		'vulnerability.difficultyAccessingEmployment',
+		hasReason(reasons, 'difficulty_accessing_employment')
+	)
+	setCheck(form, 'vulnerability.dependants', hasReason(reasons, 'dependants'))
+	setCheck(form, 'vulnerability.vulnerableFamilyUnit', hasReason(reasons, 'vulnerable_family_unit'))
+	setCheck(
+		form,
+		'vulnerability.singleParentPrecarity',
+		hasReason(reasons, 'single_parent_precarity')
+	)
+	setCheck(form, 'vulnerability.psychosocialRisks', hasReason(reasons, 'psychosocial_risks'))
+	setCheck(form, 'vulnerability.exploitationOrAbuse', hasReason(reasons, 'exploitation_or_abuse'))
 	setText(
 		form,
 		'certificate.signerOrSeal',

@@ -38,6 +38,10 @@ See:
 packages/certificate/templates/certificado-vulnerabilidad.fields.md
 ```
 
+The public certificate-draft contract intentionally does not support the official
+template's generic "other" vulnerability line. See ADR 017 for the product and
+policy rationale.
+
 ## Review rule
 
 When the source PDF changes:

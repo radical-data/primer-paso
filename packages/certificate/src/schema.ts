@@ -4,7 +4,6 @@ import {
 	type CertificateIssueRequest,
 	DOCUMENT_TYPE_VALUES,
 	GENDER_MARKER_VALUES,
-	LOCATION_EVIDENCE_TYPE_VALUES,
 	type ValidationIssue,
 	type ValidationResult,
 	VULNERABILITY_REASON_VALUES
@@ -112,21 +111,12 @@ export const certificateDraftSchema = {
 				description: 'Postal code.'
 			}
 		},
-		locationEvidence: {
-			type: 'array',
-			required: true,
-			description: 'Evidence categories the user expects to show in person.'
-		},
 		vulnerability: {
 			reasons: {
 				type: 'array',
 				required: true,
 				values: VULNERABILITY_REASON_VALUES,
 				description: 'Broad vulnerability categories selected by the user.'
-			},
-			freeText: {
-				type: 'string',
-				description: 'Optional user-provided context for organisation review.'
 			}
 		}
 	},
@@ -211,11 +201,6 @@ export const certificateIssueRequestSchema = {
 			type: 'boolean',
 			required: true,
 			description: 'The identity document was checked against the draft data.'
-		},
-		locationEvidenceChecked: {
-			type: 'boolean',
-			required: true,
-			description: 'The location evidence was checked against the draft data.'
 		},
 		userInformationConfirmed: {
 			type: 'boolean',
@@ -422,41 +407,6 @@ export const validateCertificateDraft = (value: unknown): ValidationResult<Certi
 			)
 		}
 
-		const locationEvidence = userData.locationEvidence
-		if (!Array.isArray(locationEvidence) || locationEvidence.length === 0) {
-			issues.push({
-				path: 'userData.locationEvidence',
-				message: 'At least one location evidence entry is required.'
-			})
-		} else {
-			locationEvidence.forEach((entry, index) => {
-				const path = `userData.locationEvidence.${index}`
-				if (!isRecord(entry)) {
-					issues.push({ path, message: 'Location evidence entry must be an object.' })
-					return
-				}
-				addEnumIssue(
-					issues,
-					entry.type,
-					LOCATION_EVIDENCE_TYPE_VALUES,
-					`${path}.type`,
-					'Evidence type'
-				)
-				addOptionalStringIssue(
-					issues,
-					entry.description,
-					`${path}.description`,
-					'Evidence description'
-				)
-				addRequiredBooleanIssue(
-					issues,
-					entry.checkedByUser,
-					`${path}.checkedByUser`,
-					'Evidence checked by user'
-				)
-			})
-		}
-
 		const vulnerability = userData.vulnerability
 		if (!isRecord(vulnerability)) {
 			issues.push({
@@ -481,12 +431,6 @@ export const validateCertificateDraft = (value: unknown): ValidationResult<Certi
 					)
 				})
 			}
-			addOptionalStringIssue(
-				issues,
-				vulnerability.freeText,
-				'userData.vulnerability.freeText',
-				'Vulnerability free text'
-			)
 		}
 	}
 
@@ -565,12 +509,6 @@ export const validateCertificateIssueRequest = (
 			verification.passportOrIdentityDocumentChecked,
 			'verification.passportOrIdentityDocumentChecked',
 			'Identity document check'
-		)
-		addRequiredBooleanIssue(
-			issues,
-			verification.locationEvidenceChecked,
-			'verification.locationEvidenceChecked',
-			'Location evidence check'
 		)
 		addRequiredBooleanIssue(
 			issues,

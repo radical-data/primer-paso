@@ -10,7 +10,8 @@ const requiredKeys = [
 	'PUBLIC_MATOMO_SITE_ID_PRODUCTION',
 	'PUBLIC_MATOMO_SITE_ID_TEST',
 	'PUBLIC_MATOMO_LOCAL_ANALYTICS',
-	'PUBLIC_MATOMO_PRODUCTION_HOSTS'
+	'PUBLIC_MATOMO_PRODUCTION_HOSTS',
+	'PUBLIC_CERTIFICATE_HANDOFF_ENABLED'
 ]
 
 const args = new Set(process.argv.slice(2))
@@ -57,6 +58,11 @@ for (const key of requiredKeys) {
 const enabled = read('PUBLIC_MATOMO_ENABLED')
 if (enabled !== undefined && !isBooleanString(enabled)) {
 	failures.push('PUBLIC_MATOMO_ENABLED must be "true" or "false"')
+}
+
+const certificateHandoffEnabled = read('PUBLIC_CERTIFICATE_HANDOFF_ENABLED')
+if (certificateHandoffEnabled !== undefined && !isBooleanString(certificateHandoffEnabled)) {
+	failures.push('PUBLIC_CERTIFICATE_HANDOFF_ENABLED must be "true" or "false"')
 }
 
 const matomoUrl = read('PUBLIC_MATOMO_URL')
@@ -126,6 +132,7 @@ if (failures.length === 0) {
 	lines.push(`- enabled: ${enabled ?? '(missing)'}`)
 	lines.push(`- local analytics: ${localAnalytics ?? '(missing)'}`)
 	lines.push(`- production hosts: ${productionHosts.join(', ') || '(none)'}`)
+	lines.push(`- certificate handoff enabled: ${certificateHandoffEnabled ?? '(missing)'}`)
 }
 
 console.log(lines.join('\n'))

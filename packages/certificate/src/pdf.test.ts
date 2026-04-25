@@ -41,7 +41,7 @@ describe('certificate PDF generation contract', () => {
 		expect(existsSync(templatePath)).toBe(true)
 	})
 
-	it('adds the expected AcroForm fields to the runtime template', async () => {
+	it('adds the expected supported AcroForm fields to the runtime template', async () => {
 		const pdf = await PDFDocument.load(readFileSync(templatePath))
 		const fieldNames = pdf
 			.getForm()
@@ -77,12 +77,44 @@ describe('certificate PDF generation contract', () => {
 				'vulnerability.singleParentPrecarity',
 				'vulnerability.psychosocialRisks',
 				'vulnerability.exploitationOrAbuse',
-				'vulnerability.other',
-				'vulnerability.otherText',
 				'certificate.signerOrSeal',
 				'certificate.issuedAt'
 			])
 		)
+
+		expect(fieldNames).not.toContain('vulnerability.other')
+		expect(fieldNames).not.toContain('vulnerability.otherText')
+	})
+
+	it('maps every supported vulnerability reason directly to a template checkbox', async () => {
+		const issueRequest = parseCertificateIssueRequest({
+			...fixture,
+			draft: {
+				...fixture.draft,
+				userData: {
+					...fixture.draft.userData,
+					vulnerability: {
+						reasons: [
+							'social_isolation_or_lack_of_support_network',
+							'homelessness_or_precarious_housing',
+							'discrimination_or_social_exclusion',
+							'insufficient_income',
+							'poverty_or_economic_exclusion_risk',
+							'difficulty_accessing_employment',
+							'dependants',
+							'vulnerable_family_unit',
+							'single_parent_precarity',
+							'psychosocial_risks',
+							'exploitation_or_abuse'
+						]
+					}
+				}
+			}
+		})
+
+		const generated = await generateVulnerabilityCertificatePdf(issueRequest)
+
+		expect(generated.bytes.length).toBeGreaterThan(1000)
 	})
 
 	it('generates a PDF from fixture user, organisation, signer, and verification data', async () => {

@@ -175,15 +175,6 @@ const textFields: TextFieldDefinition[] = [
 		width: 172,
 		height: DEFAULT_TEXT_FIELD_HEIGHT
 	},
-	// Page 2
-	{
-		name: 'vulnerability.otherText',
-		page: 1,
-		x: 117,
-		y: 785,
-		width: 424,
-		height: DEFAULT_TEXT_FIELD_HEIGHT
-	},
 	{
 		name: 'certificate.signerOrSeal',
 		page: 1,
@@ -324,15 +315,6 @@ const checkBoxes: CheckBoxDefinition[] = [
 		page: 0,
 		x: 35.5,
 		y: 41.5,
-		width: DEFAULT_CHECKBOX_SIZE,
-		height: DEFAULT_CHECKBOX_SIZE
-	},
-	// Page 2
-	{
-		name: 'vulnerability.other',
-		page: 1,
-		x: 35.5,
-		y: 787.5,
 		width: DEFAULT_CHECKBOX_SIZE,
 		height: DEFAULT_CHECKBOX_SIZE
 	}

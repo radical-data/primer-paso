@@ -14,11 +14,13 @@ import {
 	WORK_SITUATION_VALUES,
 	YES_NO_NOT_SURE_VALUES
 } from '$lib/journey/types'
+import type { PublicCertificateDraftState } from './certificate'
 
 const JOURNEY_COOKIE = 'ri_journey'
 const THIRTY_DAYS = 60 * 60 * 24 * 30
 
 const safeRelativePath = (value: string | null, fallback: string) => {
+	if (value === '/certificate/check') return value
 	if (value === '/result') {
 		return fallback
 	}
@@ -59,6 +61,9 @@ const isStringArrayOf = <T extends string>(
 	itemGuard: (entry: unknown) => entry is T
 ): value is T[] => Array.isArray(value) && value.every(itemGuard)
 
+const isPublicCertificateDraftState = (value: unknown): value is PublicCertificateDraftState =>
+	Boolean(value) && typeof value === 'object'
+
 const isJourneyState = (value: unknown): value is JourneyState => {
 	if (!value || typeof value !== 'object') {
 		return false
@@ -69,6 +74,8 @@ const isJourneyState = (value: unknown): value is JourneyState => {
 
 	return (
 		typeof candidate.sessionId === 'string' &&
+		(candidate.certificateDraft === undefined ||
+			isPublicCertificateDraftState(candidate.certificateDraft)) &&
 		typeof candidate.updatedAt === 'string' &&
 		(candidate.answers === undefined || typeof candidate.answers === 'object') &&
 		(answers.language === undefined || isLanguageValue(answers.language)) &&
@@ -138,6 +145,20 @@ export const updateJourneyAnswers = (cookies: Cookies, answers: Partial<JourneyA
 
 	setJourneyState(cookies, next)
 
+	return next
+}
+
+export const updateCertificateDraft = (
+	cookies: Cookies,
+	certificateDraft: PublicCertificateDraftState
+) => {
+	const current = getJourneyState(cookies)
+	const next: JourneyState = {
+		...current,
+		certificateDraft,
+		updatedAt: new Date().toISOString()
+	}
+	setJourneyState(cookies, next)
 	return next
 }
 

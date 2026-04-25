@@ -154,6 +154,19 @@ const startAgainHref = $derived(localiseHref(data.locale ?? 'es', '/screener?new
 				{/if}
 			</section>
 
+			{#if data.result.recommendedRoute === 'collaborating_organisation'}
+				<section class="panel section-block">
+					<h2 class="section-title">Prepare a certificate draft</h2>
+					<p class="lead-text">
+						You can prepare draft information for a collaborating organisation to review. This does
+						not issue a certificate.
+					</p>
+					<div class="actions">
+						<Button href={data.certificateHref}>Prepare certificate draft</Button>
+					</div>
+				</section>
+			{/if}
+
 			<section class="panel section-block">
 				<h2 class="section-title">{tt('pages.result.collaborating_cta.title')}</h2>
 				<p class="lead-text">{tt('pages.result.collaborating_cta.lead')}</p>
