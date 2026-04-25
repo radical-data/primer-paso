@@ -1,7 +1,14 @@
 {
 	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
 	"files": {
-		"includes": ["**", "!build", "!.svelte-kit", "!node_modules", "!static", "!.netlify"]
+		"includes": [
+			"**",
+			"!**/build",
+			"!**/.svelte-kit",
+			"!**/node_modules",
+			"!**/static",
+			"!**/.netlify"
+		]
 	},
 	"formatter": {
 		"enabled": true,

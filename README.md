@@ -1,6 +1,6 @@
 # Primer Paso
 
-A SvelteKit app for a multilingual, server-first intake screener for Spain's 2026 extraordinary regularisation process.
+A pnpm monorepo for a multilingual, server-first intake screener for Spain's 2026 extraordinary regularisation process and related organisation workflows.
 
 ## What it does
 
@@ -19,6 +19,15 @@ mise x -- pnpm install --frozen-lockfile
 mise x -- pnpm dev
 ```
 
+The default `pnpm dev` command runs the public app.
+
+To run apps explicitly:
+
+```sh
+pnpm dev:public
+pnpm dev:org
+```
+
 To check that the analytics environment contract is satisfied:
 
 ```sh
@@ -33,20 +42,25 @@ pnpm run typecheck
 pnpm test
 ```
 
+`pnpm test` loads committed `.env.test` for the public app so Matomo-related unit tests match CI (see `apps/public/package.json` `test` script).
+
 ## Build
 
 ```sh
 pnpm build
+pnpm build:public
 pnpm preview
 ```
 
 ## Project shape
 
-- src/routes — journey pages, check answers, result, handover
-- src/lib/journey — step config, field adapters, shared types
-- src/lib/triage — triage engine and result types
-- src/lib/server — cookie-backed journey state
-- src/lib/content — message content
+- apps/public — public Primer Paso service
+- apps/org-portal — authenticated organisation portal placeholder
+- packages/certificate — shared certificate model and PDF generation package placeholder
+- packages/auth — shared role and permission model placeholder
+- packages/db — shared persistence package placeholder
+- packages/config — shared app configuration placeholder
+- packages/ui — shared UI package placeholder
 - docs/ — design spec, journey, triage rules, ADRs
 
 ## Notes

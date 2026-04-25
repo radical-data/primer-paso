@@ -12,3 +12,15 @@ run = "node scripts/check-matomo-env.mjs"
 [tasks."analytics:env:check:strict"]
 description = "Validate the Matomo public environment contract and fail on missing or invalid values"
 run = "node scripts/check-matomo-env.mjs --strict"
+
+[tasks."dev:public"]
+description = "Run the public Primer Paso app"
+run = "pnpm --filter @primer-paso/public dev"
+
+[tasks."dev:org"]
+description = "Run the organisation portal placeholder app"
+run = "pnpm --filter @primer-paso/org-portal dev"
+
+[tasks."build:public"]
+description = "Build the public Primer Paso app"
+run = "pnpm --filter @primer-paso/public build"

@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
-const outputDir = path.join(rootDir, 'src', 'lib', 'generated')
+const outputDir = path.join(rootDir, 'apps', 'public', 'src', 'lib', 'generated')
 const outputFile = path.join(outputDir, 'provinces.ts')
 
 const SOURCE_URL = 'https://ine.es/daco/daco42/codmun/cod_provincia.htm'

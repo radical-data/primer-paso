@@ -65,8 +65,8 @@ The service should follow these principles throughout the journey, not just on i
 
 The implemented journey is code-owned.
 
-- `src/lib/journey/config.ts` is the canonical reference for implemented steps, ordering, route slugs, and branching.
-- `src/routes/**` are the canonical reference for implemented page behaviour.
+- `apps/public/src/lib/journey/config.ts` is the canonical reference for implemented steps, ordering, route slugs, and branching.
+- `apps/public/src/routes/**` are the canonical reference for implemented page behaviour.
 - docs should describe product requirements and deferred work, not duplicate implemented screen-by-screen flow.
 
 Version 1 should follow this flow:

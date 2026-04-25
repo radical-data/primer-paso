@@ -1,0 +1,19 @@
+{
+	"name": "@primer-paso/certificate",
+	"private": true,
+	"version": "0.0.1",
+	"type": "module",
+	"exports": {
+		".": "./src/index.ts"
+	},
+	"scripts": {
+		"check": "biome check .",
+		"typecheck": "tsc --noEmit",
+		"test": "vitest run --passWithNoTests"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.4.8",
+		"typescript": "^6.0.2",
+		"vitest": "^3.0.0"
+	}
+}

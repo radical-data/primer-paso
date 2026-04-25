@@ -1,0 +1,4 @@
+# Read by @sveltejs/adapter-netlify during `vite build` from this directory.
+# Site-wide Netlify settings live in the repository root `netlify.toml`.
+[build]
+	publish = "build"
