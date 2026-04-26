@@ -1,6 +1,6 @@
 import {
-	createPostgresCertificateHandoffRepository,
-	type CertificateHandoffRepository
+	type CertificateHandoffRepository,
+	createPostgresCertificateHandoffRepository
 } from '@primer-paso/db'
 import { env as privateEnv } from '$env/dynamic/private'
 import { env as publicEnv } from '$env/dynamic/public'

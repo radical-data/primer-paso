@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest'
 import type { CertificateDraft } from '@primer-paso/certificate'
+import { describe, expect, it } from 'vitest'
 import {
 	createCertificateHandoffToken,
 	createInMemoryCertificateHandoffRepository,

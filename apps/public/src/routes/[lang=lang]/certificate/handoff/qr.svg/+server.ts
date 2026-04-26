@@ -1,6 +1,6 @@
 import { error } from '@sveltejs/kit'
-import { getCertificateHandoffByToken } from '$lib/server/certificate-handoff'
 import { env } from '$env/dynamic/public'
+import { getCertificateHandoffByToken } from '$lib/server/certificate-handoff'
 import { assertSafeQrPayload, generateQrSvg } from '$lib/server/qr'
 import type { RequestHandler } from './$types'
 

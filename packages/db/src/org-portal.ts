@@ -1,12 +1,12 @@
 import { createHash, randomBytes, randomUUID } from 'node:crypto'
-import type { CertificateDraft } from '@primer-paso/certificate'
 import type { OrgRole } from '@primer-paso/auth'
+import type { CertificateDraft } from '@primer-paso/certificate'
 import postgres, { type JSONValue, type Sql } from 'postgres'
 import {
-	hashCertificateHandoffToken,
+	type CertificateHandoffConsent,
 	type CertificateHandoffRecord,
 	type CertificateHandoffStatus,
-	type CertificateHandoffConsent
+	hashCertificateHandoffToken
 } from './certificate-handoffs'
 
 export type OrganisationMemberStatus = 'invited' | 'active' | 'disabled'
@@ -169,19 +169,6 @@ const normaliseHandoffStatus = (
 	return record.status
 }
 
-const organisationFromRow = (row: Record<string, unknown>): OrganisationRecord => ({
-	id: String(row.id),
-	name: String(row.name),
-	registrationNumber: optionalString(row.registration_number),
-	nifCif: optionalString(row.nif_cif),
-	address: optionalString(row.address),
-	email: optionalString(row.email),
-	phone: optionalString(row.phone),
-	entityType: String(row.entity_type) as OrganisationRecord['entityType'],
-	createdAt: date(row.created_at),
-	updatedAt: date(row.updated_at)
-})
-
 const memberFromRow = (row: Record<string, unknown>): OrganisationMemberRecord => ({
 	id: String(row.id),
 	organisationId: String(row.organisation_id),
@@ -190,16 +177,6 @@ const memberFromRow = (row: Record<string, unknown>): OrganisationMemberRecord =
 	role: String(row.role) as OrgRole,
 	status: String(row.status) as OrganisationMemberStatus,
 	createdAt: date(row.created_at)
-})
-
-const sessionFromRow = (row: Record<string, unknown>): OrganisationSessionRecord => ({
-	id: String(row.id),
-	memberId: String(row.member_id),
-	sessionHash: String(row.session_hash),
-	createdAt: date(row.created_at),
-	expiresAt: date(row.expires_at),
-	lastSeenAt: optionalDate(row.last_seen_at),
-	revokedAt: optionalDate(row.revoked_at)
 })
 
 const handoffFromRow = (row: Record<string, unknown>): CertificateHandoffRecord => ({
@@ -241,17 +218,6 @@ const findMemberById = async (sql: Sql, id: string) => {
 	`
 
 	return rows[0] ? memberFromRow(rows[0]) : null
-}
-
-const findOrganisationById = async (sql: Sql, id: string) => {
-	const rows = await sql`
-		select *
-		from organisations
-		where id = ${id}
-		limit 1
-	`
-
-	return rows[0] ? organisationFromRow(rows[0]) : null
 }
 
 export const createPostgresOrgPortalRepository = ({

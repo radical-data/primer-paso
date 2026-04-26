@@ -1,4 +1,5 @@
 import { fail, redirect } from '@sveltejs/kit'
+import { writeAuditEvent } from '$lib/server/audit'
 import {
 	authenticateMemberWithBootstrapCode,
 	clearPendingHandoffToken,
@@ -6,7 +7,6 @@ import {
 	normaliseEmail,
 	setOrgSessionCookie
 } from '$lib/server/auth'
-import { writeAuditEvent } from '$lib/server/audit'
 import type { Actions, PageServerLoad } from './$types'
 
 export const load: PageServerLoad = ({ locals, cookies }) => {

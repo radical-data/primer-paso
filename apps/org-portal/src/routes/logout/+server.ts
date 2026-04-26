@@ -1,6 +1,6 @@
 import { redirect } from '@sveltejs/kit'
-import { clearOrgSessionCookie, ORG_SESSION_COOKIE } from '$lib/server/auth'
 import { writeAuditEvent } from '$lib/server/audit'
+import { clearOrgSessionCookie, ORG_SESSION_COOKIE } from '$lib/server/auth'
 import { getOrgPortalRepository } from '$lib/server/repository'
 import type { RequestHandler } from './$types'
 
