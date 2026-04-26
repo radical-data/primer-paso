@@ -1,12 +1,13 @@
 {
 	"$schema": "https://repomix.com/schemas/latest/schema.json",
 	"output": {
+		"filePath": ".repomix/repomix-all.xml",
 		"parsableStyle": false,
 		"fileSummary": true,
 		"directoryStructure": true,
 		"files": true,
-		"removeComments": false,
-		"removeEmptyLines": false,
+		"removeComments": true,
+		"removeEmptyLines": true,
 		"compress": false,
 		"topFilesLength": 5
 	}

@@ -1,0 +1,16 @@
+apps/public/src/lib/analytics/**
+apps/public/src/lib/components/analytics/**
+apps/public/src/routes/[lang=lang]/+layout.svelte
+apps/public/src/routes/[lang=lang]/**/*.svelte
+apps/public/src/routes/[lang=lang]/**/*.ts
+scripts/check-matomo-env.mjs
+docs/analytics.md
+.env.example
+.env.test
+.github/workflows/ci.yml
+netlify.toml
+apps/public/vite.config.ts
+apps/public/svelte.config.js
+apps/public/package.json
+package.json
+pnpm-workspace.yaml

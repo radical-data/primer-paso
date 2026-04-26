@@ -1,0 +1,10 @@
+packages/auth/**
+packages/certificate/**
+packages/db/**
+docs/adr/014-token-based-certificate-handoff.md
+docs/adr/016-certificate-issuance-belongs-to-organisation-portal.md
+docs/adr/018-organisation-portal-auth-and-review-workflow.md
+.env.example
+.env.test
+package.json
+pnpm-workspace.yaml

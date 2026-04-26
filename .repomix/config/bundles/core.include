@@ -1,0 +1,61 @@
+# Root workspace and runtime config
+package.json
+pnpm-workspace.yaml
+biome.jsonc
+mise.toml
+netlify.toml
+.github/workflows/ci.yml
+.env.example
+.env.test
+scripts/**
+
+# App/package manifests and build config
+apps/*/package.json
+apps/*/svelte.config.js
+apps/*/vite.config.ts
+apps/*/tsconfig.json
+apps/*/app.d.ts
+apps/*/src/app.d.ts
+apps/*/src/app.html
+apps/*/src/hooks.server.ts
+
+# Public app: domain logic, server logic, routing logic, tests
+apps/public/src/lib/analytics/**
+apps/public/src/lib/i18n/**
+apps/public/src/lib/journey/**
+apps/public/src/lib/organisations/**
+apps/public/src/lib/server/**
+apps/public/src/lib/triage/**
+apps/public/src/lib/index.ts
+apps/public/src/lib/index.test.ts
+apps/public/src/lib/utils.ts
+apps/public/src/params/**
+apps/public/src/routes/**/+page.server.ts
+apps/public/src/routes/**/+server.ts
+apps/public/src/routes/sitemap.xml/**
+apps/public/static/**
+
+# Keep route shell/load behaviour, but avoid Svelte surface copy and styling
+apps/public/src/routes/**/+layout.server.ts
+
+# Organisation portal: server/auth/review behaviour
+apps/org-portal/src/lib/server/**
+apps/org-portal/src/hooks.server.ts
+apps/org-portal/src/routes/**/+page.server.ts
+apps/org-portal/src/routes/**/+server.ts
+
+# Shared packages
+packages/**
+
+# Architecture and operational docs
+docs/README.md
+docs/adr/**
+docs/analytics.md
+docs/design-spec.md
+docs/journey-future.md
+docs/policy-context.md
+docs/triage-rules.md
+
+# Repomix config itself
+repomix.config.json
+.repomixignore

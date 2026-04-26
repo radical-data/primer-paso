@@ -24,7 +24,9 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
 # Repomix
-repomix-output.xml
+/.repomix/*
+!/.repomix/config/
+!/.repomix/config/**
 
 # Pnpm
 .pnpm-store
