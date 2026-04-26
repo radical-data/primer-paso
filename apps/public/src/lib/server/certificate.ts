@@ -6,10 +6,12 @@ import {
 	VULNERABILITY_REASON_VALUES,
 	type VulnerabilityReason
 } from '@primer-paso/certificate'
-import { env } from '$env/dynamic/public'
+import { PUBLIC_CERTIFICATE_HANDOFF_ENABLED } from '$env/static/public'
 import type { JourneyAnswers, JourneyState } from '$lib/journey/types'
 
-export const isCertificateHandoffEnabled = () => env.PUBLIC_CERTIFICATE_HANDOFF_ENABLED === 'true'
+export const isCertificateHandoffEnabled = () => {
+	return PUBLIC_CERTIFICATE_HANDOFF_ENABLED === 'true'
+}
 
 export interface PublicCertificateDraftFormValue {
 	givenNames: string

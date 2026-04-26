@@ -11,6 +11,10 @@
 		"typecheck": "tsc --noEmit",
 		"test": "vitest run --passWithNoTests"
 	},
+	"dependencies": {
+		"@primer-paso/certificate": "workspace:*",
+		"postgres": "^3.4.7"
+	},
 	"devDependencies": {
 		"@biomejs/biome": "2.4.8",
 		"typescript": "^6.0.2",

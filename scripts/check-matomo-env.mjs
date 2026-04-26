@@ -11,7 +11,8 @@ const requiredKeys = [
 	'PUBLIC_MATOMO_SITE_ID_TEST',
 	'PUBLIC_MATOMO_LOCAL_ANALYTICS',
 	'PUBLIC_MATOMO_PRODUCTION_HOSTS',
-	'PUBLIC_CERTIFICATE_HANDOFF_ENABLED'
+	'PUBLIC_CERTIFICATE_HANDOFF_ENABLED',
+	'PUBLIC_ORG_PORTAL_URL'
 ]
 
 const args = new Set(process.argv.slice(2))
@@ -63,6 +64,15 @@ if (enabled !== undefined && !isBooleanString(enabled)) {
 const certificateHandoffEnabled = read('PUBLIC_CERTIFICATE_HANDOFF_ENABLED')
 if (certificateHandoffEnabled !== undefined && !isBooleanString(certificateHandoffEnabled)) {
 	failures.push('PUBLIC_CERTIFICATE_HANDOFF_ENABLED must be "true" or "false"')
+}
+
+const orgPortalUrl = read('PUBLIC_ORG_PORTAL_URL')
+if (orgPortalUrl !== undefined && !isAbsoluteHttpUrl(orgPortalUrl)) {
+	failures.push('PUBLIC_ORG_PORTAL_URL must be an absolute http or https URL')
+}
+
+if (certificateHandoffEnabled === 'true' && !isNonEmptyString(read('PRIVATE_DATABASE_URL'))) {
+	failures.push('PRIVATE_DATABASE_URL is required when PUBLIC_CERTIFICATE_HANDOFF_ENABLED=true')
 }
 
 const matomoUrl = read('PUBLIC_MATOMO_URL')
@@ -133,6 +143,7 @@ if (failures.length === 0) {
 	lines.push(`- local analytics: ${localAnalytics ?? '(missing)'}`)
 	lines.push(`- production hosts: ${productionHosts.join(', ') || '(none)'}`)
 	lines.push(`- certificate handoff enabled: ${certificateHandoffEnabled ?? '(missing)'}`)
+	lines.push(`- organisation portal URL: ${orgPortalUrl ?? '(missing)'}`)
 }
 
 console.log(lines.join('\n'))

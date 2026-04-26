@@ -68,3 +68,17 @@ pnpm preview
 - the core flow uses standard HTML forms and SvelteKit form actions
 - the app is configured for Netlify deployment
 - this service is triage, not a legal determination
+
+## Certificate handoff storage
+
+The public certificate handoff flow stores the certificate draft server-side and places
+only an opaque token in the handoff URL/QR code.
+
+To enable it:
+
+1. apply `packages/db/migrations/001_certificate_handoffs.sql` to Postgres
+2. set `PRIVATE_DATABASE_URL`
+3. set `PUBLIC_CERTIFICATE_HANDOFF_ENABLED=true`
+4. set `PUBLIC_ORG_PORTAL_URL`
+
+The raw token is never stored. The database stores only a SHA-256 token hash.

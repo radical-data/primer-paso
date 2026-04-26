@@ -1,9 +1,10 @@
 import { localiseHref } from '$lib/i18n/routing'
 import { isCertificateHandoffEnabled } from '$lib/server/certificate'
+import { createCertificateHandoff } from '$lib/server/certificate-handoff'
 import { getJourneyState } from '$lib/server/journey'
 import type { RequestHandler } from './$types'
 
-export const POST: RequestHandler = ({ cookies, params }) => {
+export const POST: RequestHandler = async ({ cookies, params }) => {
 	const state = getJourneyState(cookies)
 
 	if (!state.certificateDraft?.draft) {
@@ -25,7 +26,7 @@ export const POST: RequestHandler = ({ cookies, params }) => {
 			JSON.stringify({
 				error: 'certificate_handoff_disabled',
 				message:
-					'Certificate handoff creation is disabled until database-backed token storage is implemented.'
+					'Certificate handoff creation is disabled. Set PUBLIC_CERTIFICATE_HANDOFF_ENABLED=true after configuring persistence.'
 			}),
 			{
 				status: 501,
@@ -38,15 +39,20 @@ export const POST: RequestHandler = ({ cookies, params }) => {
 		)
 	}
 
-	return new Response(
-		JSON.stringify({
-			error: 'certificate_handoff_not_implemented',
-			message:
-				'Enablement is present, but token creation must be implemented in the database-backed handoff PR.'
-		}),
+	const handoff = await createCertificateHandoff(
 		{
-			status: 501,
-			headers: { 'content-type': 'application/json; charset=utf-8' }
-		}
+			draft: state.certificateDraft.draft,
+			consent: state.certificateDraft.consent
+		},
+		state.sessionId
 	)
+
+	const location = `${localiseHref(params.lang, '/certificate/handoff')}?token=${encodeURIComponent(
+		handoff.token
+	)}`
+
+	return new Response(null, {
+		status: 303,
+		headers: { location, 'cache-control': 'no-store' }
+	})
 }

@@ -21,6 +21,7 @@ const THIRTY_DAYS = 60 * 60 * 24 * 30
 
 const safeRelativePath = (value: string | null, fallback: string) => {
 	if (value === '/certificate/check') return value
+	if (value === '/certificate/handoff') return value
 	if (value === '/result') {
 		return fallback
 	}

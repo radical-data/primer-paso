@@ -20,7 +20,7 @@ export const load: PageServerLoad = ({ cookies, params }) => {
 		consent: state.certificateDraft.consent,
 		editHref: localiseHref(params.lang, '/certificate'),
 		jsonHref: localiseHref(params.lang, '/certificate/draft.json'),
-		handoffHref: localiseHref(params.lang, '/certificate/handoff'),
+		handoffHref: localiseHref(params.lang, '/certificate/handoff/create'),
 		handoffEnabled: isCertificateHandoffEnabled()
 	}
 }
