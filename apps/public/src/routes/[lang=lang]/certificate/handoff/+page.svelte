@@ -54,12 +54,13 @@ const expiresAt = $derived(
 
 		<section class="panel-subtle section-block">
 			<h2 class="section-title">Organisation link</h2>
+			<p class="hint">
+				This link is for authorised organisation users. Show the QR code or reference code to the
+				organisation rather than opening it yourself.
+			</p>
 			<p class="break-all">{data.orgHandoffUrl}</p>
 		</section>
 
-		<div class="actions">
-			<Button href={data.orgHandoffUrl}>Open organisation handoff</Button>
-			<Button href={data.backHref} variant="outline">Back</Button>
-		</div>
+		<div class="actions"><Button href={data.backHref} variant="outline">Back</Button></div>
 	</div>
 </section>

@@ -1,12 +1,35 @@
+import { redirect } from '@sveltejs/kit'
+import { requirePermission, setPendingHandoffToken } from '$lib/server/auth'
 import type { PageServerLoad } from './$types'
 
-export const load: PageServerLoad = ({ url }) => {
-	const token = url.searchParams.get('token') ?? ''
+const extractToken = (value: string) => {
+	const trimmed = value.trim()
+	if (!trimmed) return ''
 
-	return {
-		hasToken: token.length > 0,
-		// Do not expose the token back to the client page. This placeholder only
-		// confirms that the QR/link destination exists.
-		tokenReceived: token.length > 0
+	try {
+		const url = new URL(trimmed)
+		return url.searchParams.get('token')?.trim() ?? ''
+	} catch {
+		return trimmed
 	}
+}
+
+export const load: PageServerLoad = ({ cookies, locals, url }) => {
+	const token = extractToken(url.searchParams.get('token') ?? '')
+
+	if (!token) {
+		return {
+			hasToken: false,
+			signedIn: Boolean(locals.session)
+		}
+	}
+
+	if (!locals.session) {
+		setPendingHandoffToken(cookies, token)
+		redirect(303, '/login?next=/handoff')
+	}
+
+	requirePermission(locals, 'handoff:open')
+
+	redirect(303, `/handoff/${encodeURIComponent(token)}`)
 }

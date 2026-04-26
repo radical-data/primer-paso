@@ -7,3 +7,6 @@ export {
 	createPostgresCertificateHandoffRepository,
 	hashCertificateHandoffToken
 } from './certificate-handoffs'
+
+export type * from './org-portal'
+export { createPostgresOrgPortalRepository } from './org-portal'

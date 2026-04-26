@@ -82,3 +82,45 @@ To enable it:
 4. set `PUBLIC_ORG_PORTAL_URL`
 
 The raw token is never stored. The database stores only a SHA-256 token hash.
+
+## Local organisation portal testing
+
+The organisation portal has a temporary bootstrap login for local and pilot testing.
+It is not open registration: the email must already exist in `organisation_members`
+and the shared bootstrap code must match `PRIVATE_ORG_PORTAL_LOGIN_CODE`.
+
+For local testing, set:
+
+```sh
+PRIVATE_DATABASE_URL=postgres://primer_paso:primer_paso@localhost:5432/primer_paso
+PRIVATE_ORG_PORTAL_LOGIN_CODE=test-code
+PUBLIC_CERTIFICATE_HANDOFF_ENABLED=true
+PUBLIC_ORG_PORTAL_URL=http://localhost:5174
+```
+
+Apply the database migrations:
+
+```sh
+psql "$PRIVATE_DATABASE_URL" -f packages/db/migrations/001_certificate_handoffs.sql
+psql "$PRIVATE_DATABASE_URL" -f packages/db/migrations/002_org_portal_mvp.sql
+```
+
+Seed a local collaborating organisation and test users:
+
+```sh
+pnpm db:seed:local-org-portal
+```
+
+The seed command loads the repository-root `.env` automatically. If you run the
+package script directly from `packages/db`, it loads `../../.env`.
+
+Seeded local member emails:
+
+```txt
+admin@example.invalid
+volunteer@example.invalid
+signer@example.invalid
+```
+
+Use any of those emails with the value of `PRIVATE_ORG_PORTAL_LOGIN_CODE` on the
+organisation portal sign-in page.

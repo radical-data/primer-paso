@@ -9,14 +9,17 @@
 	"scripts": {
 		"check": "biome check .",
 		"typecheck": "tsc --noEmit",
-		"test": "vitest run --passWithNoTests"
+		"test": "vitest run --passWithNoTests",
+		"seed:local-org-portal": "node --env-file=../../.env --import tsx scripts/seed-local-org-portal.ts"
 	},
 	"dependencies": {
+		"@primer-paso/auth": "workspace:*",
 		"@primer-paso/certificate": "workspace:*",
 		"postgres": "^3.4.7"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.4.8",
+		"tsx": "^4.20.6",
 		"typescript": "^6.0.2",
 		"vitest": "^3.0.0"
 	}

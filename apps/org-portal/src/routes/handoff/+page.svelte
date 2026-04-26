@@ -14,19 +14,21 @@ let { data } = $props()
 
 		{#if data.hasToken}
 			<p>
-				A handoff reference was received. In the next PR this page will require an authorised
-				organisation user to sign in before the draft can be opened.
+				A handoff reference was received. Sign in as an authorised organisation user to open the
+				draft.
 			</p>
 		{:else}
 			<p>
 				No handoff reference was provided. Open this page from a Primer Paso certificate handoff QR
 				code or link.
 			</p>
+			<form method="GET" action="/handoff">
+				<label>
+					Handoff token or link
+					<input name="token" autocomplete="off">
+				</label>
+				<button type="submit">Open handoff</button>
+			</form>
 		{/if}
-
-		<p>
-			This portal will handle organisation review, verification confirmations, issuing, and audit
-			history.
-		</p>
 	</section>
 </main>

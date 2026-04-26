@@ -17,6 +17,7 @@
 		"check:analytics-env:strict": "node scripts/check-matomo-env.mjs --strict",
 		"generate:provinces": "pnpm --filter @primer-paso/public generate:provinces",
 		"preview": "pnpm --filter @primer-paso/public preview",
+		"db:seed:local-org-portal": "node --env-file=.env --import tsx packages/db/scripts/seed-local-org-portal.ts",
 		"format": "biome format . --write",
 		"lint": "biome lint .",
 		"check": "biome check .",
