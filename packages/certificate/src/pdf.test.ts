@@ -86,6 +86,13 @@ describe('certificate PDF generation contract', () => {
 		expect(fieldNames).not.toContain('vulnerability.otherText')
 	})
 
+	it('keeps organisation NIF/CIF separate from registration number in the issue contract', () => {
+		const issueRequest = parseCertificateIssueRequest(fixture)
+		expect(issueRequest.organisation.nifCif).toBe('G00000000')
+		expect(issueRequest.organisation.registrationNumber).toBe('RECEX-0001')
+		expect(issueRequest.organisation.nifCif).not.toBe(issueRequest.organisation.registrationNumber)
+	})
+
 	it('maps every supported vulnerability reason directly to a template checkbox', async () => {
 		const issueRequest = parseCertificateIssueRequest({
 			...fixture,

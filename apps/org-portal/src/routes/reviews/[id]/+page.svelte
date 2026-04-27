@@ -170,6 +170,12 @@ const verification = $derived(formVerification ?? review.verification ?? emptyVe
 				<button type="submit" formaction="?/ready">Mark ready to issue</button>
 			{/if}
 		</form>
+		{#if data.canIssueCertificate}
+			<form method="POST" action="?/issue"><button type="submit">Issue certificate</button></form>
+		{/if}
+		{#if data.certificateHref}
+			<p><a href={data.certificateHref}>Download issued certificate</a></p>
+		{/if}
 
 		<p><a href="/dashboard">Back to dashboard</a></p>
 	</section>

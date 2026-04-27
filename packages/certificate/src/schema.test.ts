@@ -24,6 +24,7 @@ describe('certificate schema', () => {
 		if (result.ok) {
 			expect(result.value.draft.version).toBe(1)
 			expect(result.value.organisation.name).toBe('Entidad Colaboradora de Ejemplo')
+			expect(result.value.organisation.nifCif).toBe('G00000000')
 		}
 	})
 

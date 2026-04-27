@@ -47,7 +47,7 @@ export const generateVulnerabilityCertificatePdf = async (
 	const { identity, contact, location, vulnerability } = issueRequest.draft.userData
 
 	setText(form, 'organisation.name', issueRequest.organisation.name)
-	setText(form, 'organisation.nifCif', issueRequest.organisation.registrationNumber)
+	setText(form, 'organisation.nifCif', issueRequest.organisation.nifCif)
 	setText(form, 'organisation.registrationNumber', issueRequest.organisation.registrationNumber)
 	setText(form, 'organisation.address', issueRequest.organisation.address)
 	setText(

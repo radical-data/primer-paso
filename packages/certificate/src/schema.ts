@@ -161,6 +161,10 @@ export const certificateIssueRequestSchema = {
 			type: 'string',
 			description: 'Official or internal registration number where applicable.'
 		},
+		nifCif: {
+			type: 'string',
+			description: 'Organisation NIF/CIF where applicable.'
+		},
 		address: {
 			type: 'string',
 			description: 'Organisation address.'
@@ -479,6 +483,12 @@ export const validateCertificateIssueRequest = (
 			organisation.registrationNumber,
 			'organisation.registrationNumber',
 			'Organisation registration number'
+		)
+		addOptionalStringIssue(
+			issues,
+			organisation.nifCif,
+			'organisation.nifCif',
+			'Organisation NIF/CIF'
 		)
 		addOptionalStringIssue(
 			issues,

@@ -74,6 +74,7 @@ export interface OrganisationIdentity {
 	id: string
 	name: string
 	registrationNumber?: string
+	nifCif?: string
 	address?: string
 	email?: string
 	phone?: string

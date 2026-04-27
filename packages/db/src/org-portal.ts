@@ -1,7 +1,11 @@
 import { createHash, randomBytes, randomUUID } from 'node:crypto'
 import type { OrgRole } from '@primer-paso/auth'
-import type { CertificateDraft } from '@primer-paso/certificate'
-import postgres, { type JSONValue, type Sql } from 'postgres'
+import type {
+	CertificateDraft,
+	CertificateIssueRequest,
+	GeneratedCertificatePdf
+} from '@primer-paso/certificate'
+import postgres, { type JSONValue, type Sql, type TransactionSql } from 'postgres'
 import {
 	type CertificateHandoffConsent,
 	type CertificateHandoffRecord,
@@ -72,6 +76,19 @@ export interface CertificateHandoffReviewRecord {
 	issuedAt?: string
 }
 
+export interface IssuedCertificateRecord {
+	id: string
+	reviewId: string
+	handoffId: string
+	organisationId: string
+	signerMemberId: string
+	issueRequest: CertificateIssueRequest
+	pdfBytes: Uint8Array
+	filename: string
+	contentType: 'application/pdf'
+	createdAt: string
+}
+
 export interface CreateOrganisationSessionInput {
 	memberId: string
 	now?: Date
@@ -96,6 +113,16 @@ export interface CreateAuditEventInput {
 	now?: Date
 }
 
+export interface CreateIssuedCertificateInput {
+	reviewId: string
+	handoffId: string
+	organisationId: string
+	signerMemberId: string
+	issueRequest: CertificateIssueRequest
+	pdf: GeneratedCertificatePdf
+	now?: Date
+}
+
 export interface CreateOrFindCertificateHandoffReviewInput {
 	handoffId: string
 	organisationId: string
@@ -113,6 +140,8 @@ export interface UpdateCertificateHandoffReviewVerificationInput {
 }
 
 export interface OrgPortalRepository {
+	findOrganisationById: (id: string) => Promise<OrganisationRecord | null>
+	findOrganisationMemberById: (id: string) => Promise<OrganisationMemberRecord | null>
 	findActiveOrganisationMemberByEmail: (email: string) => Promise<OrganisationMemberRecord | null>
 	createOrganisationSession: (
 		input: CreateOrganisationSessionInput
@@ -131,6 +160,8 @@ export interface OrgPortalRepository {
 	updateCertificateHandoffReviewVerification: (
 		input: UpdateCertificateHandoffReviewVerificationInput
 	) => Promise<CertificateHandoffReviewRecord | null>
+	createIssuedCertificate: (input: CreateIssuedCertificateInput) => Promise<IssuedCertificateRecord>
+	findIssuedCertificateByReviewId: (reviewId: string) => Promise<IssuedCertificateRecord | null>
 	createAuditEvent: (input: CreateAuditEventInput) => Promise<void>
 }
 
@@ -179,6 +210,19 @@ const memberFromRow = (row: Record<string, unknown>): OrganisationMemberRecord =
 	createdAt: date(row.created_at)
 })
 
+const organisationFromRow = (row: Record<string, unknown>): OrganisationRecord => ({
+	id: String(row.id),
+	name: String(row.name),
+	registrationNumber: optionalString(row.registration_number),
+	nifCif: optionalString(row.nif_cif),
+	address: optionalString(row.address),
+	email: optionalString(row.email),
+	phone: optionalString(row.phone),
+	entityType: String(row.entity_type) as OrganisationRecord['entityType'],
+	createdAt: date(row.created_at),
+	updatedAt: date(row.updated_at)
+})
+
 const handoffFromRow = (row: Record<string, unknown>): CertificateHandoffRecord => ({
 	id: String(row.id),
 	referenceCode: String(row.reference_code),
@@ -209,6 +253,19 @@ const reviewFromRow = (row: Record<string, unknown>): CertificateHandoffReviewRe
 	issuedAt: optionalDate(row.issued_at)
 })
 
+const issuedCertificateFromRow = (row: Record<string, unknown>): IssuedCertificateRecord => ({
+	id: String(row.id),
+	reviewId: String(row.review_id),
+	handoffId: String(row.handoff_id),
+	organisationId: String(row.organisation_id),
+	signerMemberId: String(row.signer_member_id),
+	issueRequest: row.issue_request as CertificateIssueRequest,
+	pdfBytes: new Uint8Array(row.pdf_bytes as Buffer),
+	filename: String(row.filename),
+	contentType: 'application/pdf',
+	createdAt: date(row.created_at)
+})
+
 const findMemberById = async (sql: Sql, id: string) => {
 	const rows = await sql`
 		select *
@@ -218,6 +275,28 @@ const findMemberById = async (sql: Sql, id: string) => {
 	`
 
 	return rows[0] ? memberFromRow(rows[0]) : null
+}
+
+const findOrganisationById = async (sql: Sql, id: string) => {
+	const rows = await sql`
+		select *
+		from organisations
+		where id = ${id}
+		limit 1
+	`
+
+	return rows[0] ? organisationFromRow(rows[0]) : null
+}
+
+const findIssuedCertificateByReviewId = async (sql: Sql | TransactionSql, reviewId: string) => {
+	const rows = await sql`
+		select *
+		from issued_certificates
+		where review_id = ${reviewId}
+		limit 1
+	`
+
+	return rows[0] ? issuedCertificateFromRow(rows[0]) : null
 }
 
 export const createPostgresOrgPortalRepository = ({
@@ -267,6 +346,8 @@ export const createPostgresOrgPortalRepository = ({
 	}
 
 	return {
+		findOrganisationById: (id) => findOrganisationById(sql, id),
+		findOrganisationMemberById: (id) => findMemberById(sql, id),
 		findActiveOrganisationMemberByEmail: async (email) => {
 			const rows = await sql`
 				select *
@@ -504,6 +585,71 @@ export const createPostgresOrgPortalRepository = ({
 
 			return rows[0] ? reviewFromRow(rows[0]) : null
 		},
+
+		createIssuedCertificate: async ({
+			reviewId,
+			handoffId,
+			organisationId,
+			signerMemberId,
+			issueRequest,
+			pdf,
+			now = new Date()
+		}) => {
+			return sql.begin(async (tx) => {
+				const existing = await findIssuedCertificateByReviewId(tx, reviewId)
+				if (existing) return existing
+
+				const id = randomUUID()
+				const rows = await tx`
+					insert into issued_certificates (
+						id,
+						review_id,
+						handoff_id,
+						organisation_id,
+						signer_member_id,
+						issue_request,
+						pdf_bytes,
+						filename,
+						content_type,
+						created_at
+					)
+					values (
+						${id},
+						${reviewId},
+						${handoffId},
+						${organisationId},
+						${signerMemberId},
+						${tx.json(toJsonValue(issueRequest))},
+						${Buffer.from(pdf.bytes)},
+						${pdf.filename},
+						${pdf.contentType},
+						${now.toISOString()}
+					)
+					returning *
+				`
+
+				await tx`
+					update certificate_handoff_reviews
+					set
+						status = 'issued',
+						updated_at = ${now.toISOString()},
+						issued_at = coalesce(issued_at, ${now.toISOString()})
+					where id = ${reviewId}
+				`
+
+				await tx`
+					update certificate_handoffs
+					set
+						status = 'issued',
+						issued_certificate_id = ${id}
+					where id = ${handoffId}
+				`
+
+				return issuedCertificateFromRow(rows[0])
+			})
+		},
+
+		findIssuedCertificateByReviewId: (reviewId) => findIssuedCertificateByReviewId(sql, reviewId),
 
 		createAuditEvent: async ({
 			organisationId,
