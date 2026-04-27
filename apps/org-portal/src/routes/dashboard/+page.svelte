@@ -32,6 +32,20 @@ let { data } = $props()
 
 		<p>Open this page from a Primer Paso QR code, or paste the handoff link/token above.</p>
 
+		{#if data.adminLinks.canManageMembers || data.adminLinks.canReadAudit}
+			<section>
+				<h2>Organisation admin</h2>
+				<ul>
+					{#if data.adminLinks.canManageMembers}
+						<li><a href="/admin/members">Manage members</a></li>
+					{/if}
+					{#if data.adminLinks.canReadAudit}
+						<li><a href="/admin/audit">View audit log</a></li>
+					{/if}
+				</ul>
+			</section>
+		{/if}
+
 		<form method="POST" action="/logout"><button type="submit">Sign out</button></form>
 	</section>
 </main>

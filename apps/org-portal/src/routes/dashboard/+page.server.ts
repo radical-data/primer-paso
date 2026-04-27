@@ -6,6 +6,10 @@ export const load: PageServerLoad = ({ locals, url }) => {
 
 	return {
 		session,
-		permissionError: url.searchParams.get('error') === 'permission'
+		permissionError: url.searchParams.get('error') === 'permission',
+		adminLinks: {
+			canManageMembers: session.permissions.includes('organisation:manage_members'),
+			canReadAudit: session.permissions.includes('audit:read')
+		}
 	}
 }

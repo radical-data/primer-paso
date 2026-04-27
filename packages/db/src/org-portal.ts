@@ -1,5 +1,5 @@
 import { createHash, randomBytes, randomUUID } from 'node:crypto'
-import type { OrgRole } from '@primer-paso/auth'
+import { isOrgRole, type OrgRole } from '@primer-paso/auth'
 import type {
 	CertificateDraft,
 	CertificateIssueRequest,
@@ -36,6 +36,23 @@ export interface OrganisationMemberRecord {
 	name: string
 	role: OrgRole
 	status: OrganisationMemberStatus
+	createdAt: string
+	updatedAt: string
+	disabledAt?: string
+	disabledByMemberId?: string
+}
+
+export interface OrganisationAuditEventRecord {
+	id: string
+	organisationId?: string
+	memberId?: string
+	memberEmail?: string
+	handoffId?: string
+	reviewId?: string
+	eventType: string
+	eventData: Record<string, unknown>
+	ipAddress?: string
+	userAgent?: string
 	createdAt: string
 }
 
@@ -123,6 +140,37 @@ export interface CreateIssuedCertificateInput {
 	now?: Date
 }
 
+export interface CreateOrganisationMemberInput {
+	organisationId: string
+	email: string
+	name: string
+	role: OrgRole
+	now?: Date
+}
+
+export interface UpdateOrganisationMemberRoleInput {
+	organisationId: string
+	memberId: string
+	role: OrgRole
+	now?: Date
+}
+
+export interface DisableOrganisationMemberInput {
+	organisationId: string
+	memberId: string
+	disabledByMemberId: string
+	now?: Date
+}
+
+export class OrgPortalRepositoryError extends Error {
+	constructor(
+		message: string,
+		public readonly code: 'not_found' | 'invalid_role' | 'last_admin' | 'duplicate_member'
+	) {
+		super(message)
+	}
+}
+
 export interface CreateOrFindCertificateHandoffReviewInput {
 	handoffId: string
 	organisationId: string
@@ -143,9 +191,20 @@ export interface OrgPortalRepository {
 	findOrganisationById: (id: string) => Promise<OrganisationRecord | null>
 	findOrganisationMemberById: (id: string) => Promise<OrganisationMemberRecord | null>
 	findActiveOrganisationMemberByEmail: (email: string) => Promise<OrganisationMemberRecord | null>
+	listOrganisationMembers: (organisationId: string) => Promise<OrganisationMemberRecord[]>
+	createOrganisationMember: (
+		input: CreateOrganisationMemberInput
+	) => Promise<OrganisationMemberRecord>
+	updateOrganisationMemberRole: (
+		input: UpdateOrganisationMemberRoleInput
+	) => Promise<OrganisationMemberRecord>
+	disableOrganisationMember: (
+		input: DisableOrganisationMemberInput
+	) => Promise<OrganisationMemberRecord>
 	createOrganisationSession: (
 		input: CreateOrganisationSessionInput
 	) => Promise<CreatedOrganisationSession | null>
+	revokeOrganisationSessionsForMember: (memberId: string, now?: Date) => Promise<void>
 	findActiveOrganisationSessionByToken: (
 		token: string,
 		now?: Date
@@ -163,6 +222,10 @@ export interface OrgPortalRepository {
 	createIssuedCertificate: (input: CreateIssuedCertificateInput) => Promise<IssuedCertificateRecord>
 	findIssuedCertificateByReviewId: (reviewId: string) => Promise<IssuedCertificateRecord | null>
 	createAuditEvent: (input: CreateAuditEventInput) => Promise<void>
+	listOrganisationAuditEvents: (
+		organisationId: string,
+		limit?: number
+	) => Promise<OrganisationAuditEventRecord[]>
 }
 
 export interface PostgresOrgPortalRepositoryOptions {
@@ -207,7 +270,10 @@ const memberFromRow = (row: Record<string, unknown>): OrganisationMemberRecord =
 	name: String(row.name),
 	role: String(row.role) as OrgRole,
 	status: String(row.status) as OrganisationMemberStatus,
-	createdAt: date(row.created_at)
+	createdAt: date(row.created_at),
+	updatedAt: date(row.updated_at ?? row.created_at),
+	disabledAt: optionalDate(row.disabled_at),
+	disabledByMemberId: optionalString(row.disabled_by_member_id)
 })
 
 const organisationFromRow = (row: Record<string, unknown>): OrganisationRecord => ({
@@ -266,6 +332,23 @@ const issuedCertificateFromRow = (row: Record<string, unknown>): IssuedCertifica
 	createdAt: date(row.created_at)
 })
 
+const auditEventFromRow = (row: Record<string, unknown>): OrganisationAuditEventRecord => ({
+	id: String(row.id),
+	organisationId: optionalString(row.organisation_id),
+	memberId: optionalString(row.member_id),
+	memberEmail: optionalString(row.member_email),
+	handoffId: optionalString(row.handoff_id),
+	reviewId: optionalString(row.review_id),
+	eventType: String(row.event_type),
+	eventData:
+		row.event_data && typeof row.event_data === 'object'
+			? (row.event_data as Record<string, unknown>)
+			: {},
+	ipAddress: optionalString(row.ip_address),
+	userAgent: optionalString(row.user_agent),
+	createdAt: date(row.created_at)
+})
+
 const findMemberById = async (sql: Sql, id: string) => {
 	const rows = await sql`
 		select *
@@ -287,6 +370,35 @@ const findOrganisationById = async (sql: Sql, id: string) => {
 
 	return rows[0] ? organisationFromRow(rows[0]) : null
 }
+
+const countActiveAdmins = async (sql: Sql | TransactionSql, organisationId: string) => {
+	const rows = await sql`
+		select count(*)::int as count
+		from organisation_members
+		where organisation_id = ${organisationId}
+		and role = 'admin'
+		and status = 'active'
+	`
+	return Number(rows[0]?.count ?? 0)
+}
+
+const findMemberForUpdate = async (
+	sql: Sql | TransactionSql,
+	organisationId: string,
+	memberId: string
+) => {
+	const rows = await sql`
+		select *
+		from organisation_members
+		where organisation_id = ${organisationId}
+		and id = ${memberId}
+		for update
+	`
+	return rows[0] ? memberFromRow(rows[0]) : null
+}
+
+const normaliseMemberEmail = (email: string) => email.trim().toLowerCase()
+const normaliseMemberName = (name: string) => name.replace(/\s+/g, ' ').trim()
 
 const findIssuedCertificateByReviewId = async (sql: Sql | TransactionSql, reviewId: string) => {
 	const rows = await sql`
@@ -348,6 +460,145 @@ export const createPostgresOrgPortalRepository = ({
 	return {
 		findOrganisationById: (id) => findOrganisationById(sql, id),
 		findOrganisationMemberById: (id) => findMemberById(sql, id),
+		listOrganisationMembers: async (organisationId) => {
+			const rows = await sql`
+				select *
+				from organisation_members
+				where organisation_id = ${organisationId}
+				order by
+					case when status = 'active' then 0 when status = 'invited' then 1 else 2 end,
+					lower(email) asc
+			`
+			return rows.map(memberFromRow)
+		},
+		createOrganisationMember: async ({ organisationId, email, name, role, now = new Date() }) => {
+			if (!isOrgRole(role)) {
+				throw new OrgPortalRepositoryError('Choose a valid organisation role.', 'invalid_role')
+			}
+			const normalisedEmail = normaliseMemberEmail(email)
+			const normalisedName = normaliseMemberName(name)
+			if (!normalisedEmail || !normalisedName) {
+				throw new OrgPortalRepositoryError('Member name and email are required.', 'not_found')
+			}
+			try {
+				const rows = await sql`
+					insert into organisation_members (
+						id,
+						organisation_id,
+						email,
+						name,
+						role,
+						status,
+						created_at,
+						updated_at,
+						disabled_at,
+						disabled_by_member_id
+					)
+					values (
+						${randomUUID()},
+						${organisationId},
+						${normalisedEmail},
+						${normalisedName},
+						${role},
+						'active',
+						${now.toISOString()},
+						${now.toISOString()},
+						null,
+						null
+					)
+					on conflict (organisation_id, email) do update set
+						name = excluded.name,
+						role = excluded.role,
+						status = 'active',
+						updated_at = excluded.updated_at,
+						disabled_at = null,
+						disabled_by_member_id = null
+					returning *
+				`
+				return memberFromRow(rows[0])
+			} catch (error) {
+				if (
+					error &&
+					typeof error === 'object' &&
+					'code' in error &&
+					(error as { code?: string }).code === '23505'
+				) {
+					throw new OrgPortalRepositoryError(
+						'An active member with this email already exists.',
+						'duplicate_member'
+					)
+				}
+				throw error
+			}
+		},
+		updateOrganisationMemberRole: async ({ organisationId, memberId, role, now = new Date() }) => {
+			if (!isOrgRole(role)) {
+				throw new OrgPortalRepositoryError('Choose a valid organisation role.', 'invalid_role')
+			}
+			return sql.begin(async (tx) => {
+				const member = await findMemberForUpdate(tx, organisationId, memberId)
+				if (!member) {
+					throw new OrgPortalRepositoryError('Member not found.', 'not_found')
+				}
+				if (member.status === 'active' && member.role === 'admin' && role !== 'admin') {
+					const activeAdmins = await countActiveAdmins(tx, organisationId)
+					if (activeAdmins <= 1) {
+						throw new OrgPortalRepositoryError(
+							'An organisation must keep at least one active admin.',
+							'last_admin'
+						)
+					}
+				}
+				const rows = await tx`
+					update organisation_members
+					set
+						role = ${role},
+						updated_at = ${now.toISOString()}
+					where organisation_id = ${organisationId}
+					and id = ${memberId}
+					returning *
+				`
+				return memberFromRow(rows[0])
+			})
+		},
+		disableOrganisationMember: async ({
+			organisationId,
+			memberId,
+			disabledByMemberId,
+			now = new Date()
+		}) =>
+			sql.begin(async (tx) => {
+				const member = await findMemberForUpdate(tx, organisationId, memberId)
+				if (!member) {
+					throw new OrgPortalRepositoryError('Member not found.', 'not_found')
+				}
+				if (member.status === 'active' && member.role === 'admin') {
+					const activeAdmins = await countActiveAdmins(tx, organisationId)
+					if (activeAdmins <= 1) {
+						throw new OrgPortalRepositoryError(
+							'An organisation must keep at least one active admin.',
+							'last_admin'
+						)
+					}
+				}
+				const rows = await tx`
+					update organisation_members
+					set
+						status = 'disabled',
+						updated_at = ${now.toISOString()},
+						disabled_at = coalesce(disabled_at, ${now.toISOString()}),
+						disabled_by_member_id = coalesce(disabled_by_member_id, ${disabledByMemberId})
+					where organisation_id = ${organisationId}
+					and id = ${memberId}
+					returning *
+				`
+				await tx`
+					update organisation_sessions
+					set revoked_at = coalesce(revoked_at, ${now.toISOString()})
+					where member_id = ${memberId}
+				`
+				return memberFromRow(rows[0])
+			}),
 		findActiveOrganisationMemberByEmail: async (email) => {
 			const rows = await sql`
 				select *
@@ -392,6 +643,13 @@ export const createPostgresOrgPortalRepository = ({
 			`
 
 			return { token, session, member }
+		},
+		revokeOrganisationSessionsForMember: async (memberId, now = new Date()) => {
+			await sql`
+				update organisation_sessions
+				set revoked_at = coalesce(revoked_at, ${now.toISOString()})
+				where member_id = ${memberId}
+			`
 		},
 
 		findActiveOrganisationSessionByToken: async (token, now = new Date()) => {
@@ -458,7 +716,10 @@ export const createPostgresOrgPortalRepository = ({
 					name: String(row.member_name),
 					role: String(row.role) as OrgRole,
 					status: String(row.status) as OrganisationMemberStatus,
-					createdAt: date(row.member_created_at)
+					createdAt: date(row.member_created_at),
+					updatedAt: date(row.member_created_at),
+					disabledAt: undefined,
+					disabledByMemberId: undefined
 				},
 				organisation: {
 					id: String(row.organisation_id),
@@ -688,6 +949,29 @@ export const createPostgresOrgPortalRepository = ({
 					${now.toISOString()}
 				)
 			`
+		},
+		listOrganisationAuditEvents: async (organisationId, limit = 150) => {
+			const safeLimit = Math.min(Math.max(Math.trunc(limit), 1), 500)
+			const rows = await sql`
+				select
+					a.id,
+					a.organisation_id,
+					a.member_id,
+					m.email as member_email,
+					a.handoff_id,
+					a.review_id,
+					a.event_type,
+					a.event_data,
+					a.ip_address,
+					a.user_agent,
+					a.created_at
+				from audit_events a
+				left join organisation_members m on m.id = a.member_id
+				where a.organisation_id = ${organisationId}
+				order by a.created_at desc
+				limit ${safeLimit}
+			`
+			return rows.map(auditEventFromRow)
 		}
 	}
 }

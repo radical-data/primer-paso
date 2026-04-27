@@ -1,6 +1,5 @@
 <script lang="ts">
 import ExternalLinkIcon from '@lucide/svelte/icons/external-link'
-import { trackEvent } from '$lib/analytics/matomo'
 import { Button } from '@primer-paso/ui/button'
 import {
 	Card,
@@ -10,6 +9,7 @@ import {
 	CardHeader,
 	CardTitle
 } from '@primer-paso/ui/card'
+import { trackEvent } from '$lib/analytics/matomo'
 import type { Locale } from '$lib/content'
 import { getTranslator } from '$lib/content'
 import { localiseHref } from '$lib/i18n/routing'

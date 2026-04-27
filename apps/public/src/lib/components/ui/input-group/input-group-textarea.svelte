@@ -1,6 +1,6 @@
 <script lang="ts">
-import type { ComponentProps } from 'svelte'
 import { Textarea } from '@primer-paso/ui/textarea'
+import type { ComponentProps } from 'svelte'
 import { cn } from '$lib/utils.js'
 
 let {

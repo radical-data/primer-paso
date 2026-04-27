@@ -9,4 +9,4 @@ export {
 } from './certificate-handoffs'
 
 export type * from './org-portal'
-export { createPostgresOrgPortalRepository } from './org-portal'
+export { createPostgresOrgPortalRepository, OrgPortalRepositoryError } from './org-portal'

@@ -2,9 +2,9 @@
 import ExternalLinkIcon from '@lucide/svelte/icons/external-link'
 import FileDownIcon from '@lucide/svelte/icons/file-down'
 import ListChecksIcon from '@lucide/svelte/icons/list-checks'
-import { trackEvent } from '$lib/analytics/matomo'
 import { Badge } from '@primer-paso/ui/badge'
 import { Button } from '@primer-paso/ui/button'
+import { trackEvent } from '$lib/analytics/matomo'
 import { getTranslator } from '$lib/content'
 import { localiseHref } from '$lib/i18n/routing'
 
