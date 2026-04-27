@@ -1,0 +1,7 @@
+[build]
+	command = "node scripts/check-org-portal-env.mjs --strict && pnpm --filter @primer-paso/org-portal build"
+	publish = "apps/org-portal/build"
+
+[build.environment]
+	NODE_VERSION = "24.10.0"
+	PRIVATE_ORG_PORTAL_ENVIRONMENT = "production"

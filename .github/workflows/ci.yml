@@ -25,8 +25,9 @@ jobs:
       PUBLIC_CERTIFICATE_HANDOFF_ENABLED: 'false'
       PRIVATE_DATABASE_URL: ''
       PUBLIC_ORG_PORTAL_URL: https://org.primerpaso.org
-      PRIVATE_ORG_PORTAL_DEV_LOGIN_ENABLED: 'false'
+      PRIVATE_ORG_PORTAL_LOGIN_CODE: test-code
       PRIVATE_ORG_PORTAL_ENVIRONMENT: test
+      PRIVATE_ORG_PORTAL_DEV_LOGIN_ENABLED: 'false'
       PRIVATE_ORG_PORTAL_DEV_MEMBER_EMAIL: volunteer-signer@example.invalid
 
     steps:
@@ -44,6 +45,9 @@ jobs:
 
       - name: Check analytics environment contract
         run: mise run analytics:env:check:strict
+
+      - name: Check organisation portal environment contract
+        run: mise run org:env:check:strict
 
       - name: Check formatting and lint
         run: mise x -- pnpm run check
