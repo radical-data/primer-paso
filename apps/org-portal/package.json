@@ -13,6 +13,7 @@
 		"test": "vitest run --passWithNoTests"
 	},
 	"dependencies": {
+		"@primer-paso/ui": "workspace:*",
 		"@primer-paso/auth": "workspace:*",
 		"@primer-paso/certificate": "workspace:*",
 		"@primer-paso/db": "workspace:*",

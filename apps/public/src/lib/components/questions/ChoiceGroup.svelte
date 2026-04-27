@@ -1,6 +1,6 @@
 <script lang="ts">
 import CheckIcon from '@lucide/svelte/icons/check'
-import { Label } from '$lib/components/ui/label'
+import { Label } from '@primer-paso/ui/label'
 
 export interface ChoiceOption {
 	value: string

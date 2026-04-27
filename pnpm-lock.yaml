@@ -44,6 +44,9 @@ importers:
       '@primer-paso/db':
         specifier: workspace:*
         version: link:../../packages/db
+      '@primer-paso/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -105,6 +108,9 @@ importers:
       '@primer-paso/db':
         specifier: workspace:*
         version: link:../../packages/db
+      '@primer-paso/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       bits-ui:
         specifier: ^2.17.3
         version: 2.17.3(@internationalized/date@3.12.1)(@sveltejs/kit@2.58.0(@opentelemetry/api@1.9.0)(@sveltejs/vite-plugin-svelte@7.0.0(svelte@5.55.3(@typescript-eslint/types@8.58.2))(vite@8.0.8(@types/node@24.12.2)(esbuild@0.27.7)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3)))(svelte@5.55.3(@typescript-eslint/types@8.58.2))(typescript@6.0.2)(vite@8.0.8(@types/node@24.12.2)(esbuild@0.27.7)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3)))(svelte@5.55.3(@typescript-eslint/types@8.58.2))
@@ -243,16 +249,34 @@ importers:
 
   packages/ui:
     dependencies:
+      '@lucide/svelte':
+        specifier: ^1.8.0
+        version: 1.8.0(svelte@5.55.3(@typescript-eslint/types@8.58.2))
+      bits-ui:
+        specifier: ^2.17.3
+        version: 2.17.3(@internationalized/date@3.12.1)(@sveltejs/kit@2.58.0(@opentelemetry/api@1.9.0)(@sveltejs/vite-plugin-svelte@7.0.0(svelte@5.55.3(@typescript-eslint/types@8.58.2))(vite@8.0.8(@types/node@24.12.2)(esbuild@0.27.7)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3)))(svelte@5.55.3(@typescript-eslint/types@8.58.2))(typescript@6.0.2)(vite@8.0.8(@types/node@24.12.2)(esbuild@0.27.7)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3)))(svelte@5.55.3(@typescript-eslint/types@8.58.2))
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
       tailwind-merge:
         specifier: ^3.5.0
         version: 3.5.0
+      tailwind-variants:
+        specifier: ^3.2.2
+        version: 3.2.2(tailwind-merge@3.5.0)(tailwindcss@4.2.2)
     devDependencies:
       '@biomejs/biome':
         specifier: 2.4.8
         version: 2.4.8
+      '@types/node':
+        specifier: ^24
+        version: 24.12.2
+      svelte:
+        specifier: ^5.55.2
+        version: 5.55.3(@typescript-eslint/types@8.58.2)
+      svelte-check:
+        specifier: ^4.4.6
+        version: 4.4.6(picomatch@4.0.4)(svelte@5.55.3(@typescript-eslint/types@8.58.2))(typescript@6.0.2)
       typescript:
         specifier: ^6.0.2
         version: 6.0.2

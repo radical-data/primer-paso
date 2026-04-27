@@ -21,7 +21,7 @@ export type InputGroupButtonSize = VariantProps<typeof inputGroupButtonVariants>
 
 <script lang="ts">
 import type { ComponentProps } from 'svelte'
-import { Button } from '$lib/components/ui/button/index.js'
+import { Button } from '@primer-paso/ui/button'
 import { cn } from '$lib/utils.js'
 
 let {

@@ -3,7 +3,7 @@ import { trackEvent } from '$lib/analytics/matomo'
 import FormField from '$lib/components/forms/FormField.svelte'
 import ChoiceGroup from '$lib/components/questions/ChoiceGroup.svelte'
 import QuestionPage from '$lib/components/questions/QuestionPage.svelte'
-import { NativeSelect, NativeSelectOption } from '$lib/components/ui/native-select'
+import { NativeSelect, NativeSelectOption } from '@primer-paso/ui/native-select'
 import { getTranslator } from '$lib/content'
 
 let { data, form } = $props()

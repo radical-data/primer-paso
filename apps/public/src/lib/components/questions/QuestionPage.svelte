@@ -1,6 +1,6 @@
 <script lang="ts">
 import { trackEvent } from '$lib/analytics/matomo'
-import { Button } from '$lib/components/ui/button'
+import { Button } from '@primer-paso/ui/button'
 import type { Locale } from '$lib/content'
 import { getTranslator } from '$lib/content'
 
