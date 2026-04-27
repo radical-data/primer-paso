@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { Separator as SeparatorPrimitive } from 'bits-ui'
+import type { HTMLAttributes } from 'svelte/elements'
 import { cn } from '../../utils.js'
 import { Separator } from '../separator/index.js'
 
@@ -7,7 +7,7 @@ let {
 	ref = $bindable(null),
 	class: className,
 	...restProps
-}: SeparatorPrimitive.RootProps = $props()
+}: HTMLAttributes<HTMLHRElement> & { ref?: HTMLHRElement | null } = $props()
 </script>
 
 <Separator
