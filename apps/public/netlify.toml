@@ -1,4 +1,16 @@
-# Read by @sveltejs/adapter-netlify during `vite build` from this directory.
-# Site-wide Netlify settings live in the repository root `netlify.toml`.
 [build]
-	publish = "build"
+	command = "node scripts/check-matomo-env.mjs --strict && node scripts/check-db-runtime.mjs --strict && pnpm --filter @primer-paso/public build"
+	publish = "apps/public/build"
+
+[build.environment]
+	NODE_VERSION = "24.10.0"
+	PUBLIC_CERTIFICATE_HANDOFF_ENABLED = "false"
+	PUBLIC_ORG_PORTAL_URL = "https://org.primerpaso.org"
+
+[context.production.environment]
+	PUBLIC_CERTIFICATE_HANDOFF_ENABLED = "true"
+	PUBLIC_ORG_PORTAL_URL = "https://org.primerpaso.org"
+
+[context.deploy-preview.environment]
+	PUBLIC_CERTIFICATE_HANDOFF_ENABLED = "false"
+	PUBLIC_ORG_PORTAL_URL = "https://org.primerpaso.org"
