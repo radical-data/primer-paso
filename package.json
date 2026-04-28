@@ -17,6 +17,8 @@
 		"check:analytics-env": "node --env-file-if-exists=.env scripts/check-matomo-env.mjs",
 		"check:analytics-env:strict": "node --env-file-if-exists=.env scripts/check-matomo-env.mjs --strict",
 		"check:org-env": "node --env-file-if-exists=.env scripts/check-org-portal-env.mjs",
+		"check:db-runtime": "node --env-file-if-exists=.env scripts/check-db-runtime.mjs --smoke",
+		"check:db-runtime:strict": "node --env-file-if-exists=.env scripts/check-db-runtime.mjs --strict --smoke",
 		"check:org-env:strict": "node --env-file-if-exists=.env scripts/check-org-portal-env.mjs --strict",
 		"generate:provinces": "pnpm --filter @primer-paso/public generate:provinces",
 		"smoke:certificate-pilot": "node scripts/smoke-certificate-pilot.mjs",
@@ -48,6 +50,7 @@
 		"@biomejs/biome": "2.4.8",
 		"@types/node": "^24",
 		"netlify-cli": "^25.0.1",
+		"postgres": "^3.4.9",
 		"repomix": "^1.13.1",
 		"tsx": "^4.20.6",
 		"vite": "^8.0.7"

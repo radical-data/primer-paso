@@ -27,8 +27,7 @@ export const getAuthCallbackUrl = () => new URL('/auth/callback', getOrgPortalUr
 
 export const isSupabaseAuthConfigured = () =>
 	Boolean(
-		publicEnv.PUBLIC_SUPABASE_URL?.trim() &&
-			publicEnv.PUBLIC_SUPABASE_PUBLISHABLE_KEY?.trim()
+		publicEnv.PUBLIC_SUPABASE_URL?.trim() && publicEnv.PUBLIC_SUPABASE_PUBLISHABLE_KEY?.trim()
 	)
 
 export const assertSupabaseAuthConfigured = () => {

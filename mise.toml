@@ -22,6 +22,14 @@ run = "node --env-file-if-exists=.env scripts/check-org-portal-env.mjs"
 description = "Validate the organisation portal environment contract and fail on missing or invalid values"
 run = "node --env-file-if-exists=.env scripts/check-org-portal-env.mjs --strict"
 
+[tasks."db:runtime:check"]
+description = "Validate and smoke-test the runtime Postgres database connection"
+run = "node --env-file-if-exists=.env scripts/check-db-runtime.mjs --smoke"
+
+[tasks."db:runtime:check:strict"]
+description = "Validate and smoke-test the runtime Postgres database connection and fail on errors"
+run = "node --env-file-if-exists=.env scripts/check-db-runtime.mjs --strict --smoke"
+
 [tasks."dev:public"]
 description = "Run the public Primer Paso app"
 run = "pnpm --filter @primer-paso/public dev"

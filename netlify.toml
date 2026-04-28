@@ -1,5 +1,5 @@
 [build]
-	command = "node scripts/check-matomo-env.mjs --strict && pnpm --filter @primer-paso/public build"
+	command = "node scripts/check-matomo-env.mjs --strict && node scripts/check-db-runtime.mjs --strict && pnpm --filter @primer-paso/public build"
 	publish = "apps/public/build"
 
 [build.environment]

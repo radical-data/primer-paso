@@ -17,6 +17,25 @@ const isAbsoluteHttpUrl = (value) => {
 	}
 }
 
+const parseUrl = (value) => {
+	if (!isNonEmptyString(value)) return null
+	try {
+		return new URL(value)
+	} catch {
+		return null
+	}
+}
+
+const isPostgresUrl = (url) => url.protocol === 'postgres:' || url.protocol === 'postgresql:'
+
+const looksLikeSupabasePooler = (url) =>
+	url.hostname.endsWith('.pooler.supabase.com') || url.hostname.includes('.pooler.supabase.')
+
+const looksLikeSupabaseDirectHost = (url) =>
+	url.hostname.endsWith('.supabase.co') || url.hostname.includes('.supabase.co')
+
+const usesTransactionPoolerPort = (url) => url.port === '6543'
+
 const isValidOrgPortalEnvironment = (value) =>
 	value === 'local' || value === 'test' || value === 'preview' || value === 'production'
 
@@ -77,10 +96,49 @@ if (
 }
 
 const databaseUrl = read('PRIVATE_DATABASE_URL')
+const databaseProvider = read('PRIVATE_DATABASE_PROVIDER')?.trim().toLowerCase()
+
+if (
+	databaseProvider !== undefined &&
+	databaseProvider !== '' &&
+	databaseProvider !== 'supabase' &&
+	databaseProvider !== 'postgres'
+) {
+	failures.push('PRIVATE_DATABASE_PROVIDER must be "supabase" or "postgres" when provided')
+}
+
 if (environment === 'production' || environment === 'preview') {
 	if (!isNonEmptyString(databaseUrl)) {
 		failures.push('PRIVATE_DATABASE_URL is required for deployed organisation portal environments')
 	}
+}
+
+const parsedDatabaseUrl = parseUrl(databaseUrl)
+if (isNonEmptyString(databaseUrl) && !parsedDatabaseUrl) {
+	failures.push('PRIVATE_DATABASE_URL must be a valid Postgres connection URL')
+}
+
+if (parsedDatabaseUrl && !isPostgresUrl(parsedDatabaseUrl)) {
+	failures.push('PRIVATE_DATABASE_URL must use postgres:// or postgresql://')
+}
+
+if (
+	parsedDatabaseUrl &&
+	(environment === 'production' || environment === 'preview') &&
+	(databaseProvider === 'supabase' || looksLikeSupabaseDirectHost(parsedDatabaseUrl)) &&
+	!looksLikeSupabasePooler(parsedDatabaseUrl)
+) {
+	warnings.push('For deployed Supabase Postgres on Netlify, prefer the Transaction pooler URL.')
+}
+
+if (
+	parsedDatabaseUrl &&
+	looksLikeSupabasePooler(parsedDatabaseUrl) &&
+	!usesTransactionPoolerPort(parsedDatabaseUrl)
+) {
+	warnings.push(
+		'Supabase pooler URL is not using port 6543. Confirm whether this is the intended pooler mode.'
+	)
 }
 
 const handoffEnabled = read('PUBLIC_CERTIFICATE_HANDOFF_ENABLED')
@@ -131,6 +189,7 @@ if (failures.length === 0) {
 	lines.push('Organisation portal environment check passed.')
 	lines.push(`- environment: ${environment ?? '(missing)'}`)
 	lines.push(`- organisation portal URL: ${orgPortalUrl ?? '(missing)'}`)
+	lines.push(`- database provider: ${databaseProvider || '(unset)'}`)
 	lines.push(`- database configured: ${isNonEmptyString(databaseUrl) ? 'yes' : 'no'}`)
 	lines.push(`- dev login enabled: ${devLoginEnabled ?? '(unset)'}`)
 	lines.push(`- Supabase auth configured: ${isNonEmptyString(supabaseUrl) ? 'yes' : 'no'}`)

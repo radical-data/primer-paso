@@ -20,6 +20,9 @@ importers:
       netlify-cli:
         specifier: ^25.0.1
         version: 25.0.1(@types/node@24.12.2)(picomatch@4.0.4)
+      postgres:
+        specifier: ^3.4.9
+        version: 3.4.9
       repomix:
         specifier: ^1.13.1
         version: 1.13.1
