@@ -1,6 +1,6 @@
 [build]
 	command = "node scripts/check-matomo-env.mjs --strict && node scripts/check-db-runtime.mjs --strict && pnpm --filter @primer-paso/public build"
-	publish = "apps/public/build"
+	publish = "build"
 
 [build.environment]
 	NODE_VERSION = "24.10.0"
