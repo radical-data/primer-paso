@@ -26,7 +26,9 @@ const warnings = []
 const requiredKeys = [
 	'PUBLIC_ORG_PORTAL_URL',
 	'PRIVATE_ORG_PORTAL_ENVIRONMENT',
-	'PRIVATE_ORG_PORTAL_LOGIN_CODE'
+	'PUBLIC_SUPABASE_URL',
+	'PUBLIC_SUPABASE_PUBLISHABLE_KEY',
+	'PRIVATE_ORG_PORTAL_CUSTOM_SMTP_CONFIGURED'
 ]
 
 for (const key of requiredKeys) {
@@ -51,6 +53,29 @@ if (environment === 'production' && orgPortalUrl?.startsWith('http://')) {
 	failures.push('PUBLIC_ORG_PORTAL_URL must use https in production')
 }
 
+const supabaseUrl = read('PUBLIC_SUPABASE_URL')
+if (supabaseUrl !== undefined && !isAbsoluteHttpUrl(supabaseUrl)) {
+	failures.push('PUBLIC_SUPABASE_URL must be an absolute http or https URL')
+}
+
+if (environment === 'production' && supabaseUrl?.startsWith('http://')) {
+	failures.push('PUBLIC_SUPABASE_URL must use https in production')
+}
+
+if (environment === 'production' && !String(supabaseUrl ?? '').includes('.supabase.co')) {
+	warnings.push('PUBLIC_SUPABASE_URL does not look like a hosted Supabase project URL')
+}
+
+const supabasePublishableKey = read('PUBLIC_SUPABASE_PUBLISHABLE_KEY')
+if (
+	isNonEmptyString(supabasePublishableKey) &&
+	!supabasePublishableKey.trim().startsWith('sb_publishable_')
+) {
+	warnings.push(
+		'PUBLIC_SUPABASE_PUBLISHABLE_KEY does not look like a current Supabase publishable key'
+	)
+}
+
 const databaseUrl = read('PRIVATE_DATABASE_URL')
 if (environment === 'production' || environment === 'preview') {
 	if (!isNonEmptyString(databaseUrl)) {
@@ -72,16 +97,17 @@ if (environment === 'production' && devLoginEnabled === 'true') {
 	failures.push('PRIVATE_ORG_PORTAL_DEV_LOGIN_ENABLED must not be true in production')
 }
 
-const loginCode = read('PRIVATE_ORG_PORTAL_LOGIN_CODE')
-if (isNonEmptyString(loginCode) && loginCode.trim().length < 10 && environment === 'production') {
-	warnings.push(
-		'PRIVATE_ORG_PORTAL_LOGIN_CODE is shorter than 10 characters. This is only a temporary pilot login mechanism.'
-	)
+const customSmtpConfigured = read('PRIVATE_ORG_PORTAL_CUSTOM_SMTP_CONFIGURED')
+if (customSmtpConfigured !== undefined && !isBooleanString(customSmtpConfigured)) {
+	failures.push('PRIVATE_ORG_PORTAL_CUSTOM_SMTP_CONFIGURED must be "true" or "false"')
 }
 
-if (environment === 'production') {
-	warnings.push(
-		'Bootstrap login code is enabled for production. Replace it with per-user email login before a wider pilot.'
+if (
+	(environment === 'production' || environment === 'preview') &&
+	customSmtpConfigured !== 'true'
+) {
+	failures.push(
+		'PRIVATE_ORG_PORTAL_CUSTOM_SMTP_CONFIGURED=true is required for deployed organisation portal environments'
 	)
 }
 
@@ -107,6 +133,11 @@ if (failures.length === 0) {
 	lines.push(`- organisation portal URL: ${orgPortalUrl ?? '(missing)'}`)
 	lines.push(`- database configured: ${isNonEmptyString(databaseUrl) ? 'yes' : 'no'}`)
 	lines.push(`- dev login enabled: ${devLoginEnabled ?? '(unset)'}`)
+	lines.push(`- Supabase auth configured: ${isNonEmptyString(supabaseUrl) ? 'yes' : 'no'}`)
+	lines.push(
+		`- Supabase publishable key configured: ${isNonEmptyString(supabasePublishableKey) ? 'yes' : 'no'}`
+	)
+	lines.push(`- custom SMTP configured: ${customSmtpConfigured ?? '(missing)'}`)
 }
 
 console.log(lines.join('\n'))

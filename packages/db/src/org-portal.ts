@@ -148,6 +148,22 @@ export interface CreateOrganisationMemberInput {
 	now?: Date
 }
 
+export interface RecordOrganisationAuthAttemptInput {
+	identifier: string
+	identifierType: 'email' | 'ip' | 'email_ip'
+	action: 'magic_link'
+	limit: number
+	windowSeconds: number
+	blockSeconds: number
+	now?: Date
+}
+
+export interface OrganisationAuthAttemptResult {
+	allowed: boolean
+	attemptCount: number
+	blockedUntil?: string
+}
+
 export interface UpdateOrganisationMemberRoleInput {
 	organisationId: string
 	memberId: string
@@ -222,6 +238,9 @@ export interface OrgPortalRepository {
 	createIssuedCertificate: (input: CreateIssuedCertificateInput) => Promise<IssuedCertificateRecord>
 	findIssuedCertificateByReviewId: (reviewId: string) => Promise<IssuedCertificateRecord | null>
 	createAuditEvent: (input: CreateAuditEventInput) => Promise<void>
+	recordOrganisationAuthAttempt: (
+		input: RecordOrganisationAuthAttemptInput
+	) => Promise<OrganisationAuthAttemptResult>
 	listOrganisationAuditEvents: (
 		organisationId: string,
 		limit?: number
@@ -399,6 +418,7 @@ const findMemberForUpdate = async (
 
 const normaliseMemberEmail = (email: string) => email.trim().toLowerCase()
 const normaliseMemberName = (name: string) => name.replace(/\s+/g, ' ').trim()
+const addSeconds = (date: Date, seconds: number) => new Date(date.getTime() + seconds * 1000)
 
 const findIssuedCertificateByReviewId = async (sql: Sql | TransactionSql, reviewId: string) => {
 	const rows = await sql`
@@ -949,6 +969,105 @@ export const createPostgresOrgPortalRepository = ({
 					${now.toISOString()}
 				)
 			`
+		},
+		recordOrganisationAuthAttempt: async ({
+			identifier,
+			identifierType,
+			action,
+			limit,
+			windowSeconds,
+			blockSeconds,
+			now = new Date()
+		}) => {
+			const cleanIdentifier = identifier.replace(/\s+/g, ' ').trim().toLowerCase()
+			if (!cleanIdentifier) {
+				return { allowed: true, attemptCount: 0 }
+			}
+
+			const nowIso = now.toISOString()
+			const windowStartedAt = addSeconds(now, -windowSeconds).toISOString()
+			const blockedUntil = addSeconds(now, blockSeconds).toISOString()
+
+			return sql.begin(async (tx) => {
+				const existingRows = await tx`
+					select *
+					from organisation_auth_rate_limits
+					where identifier = ${cleanIdentifier}
+					and identifier_type = ${identifierType}
+					and action = ${action}
+					for update
+				`
+
+				const existing = existingRows[0]
+				if (
+					existing?.blocked_until &&
+					new Date(String(existing.blocked_until)).getTime() > now.getTime()
+				) {
+					return {
+						allowed: false,
+						attemptCount: Number(existing.attempt_count),
+						blockedUntil: date(existing.blocked_until)
+					}
+				}
+
+				if (
+					existing &&
+					new Date(String(existing.window_started_at)).getTime() >
+						new Date(windowStartedAt).getTime()
+				) {
+					const attemptCount = Number(existing.attempt_count) + 1
+					const shouldBlock = attemptCount > limit
+					const rows = await tx`
+						update organisation_auth_rate_limits
+						set
+							attempt_count = ${attemptCount},
+							last_attempt_at = ${nowIso},
+							blocked_until = ${shouldBlock ? blockedUntil : null}
+						where id = ${existing.id}
+						returning *
+					`
+					return {
+						allowed: !shouldBlock,
+						attemptCount,
+						blockedUntil: optionalDate(rows[0]?.blocked_until)
+					}
+				}
+
+				const id = existing?.id ? String(existing.id) : randomUUID()
+				const rows = await tx`
+					insert into organisation_auth_rate_limits (
+						id,
+						identifier,
+						identifier_type,
+						action,
+						attempt_count,
+						window_started_at,
+						last_attempt_at,
+						blocked_until
+					)
+					values (
+						${id},
+						${cleanIdentifier},
+						${identifierType},
+						${action},
+						1,
+						${nowIso},
+						${nowIso},
+						null
+					)
+					on conflict (identifier, identifier_type, action) do update set
+						attempt_count = 1,
+						window_started_at = excluded.window_started_at,
+						last_attempt_at = excluded.last_attempt_at,
+						blocked_until = null
+					returning *
+				`
+
+				return {
+					allowed: true,
+					attemptCount: Number(rows[0]?.attempt_count ?? 1)
+				}
+			})
 		},
 		listOrganisationAuditEvents: async (organisationId, limit = 150) => {
 			const safeLimit = Math.min(Math.max(Math.trunc(limit), 1), 500)

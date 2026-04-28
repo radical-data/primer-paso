@@ -13,27 +13,36 @@ let { data, form } = $props()
 		<h1>Sign in to the organisation portal</h1>
 
 		{#if data.hasPendingHandoff}
-			<p>After signing in, you will continue to the certificate handoff.</p>
+			<p>Sign in to open the certificate handoff.</p>
+		{:else}
+			<p>Enter your organisation email. We'll send you a secure sign-in link.</p>
 		{/if}
 
-		{#if form?.error}
-			<p role="alert">{form.error}</p>
+		{#if form?.success}
+			<p role="status">
+				{form.message ?? 'Check your email. The sign-in link will open this portal.'}
+			</p>
+		{:else}
+			{#if form?.error}
+				<p role="alert">{form.error}</p>
+			{/if}
+			<form method="POST" class="stack">
+				<input type="hidden" name="next" value={data.next}>
+				<label for="email">Organisation email</label>
+				<input
+					id="email"
+					name="email"
+					type="email"
+					autocomplete="email"
+					required
+					value={form?.email ?? data.email ?? ''}
+				>
+				<button type="submit">Send sign-in link</button>
+			</form>
 		{/if}
 
-		<form method="POST" class="stack">
-			<label>
-				Organisation email
-				<input name="email" type="email" autocomplete="email" value={form?.email ?? ''} required>
-			</label>
-
-			<label>
-				Access code
-				<input name="code" type="password" autocomplete="one-time-code" required>
-			</label>
-
-			<button type="submit">Sign in</button>
-		</form>
-
-		<p>Access is limited to authorised members of collaborating organisations.</p>
+		{#if !form?.success}
+			<p>Access is limited to authorised members of collaborating organisations.</p>
+		{/if}
 	</section>
 </main>

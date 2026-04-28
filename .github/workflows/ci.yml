@@ -25,10 +25,12 @@ jobs:
       PUBLIC_CERTIFICATE_HANDOFF_ENABLED: 'false'
       PRIVATE_DATABASE_URL: ''
       PUBLIC_ORG_PORTAL_URL: https://org.primerpaso.org
-      PRIVATE_ORG_PORTAL_LOGIN_CODE: test-code
       PRIVATE_ORG_PORTAL_ENVIRONMENT: test
       PRIVATE_ORG_PORTAL_DEV_LOGIN_ENABLED: 'false'
       PRIVATE_ORG_PORTAL_DEV_MEMBER_EMAIL: volunteer-signer@example.invalid
+      PUBLIC_SUPABASE_URL: https://example.supabase.co
+      PUBLIC_SUPABASE_PUBLISHABLE_KEY: sb_publishable_test_key
+      PRIVATE_ORG_PORTAL_CUSTOM_SMTP_CONFIGURED: 'true'
 
     steps:
       - name: Check out repository

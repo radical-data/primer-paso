@@ -122,7 +122,9 @@ const main = async () => {
 		console.log(`- ${member.email} (${member.role})`)
 	}
 	console.log('')
-	console.log('Use PRIVATE_ORG_PORTAL_LOGIN_CODE to sign in with any seeded email above.')
+	console.log(
+		'Use organisation portal magic-link sign-in with any seeded email above (Supabase Auth).'
+	)
 }
 
 main()

@@ -1,17 +1,8 @@
 import { redirect } from '@sveltejs/kit'
 import { writeAuditEvent } from '$lib/server/audit'
-import { clearOrgSessionCookie, ORG_SESSION_COOKIE } from '$lib/server/auth'
-import { getOrgPortalRepository } from '$lib/server/repository'
 import type { RequestHandler } from './$types'
 
-export const POST: RequestHandler = async ({ cookies, locals, request }) => {
-	const token = cookies.get(ORG_SESSION_COOKIE)
-	const repository = getOrgPortalRepository()
-
-	if (token && repository) {
-		await repository.revokeOrganisationSessionByToken(token)
-	}
-
+export const POST: RequestHandler = async ({ locals, request }) => {
 	if (locals.session) {
 		await writeAuditEvent({
 			eventType: 'auth.logout',
@@ -20,7 +11,6 @@ export const POST: RequestHandler = async ({ cookies, locals, request }) => {
 			request
 		})
 	}
-
-	clearOrgSessionCookie(cookies)
+	await locals.supabase.auth.signOut()
 	redirect(303, '/login')
 }

@@ -1,5 +1,6 @@
 import type { Handle } from '@sveltejs/kit'
-import { getSessionFromCookies } from '$lib/server/auth'
+import { resolveSupabaseAuthSession } from '$lib/server/auth'
+import { createSupabaseServerClient } from '$lib/server/supabase'
 
 const SENSITIVE_PATH_PREFIXES = ['/dashboard', '/handoff', '/reviews', '/admin']
 
@@ -7,9 +8,19 @@ const isSensitivePath = (pathname: string) =>
 	SENSITIVE_PATH_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`))
 
 export const handle: Handle = async ({ event, resolve }) => {
-	event.locals.session = await getSessionFromCookies(event.cookies)
+	event.locals.supabase = createSupabaseServerClient(event)
+	event.locals.supabaseUser = null
+	event.locals.session = null
 
-	const response = await resolve(event)
+	const authResult = await resolveSupabaseAuthSession(event.locals.supabase)
+	event.locals.supabaseUser = authResult.user
+	event.locals.session = authResult.session
+
+	const response = await resolve(event, {
+		filterSerializedResponseHeaders(name) {
+			return name === 'content-range' || name === 'x-supabase-api-version'
+		}
+	})
 
 	if (isSensitivePath(event.url.pathname)) {
 		response.headers.set('cache-control', 'no-store')

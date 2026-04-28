@@ -22,7 +22,10 @@ The organisation portal will require authentication before any certificate draft
 
 Certificate handoff tokens will remain opaque references. A token can be opened only by an authenticated organisation member with permission to open handoffs.
 
-The portal will use database-backed sessions rather than self-contained JWT-only sessions. Session tokens will be random and stored hashed server-side.
+The portal will use Supabase Auth magic links for user authentication, with SSR
+cookie handling through `@supabase/ssr`. The application still resolves every
+authenticated Supabase user against `organisation_members` before granting portal
+access, so Supabase Auth is not treated as open registration for the portal.
 
 The organisation workflow will use explicit role-to-permission checks. The first roles are:
 
@@ -50,7 +53,9 @@ Certificate issue will not be implemented in the first authenticated handoff PR.
 - sessions can be revoked
 - member access can be disabled
 - handoff open and review actions can be audited
+- Supabase API configuration uses a publishable key, not a legacy anon key name
 - the final PDF issue step can be added later without changing the access model
+- the portal can support both one-actor and two-step organisation workflows
 - the portal can support both one-actor and two-step organisation workflows
 
 ## Alternatives considered
