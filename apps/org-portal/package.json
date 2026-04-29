@@ -14,8 +14,8 @@
 		"lint": "biome lint .",
 		"check": "biome check .",
 		"typecheck": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"test": "node --env-file=../../.env.test ./node_modules/vitest/vitest.mjs run",
-		"test:watch": "node --env-file=../../.env.test ./node_modules/vitest/vitest.mjs"
+		"test": "node --env-file=../../.env.test ./node_modules/vitest/vitest.mjs run --passWithNoTests",
+		"test:watch": "node --env-file=../../.env.test ./node_modules/vitest/vitest.mjs --passWithNoTests"
 	},
 	"dependencies": {
 		"@primer-paso/ui": "workspace:*",
