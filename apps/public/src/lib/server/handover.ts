@@ -42,7 +42,7 @@ export const buildHandoverPacket = (state: JourneyState, locale: Locale): Handov
 	const notAnswered = tt('common.not_answered')
 
 	const answers = journeySteps
-		.filter((step) => step.slug !== 'language' && (!step.guard || step.guard(state.answers)))
+		.filter((step) => !step.guard || step.guard(state.answers))
 		.map((step) => ({
 			label: step.checkAnswersLabelKey ? tt(step.checkAnswersLabelKey) : tt(step.titleKey),
 			value: fieldAdapters[step.adapter]
