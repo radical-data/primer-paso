@@ -6,6 +6,7 @@
 	"scripts": {
 		"dev": "vite dev --port 5174",
 		"build": "vite build",
+		"build:netlify": "pnpm -w run check:org-deploy-env && pnpm build",
 		"preview": "vite preview --port 4174",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "biome check .",

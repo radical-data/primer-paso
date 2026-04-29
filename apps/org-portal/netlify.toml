@@ -1,6 +1,6 @@
 [build]
 	base = "apps/org-portal"
-	command = "node ../../scripts/check-org-portal-env.mjs --strict && node ../../scripts/check-db-runtime.mjs --strict && pnpm build"
+	command = "pnpm build:netlify"
 	publish = "build"
 
 [build.environment]

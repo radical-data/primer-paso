@@ -6,6 +6,7 @@
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
+		"build:netlify": "pnpm -w run check:public-deploy-env && pnpm build",
 		"check:analytics-env": "node ../../scripts/check-matomo-env.mjs",
 		"check:analytics-env:strict": "node ../../scripts/check-matomo-env.mjs --strict",
 		"generate:provinces": "node ../../scripts/generate-provinces.mjs",
