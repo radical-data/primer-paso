@@ -1,0 +1,11 @@
+packages/certificate/**
+packages/db/**
+packages/auth/**
+docs/adr/**
+docs/policy-context.md
+docs/triage-rules.md
+.env.example
+.env.test
+netlify.toml
+package.json
+pnpm-workspace.yaml

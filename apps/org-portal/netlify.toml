@@ -1,0 +1,13 @@
+[build]
+	base = "apps/org-portal"
+	command = "pnpm build:netlify"
+	publish = "build"
+
+[build.environment]
+	NODE_VERSION = "24.10.0"
+
+[context.deploy-preview.environment]
+	PRIVATE_ORG_PORTAL_ENVIRONMENT = "preview"
+
+[context.production.environment]
+	PRIVATE_ORG_PORTAL_ENVIRONMENT = "production"

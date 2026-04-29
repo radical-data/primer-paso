@@ -1,0 +1,13 @@
+docs/policy-context.md
+docs/triage-rules.md
+docs/design-spec.md
+docs/journey-future.md
+docs/README.md
+docs/adr/**
+apps/public/src/lib/triage/**
+apps/public/src/lib/journey/**
+apps/public/src/routes/[lang=lang]/result/**
+apps/public/src/routes/[lang=lang]/check-answers/**
+apps/public/src/routes/[lang=lang]/screener/**
+apps/public/src/routes/[lang=lang]/+page.svelte
+apps/public/src/routes/[lang=lang]/+page.server.ts

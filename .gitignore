@@ -5,8 +5,9 @@ node_modules
 .vercel
 .netlify
 .wrangler
-/.svelte-kit
+.svelte-kit
 /build
+apps/*/build
 
 # OS
 .DS_Store
@@ -16,10 +17,16 @@ Thumbs.db
 .env
 .env.*
 !.env.example
+!.env.test
 
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
 # Repomix
-repomix-output.xml
+/.repomix/*
+!/.repomix/config/
+!/.repomix/config/**
+
+# Pnpm
+.pnpm-store

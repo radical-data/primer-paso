@@ -1,0 +1,25 @@
+{
+	"name": "@primer-paso/certificate",
+	"private": true,
+	"version": "0.0.1",
+	"type": "module",
+	"exports": {
+		".": "./src/index.ts"
+	},
+	"scripts": {
+		"check": "biome check .",
+		"typecheck": "tsc --noEmit",
+		"test": "vitest run",
+		"export:sample-pdf": "tsx scripts/export-sample-pdf.ts",
+		"template:field": "tsx scripts/create-fielded-template.ts"
+	},
+	"dependencies": {
+		"pdf-lib": "^1.17.1"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.4.8",
+		"tsx": "^4.20.6",
+		"typescript": "^6.0.2",
+		"vitest": "^3.0.0"
+	}
+}

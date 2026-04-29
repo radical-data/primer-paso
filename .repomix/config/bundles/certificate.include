@@ -1,0 +1,14 @@
+apps/public/src/lib/server/certificate.ts
+apps/public/src/lib/server/certificate-handoff.ts
+apps/public/src/routes/[lang=lang]/certificate/**
+apps/org-portal/src/routes/handoff/**
+apps/org-portal/src/routes/reviews/**
+packages/certificate/**
+packages/db/src/certificate-handoffs.ts
+packages/db/src/org-portal.ts
+packages/db/migrations/**
+docs/adr/014-token-based-certificate-handoff.md
+docs/adr/015-certificate-package-owns-pdf-template.md
+docs/adr/016-certificate-issuance-belongs-to-organisation-portal.md
+docs/adr/017-no-other-vulnerability-category-in-certificate-drafts.md
+docs/adr/018-organisation-portal-auth-and-review-workflow.md

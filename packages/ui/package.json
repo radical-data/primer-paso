@@ -1,0 +1,41 @@
+{
+	"name": "@primer-paso/ui",
+	"private": true,
+	"version": "0.0.1",
+	"type": "module",
+	"exports": {
+		".": "./src/index.ts",
+		"./badge": "./src/components/badge/index.ts",
+		"./button": "./src/components/button/index.ts",
+		"./card": "./src/components/card/index.ts",
+		"./dialog": "./src/components/dialog/index.ts",
+		"./input": "./src/components/input/index.ts",
+		"./label": "./src/components/label/index.ts",
+		"./native-select": "./src/components/native-select/index.ts",
+		"./select": "./src/components/select/index.ts",
+		"./separator": "./src/components/separator/index.ts",
+		"./table": "./src/components/table/index.ts",
+		"./textarea": "./src/components/textarea/index.ts",
+		"./utils": "./src/utils.ts"
+	},
+	"scripts": {
+		"check": "biome check .",
+		"typecheck": "svelte-check --tsconfig ./tsconfig.json",
+		"test": "vitest run --passWithNoTests"
+	},
+	"dependencies": {
+		"@lucide/svelte": "^1.8.0",
+		"bits-ui": "^2.17.3",
+		"clsx": "^2.1.1",
+		"tailwind-merge": "^3.5.0",
+		"tailwind-variants": "^3.2.2"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.4.8",
+		"@types/node": "^24",
+		"svelte": "^5.55.2",
+		"svelte-check": "^4.4.6",
+		"typescript": "^6.0.2",
+		"vitest": "^3.0.0"
+	}
+}

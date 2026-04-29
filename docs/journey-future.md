@@ -4,8 +4,8 @@ This file is intentionally limited to journey work that is not yet the canonical
 
 The implemented journey lives in:
 
-- `src/lib/journey/config.ts`
-- `src/routes/**`
+- `apps/public/src/lib/journey/config.ts`
+- `apps/public/src/routes/**`
 
 ## Deferred items
 

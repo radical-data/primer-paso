@@ -12,8 +12,8 @@ Keep docs lean. Each file should have one main job and one main source of truth.
   - high-level functional, UX, content, data, and accessibility requirements
 
 - the implemented journey lives in code:
-  - `src/lib/journey/config.ts` owns implemented step order, route slugs, labels, and branching
-  - `src/routes/**` own implemented page behaviour
+  - `apps/public/src/lib/journey/config.ts` owns implemented step order, route slugs, labels, and branching
+  - `apps/public/src/routes/**` own implemented page behaviour
 
 - `journey-future.md` owns non-implemented journey notes only:
   - deferred or future journey ideas
@@ -49,7 +49,7 @@ Keep docs lean. Each file should have one main job and one main source of truth.
 ## Current canonical owners
 
 - result-state identifiers: `triage-rules.md`
-- implemented route map and screen catalogue: `src/lib/journey/config.ts`
+- implemented route map and screen catalogue: `apps/public/src/lib/journey/config.ts`
 - deferred journey notes: `journey-future.md`
 - product requirements: `design-spec.md`
 - external policy assumptions: `policy-context.md`

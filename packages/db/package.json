@@ -1,0 +1,27 @@
+{
+	"name": "@primer-paso/db",
+	"private": true,
+	"version": "0.0.1",
+	"type": "module",
+	"exports": {
+		".": "./src/index.ts"
+	},
+	"scripts": {
+		"check": "biome check .",
+		"typecheck": "tsc --noEmit",
+		"test": "vitest run --passWithNoTests",
+		"migrate": "node --env-file=../../.env --import tsx scripts/migrate.ts",
+		"seed:local-org-portal": "node --env-file=../../.env --import tsx scripts/seed-local-org-portal.ts"
+	},
+	"dependencies": {
+		"@primer-paso/auth": "workspace:*",
+		"@primer-paso/certificate": "workspace:*",
+		"postgres": "^3.4.7"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.4.8",
+		"tsx": "^4.20.6",
+		"typescript": "^6.0.2",
+		"vitest": "^3.0.0"
+	}
+}

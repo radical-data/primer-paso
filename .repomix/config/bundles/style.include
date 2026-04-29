@@ -1,0 +1,12 @@
+apps/public/src/app.css
+apps/public/src/lib/components/**
+apps/public/src/lib/utils.ts
+apps/public/components.json
+apps/public/src/routes/[lang=lang]/**/*.svelte
+apps/public/src/routes/[lang=lang]/+layout.svelte
+apps/org-portal/src/app.css
+apps/org-portal/src/routes/**/*.svelte
+docs/design-spec.md
+docs/adr/002-one-question-per-page.md
+docs/adr/006-sveltekit-server-first-forms.md
+docs/adr/008-wcag-2-2-aa-target.md

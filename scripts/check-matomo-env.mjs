@@ -10,7 +10,9 @@ const requiredKeys = [
 	'PUBLIC_MATOMO_SITE_ID_PRODUCTION',
 	'PUBLIC_MATOMO_SITE_ID_TEST',
 	'PUBLIC_MATOMO_LOCAL_ANALYTICS',
-	'PUBLIC_MATOMO_PRODUCTION_HOSTS'
+	'PUBLIC_MATOMO_PRODUCTION_HOSTS',
+	'PUBLIC_CERTIFICATE_HANDOFF_ENABLED',
+	'PUBLIC_ORG_PORTAL_URL'
 ]
 
 const args = new Set(process.argv.slice(2))
@@ -39,6 +41,23 @@ const isAbsoluteHttpUrl = (value) => {
 	}
 }
 
+const parseUrl = (value) => {
+	if (!isNonEmptyString(value)) return null
+	try {
+		return new URL(value)
+	} catch {
+		return null
+	}
+}
+
+const isPostgresUrl = (url) => url.protocol === 'postgres:' || url.protocol === 'postgresql:'
+
+const looksLikeSupabasePooler = (url) =>
+	url.hostname.endsWith('.pooler.supabase.com') || url.hostname.includes('.pooler.supabase.')
+
+const looksLikeSupabaseDirectHost = (url) =>
+	url.hostname.endsWith('.supabase.co') || url.hostname.includes('.supabase.co')
+
 const parseHosts = (value) =>
 	(value ?? '')
 		.split(',')
@@ -57,6 +76,50 @@ for (const key of requiredKeys) {
 const enabled = read('PUBLIC_MATOMO_ENABLED')
 if (enabled !== undefined && !isBooleanString(enabled)) {
 	failures.push('PUBLIC_MATOMO_ENABLED must be "true" or "false"')
+}
+
+const certificateHandoffEnabled = read('PUBLIC_CERTIFICATE_HANDOFF_ENABLED')
+if (certificateHandoffEnabled !== undefined && !isBooleanString(certificateHandoffEnabled)) {
+	failures.push('PUBLIC_CERTIFICATE_HANDOFF_ENABLED must be "true" or "false"')
+}
+
+const orgPortalUrl = read('PUBLIC_ORG_PORTAL_URL')
+if (orgPortalUrl !== undefined && !isAbsoluteHttpUrl(orgPortalUrl)) {
+	failures.push('PUBLIC_ORG_PORTAL_URL must be an absolute http or https URL')
+}
+
+const databaseUrl = read('PRIVATE_DATABASE_URL')
+const databaseProvider = read('PRIVATE_DATABASE_PROVIDER')?.trim().toLowerCase()
+const parsedDatabaseUrl = parseUrl(databaseUrl)
+
+if (certificateHandoffEnabled === 'true' && !isNonEmptyString(databaseUrl)) {
+	failures.push('PRIVATE_DATABASE_URL is required when PUBLIC_CERTIFICATE_HANDOFF_ENABLED=true')
+}
+
+if (
+	databaseProvider !== undefined &&
+	databaseProvider !== '' &&
+	databaseProvider !== 'supabase' &&
+	databaseProvider !== 'postgres'
+) {
+	failures.push('PRIVATE_DATABASE_PROVIDER must be "supabase" or "postgres" when provided')
+}
+
+if (isNonEmptyString(databaseUrl) && !parsedDatabaseUrl) {
+	failures.push('PRIVATE_DATABASE_URL must be a valid Postgres connection URL')
+}
+
+if (parsedDatabaseUrl && !isPostgresUrl(parsedDatabaseUrl)) {
+	failures.push('PRIVATE_DATABASE_URL must use postgres:// or postgresql://')
+}
+
+if (
+	parsedDatabaseUrl &&
+	databaseProvider === 'supabase' &&
+	looksLikeSupabaseDirectHost(parsedDatabaseUrl) &&
+	!looksLikeSupabasePooler(parsedDatabaseUrl)
+) {
+	warnings.push('For deployed Supabase Postgres on Netlify, prefer the Transaction pooler URL.')
 }
 
 const matomoUrl = read('PUBLIC_MATOMO_URL')
@@ -126,6 +189,10 @@ if (failures.length === 0) {
 	lines.push(`- enabled: ${enabled ?? '(missing)'}`)
 	lines.push(`- local analytics: ${localAnalytics ?? '(missing)'}`)
 	lines.push(`- production hosts: ${productionHosts.join(', ') || '(none)'}`)
+	lines.push(`- certificate handoff enabled: ${certificateHandoffEnabled ?? '(missing)'}`)
+	lines.push(`- organisation portal URL: ${orgPortalUrl ?? '(missing)'}`)
+	lines.push(`- database provider: ${databaseProvider || '(unset)'}`)
+	lines.push(`- database configured: ${isNonEmptyString(databaseUrl) ? 'yes' : 'no'}`)
 }
 
 console.log(lines.join('\n'))

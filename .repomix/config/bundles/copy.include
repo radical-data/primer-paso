@@ -1,0 +1,16 @@
+apps/public/src/lib/content/**
+apps/public/src/lib/journey/config.ts
+apps/public/src/lib/journey/types.ts
+apps/public/src/lib/triage/**
+apps/public/src/routes/[lang=lang]/**/*.svelte
+apps/public/src/routes/[lang=lang]/**/*.ts
+apps/org-portal/src/routes/**/*.svelte
+apps/org-portal/src/routes/**/*.ts
+docs/design-spec.md
+docs/policy-context.md
+docs/triage-rules.md
+docs/adr/001-triage-not-determination.md
+docs/adr/004-assisted-mode-is-core.md
+docs/adr/011-require-check-answers-before-result.md
+docs/adr/016-certificate-issuance-belongs-to-organisation-portal.md
+docs/adr/017-no-other-vulnerability-category-in-certificate-drafts.md

@@ -1,5 +1,6 @@
 [tools]
 pnpm = "10.33.0"
+just = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["node"]
@@ -7,8 +8,44 @@ experimental = true
 
 [tasks."analytics:env:check"]
 description = "Validate the Matomo public environment contract"
-run = "node scripts/check-matomo-env.mjs"
+run = "node --env-file-if-exists=.env scripts/check-matomo-env.mjs"
 
 [tasks."analytics:env:check:strict"]
 description = "Validate the Matomo public environment contract and fail on missing or invalid values"
-run = "node scripts/check-matomo-env.mjs --strict"
+run = "node --env-file-if-exists=.env scripts/check-matomo-env.mjs --strict"
+
+[tasks."org:env:check"]
+description = "Validate the organisation portal environment contract"
+run = "node --env-file-if-exists=.env scripts/check-org-portal-env.mjs"
+
+[tasks."org:env:check:strict"]
+description = "Validate the organisation portal environment contract and fail on missing or invalid values"
+run = "node --env-file-if-exists=.env scripts/check-org-portal-env.mjs --strict"
+
+[tasks."db:runtime:check"]
+description = "Validate and smoke-test the runtime Postgres database connection"
+run = "node --env-file-if-exists=.env scripts/check-db-runtime.mjs --smoke"
+
+[tasks."db:runtime:check:strict"]
+description = "Validate and smoke-test the runtime Postgres database connection and fail on errors"
+run = "node --env-file-if-exists=.env scripts/check-db-runtime.mjs --strict --smoke"
+
+[tasks."dev:public"]
+description = "Run the public Primer Paso app"
+run = "pnpm --filter @primer-paso/public dev"
+
+[tasks."dev:org"]
+description = "Run the organisation portal app"
+run = "pnpm --filter @primer-paso/org-portal dev"
+
+[tasks."build:public"]
+description = "Build the public Primer Paso app"
+run = "pnpm --filter @primer-paso/public build"
+
+[tasks."build:org"]
+description = "Build the organisation portal app"
+run = "pnpm --filter @primer-paso/org-portal build"
+
+[tasks."db:migrate"]
+description = "Apply database migrations"
+run = "pnpm --filter @primer-paso/db migrate"
