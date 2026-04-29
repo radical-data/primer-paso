@@ -6,12 +6,16 @@
 	"scripts": {
 		"dev": "vite dev --port 5174",
 		"build": "vite build",
-		"build:netlify": "pnpm -w run check:org-deploy-env && pnpm build",
+		"build:netlify": "pnpm -w run check:org-deploy-env && pnpm build && pnpm check:netlify-output",
+		"check:netlify-output": "test -d build && test -f build/_headers && test -d .netlify/functions-internal && test -f .netlify/functions-internal/sveltekit-render.mjs && test -d .netlify/server",
 		"preview": "vite preview --port 4174",
 		"prepare": "svelte-kit sync || echo ''",
+		"format": "biome format . --write",
+		"lint": "biome lint .",
 		"check": "biome check .",
 		"typecheck": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"test": "vitest run --passWithNoTests"
+		"test": "node --env-file=../../.env.test ./node_modules/vitest/vitest.mjs run --passWithNoTests",
+		"test:watch": "node --env-file=../../.env.test ./node_modules/vitest/vitest.mjs --passWithNoTests"
 	},
 	"dependencies": {
 		"@primer-paso/ui": "workspace:*",

@@ -6,7 +6,8 @@
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
-		"build:netlify": "pnpm -w run check:public-deploy-env && pnpm build",
+		"build:netlify": "pnpm -w run check:public-deploy-env && pnpm build && pnpm check:netlify-output",
+		"check:netlify-output": "test -d build && test -f build/_headers && test -d .netlify/functions-internal && test -f .netlify/functions-internal/sveltekit-render.mjs && test -d .netlify/server",
 		"check:analytics-env": "node ../../scripts/check-matomo-env.mjs",
 		"check:analytics-env:strict": "node ../../scripts/check-matomo-env.mjs --strict",
 		"generate:provinces": "node ../../scripts/generate-provinces.mjs",
