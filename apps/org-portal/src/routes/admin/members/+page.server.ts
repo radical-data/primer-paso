@@ -16,12 +16,12 @@ const readEmail = (formData: FormData) => readString(formData, 'email').toLowerC
 const errorMessage = (error: unknown) =>
 	error instanceof OrgPortalRepositoryError
 		? error.message
-		: 'Something went wrong. Please try again.'
+		: 'Algo salió mal. Inténtalo de nuevo.'
 
 const getRepositoryOrError = () => {
 	const repository = getOrgPortalRepository()
 	if (!repository) {
-		error(503, 'Organisation portal storage is not configured.')
+		error(503, 'El almacenamiento del portal de organizaciones no está configurado.')
 	}
 	return repository
 }
@@ -35,7 +35,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 	])
 
 	if (!organisation) {
-		error(404, 'Organisation not found.')
+		error(404, 'Organización no encontrada.')
 	}
 
 	return {
@@ -58,7 +58,7 @@ export const actions: Actions = {
 		if (!email || !email.includes('@')) {
 			return fail(400, {
 				intent: 'add',
-				error: 'Enter a valid email address.',
+				error: 'Introduce una dirección de correo electrónico válida.',
 				value: { email, name, role }
 			})
 		}
@@ -66,7 +66,7 @@ export const actions: Actions = {
 		if (!name) {
 			return fail(400, {
 				intent: 'add',
-				error: 'Enter the member name.',
+				error: 'Introduce el nombre del miembro.',
 				value: { email, name, role }
 			})
 		}
@@ -74,7 +74,7 @@ export const actions: Actions = {
 		if (!isOrgRole(role)) {
 			return fail(400, {
 				intent: 'add',
-				error: 'Choose a valid role.',
+				error: 'Elige un rol válido.',
 				value: { email, name, role }
 			})
 		}
@@ -120,7 +120,7 @@ export const actions: Actions = {
 		if (!memberId || !isOrgRole(role)) {
 			return fail(400, {
 				intent: 'role',
-				error: 'Choose a valid member and role.'
+				error: 'Elige un miembro y un rol válidos.'
 			})
 		}
 
@@ -161,14 +161,14 @@ export const actions: Actions = {
 		if (!memberId) {
 			return fail(400, {
 				intent: 'disable',
-				error: 'Choose a member to disable.'
+				error: 'Elige un miembro para desactivar.'
 			})
 		}
 
 		if (memberId === session.memberId) {
 			return fail(400, {
 				intent: 'disable',
-				error: 'You cannot disable your own account.'
+				error: 'No puedes desactivar tu propia cuenta.'
 			})
 		}
 

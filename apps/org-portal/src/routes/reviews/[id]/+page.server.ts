@@ -33,13 +33,13 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 	const repository = getOrgPortalRepository()
 
 	if (!repository) {
-		error(503, 'Organisation portal storage is not configured.')
+		error(503, 'El almacenamiento del portal de organizaciones no está configurado.')
 	}
 
 	const review = await repository.findCertificateHandoffReviewById(params.id)
 
 	if (!review || review.organisationId !== session.organisationId) {
-		error(404, 'Review not found.')
+		error(404, 'Revisión no encontrada.')
 	}
 	const issuedCertificate = await repository.findIssuedCertificateByReviewId(review.id)
 
@@ -69,12 +69,12 @@ export const actions: Actions = {
 		const repository = getOrgPortalRepository()
 
 		if (!repository) {
-			error(503, 'Organisation portal storage is not configured.')
+			error(503, 'El almacenamiento del portal de organizaciones no está configurado.')
 		}
 
 		const review = await repository.findCertificateHandoffReviewById(params.id)
 		if (!review || review.organisationId !== session.organisationId) {
-			error(404, 'Review not found.')
+			error(404, 'Revisión no encontrada.')
 		}
 
 		const verification = parseVerification(await request.formData())
@@ -101,19 +101,19 @@ export const actions: Actions = {
 		const repository = getOrgPortalRepository()
 
 		if (!repository) {
-			error(503, 'Organisation portal storage is not configured.')
+			error(503, 'El almacenamiento del portal de organizaciones no está configurado.')
 		}
 
 		const review = await repository.findCertificateHandoffReviewById(params.id)
 		if (!review || review.organisationId !== session.organisationId) {
-			error(404, 'Review not found.')
+			error(404, 'Revisión no encontrada.')
 		}
 
 		const verification = parseVerification(await request.formData())
 		if (!verificationComplete(verification)) {
 			return fail(400, {
 				error:
-					'Complete every verification confirmation before marking this review ready to issue.',
+					'Completa todas las confirmaciones de verificación antes de marcar esta revisión como lista para emitir.',
 				verification
 			})
 		}
@@ -139,12 +139,12 @@ export const actions: Actions = {
 		const session = requirePermission(locals, 'certificate:issue')
 		const repository = getOrgPortalRepository()
 		if (!repository) {
-			error(503, 'Organisation portal storage is not configured.')
+			error(503, 'El almacenamiento del portal de organizaciones no está configurado.')
 		}
 
 		const review = await repository.findCertificateHandoffReviewById(params.id)
 		if (!review || review.organisationId !== session.organisationId) {
-			error(404, 'Review not found.')
+			error(404, 'Revisión no encontrada.')
 		}
 
 		if (review.status === 'issued') {
@@ -153,13 +153,13 @@ export const actions: Actions = {
 
 		if (review.status !== 'ready_to_issue') {
 			return fail(400, {
-				error: 'This review must be marked ready to issue before issuing the certificate.'
+				error: 'Esta revisión debe marcarse como lista para emitir antes de emitir el certificado.'
 			})
 		}
 
 		if (!storedVerificationComplete(review.verification)) {
 			return fail(400, {
-				error: 'Complete every verification confirmation before issuing the certificate.'
+				error: 'Completa todas las confirmaciones de verificación antes de emitir el certificado.'
 			})
 		}
 
@@ -175,7 +175,7 @@ export const actions: Actions = {
 				reviewId: review.id,
 				request
 			})
-			error(409, 'Organisation or signer details could not be resolved.')
+			error(409, 'No se pudieron resolver los datos de la organización o del firmante.')
 		}
 
 		const issuedAt = new Date().toISOString()

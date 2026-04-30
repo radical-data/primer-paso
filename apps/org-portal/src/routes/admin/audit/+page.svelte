@@ -29,29 +29,29 @@ const formatEventData = (eventData: Record<string, unknown>) => {
 </script>
 
 <svelte:head>
-	<title>Audit log | Primer Paso organisation portal</title>
+	<title>Registro de auditoría | Portal de organizaciones de Primer Paso</title>
 	<meta name="robots" content="noindex, nofollow">
 </svelte:head>
 
 <main class="shell">
 	<section class="card">
-		<p class="eyebrow">Organisation admin</p>
-		<h1>Audit log</h1>
-		<p>Latest recorded actions for <strong>{data.organisation.name}</strong>.</p>
+		<p class="eyebrow">Administración de la organización</p>
+		<h1>Registro de auditoría</h1>
+		<p>Últimas acciones registradas para <strong>{data.organisation.name}</strong>.</p>
 
-		<p><a href="/dashboard">Back to dashboard</a></p>
+		<p><a href="/dashboard">Volver al panel</a></p>
 
 		{#if data.events.length === 0}
-			<p>No audit events have been recorded yet.</p>
+			<p>Aún no se ha registrado ningún evento de auditoría.</p>
 		{:else}
 			<Table>
 				<TableHeader>
 					<TableRow>
-						<TableHead>Time</TableHead>
-						<TableHead>Event</TableHead>
+						<TableHead>Hora</TableHead>
+						<TableHead>Evento</TableHead>
 						<TableHead>Actor</TableHead>
-						<TableHead>Review</TableHead>
-						<TableHead>Details</TableHead>
+						<TableHead>Revisión</TableHead>
+						<TableHead>Detalles</TableHead>
 					</TableRow>
 				</TableHeader>
 				<TableBody>
@@ -59,10 +59,10 @@ const formatEventData = (eventData: Record<string, unknown>) => {
 						<TableRow>
 							<TableCell>{formatDate(event.createdAt)}</TableCell>
 							<TableCell> <Badge variant="secondary">{event.eventType}</Badge> </TableCell>
-							<TableCell>{event.memberEmail ?? 'System'}</TableCell>
+							<TableCell>{event.memberEmail ?? 'Sistema'}</TableCell>
 							<TableCell>
 								{#if event.reviewId}
-									<a href={`/reviews/${event.reviewId}`}>Open review</a>
+									<a href={`/reviews/${event.reviewId}`}>Abrir revisión</a>
 								{:else}
 									<span>—</span>
 								{/if}

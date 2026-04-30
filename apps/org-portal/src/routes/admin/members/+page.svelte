@@ -17,10 +17,10 @@ let { data, form } = $props()
 
 const roleLabel = (role: string) =>
 	({
-		admin: 'Admin',
-		audit_viewer: 'Audit viewer',
-		intake_volunteer: 'Intake volunteer',
-		authorised_signer: 'Authorised signer'
+		admin: 'Administrador',
+		audit_viewer: 'Visor de auditoría',
+		intake_volunteer: 'Voluntario de admisión',
+		authorised_signer: 'Firmante autorizado'
 	})[role] ?? role
 
 const statusVariant = (status: string) => (status === 'active' ? 'success' : 'outline')
@@ -39,20 +39,20 @@ const inactiveMembers = $derived(data.members.filter((member) => member.status !
 </script>
 
 <svelte:head>
-	<title>Members | Primer Paso organisation portal</title>
+	<title>Miembros | Portal de organizaciones de Primer Paso</title>
 	<meta name="robots" content="noindex, nofollow">
 </svelte:head>
 
 <main class="shell">
 	<section class="card">
-		<p class="eyebrow">Organisation admin</p>
-		<h1>Members</h1>
-		<p>Manage who can use the organisation portal for <strong>{data.organisation.name}</strong>.</p>
+		<p class="eyebrow">Administración de la organización</p>
+		<h1>Miembros</h1>
+		<p>Gestiona quién puede usar el portal de organizaciones de <strong>{data.organisation.name}</strong>.</p>
 
 		<p>
-			<a href="/dashboard">Back to dashboard</a>
+			<a href="/dashboard">Volver al panel</a>
 			{' · '}
-			<a href="/admin/audit">View audit log</a>
+			<a href="/admin/audit">Ver registro de auditoría</a>
 		</p>
 
 		{#if form?.error}
@@ -60,15 +60,16 @@ const inactiveMembers = $derived(data.members.filter((member) => member.status !
 		{/if}
 
 		<section aria-labelledby="add-member-title">
-			<h2 id="add-member-title">Add or reactivate a member</h2>
+			<h2 id="add-member-title">Añadir o reactivar un miembro</h2>
 			<p>
-				This uses the current pilot login mechanism. A member can sign in with their email and the
-				shared organisation access code until email delivery replaces it.
+				Esto utiliza el mecanismo de acceso del piloto actual. Un miembro puede iniciar sesión con
+				su correo y el código de acceso compartido de la organización hasta que la entrega por
+				correo lo sustituya.
 			</p>
 
 			<form method="POST" action="?/add">
 				<div>
-					<Label for="name">Name</Label>
+					<Label for="name">Nombre</Label>
 					<Input
 						id="name"
 						name="name"
@@ -79,7 +80,7 @@ const inactiveMembers = $derived(data.members.filter((member) => member.status !
 				</div>
 
 				<div>
-					<Label for="email">Email</Label>
+					<Label for="email">Correo electrónico</Label>
 					<Input
 						id="email"
 						name="email"
@@ -91,7 +92,7 @@ const inactiveMembers = $derived(data.members.filter((member) => member.status !
 				</div>
 
 				<div>
-					<Label for="role">Role</Label>
+					<Label for="role">Rol</Label>
 					<NativeSelect id="role" name="role" required>
 						{#each data.roles as role}
 							<NativeSelectOption
@@ -106,21 +107,21 @@ const inactiveMembers = $derived(data.members.filter((member) => member.status !
 					</NativeSelect>
 				</div>
 
-				<p><Button type="submit">Save member</Button></p>
+				<p><Button type="submit">Guardar miembro</Button></p>
 			</form>
 		</section>
 
 		<section aria-labelledby="active-members-title">
-			<h2 id="active-members-title">Active members</h2>
+			<h2 id="active-members-title">Miembros activos</h2>
 
 			<Table>
 				<TableHeader>
 					<TableRow>
-						<TableHead>Member</TableHead>
-						<TableHead>Status</TableHead>
-						<TableHead>Role</TableHead>
-						<TableHead>Created</TableHead>
-						<TableHead>Actions</TableHead>
+						<TableHead>Miembro</TableHead>
+						<TableHead>Estado</TableHead>
+						<TableHead>Rol</TableHead>
+						<TableHead>Creado</TableHead>
+						<TableHead>Acciones</TableHead>
 					</TableRow>
 				</TableHeader>
 				<TableBody>
@@ -136,24 +137,24 @@ const inactiveMembers = $derived(data.members.filter((member) => member.status !
 							<TableCell>
 								<form method="POST" action="?/role">
 									<input type="hidden" name="memberId" value={member.id}>
-									<NativeSelect name="role" aria-label={`Role for ${member.email}`}>
+									<NativeSelect name="role" aria-label={`Rol de ${member.email}`}>
 										{#each data.roles as role}
 											<NativeSelectOption value={role} selected={role === member.role}>
 												{roleLabel(role)}
 											</NativeSelectOption>
 										{/each}
 									</NativeSelect>
-									<Button type="submit" variant="outline" size="sm">Save</Button>
+									<Button type="submit" variant="outline" size="sm">Guardar</Button>
 								</form>
 							</TableCell>
 							<TableCell>{formatDate(member.createdAt)}</TableCell>
 							<TableCell>
 								{#if member.id === data.currentMemberId}
-									<Badge variant="outline">Current user</Badge>
+									<Badge variant="outline">Usuario actual</Badge>
 								{:else}
 									<form method="POST" action="?/disable">
 										<input type="hidden" name="memberId" value={member.id}>
-										<Button type="submit" variant="destructive" size="sm">Disable</Button>
+										<Button type="submit" variant="destructive" size="sm">Desactivar</Button>
 									</form>
 								{/if}
 							</TableCell>
@@ -165,15 +166,15 @@ const inactiveMembers = $derived(data.members.filter((member) => member.status !
 
 		{#if inactiveMembers.length > 0}
 			<section aria-labelledby="inactive-members-title">
-				<h2 id="inactive-members-title">Inactive members</h2>
+				<h2 id="inactive-members-title">Miembros inactivos</h2>
 
 				<Table>
 					<TableHeader>
 						<TableRow>
-							<TableHead>Member</TableHead>
-							<TableHead>Status</TableHead>
-							<TableHead>Role</TableHead>
-							<TableHead>Disabled</TableHead>
+							<TableHead>Miembro</TableHead>
+							<TableHead>Estado</TableHead>
+							<TableHead>Rol</TableHead>
+							<TableHead>Desactivado</TableHead>
 						</TableRow>
 					</TableHeader>
 					<TableBody>

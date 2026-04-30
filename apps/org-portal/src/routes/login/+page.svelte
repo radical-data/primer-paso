@@ -3,24 +3,24 @@ let { data, form } = $props()
 </script>
 
 <svelte:head>
-	<title>Sign in | Primer Paso organisation portal</title>
+	<title>Iniciar sesión | Portal de organizaciones de Primer Paso</title>
 	<meta name="robots" content="noindex, nofollow">
 </svelte:head>
 
 <main class="shell">
 	<section class="card">
 		<p class="eyebrow">Primer Paso</p>
-		<h1>Sign in to the organisation portal</h1>
+		<h1>Iniciar sesión en el portal de organizaciones</h1>
 
 		{#if data.hasPendingHandoff}
-			<p>Sign in to open the certificate handoff.</p>
+			<p>Inicia sesión para abrir la entrega de certificado.</p>
 		{:else}
-			<p>Enter your organisation email. We'll send you a secure sign-in link.</p>
+			<p>Introduce el correo de tu organización. Te enviaremos un enlace de acceso seguro.</p>
 		{/if}
 
 		{#if form?.success}
 			<p role="status">
-				{form.message ?? 'Check your email. The sign-in link will open this portal.'}
+				{form.message ?? 'Revisa tu correo. El enlace de acceso abrirá este portal.'}
 			</p>
 		{:else}
 			{#if form?.error}
@@ -28,7 +28,7 @@ let { data, form } = $props()
 			{/if}
 			<form method="POST" class="stack">
 				<input type="hidden" name="next" value={data.next}>
-				<label for="email">Organisation email</label>
+				<label for="email">Correo de la organización</label>
 				<input
 					id="email"
 					name="email"
@@ -37,12 +37,12 @@ let { data, form } = $props()
 					required
 					value={form?.email ?? data.email ?? ''}
 				>
-				<button type="submit">Send sign-in link</button>
+				<button type="submit">Enviar enlace de acceso</button>
 			</form>
 		{/if}
 
 		{#if !form?.success}
-			<p>Access is limited to authorised members of collaborating organisations.</p>
+			<p>El acceso está limitado a miembros autorizados de organizaciones colaboradoras.</p>
 		{/if}
 	</section>
 </main>

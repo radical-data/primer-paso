@@ -3,31 +3,31 @@ let { data } = $props()
 </script>
 
 <svelte:head>
-	<title>Certificate handoff | Primer Paso organisation portal</title>
+	<title>Entrega de certificado | Portal de organizaciones de Primer Paso</title>
 	<meta name="robots" content="noindex, nofollow">
 </svelte:head>
 
 <main class="shell">
 	<section class="card">
 		<p class="eyebrow">Primer Paso</p>
-		<h1>Certificate handoff</h1>
+		<h1>Entrega de certificado</h1>
 
 		{#if data.hasToken}
 			<p>
-				A handoff reference was received. Sign in as an authorised organisation user to open the
-				draft.
+				Se recibió una referencia de entrega. Inicia sesión como persona usuaria autorizada de la
+				organización para abrir el borrador.
 			</p>
 		{:else}
 			<p>
-				No handoff reference was provided. Open this page from a Primer Paso certificate handoff QR
-				code or link.
+				No se proporcionó ninguna referencia de entrega. Abre esta página desde un código QR o
+				enlace de entrega de certificado de Primer Paso.
 			</p>
 			<form method="GET" action="/handoff">
 				<label>
-					Handoff token or link
+					Token o enlace de entrega
 					<input name="token" autocomplete="off">
 				</label>
-				<button type="submit">Open handoff</button>
+				<button type="submit">Abrir entrega</button>
 			</form>
 		{/if}
 	</section>

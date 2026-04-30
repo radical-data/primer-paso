@@ -10,7 +10,7 @@ const PENDING_HANDOFF_COOKIE = 'pp_pending_handoff'
 const TEN_MINUTES = 60 * 10
 
 export const GENERIC_MAGIC_LINK_RESPONSE =
-	'If that email belongs to an active organisation member, we’ll send a sign-in link.'
+	'Si ese correo pertenece a un miembro activo de la organización, te enviaremos un enlace de acceso.'
 
 const MAGIC_LINK_EMAIL_LIMIT = 5
 const MAGIC_LINK_IP_LIMIT = 20
@@ -32,7 +32,7 @@ export const isSupabaseAuthConfigured = () =>
 
 export const assertSupabaseAuthConfigured = () => {
 	if (!isSupabaseAuthConfigured()) {
-		error(503, 'Organisation portal authentication is not configured.')
+		error(503, 'La autenticación del portal de organizaciones no está configurada.')
 	}
 }
 
@@ -41,7 +41,7 @@ const isCustomSmtpConfigured = () => privateEnv.PRIVATE_ORG_PORTAL_CUSTOM_SMTP_C
 export const assertProductionAuthConfiguration = () => {
 	const environment = privateEnv.PRIVATE_ORG_PORTAL_ENVIRONMENT
 	if ((environment === 'production' || environment === 'preview') && !isCustomSmtpConfigured()) {
-		error(503, 'Organisation portal email delivery is not configured.')
+		error(503, 'La entrega de correo del portal de organizaciones no está configurada.')
 	}
 }
 

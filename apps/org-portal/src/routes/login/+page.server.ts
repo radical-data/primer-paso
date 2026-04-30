@@ -55,7 +55,7 @@ export const actions: Actions = {
 
 		if (!email || !email.includes('@')) {
 			return fail(400, {
-				error: 'Enter your organisation email address.',
+				error: 'Introduce el correo electrónico de tu organización.',
 				email
 			})
 		}
@@ -82,7 +82,7 @@ export const actions: Actions = {
 		const repository = getOrgPortalRepository()
 		if (!repository) {
 			return fail(503, {
-				error: 'Organisation portal storage is not configured.',
+				error: 'El almacenamiento del portal de organizaciones no está configurado.',
 				email
 			})
 		}
@@ -124,7 +124,7 @@ export const actions: Actions = {
 				request
 			})
 			return fail(400, {
-				error: 'We could not send a sign-in email. Please try again.',
+				error: 'No pudimos enviar el correo de acceso. Inténtalo de nuevo.',
 				email
 			})
 		}

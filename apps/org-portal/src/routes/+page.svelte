@@ -1,20 +1,20 @@
 <svelte:head>
-	<title>Organisation portal | Primer Paso</title>
+	<title>Portal de organizaciones | Primer Paso</title>
 	<meta name="robots" content="noindex, nofollow">
 </svelte:head>
 
 <main class="shell">
 	<section class="card">
 		<p class="eyebrow">Primer Paso</p>
-		<h1>Organisation portal</h1>
+		<h1>Portal de organizaciones</h1>
 		<p>
-			Use this portal to open certificate handoffs, review draft information, record verification
-			confirmations, and prepare certificates for issue.
+			Utiliza este portal para abrir entregas de certificados, revisar la información en borrador,
+			registrar las confirmaciones de verificación y preparar los certificados para su emisión.
 		</p>
 		<p>
-			Certificate issue is limited to authorised organisation users and is recorded in the audit
-			history.
+			La emisión de certificados está limitada a personas usuarias autorizadas de la organización y
+			queda registrada en el historial de auditoría.
 		</p>
-		<p><a href="/login">Sign in</a></p>
+		<p><a href="/login">Iniciar sesión</a></p>
 	</section>
 </main>
