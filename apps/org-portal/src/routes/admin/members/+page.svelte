@@ -47,7 +47,10 @@ const inactiveMembers = $derived(data.members.filter((member) => member.status !
 	<section class="card">
 		<p class="eyebrow">Administración de la organización</p>
 		<h1>Miembros</h1>
-		<p>Gestiona quién puede usar el portal de organizaciones de <strong>{data.organisation.name}</strong>.</p>
+		<p>
+			Gestiona quién puede usar el portal de organizaciones de
+			<strong>{data.organisation.name}</strong>.
+		</p>
 
 		<p>
 			<a href="/dashboard">Volver al panel</a>

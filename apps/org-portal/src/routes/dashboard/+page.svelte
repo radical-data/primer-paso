@@ -30,7 +30,10 @@ let { data } = $props()
 			<button type="submit">Abrir entrega</button>
 		</form>
 
-		<p>Abre esta página desde un código QR de Primer Paso, o pega el enlace o token de entrega arriba.</p>
+		<p>
+			Abre esta página desde un código QR de Primer Paso, o pega el enlace o token de entrega
+			arriba.
+		</p>
 
 		{#if data.adminLinks.canManageMembers || data.adminLinks.canReadAudit}
 			<section>

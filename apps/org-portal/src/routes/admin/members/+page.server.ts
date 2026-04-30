@@ -14,9 +14,7 @@ const readString = (formData: FormData, key: string) =>
 const readEmail = (formData: FormData) => readString(formData, 'email').toLowerCase()
 
 const errorMessage = (error: unknown) =>
-	error instanceof OrgPortalRepositoryError
-		? error.message
-		: 'Algo salió mal. Inténtalo de nuevo.'
+	error instanceof OrgPortalRepositoryError ? error.message : 'Algo salió mal. Inténtalo de nuevo.'
 
 const getRepositoryOrError = () => {
 	const repository = getOrgPortalRepository()
