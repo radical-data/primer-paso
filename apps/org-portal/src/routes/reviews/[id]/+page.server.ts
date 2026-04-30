@@ -6,11 +6,7 @@ import {
 import type { VerificationReview } from '@primer-paso/db'
 import { signPdfWithOrganisationCertificate } from '@primer-paso/signing-client'
 import { error, fail, redirect } from '@sveltejs/kit'
-import {
-	PRIVATE_PDF_SIGNER_TOKEN,
-	PRIVATE_PDF_SIGNER_URL,
-	PRIVATE_SIGNING_CERT_ENCRYPTION_KEY
-} from '$env/static/private'
+import { env } from '$env/dynamic/private'
 import { writeAuditEvent } from '$lib/server/audit'
 import { requirePermission } from '$lib/server/auth'
 import { getOrgPortalRepository } from '$lib/server/repository'
@@ -227,18 +223,37 @@ export const actions: Actions = {
 		}
 		let signedPdfBytes: Uint8Array
 		let signedPdfSha256: string
+		const signerUrl = env.PRIVATE_PDF_SIGNER_URL
+		const signerToken = env.PRIVATE_PDF_SIGNER_TOKEN
+		const signingCertEncryptionKey = env.PRIVATE_SIGNING_CERT_ENCRYPTION_KEY
+
+		if (!signerUrl || !signerToken || !signingCertEncryptionKey) {
+			await writeAuditEvent({
+				eventType: 'certificate.issue_failed',
+				eventData: { reason: 'pdf_signing_environment_not_configured' },
+				organisationId: session.organisationId,
+				memberId: session.memberId,
+				handoffId: review.handoffId,
+				reviewId: review.id,
+				request
+			})
+			return fail(500, {
+				error: 'PDF signing is not configured for this environment.'
+			})
+		}
+
 		try {
 			const pkcs12 = decryptSigningSecret(
 				signingCertificate.encryptedPkcs12,
-				PRIVATE_SIGNING_CERT_ENCRYPTION_KEY
+				signingCertEncryptionKey
 			)
 			const pkcs12Passphrase = decryptSigningText(
 				signingCertificate.encryptedPassphrase,
-				PRIVATE_SIGNING_CERT_ENCRYPTION_KEY
+				signingCertEncryptionKey
 			)
 			const signed = await signPdfWithOrganisationCertificate({
-				serviceUrl: PRIVATE_PDF_SIGNER_URL,
-				serviceToken: PRIVATE_PDF_SIGNER_TOKEN,
+				serviceUrl: signerUrl,
+				serviceToken: signerToken,
 				unsignedPdf: unsignedPdf.bytes,
 				pkcs12,
 				pkcs12Passphrase,
