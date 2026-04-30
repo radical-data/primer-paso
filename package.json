@@ -10,7 +10,6 @@
 	"scripts": {
 		"org-signing:add-certificate:local": "node --env-file=.env --import tsx scripts/add-org-signing-certificate.ts",
 		"org-signing:add-certificate:production": "node --env-file=.env.netlify.production --import tsx scripts/add-org-signing-certificate.ts",
-		"signing:generate-fixture": "bash scripts/generate-test-signing-fixture.sh",
 		"signing:test-pdf": "node --env-file=.env scripts/test-pdf-signing-service.mjs",
 		"dev": "pnpm --filter @primer-paso/public dev",
 		"dev:public": "pnpm --filter @primer-paso/public dev",

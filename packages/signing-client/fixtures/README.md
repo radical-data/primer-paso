@@ -1,29 +1,28 @@
 # Signing client fixtures
 
-This directory contains fake signing material for local development and smoke
-tests only.
+This directory contains signing material for local development and smoke tests
+only.
 
-The certificate is self-signed and is not issued by FNMT, AOC, Cl@ve, or any
-trusted certificate authority. It must never be used for real certificate
-issuance.
+These fixtures must never be used for real certificate issuance.
 
-Committed fixture:
+## Committed fixture
 
 ```txt
-test-organisation-signing-cert.p12
+fnmt-test-sello-entidad-nosmime.p12
 ```
 
-Passphrase:
+This is an FNMT test certificate from the public FNMT test certificate bundle:
 
 ```txt
-test-password
+Claves RSA/AC Representación/Certificados pruebas Sello de Entidad/FNMT_SELLO_ENTIDAD_NOSMIME.p12
 ```
 
-Regenerate it from the repository root with:
+It is used because it behaves more like a Spanish administrative signing
+certificate in validation tools than a self-signed local certificate.
 
-```sh
-pnpm signing:generate-fixture
+The passphrase is stored in:
+
+```txt
+fnmt-test-sello-entidad-nosmime.passphrase.txt
 ```
 
-The script writes the temporary private key under `/tmp` and removes it after
-creating the PKCS#12 fixture.
