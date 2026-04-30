@@ -38,6 +38,18 @@ run = "pnpm --filter @primer-paso/public dev"
 description = "Run the organisation portal app"
 run = "pnpm --filter @primer-paso/org-portal dev"
 
+[tasks."supabase:start"]
+description = "Start the local Supabase stack"
+run = "pnpm supabase:start"
+
+[tasks."db:reset"]
+description = "Reset the local Supabase database and apply all migrations"
+run = "pnpm db:reset"
+
+[tasks."db:types"]
+description = "Generate TypeScript database types from the local Supabase database"
+run = "pnpm db:types"
+
 [tasks."build:public"]
 description = "Build the public Primer Paso app"
 run = "pnpm --filter @primer-paso/public build"

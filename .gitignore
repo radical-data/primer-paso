@@ -30,3 +30,7 @@ vite.config.ts.timestamp-*
 
 # Pnpm
 .pnpm-store
+
+# Supabase local runtime state
+supabase/.branches/
+supabase/.temp/

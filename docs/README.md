@@ -33,6 +33,10 @@ Keep docs lean. Each file should have one main job and one main source of truth.
   - what sources to watch
   - how policy changes should be reflected in the repo
 
+- `local-supabase.md` owns local database workflow:
+  - local Supabase stack setup
+  - local reset, seed, and type generation commands
+
 - `adr/*.md` own decision rationale:
   - why a significant decision was made
   - consequences of that decision
@@ -54,3 +58,4 @@ Keep docs lean. Each file should have one main job and one main source of truth.
 - product requirements: `design-spec.md`
 - external policy assumptions: `policy-context.md`
 - significant decision rationale: `adr/*.md`
+- local database workflow: `local-supabase.md`

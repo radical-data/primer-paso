@@ -26,6 +26,10 @@
 		"netlify:build:org": "pnpm --filter @primer-paso/org-portal build:netlify",
 		"generate:provinces": "pnpm --filter @primer-paso/public generate:provinces",
 		"smoke:certificate-pilot": "node scripts/smoke-certificate-pilot.mjs",
+		"supabase:start": "supabase start",
+		"supabase:start:minimal": "supabase start -x studio,realtime,storage-api,imgproxy,edge-runtime,logflare,vector",
+		"db:reset": "supabase db reset",
+		"db:types": "supabase gen types typescript --local > packages/db/src/database.types.ts",
 		"preview": "pnpm --filter @primer-paso/public preview",
 		"db:migrate": "pnpm --filter @primer-paso/db migrate",
 		"db:seed:local-org-portal": "node --env-file=.env --import tsx packages/db/scripts/seed-local-org-portal.ts",
@@ -47,6 +51,7 @@
 			"esbuild",
 			"netlify-cli",
 			"sharp",
+			"supabase",
 			"unix-dgram"
 		]
 	},
@@ -56,6 +61,7 @@
 		"netlify-cli": "^25.0.1",
 		"postgres": "^3.4.9",
 		"repomix": "^1.13.1",
+		"supabase": "^2.78.1",
 		"tsx": "^4.20.6",
 		"vite": "^8.0.7"
 	}

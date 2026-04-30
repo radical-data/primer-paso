@@ -5,7 +5,7 @@ import {
 	assertSupabaseAuthConfigured,
 	checkMagicLinkRateLimit,
 	GENERIC_MAGIC_LINK_RESPONSE,
-	getAuthCallbackUrl,
+	getAuthConfirmUrl,
 	getPendingHandoffToken,
 	normaliseEmail
 } from '$lib/server/auth'
@@ -20,12 +20,6 @@ const safeNextPath = (value: string | null) => {
 		return '/dashboard'
 	}
 	return value
-}
-
-const buildRedirectTo = (next: string) => {
-	const url = new URL(getAuthCallbackUrl())
-	url.searchParams.set('next', next)
-	return url.toString()
 }
 
 export const load: PageServerLoad = ({ locals, cookies, url }) => {
@@ -103,15 +97,14 @@ export const actions: Actions = {
 			}
 		}
 
-		// Keep shouldCreateUser=true here. This is not open registration because
-		// we only call Supabase after confirming the email belongs to an active
-		// organisation member in our database. Supabase Auth users are the auth
-		// identity layer; organisation_members remains the authorisation layer.
+		// Keep shouldCreateUser=false so unknown emails cannot be provisioned in
+		// Supabase Auth through this flow. We only send links after confirming
+		// the email belongs to an active organisation member in our database.
 		const { error: signInError } = await locals.supabase.auth.signInWithOtp({
 			email,
 			options: {
-				shouldCreateUser: true,
-				emailRedirectTo: buildRedirectTo(next)
+				shouldCreateUser: false,
+				emailRedirectTo: getAuthConfirmUrl()
 			}
 		})
 
