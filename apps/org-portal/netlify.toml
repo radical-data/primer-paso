@@ -1,11 +1,9 @@
 [build]
-	base = "apps/public"
+	base = "apps/org-portal"
 	command = "pnpm build:netlify"
 	publish = "build"
 	functions = ".netlify/functions-internal"
 
 [build.environment]
 	NODE_VERSION = "24.10.0"
-	PUBLIC_CERTIFICATE_HANDOFF_ENABLED = "true"
-	PUBLIC_ORG_PORTAL_URL = "https://org.primerpaso.org"
-
+	PUBLIC_SITE_URL = "https://primerpaso.org"

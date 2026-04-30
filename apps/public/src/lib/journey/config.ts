@@ -54,26 +54,6 @@ const provinceOptions: JourneyOption[] = provinces.map((province) => ({
 
 const steps: JourneyStepDefinition[] = [
 	{
-		id: 'language',
-		slug: 'language',
-		field: 'language',
-		adapter: 'single-choice',
-		eyebrowKey: 'eyebrows.session_setup',
-		titleKey: 'steps.language.title',
-		hintKey: 'steps.language.hint',
-		errorKey: 'steps.language.error',
-		checkAnswersLabelKey: 'steps.language.check_answers_label',
-		includeInCheckAnswers: false,
-		back: '/screener',
-		next: 'completion-mode',
-		options: [
-			{ value: 'es', labelKey: 'steps.language.options.es' },
-			{ value: 'en', labelKey: 'steps.language.options.en' },
-			{ value: 'ar', labelKey: 'steps.language.options.ar' },
-			{ value: 'fr', labelKey: 'steps.language.options.fr' }
-		]
-	},
-	{
 		id: 'completion-mode',
 		slug: 'completion-mode',
 		field: 'completionMode',
@@ -84,7 +64,7 @@ const steps: JourneyStepDefinition[] = [
 		errorKey: 'steps.completion_mode.error',
 		checkAnswersLabelKey: 'steps.completion_mode.check_answers_label',
 		includeInCheckAnswers: true,
-		back: 'language',
+		back: '/screener',
 		next: 'presence-before-cutoff',
 		options: [
 			{ value: 'self', labelKey: 'steps.completion_mode.options.self' },

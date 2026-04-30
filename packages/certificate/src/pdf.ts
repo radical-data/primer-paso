@@ -1,12 +1,14 @@
 import { readFile } from 'node:fs/promises'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
 import { PDFDocument, StandardFonts } from 'pdf-lib'
 import { CERTIFICATE_TEMPLATE_PACKAGE_PATH } from './template'
 import type { CertificateIssueRequest, GeneratedCertificatePdf, VulnerabilityReason } from './types'
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const packageRoot = path.resolve(__dirname, '..')
+// Avoid declaring a top-level `__dirname` here: Netlify's zip-it-and-ship-it
+// injects a `let __dirname = ...` banner when bundling the SSR function, which
+// would collide with a same-named top-level binding in this chunk and fail at
+// parse time with `Identifier '__dirname' has already been declared`.
+const packageRoot = path.resolve(import.meta.dirname, '..')
 const templatePath = path.join(packageRoot, CERTIFICATE_TEMPLATE_PACKAGE_PATH)
 
 const formatDate = (value: string) =>
