@@ -4,10 +4,13 @@ import {
 	parseCertificateIssueRequest
 } from '@primer-paso/certificate'
 import type { VerificationReview } from '@primer-paso/db'
+import { signPdfWithOrganisationCertificate } from '@primer-paso/signing-client'
 import { error, fail, redirect } from '@sveltejs/kit'
+import { env } from '$env/dynamic/private'
 import { writeAuditEvent } from '$lib/server/audit'
 import { requirePermission } from '$lib/server/auth'
 import { getOrgPortalRepository } from '$lib/server/repository'
+import { decryptSigningSecret, decryptSigningText } from '$lib/server/signing-secret-crypto'
 import type { Actions, PageServerLoad } from './$types'
 
 const parseVerification = (formData: FormData) => ({
@@ -200,21 +203,107 @@ export const actions: Actions = {
 			issuedAt
 		})
 
-		const pdf = await generateVulnerabilityCertificatePdf(issueRequest)
+		const unsignedPdf = await generateVulnerabilityCertificatePdf(issueRequest)
+		const signingCertificate = await repository.findActiveOrganisationSigningCertificate(
+			session.organisationId
+		)
+		if (!signingCertificate) {
+			await writeAuditEvent({
+				eventType: 'certificate.issue_failed',
+				eventData: { reason: 'organisation_signing_certificate_not_configured' },
+				organisationId: session.organisationId,
+				memberId: session.memberId,
+				handoffId: review.handoffId,
+				reviewId: review.id,
+				request
+			})
+			return fail(400, {
+				error: 'This organisation does not have a signing certificate configured.'
+			})
+		}
+		let signedPdfBytes: Uint8Array
+		let signedPdfSha256: string
+		const signerUrl = env.PRIVATE_PDF_SIGNER_URL
+		const signerToken = env.PRIVATE_PDF_SIGNER_TOKEN
+		const signingCertEncryptionKey = env.PRIVATE_SIGNING_CERT_ENCRYPTION_KEY
+
+		if (!signerUrl || !signerToken || !signingCertEncryptionKey) {
+			await writeAuditEvent({
+				eventType: 'certificate.issue_failed',
+				eventData: { reason: 'pdf_signing_environment_not_configured' },
+				organisationId: session.organisationId,
+				memberId: session.memberId,
+				handoffId: review.handoffId,
+				reviewId: review.id,
+				request
+			})
+			return fail(500, {
+				error: 'PDF signing is not configured for this environment.'
+			})
+		}
+
+		try {
+			const pkcs12 = decryptSigningSecret(
+				signingCertificate.encryptedPkcs12,
+				signingCertEncryptionKey
+			)
+			const pkcs12Passphrase = decryptSigningText(
+				signingCertificate.encryptedPassphrase,
+				signingCertEncryptionKey
+			)
+			const signed = await signPdfWithOrganisationCertificate({
+				serviceUrl: signerUrl,
+				serviceToken: signerToken,
+				unsignedPdf: unsignedPdf.bytes,
+				pkcs12,
+				pkcs12Passphrase,
+				reason: 'Vulnerability certificate issuance',
+				location: organisation.name
+			})
+			if (signed.certificateFingerprintSha256 !== signingCertificate.fingerprintSha256) {
+				throw new Error('Signed PDF certificate fingerprint did not match configured certificate')
+			}
+			signedPdfBytes = signed.signedPdf
+			signedPdfSha256 = signed.signedPdfSha256
+		} catch (caught) {
+			await writeAuditEvent({
+				eventType: 'certificate.issue_failed',
+				eventData: {
+					reason: 'pdf_signing_failed',
+					message: caught instanceof Error ? caught.message : 'Unknown signing error',
+					signingCertificateId: signingCertificate.id,
+					signingCertificateFingerprintSha256: signingCertificate.fingerprintSha256
+				},
+				organisationId: session.organisationId,
+				memberId: session.memberId,
+				handoffId: review.handoffId,
+				reviewId: review.id,
+				request
+			})
+			return fail(500, {
+				error: 'The certificate PDF could not be signed.'
+			})
+		}
 		const issuedCertificate = await repository.createIssuedCertificate({
 			reviewId: review.id,
 			handoffId: review.handoffId,
 			organisationId: session.organisationId,
 			signerMemberId: session.memberId,
 			issueRequest,
-			pdf
+			pdf: {
+				...unsignedPdf,
+				bytes: signedPdfBytes
+			}
 		})
 
 		await writeAuditEvent({
 			eventType: 'certificate.issued',
 			eventData: {
 				issuedCertificateId: issuedCertificate.id,
-				filename: issuedCertificate.filename
+				filename: issuedCertificate.filename,
+				signedPdfSha256,
+				signingCertificateId: signingCertificate.id,
+				signingCertificateFingerprintSha256: signingCertificate.fingerprintSha256
 			},
 			organisationId: session.organisationId,
 			memberId: session.memberId,

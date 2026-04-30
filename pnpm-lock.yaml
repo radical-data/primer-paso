@@ -50,6 +50,9 @@ importers:
       '@primer-paso/db':
         specifier: workspace:*
         version: link:../../packages/db
+      '@primer-paso/signing-client':
+        specifier: workspace:*
+        version: link:../../packages/signing-client
       '@primer-paso/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -258,6 +261,8 @@ importers:
       vitest:
         specifier: ^3.0.0
         version: 3.2.4(@types/node@24.12.2)(esbuild@0.27.7)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3)
+
+  packages/signing-client: {}
 
   packages/ui:
     dependencies:

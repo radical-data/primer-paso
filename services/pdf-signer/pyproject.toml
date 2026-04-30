@@ -1,0 +1,23 @@
+[build-system]
+requires = ["uv_build>=0.11.0,<0.12.0"]
+build-backend = "uv_build"
+
+[project]
+name = "pdf-signer"
+version = "0.1.0"
+description = ""
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115.0,<1.0.0",
+    "pyHanko==0.34.1",
+    "pyhanko-certvalidator>=0.30.0,<0.31.0",
+    "pydantic>=2.10.0,<3.0.0",
+    "uvicorn[standard]>=0.32.0,<1.0.0",
+]
+
+[project.scripts]
+pdf-signer = "pdf_signer.main:main"
+
+[dependency-groups]
+dev = ["httpx", "pre-commit", "pytest", "pyright[nodejs]", "ruff"]

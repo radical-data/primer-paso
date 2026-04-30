@@ -1,0 +1,26 @@
+repos:
+  # Pin to 0.11.0.
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.11.0
+    hooks:
+      - id: uv-lock
+
+  - repo: local
+    hooks:
+      - id: ruff-check
+        name: ruff check (uv)
+        types: [python]
+        entry: uv run ruff check --fix --exit-non-zero-on-fix
+        language: system
+
+      - id: ruff-format
+        name: ruff format (uv)
+        types: [python]
+        entry: uv run ruff format
+        language: system
+
+      - id: pyright
+        name: pyright (uv)
+        entry: uv run pyright
+        language: system
+        pass_filenames: false

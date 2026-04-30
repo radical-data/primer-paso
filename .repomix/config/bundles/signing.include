@@ -1,0 +1,12 @@
+packages/signing-client/**
+services/pdf-signer/**
+supabase/migrations/006_organisation_signing_certificates.sql
+scripts/add-org-signing-certificate.ts
+apps/org-portal/src/lib/server/signing-secret-crypto.ts
+apps/org-portal/src/routes/reviews/[id]/+page.server.ts
+apps/org-portal/src/routes/reviews/[id]/certificate.pdf/+server.ts
+packages/db/src/org-portal.ts
+.env.example
+package.json
+pnpm-workspace.yaml
+docs/adr/**
