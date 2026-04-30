@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from datetime import datetime
 from typing import Annotated
 
 from pydantic import BaseModel, Field, field_validator
@@ -37,3 +38,17 @@ class SignPdfResponse(BaseModel):
     signer_issuer: str
     certificate_serial_number: str
     certificate_fingerprint_sha256: str
+
+
+class InspectCertificateRequest(BaseModel):
+    pkcs12_base64: str = Field(min_length=1)
+    pkcs12_passphrase: str = Field(min_length=1)
+
+
+class InspectCertificateResponse(BaseModel):
+    signer_subject: str
+    signer_issuer: str
+    certificate_serial_number: str
+    certificate_fingerprint_sha256: str
+    not_before: datetime | None
+    not_after: datetime | None

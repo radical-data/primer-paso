@@ -5,8 +5,13 @@ from hmac import compare_digest
 
 from fastapi import Depends, FastAPI, Header, HTTPException, status
 
-from pdf_signer.models import SignPdfRequest, SignPdfResponse
-from pdf_signer.signing import SigningInputError, sign_pdf
+from pdf_signer.models import (
+    InspectCertificateRequest,
+    InspectCertificateResponse,
+    SignPdfRequest,
+    SignPdfResponse,
+)
+from pdf_signer.signing import SigningInputError, inspect_certificate, sign_pdf
 
 
 def _get_required_token() -> str:
@@ -66,6 +71,27 @@ def create_app() -> FastAPI:
             raise HTTPException(
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 detail="PDF signing failed",
+            ) from exc
+
+    @app.post(
+        "/v1/inspect-certificate",
+        response_model=InspectCertificateResponse,
+        dependencies=[Depends(_authorise)],
+    )
+    def inspect_certificate_endpoint(
+        request: InspectCertificateRequest,
+    ) -> InspectCertificateResponse:
+        try:
+            return inspect_certificate(request)
+        except SigningInputError as exc:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=str(exc),
+            ) from exc
+        except Exception as exc:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail="Certificate inspection failed",
             ) from exc
 
     return app

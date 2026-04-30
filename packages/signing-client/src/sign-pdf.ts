@@ -1,4 +1,5 @@
 import { createHash } from 'node:crypto'
+import { assertString, formatSigningError, fromBase64, normaliseServiceUrl, toBase64 } from './http'
 
 export type SignatureBox = readonly [number, number, number, number]
 
@@ -30,10 +31,6 @@ type SignPdfResponseBody = {
 	signer_issuer: string
 	certificate_serial_number: string
 	certificate_fingerprint_sha256: string
-}
-
-type ErrorResponseBody = {
-	detail?: unknown
 }
 
 const DEFAULT_BOX: SignatureBox = [360, 48, 540, 110]
@@ -78,42 +75,8 @@ export async function signPdfWithOrganisationCertificate(
 	}
 }
 
-function normaliseServiceUrl(value: string): string {
-	const trimmed = value.trim()
-	if (!trimmed) {
-		throw new Error('PDF signer service URL is required')
-	}
-	return trimmed.replace(/\/+$/, '')
-}
-
-function toBase64(bytes: Uint8Array): string {
-	return Buffer.from(bytes).toString('base64')
-}
-
-function fromBase64(value: string): Uint8Array {
-	return Buffer.from(value, 'base64')
-}
-
 function sha256Hex(bytes: Uint8Array): string {
 	return createHash('sha256').update(bytes).digest('hex')
-}
-
-async function formatSigningError(response: Response): Promise<string> {
-	let detail: unknown
-	try {
-		const body = (await response.json()) as ErrorResponseBody
-		detail = body.detail
-	} catch {
-		detail = await response.text().catch(() => undefined)
-	}
-
-	const detailText =
-		typeof detail === 'string'
-			? detail
-			: detail === undefined
-				? 'unknown error'
-				: JSON.stringify(detail)
-	return `PDF signing failed with HTTP ${response.status}: ${detailText}`
 }
 
 function assertSignPdfResponseBody(
@@ -127,10 +90,4 @@ function assertSignPdfResponseBody(
 	assertString(value.signer_issuer, 'signer_issuer')
 	assertString(value.certificate_serial_number, 'certificate_serial_number')
 	assertString(value.certificate_fingerprint_sha256, 'certificate_fingerprint_sha256')
-}
-
-function assertString(value: unknown, name: string): asserts value is string {
-	if (typeof value !== 'string' || value.length === 0) {
-		throw new Error(`PDF signer returned invalid ${name}`)
-	}
 }

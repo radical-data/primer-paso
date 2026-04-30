@@ -28,3 +28,21 @@ def test_sign_pdf_rejects_invalid_payload_with_token(monkeypatch) -> None:
         json={},
     )
     assert response.status_code == 422
+
+
+def test_inspect_certificate_requires_bearer_token(monkeypatch) -> None:
+    monkeypatch.setenv("PDF_SIGNER_TOKEN", "test-token")
+    client = TestClient(create_app())
+    response = client.post("/v1/inspect-certificate", json={})
+    assert response.status_code == 401
+
+
+def test_inspect_certificate_rejects_invalid_payload_with_token(monkeypatch) -> None:
+    monkeypatch.setenv("PDF_SIGNER_TOKEN", "test-token")
+    client = TestClient(create_app())
+    response = client.post(
+        "/v1/inspect-certificate",
+        headers={"Authorization": "Bearer test-token"},
+        json={},
+    )
+    assert response.status_code == 422

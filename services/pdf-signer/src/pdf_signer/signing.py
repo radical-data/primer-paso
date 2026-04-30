@@ -6,13 +6,19 @@ import binascii
 import hashlib
 import io
 import os
+from datetime import UTC, datetime
 from typing import Any
 
 from pyhanko.pdf_utils.incremental_writer import IncrementalPdfFileWriter
 from pyhanko.sign import fields, signers
 from pyhanko.sign.fields import SigFieldSpec
 
-from pdf_signer.models import SignPdfRequest, SignPdfResponse
+from pdf_signer.models import (
+    InspectCertificateRequest,
+    InspectCertificateResponse,
+    SignPdfRequest,
+    SignPdfResponse,
+)
 
 
 class SigningInputError(ValueError):
@@ -47,6 +53,54 @@ def _certificate_fingerprint_sha256(cert: Any) -> str:
     return hashlib.sha256(dumped).hexdigest()
 
 
+def _load_pkcs12_signer(pkcs12_data: bytes, passphrase: str) -> signers.SimpleSigner:
+    try:
+        return signers.SimpleSigner.load_pkcs12_data(
+            pkcs12_data,
+            passphrase=passphrase.encode("utf-8"),
+            other_certs=[],
+        )
+    except Exception as exc:
+        raise SigningInputError("PKCS#12 certificate could not be loaded") from exc
+
+
+def _normalise_cert_time(value: object) -> datetime | None:
+    if value is None:
+        return None
+    if isinstance(value, datetime):
+        if value.tzinfo is None:
+            return value.replace(tzinfo=UTC)
+        return value
+    return None
+
+
+def inspect_certificate(
+    request: InspectCertificateRequest,
+) -> InspectCertificateResponse:
+    pkcs12_data = _decode_base64(
+        request.pkcs12_base64,
+        field_name="pkcs12_base64",
+        max_bytes=_max_pkcs12_bytes(),
+    )
+    signer = _load_pkcs12_signer(pkcs12_data, request.pkcs12_passphrase)
+    signing_cert = signer.signing_cert
+    if signing_cert is None:
+        raise SigningInputError("PKCS#12 certificate has no signing certificate")
+
+    return InspectCertificateResponse(
+        signer_subject=signing_cert.subject.human_friendly,
+        signer_issuer=signing_cert.issuer.human_friendly,
+        certificate_serial_number=str(signing_cert.serial_number),
+        certificate_fingerprint_sha256=_certificate_fingerprint_sha256(signing_cert),
+        not_before=_normalise_cert_time(
+            signing_cert["tbs_certificate"]["validity"]["not_before"].native
+        ),
+        not_after=_normalise_cert_time(
+            signing_cert["tbs_certificate"]["validity"]["not_after"].native
+        ),
+    )
+
+
 def sign_pdf(request: SignPdfRequest) -> SignPdfResponse:
     unsigned_pdf = _decode_base64(
         request.unsigned_pdf_base64,
@@ -59,14 +113,7 @@ def sign_pdf(request: SignPdfRequest) -> SignPdfResponse:
         max_bytes=_max_pkcs12_bytes(),
     )
 
-    try:
-        signer = signers.SimpleSigner.load_pkcs12_data(
-            pkcs12_data,
-            passphrase=request.pkcs12_passphrase.encode("utf-8"),
-            other_certs=[],
-        )
-    except Exception as exc:
-        raise SigningInputError("PKCS#12 certificate could not be loaded") from exc
+    signer = _load_pkcs12_signer(pkcs12_data, request.pkcs12_passphrase)
 
     input_stream = io.BytesIO(unsigned_pdf)
     output_stream = io.BytesIO()
