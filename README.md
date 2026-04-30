@@ -92,26 +92,26 @@ be able to sign in via your Supabase project.
 For local testing, set:
 
 ```sh
-PRIVATE_DATABASE_URL=postgres://primer_paso:primer_paso@localhost:5432/primer_paso
+PRIVATE_DATABASE_PROVIDER=supabase
+PRIVATE_DATABASE_URL=postgresql://postgres:postgres@127.0.0.1:54322/postgres
 PUBLIC_CERTIFICATE_HANDOFF_ENABLED=true
 PUBLIC_ORG_PORTAL_URL=http://localhost:5174
-PUBLIC_SUPABASE_URL=https://YOUR_PROJECT.supabase.co
-PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+PUBLIC_SUPABASE_URL=http://127.0.0.1:54321
+PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-local-anon-key
 PRIVATE_ORG_PORTAL_CUSTOM_SMTP_CONFIGURED=false
 ```
 
-Configure the Supabase redirect URL for magic links to include
-`http://localhost:5174/auth/callback` (or your dev portal origin). For deployed
-environments, set `PRIVATE_ORG_PORTAL_CUSTOM_SMTP_CONFIGURED=true` and use custom
-SMTP in the Supabase dashboard.
+For local Supabase, run `supabase status` and copy the local anon key into
+`PUBLIC_SUPABASE_PUBLISHABLE_KEY`. Magic links return to `/auth/confirm`.
+For deployed environments, set `PRIVATE_ORG_PORTAL_CUSTOM_SMTP_CONFIGURED=true`
+and use custom SMTP in the Supabase dashboard.
 
 See `docs/supabase-org-auth.md` for the Supabase dashboard setup.
 
-Apply the database migrations:
+Reset and seed the local Supabase database:
 
 ```sh
-psql "$PRIVATE_DATABASE_URL" -f packages/db/migrations/001_certificate_handoffs.sql
-psql "$PRIVATE_DATABASE_URL" -f packages/db/migrations/002_org_portal_mvp.sql
+pnpm db:reset
 ```
 
 Seed a local collaborating organisation and test users:
@@ -147,13 +147,13 @@ Set:
 
 ```txt
 Site URL: https://org.primerpaso.org
-Redirect URL: https://org.primerpaso.org/auth/callback
+Redirect URL: https://org.primerpaso.org/auth/confirm
 ```
 
 Add preview and local callback URLs as needed, for example:
 
 ```txt
-http://localhost:5174/auth/callback
+http://localhost:5174/auth/confirm
 ```
 
 Only add origins you actually use. Avoid wildcard redirects for production.
@@ -166,11 +166,11 @@ Use the magic-link email flow. The application passes `emailRedirectTo` when it
 requests the link, so links should return to:
 
 ```txt
-/auth/callback
+/auth/confirm
 ```
 
-The callback exchanges the Supabase auth code for a session and then checks that
-the email belongs to an active organisation member.
+The confirmation route exchanges the Supabase token hash for a session and then
+checks that the email belongs to an active organisation member.
 
 ### 3. Authentication -> Emails -> SMTP Settings
 

@@ -23,7 +23,7 @@ export const normaliseEmail = (email: string) => email.trim().toLowerCase()
 export const getOrgPortalUrl = () =>
 	(publicEnv.PUBLIC_ORG_PORTAL_URL ?? 'https://org.primerpaso.org').replace(/\/+$/, '')
 
-export const getAuthCallbackUrl = () => new URL('/auth/callback', getOrgPortalUrl()).toString()
+export const getAuthConfirmUrl = () => new URL('/auth/confirm', getOrgPortalUrl()).toString()
 
 export const isSupabaseAuthConfigured = () =>
 	Boolean(
