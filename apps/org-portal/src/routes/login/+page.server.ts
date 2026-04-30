@@ -97,14 +97,16 @@ export const actions: Actions = {
 			}
 		}
 
-		// Keep shouldCreateUser=false so unknown emails cannot be provisioned in
-		// Supabase Auth through this flow. We only send links after confirming
-		// the email belongs to an active organisation member in our database.
+		const redirectTo = getAuthConfirmUrl()
+
+		// Supabase Auth users are provisioned lazily, but only after the email has
+		// matched an active organisation member in our database. Portal access is
+		// still resolved on every request through organisation_members.
 		const { error: signInError } = await locals.supabase.auth.signInWithOtp({
 			email,
 			options: {
-				shouldCreateUser: false,
-				emailRedirectTo: getAuthConfirmUrl()
+				shouldCreateUser: true,
+				emailRedirectTo: redirectTo
 			}
 		})
 
