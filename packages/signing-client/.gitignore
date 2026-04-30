@@ -1,0 +1,8 @@
+# Ignore signing material by default.
+fixtures/*
+
+# Keep the deliberately fake test fixture committed.
+!fixtures/README.md
+!fixtures/test-organisation-signing-cert.cert.pem
+!fixtures/test-organisation-signing-cert.p12
+!fixtures/test-organisation-signing-cert.passphrase.txt

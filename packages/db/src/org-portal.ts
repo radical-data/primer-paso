@@ -106,6 +106,22 @@ export interface IssuedCertificateRecord {
 	createdAt: string
 }
 
+export interface OrganisationSigningCertificateRecord {
+	id: string
+	organisationId: string
+	encryptedPkcs12: string
+	encryptedPassphrase: string
+	subject: string
+	issuer: string
+	serialNumber: string
+	fingerprintSha256: string
+	notBefore?: string
+	notAfter?: string
+	createdByMemberId?: string
+	createdAt: string
+	disabledAt?: string
+}
+
 export interface CreateOrganisationSessionInput {
 	memberId: string
 	now?: Date
@@ -237,6 +253,9 @@ export interface OrgPortalRepository {
 	) => Promise<CertificateHandoffReviewRecord | null>
 	createIssuedCertificate: (input: CreateIssuedCertificateInput) => Promise<IssuedCertificateRecord>
 	findIssuedCertificateByReviewId: (reviewId: string) => Promise<IssuedCertificateRecord | null>
+	findActiveOrganisationSigningCertificate: (
+		organisationId: string
+	) => Promise<OrganisationSigningCertificateRecord | null>
 	createAuditEvent: (input: CreateAuditEventInput) => Promise<void>
 	recordOrganisationAuthAttempt: (
 		input: RecordOrganisationAuthAttemptInput
@@ -349,6 +368,24 @@ const issuedCertificateFromRow = (row: Record<string, unknown>): IssuedCertifica
 	filename: String(row.filename),
 	contentType: 'application/pdf',
 	createdAt: date(row.created_at)
+})
+
+const organisationSigningCertificateFromRow = (
+	row: Record<string, unknown>
+): OrganisationSigningCertificateRecord => ({
+	id: String(row.id),
+	organisationId: String(row.organisation_id),
+	encryptedPkcs12: String(row.encrypted_pkcs12),
+	encryptedPassphrase: String(row.encrypted_passphrase),
+	subject: String(row.subject),
+	issuer: String(row.issuer),
+	serialNumber: String(row.serial_number),
+	fingerprintSha256: String(row.fingerprint_sha256),
+	notBefore: optionalDate(row.not_before),
+	notAfter: optionalDate(row.not_after),
+	createdByMemberId: optionalString(row.created_by_member_id),
+	createdAt: date(row.created_at),
+	disabledAt: optionalDate(row.disabled_at)
 })
 
 const auditEventFromRow = (row: Record<string, unknown>): OrganisationAuditEventRecord => ({
@@ -931,6 +968,16 @@ export const createPostgresOrgPortalRepository = ({
 		},
 
 		findIssuedCertificateByReviewId: (reviewId) => findIssuedCertificateByReviewId(sql, reviewId),
+		findActiveOrganisationSigningCertificate: async (organisationId) => {
+			const rows = await sql`
+				select *
+				from organisation_signing_certificates
+				where organisation_id = ${organisationId}
+				and disabled_at is null
+				limit 1
+			`
+			return rows[0] ? organisationSigningCertificateFromRow(rows[0]) : null
+		},
 
 		createAuditEvent: async ({
 			organisationId,

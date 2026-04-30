@@ -22,6 +22,7 @@
 		"@primer-paso/auth": "workspace:*",
 		"@primer-paso/certificate": "workspace:*",
 		"@primer-paso/db": "workspace:*",
+		"@primer-paso/signing-client": "workspace:*",
 		"@lucide/svelte": "^1.8.0",
 		"@supabase/ssr": "^0.7.0",
 		"@supabase/supabase-js": "^2.87.0",

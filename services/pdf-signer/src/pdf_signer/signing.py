@@ -74,6 +74,17 @@ def _normalise_cert_time(value: object) -> datetime | None:
     return None
 
 
+def _certificate_validity_time(cert: Any, field_name: str) -> datetime | None:
+    try:
+        value = cert["tbs_certificate"]["validity"][field_name].native
+    except Exception as exc:
+        raise SigningInputError(
+            f"signing certificate validity field could not be read: {field_name}"
+        ) from exc
+
+    return _normalise_cert_time(value)
+
+
 def inspect_certificate(
     request: InspectCertificateRequest,
 ) -> InspectCertificateResponse:
@@ -92,12 +103,8 @@ def inspect_certificate(
         signer_issuer=signing_cert.issuer.human_friendly,
         certificate_serial_number=str(signing_cert.serial_number),
         certificate_fingerprint_sha256=_certificate_fingerprint_sha256(signing_cert),
-        not_before=_normalise_cert_time(
-            signing_cert["tbs_certificate"]["validity"]["not_before"].native
-        ),
-        not_after=_normalise_cert_time(
-            signing_cert["tbs_certificate"]["validity"]["not_after"].native
-        ),
+        not_before=_certificate_validity_time(signing_cert, "not_before"),
+        not_after=_certificate_validity_time(signing_cert, "not_after"),
     )
 
 

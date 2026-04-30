@@ -19,7 +19,7 @@ import {
 type Args = {
 	organisationId: string
 	certPath: string
-	createdByUserId: string | null
+	createdByMemberId: string | null
 }
 
 const args = parseArgs(process.argv.slice(2))
@@ -52,7 +52,7 @@ await sql`
     fingerprint_sha256,
     not_before,
     not_after,
-    created_by_user_id
+    created_by_member_id
   )
   values (
     ${args.organisationId},
@@ -64,7 +64,7 @@ await sql`
     ${metadata.certificateFingerprintSha256},
     ${metadata.notBefore},
     ${metadata.notAfter},
-    ${args.createdByUserId}
+    ${args.createdByMemberId}
   )
   on conflict (organisation_id)
   where disabled_at is null
@@ -77,7 +77,7 @@ await sql`
     fingerprint_sha256 = excluded.fingerprint_sha256,
     not_before = excluded.not_before,
     not_after = excluded.not_after,
-    created_by_user_id = excluded.created_by_user_id,
+    created_by_member_id = excluded.created_by_member_id,
     created_at = now()
 `
 
@@ -111,7 +111,7 @@ function parseArgs(argv: string[]): Args {
 
 	const organisationId = values.get('organisation-id')
 	const certPath = values.get('cert')
-	const createdByUserId = values.get('created-by-user-id') ?? null
+	const createdByMemberId = values.get('created-by-member-id') ?? null
 
 	if (!organisationId) usage('Missing --organisation-id')
 	if (!certPath) usage('Missing --cert')
@@ -119,7 +119,7 @@ function parseArgs(argv: string[]): Args {
 	return {
 		organisationId,
 		certPath,
-		createdByUserId
+		createdByMemberId
 	}
 }
 
@@ -130,7 +130,7 @@ function usage(message: string): never {
 	console.error('  node --env-file=.env --import tsx scripts/add-org-signing-certificate.ts \\')
 	console.error('    --organisation-id <uuid> \\')
 	console.error('    --cert ./organisation.p12 \\')
-	console.error('    [--created-by-user-id <uuid>]')
+	console.error('    [--created-by-member-id <uuid>]')
 	process.exit(1)
 }
 

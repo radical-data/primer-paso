@@ -50,6 +50,9 @@ importers:
       '@primer-paso/db':
         specifier: workspace:*
         version: link:../../packages/db
+      '@primer-paso/signing-client':
+        specifier: workspace:*
+        version: link:../../packages/signing-client
       '@primer-paso/ui':
         specifier: workspace:*
         version: link:../../packages/ui
