@@ -3,14 +3,11 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises'
 
 import { basename, dirname, resolve } from 'node:path'
 
-const DEFAULT_INPUT_PDF = 'packages/certificate/vulnerability-certificate.pdf'
-
-const DEFAULT_CERT_PATH = 'packages/signing-client/fixtures/test-organisation-signing-cert.p12'
-
+const DEFAULT_INPUT_PDF = 'packages/certificate/templates/certificado-vulnerabilidad.pdf'
+const DEFAULT_CERT_PATH = 'packages/signing-client/fixtures/fnmt-test-sello-entidad-nosmime.p12'
 const DEFAULT_OUTPUT_PDF = 'tmp/signed-vulnerability-certificate.pdf'
-
 const DEFAULT_PASSPHRASE_PATH =
-	'packages/signing-client/fixtures/test-organisation-signing-cert.passphrase.txt'
+	'packages/signing-client/fixtures/fnmt-test-sello-entidad-nosmime.passphrase.txt'
 
 const args = parseArgs(process.argv.slice(2))
 
