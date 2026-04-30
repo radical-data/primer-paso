@@ -376,6 +376,69 @@ export type Database = {
 					}
 				]
 			}
+			organisation_signing_certificates: {
+				Row: {
+					created_at: string
+					created_by_member_id: string | null
+					disabled_at: string | null
+					encrypted_passphrase: string
+					encrypted_pkcs12: string
+					fingerprint_sha256: string
+					id: string
+					issuer: string
+					not_after: string | null
+					not_before: string | null
+					organisation_id: string
+					serial_number: string
+					subject: string
+				}
+				Insert: {
+					created_at?: string
+					created_by_member_id?: string | null
+					disabled_at?: string | null
+					encrypted_passphrase: string
+					encrypted_pkcs12: string
+					fingerprint_sha256: string
+					id?: string
+					issuer: string
+					not_after?: string | null
+					not_before?: string | null
+					organisation_id: string
+					serial_number: string
+					subject: string
+				}
+				Update: {
+					created_at?: string
+					created_by_member_id?: string | null
+					disabled_at?: string | null
+					encrypted_passphrase?: string
+					encrypted_pkcs12?: string
+					fingerprint_sha256?: string
+					id?: string
+					issuer?: string
+					not_after?: string | null
+					not_before?: string | null
+					organisation_id?: string
+					serial_number?: string
+					subject?: string
+				}
+				Relationships: [
+					{
+						foreignKeyName: 'organisation_signing_certificates_created_by_member_id_fkey'
+						columns: ['created_by_member_id']
+						isOneToOne: false
+						referencedRelation: 'organisation_members'
+						referencedColumns: ['id']
+					},
+					{
+						foreignKeyName: 'organisation_signing_certificates_organisation_id_fkey'
+						columns: ['organisation_id']
+						isOneToOne: false
+						referencedRelation: 'organisations'
+						referencedColumns: ['id']
+					}
+				]
+			}
 			organisations: {
 				Row: {
 					address: string | null
