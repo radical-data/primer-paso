@@ -2,12 +2,8 @@
 	base = "apps/org-portal"
 	command = "pnpm build:netlify"
 	publish = "build"
+	functions = ".netlify/functions-internal"
 
 [build.environment]
 	NODE_VERSION = "24.10.0"
-
-[context.deploy-preview.environment]
-	PRIVATE_ORG_PORTAL_ENVIRONMENT = "preview"
-
-[context.production.environment]
-	PRIVATE_ORG_PORTAL_ENVIRONMENT = "production"
+	PUBLIC_SITE_URL = "https://primerpaso.org"

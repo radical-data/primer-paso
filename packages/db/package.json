@@ -10,7 +10,7 @@
 		"check": "biome check .",
 		"typecheck": "tsc --noEmit",
 		"test": "vitest run --passWithNoTests",
-		"migrate": "node --env-file=../../.env --import tsx scripts/migrate.ts",
+		"migrate": "node --env-file-if-exists=../../.env --import tsx scripts/migrate.ts",
 		"seed:local-org-portal": "node --env-file=../../.env --import tsx scripts/seed-local-org-portal.ts"
 	},
 	"dependencies": {

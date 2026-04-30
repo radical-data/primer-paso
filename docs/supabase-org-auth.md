@@ -12,7 +12,7 @@ Set these for the organisation portal:
 
 ```sh
 PUBLIC_SUPABASE_URL=https://YOUR_PROJECT.supabase.co
-PUBLIC_SUPABASE_ANON_KEY=YOUR_PUBLIC_ANON_KEY
+PUBLIC_SUPABASE_PUBLISHABLE_KEY=YOUR_PUBLIC_PUBLISHABLE_OR_ANON_KEY
 PUBLIC_ORG_PORTAL_URL=https://org.primerpaso.org
 PRIVATE_ORG_PORTAL_CUSTOM_SMTP_CONFIGURED=true
 ```
@@ -40,14 +40,14 @@ Site URL: https://org.primerpaso.org
 Add redirect URLs:
 
 ```txt
-https://org.primerpaso.org/auth/callback
-http://localhost:5174/auth/callback
+https://org.primerpaso.org/auth/confirm
+http://localhost:5174/auth/confirm
 ```
 
 Add any deploy-preview or staging callback URLs used for testing, for example:
 
 ```txt
-https://preview-org-primer-paso.example.netlify.app/auth/callback
+https://preview-org-primer-paso.example.netlify.app/auth/confirm
 ```
 
 Do not use broad wildcard redirects for production unless there is a reviewed
@@ -63,15 +63,20 @@ The application calls Supabase with:
 supabase.auth.signInWithOtp({
   email,
   options: {
-    emailRedirectTo: 'https://org.primerpaso.org/auth/callback?next=/dashboard'
+    shouldCreateUser: false,
+    emailRedirectTo: 'https://org.primerpaso.org/auth/confirm'
   }
 })
 ```
 
-Supabase names the method `signInWithOtp`, but it can send a magic link when
-the email template uses the confirmation URL.
+Supabase names the method `signInWithOtp`, but it sends a magic link when the
+email template points to the app confirmation route.
 
-Use a magic-link email template that includes the confirmation URL.
+Use a magic-link email template that sends `token_hash` to:
+
+```txt
+/auth/confirm?token_hash={{ .TokenHash }}&type=email
+```
 
 ### 3. Authentication -> Emails -> SMTP Settings
 
@@ -115,7 +120,7 @@ server code, not through browser-side Supabase table queries.
 3. Enter an email that exists in `organisation_members`.
 4. Confirm Supabase sends a magic-link email.
 5. Click the link.
-6. Confirm the callback lands on `/dashboard` or the pending handoff route.
+6. Confirm `/auth/confirm` verifies the link and lands on `/dashboard`.
 7. Confirm unauthorised emails do not receive a usable login.
 
 ## Production checklist

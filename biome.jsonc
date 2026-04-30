@@ -3,6 +3,7 @@
 	"files": {
 		"includes": [
 			"**",
+			"!supabase/templates/**/*.html",
 			"!**/build",
 			"!**/.svelte-kit",
 			"!**/node_modules",

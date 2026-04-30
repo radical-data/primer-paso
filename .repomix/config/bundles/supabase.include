@@ -1,0 +1,10 @@
+supabase/**
+packages/db/scripts/migrate.ts
+packages/db/src/database.types.ts
+packages/db/package.json
+docs/local-supabase.md
+docs/supabase-org-auth.md
+.env.example
+README.md
+package.json
+pnpm-workspace.yaml

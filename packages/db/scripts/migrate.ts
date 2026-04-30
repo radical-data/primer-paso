@@ -5,8 +5,8 @@ import { fileURLToPath } from 'node:url'
 import postgres from 'postgres'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const packageRoot = path.resolve(__dirname, '..')
-const migrationsDir = path.join(packageRoot, 'migrations')
+const repoRoot = path.resolve(__dirname, '..', '..', '..')
+const migrationsDir = path.join(repoRoot, 'supabase', 'migrations')
 
 const databaseUrl = process.env.PRIVATE_DATABASE_URL?.trim() || process.env.DATABASE_URL?.trim()
 
