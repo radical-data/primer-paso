@@ -1,5 +1,4 @@
 <script lang="ts">
-import ArrowLeftIcon from '@lucide/svelte/icons/arrow-left'
 import DownloadIcon from '@lucide/svelte/icons/download'
 import { Badge } from '@primer-paso/ui/badge'
 import { Button } from '@primer-paso/ui/button'
@@ -236,11 +235,4 @@ const statusTone = $derived(
 			</CardContent>
 		</Card>
 	{/if}
-
-	<div class="actions">
-		<Button href="/dashboard" variant="ghost">
-			<ArrowLeftIcon class="size-4" aria-hidden="true" />
-			Back to dashboard
-		</Button>
-	</div>
 </div>

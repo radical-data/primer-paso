@@ -1,6 +1,5 @@
 <script lang="ts">
 import ArrowLeftIcon from '@lucide/svelte/icons/arrow-left'
-import HistoryIcon from '@lucide/svelte/icons/history'
 import { Badge } from '@primer-paso/ui/badge'
 import { Button } from '@primer-paso/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@primer-paso/ui/card'
@@ -44,17 +43,6 @@ const inactiveMembers = $derived(data.members.filter((member) => member.status !
 			Manage who can use the organisation portal for <strong>{data.organisation.name}</strong>.
 		</p>
 	</header>
-
-	<div class="actions">
-		<Button href="/dashboard" variant="ghost">
-			<ArrowLeftIcon class="size-4" aria-hidden="true" />
-			Back to dashboard
-		</Button>
-		<Button href="/admin/audit" variant="ghost">
-			<HistoryIcon class="size-4" aria-hidden="true" />
-			View audit log
-		</Button>
-	</div>
 
 	{#if form?.error}
 		<div class="error-summary" role="alert">
@@ -222,4 +210,11 @@ const inactiveMembers = $derived(data.members.filter((member) => member.status !
 			</CardContent>
 		</Card>
 	{/if}
+
+	<div class="actions">
+		<Button href="/dashboard" variant="ghost">
+			<ArrowLeftIcon class="size-4" aria-hidden="true" />
+			Back to dashboard
+		</Button>
+	</div>
 </div>

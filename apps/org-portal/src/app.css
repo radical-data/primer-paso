@@ -187,6 +187,11 @@
 		margin: 0 auto;
 	}
 
+	.bleed-wide {
+		width: min(100vw - 2rem, 60rem);
+		margin-inline: calc(50% - min(50vw - 1rem, 30rem));
+	}
+
 	.site-header-inner {
 		@apply flex flex-wrap items-center gap-4 justify-between;
 	}

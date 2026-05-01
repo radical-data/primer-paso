@@ -5,6 +5,7 @@ import '../app.css'
 let { children, data } = $props()
 
 const session = $derived(data.session)
+const path = $derived(page.url.pathname)
 
 const navItems = $derived(
 	session
@@ -17,13 +18,13 @@ const navItems = $derived(
 					? [{ href: '/admin/audit', label: 'Audit log' }]
 					: [])
 			]
-		: []
+		: [
+				{ href: '/', label: 'Home' },
+				{ href: '/login', label: 'Sign in' }
+			]
 )
 
-const isCurrent = (href: string) => {
-	const path = page.url.pathname
-	return path === href || path.startsWith(`${href}/`)
-}
+const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`)
 </script>
 
 <svelte:head> <meta name="robots" content="noindex, nofollow"> </svelte:head>
@@ -38,23 +39,23 @@ const isCurrent = (href: string) => {
 				<span class="brand-tagline">Organisation portal</span>
 			</a>
 
-			{#if session}
-				<nav class="site-nav" aria-label="Portal navigation">
-					<ul class="site-nav-list">
-						{#each navItems as item (item.href)}
-							<li>
-								<a
-									class="site-nav-link"
-									href={item.href}
-									aria-current={isCurrent(item.href) ? 'page' : undefined}
-								>
-									{item.label}
-								</a>
-							</li>
-						{/each}
-					</ul>
-				</nav>
+			<nav class="site-nav" aria-label="Portal navigation">
+				<ul class="site-nav-list">
+					{#each navItems as item (item.href)}
+						<li>
+							<a
+								class="site-nav-link"
+								href={item.href}
+								aria-current={isCurrent(item.href) ? 'page' : undefined}
+							>
+								{item.label}
+							</a>
+						</li>
+					{/each}
+				</ul>
+			</nav>
 
+			{#if session}
 				<div class="site-header-actions">
 					<span class="hint hidden md:inline">{session.email}</span>
 					<form method="POST" action="/logout">
