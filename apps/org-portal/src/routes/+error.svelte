@@ -1,7 +1,7 @@
 <script lang="ts">
-import { page } from '$app/state'
 import { Button } from '@primer-paso/ui/button'
 import { Card, CardContent } from '@primer-paso/ui/card'
+import { page } from '$app/state'
 
 const status = $derived(page.status)
 const message = $derived(page.error?.message ?? 'Something went wrong.')
