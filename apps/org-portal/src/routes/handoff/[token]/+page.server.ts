@@ -26,7 +26,7 @@ export const load: PageServerLoad = async ({ locals, params, request }) => {
 
 		error(
 			404,
-			'No se pudo abrir esta entrega. Puede haber caducado, haberse utilizado ya, o el enlace puede ser incorrecto.'
+			'No se pudo abrir este borrador. Puede haber caducado, haberse utilizado ya o el enlace puede ser incorrecto.'
 		)
 	}
 
@@ -41,7 +41,7 @@ export const load: PageServerLoad = async ({ locals, params, request }) => {
 			request
 		})
 
-		error(422, 'Esta entrega contiene un borrador de certificado no válido.')
+		error(422, 'Este enlace contiene un borrador de certificado no válido.')
 	}
 
 	const opened = await repository.markHandoffOpened(params.token)

@@ -12,22 +12,15 @@ import {
 	TableHeader,
 	TableRow
 } from '@primer-paso/ui/table'
+import { memberStatusLabel, roleLabel } from '$lib/labels'
 
 let { data, form } = $props()
-
-const roleLabel = (role: string) =>
-	({
-		admin: 'Administrador',
-		audit_viewer: 'Visor de auditoría',
-		intake_volunteer: 'Voluntario de admisión',
-		authorised_signer: 'Firmante autorizado'
-	})[role] ?? role
 
 const statusVariant = (status: string) => (status === 'active' ? 'success' : 'outline')
 
 const formatDate = (value: string | undefined) => {
 	if (!value) return '—'
-	return new Intl.DateTimeFormat('en-GB', {
+	return new Intl.DateTimeFormat('es-ES', {
 		dateStyle: 'medium',
 		timeStyle: 'short',
 		timeZone: 'Europe/Madrid'
@@ -53,7 +46,7 @@ const inactiveMembers = $derived(data.members.filter((member) => member.status !
 		</p>
 
 		<p>
-			<a href="/dashboard">Volver al panel</a>
+			<a href="/dashboard">Volver al panel de la organización</a>
 			{' · '}
 			<a href="/admin/audit">Ver registro de auditoría</a>
 		</p>
@@ -65,9 +58,8 @@ const inactiveMembers = $derived(data.members.filter((member) => member.status !
 		<section aria-labelledby="add-member-title">
 			<h2 id="add-member-title">Añadir o reactivar un miembro</h2>
 			<p>
-				Esto utiliza el mecanismo de acceso del piloto actual. Un miembro puede iniciar sesión con
-				su correo y el código de acceso compartido de la organización hasta que la entrega por
-				correo lo sustituya.
+				Añade aquí a las personas autorizadas de la organización. Podrán iniciar sesión con su
+				correo electrónico mediante un enlace de acceso seguro.
 			</p>
 
 			<form method="POST" action="?/add">
@@ -135,7 +127,9 @@ const inactiveMembers = $derived(data.members.filter((member) => member.status !
 								<span>{member.email}</span>
 							</TableCell>
 							<TableCell>
-								<Badge variant={statusVariant(member.status)}>{member.status}</Badge>
+								<Badge variant={statusVariant(member.status)}
+									>{memberStatusLabel(member.status)}</Badge
+								>
 							</TableCell>
 							<TableCell>
 								<form method="POST" action="?/role">
@@ -147,7 +141,7 @@ const inactiveMembers = $derived(data.members.filter((member) => member.status !
 											</NativeSelectOption>
 										{/each}
 									</NativeSelect>
-									<Button type="submit" variant="outline" size="sm">Guardar</Button>
+									<Button type="submit" variant="outline" size="sm">Guardar rol</Button>
 								</form>
 							</TableCell>
 							<TableCell>{formatDate(member.createdAt)}</TableCell>
@@ -188,7 +182,9 @@ const inactiveMembers = $derived(data.members.filter((member) => member.status !
 									<span>{member.email}</span>
 								</TableCell>
 								<TableCell>
-									<Badge variant={statusVariant(member.status)}>{member.status}</Badge>
+									<Badge variant={statusVariant(member.status)}
+										>{memberStatusLabel(member.status)}</Badge
+									>
 								</TableCell>
 								<TableCell>{roleLabel(member.role)}</TableCell>
 								<TableCell>{formatDate(member.disabledAt)}</TableCell>

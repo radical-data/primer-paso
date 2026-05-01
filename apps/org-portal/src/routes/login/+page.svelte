@@ -13,7 +13,7 @@ let { data, form } = $props()
 		<h1>Iniciar sesión en el portal de organizaciones</h1>
 
 		{#if data.hasPendingHandoff}
-			<p>Inicia sesión para abrir la entrega de certificado.</p>
+			<p>Inicia sesión para abrir el borrador de certificado.</p>
 		{:else}
 			<p>Introduce el correo de tu organización. Te enviaremos un enlace de acceso seguro.</p>
 		{/if}
@@ -42,7 +42,7 @@ let { data, form } = $props()
 		{/if}
 
 		{#if !form?.success}
-			<p>El acceso está limitado a miembros autorizados de organizaciones colaboradoras.</p>
+			<p>El acceso está limitado a miembros activos de organizaciones colaboradoras.</p>
 		{/if}
 	</section>
 </main>

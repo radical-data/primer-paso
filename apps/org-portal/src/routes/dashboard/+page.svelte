@@ -1,4 +1,6 @@
 <script lang="ts">
+import { roleLabel } from '$lib/labels'
+
 let { data } = $props()
 </script>
 
@@ -17,23 +19,20 @@ let { data } = $props()
 		{/if}
 
 		<p>
-			Has iniciado sesión como miembro de la organización con el rol
-			<strong>{data.session.role}</strong>.
+			Has iniciado sesión como miembro de la organización con permiso de
+			<strong>{roleLabel(data.session.role)}</strong>.
 		</p>
 
-		<h2>Abrir una entrega de certificado</h2>
+		<h2>Abrir un borrador recibido</h2>
 		<form method="GET" action="/handoff" class="stack">
 			<label>
-				Token o enlace de entrega
+				Enlace o código del borrador
 				<input name="token" autocomplete="off">
 			</label>
-			<button type="submit">Abrir entrega</button>
+			<button type="submit">Abrir borrador</button>
 		</form>
 
-		<p>
-			Abre esta página desde un código QR de Primer Paso, o pega el enlace o token de entrega
-			arriba.
-		</p>
+		<p>Escanea un código QR de Primer Paso o pega arriba el enlace o código del borrador.</p>
 
 		{#if data.adminLinks.canManageMembers || data.adminLinks.canReadAudit}
 			<section>

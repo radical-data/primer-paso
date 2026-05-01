@@ -14,7 +14,15 @@ const readString = (formData: FormData, key: string) =>
 const readEmail = (formData: FormData) => readString(formData, 'email').toLowerCase()
 
 const errorMessage = (error: unknown) =>
-	error instanceof OrgPortalRepositoryError ? error.message : 'Algo salió mal. Inténtalo de nuevo.'
+	error instanceof OrgPortalRepositoryError
+		? {
+				invalid_role: 'Elige un rol válido.',
+				not_found: 'No se encontró el miembro indicado.',
+				last_admin:
+					'La organización debe conservar al menos una persona con permiso de administración.',
+				duplicate_member: 'Ya existe un miembro activo con este correo electrónico.'
+			}[error.code]
+		: 'Algo salió mal. Inténtalo de nuevo.'
 
 const getRepositoryOrError = () => {
 	const repository = getOrgPortalRepository()
@@ -118,7 +126,7 @@ export const actions: Actions = {
 		if (!memberId || !isOrgRole(role)) {
 			return fail(400, {
 				intent: 'role',
-				error: 'Elige un miembro y un rol válidos.'
+				error: 'Elige un miembro y un rol válido.'
 			})
 		}
 

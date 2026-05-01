@@ -3,31 +3,31 @@ let { data } = $props()
 </script>
 
 <svelte:head>
-	<title>Entrega de certificado | Portal de organizaciones de Primer Paso</title>
+	<title>Borrador de certificado | Portal de organizaciones de Primer Paso</title>
 	<meta name="robots" content="noindex, nofollow">
 </svelte:head>
 
 <main class="shell">
 	<section class="card">
 		<p class="eyebrow">Primer Paso</p>
-		<h1>Entrega de certificado</h1>
+		<h1>Borrador de certificado</h1>
 
 		{#if data.hasToken}
 			<p>
-				Se recibió una referencia de entrega. Inicia sesión como persona usuaria autorizada de la
-				organización para abrir el borrador.
+				Se ha recibido una referencia de borrador. Inicia sesión como persona autorizada de la
+				organización para abrirlo.
 			</p>
 		{:else}
 			<p>
-				No se proporcionó ninguna referencia de entrega. Abre esta página desde un código QR o
-				enlace de entrega de certificado de Primer Paso.
+				No se ha proporcionado ninguna referencia de borrador. Abre esta página desde un código QR
+				de Primer Paso o pega el enlace o código del borrador.
 			</p>
 			<form method="GET" action="/handoff">
 				<label>
-					Token o enlace de entrega
+					Enlace o código del borrador
 					<input name="token" autocomplete="off">
 				</label>
-				<button type="submit">Abrir entrega</button>
+				<button type="submit">Abrir borrador</button>
 			</form>
 		{/if}
 	</section>

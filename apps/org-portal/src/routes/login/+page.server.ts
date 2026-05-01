@@ -55,7 +55,7 @@ export const actions: Actions = {
 
 		if (!email || !email.includes('@')) {
 			return fail(400, {
-				error: 'Introduce el correo electrónico de tu organización.',
+				error: 'Introduce el correo electrónico que usas con tu organización.',
 				email
 			})
 		}

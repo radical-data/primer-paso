@@ -1,4 +1,6 @@
 <script lang="ts">
+import { reviewStatusLabel, vulnerabilityReasonLabel } from '$lib/labels'
+
 let { data, form } = $props()
 
 type VerificationFormValue = {
@@ -30,13 +32,13 @@ const verification = $derived(formVerification ?? review.verification ?? emptyVe
 </script>
 
 <svelte:head>
-	<title>Revisar entrega de certificado | Portal de organizaciones de Primer Paso</title>
+	<title>Revisar borrador de certificado | Portal de organizaciones de Primer Paso</title>
 	<meta name="robots" content="noindex, nofollow">
 </svelte:head>
 
 <main class="shell">
 	<section class="card">
-		<p class="eyebrow">Entrega de certificado</p>
+		<p class="eyebrow">Borrador de certificado</p>
 		<h1>Revisar el borrador del certificado</h1>
 
 		{#if form?.error}
@@ -44,13 +46,14 @@ const verification = $derived(formVerification ?? review.verification ?? emptyVe
 		{/if}
 
 		<p>
-			Este es un borrador preparado por la persona usuaria. No emitas un certificado a menos que tu
-			organización haya comprobado la información y pueda certificar las circunstancias.
+			Este borrador ha sido preparado por la persona solicitante. Antes de emitir el certificado,
+			comprueba la información con la persona y confirma que la organización puede acreditar las
+			circunstancias indicadas.
 		</p>
 
 		<section>
 			<h2>Estado de la revisión</h2>
-			<p><strong>{data.review.status}</strong></p>
+			<p><strong>{reviewStatusLabel(data.review.status)}</strong></p>
 		</section>
 
 		<section>
@@ -130,7 +133,7 @@ const verification = $derived(formVerification ?? review.verification ?? emptyVe
 			<h2>Circunstancias de vulnerabilidad</h2>
 			<ul>
 				{#each vulnerability.reasons as reason}
-					<li>{reason}</li>
+					<li>{vulnerabilityReasonLabel(reason)}</li>
 				{/each}
 			</ul>
 		</section>
@@ -144,7 +147,7 @@ const verification = $derived(formVerification ?? review.verification ?? emptyVe
 					value="yes"
 					checked={verification.passportOrIdentityDocumentChecked}
 				>
-				He comprobado el documento de identidad cuando estaba disponible.
+				He comprobado el documento de identidad si la persona lo ha aportado.
 			</label>
 			<label>
 				<input
@@ -164,10 +167,10 @@ const verification = $derived(formVerification ?? review.verification ?? emptyVe
 				>
 				He revisado las circunstancias de vulnerabilidad.
 			</label>
-			<p>Esta acción de revisión queda registrada en el registro de auditoría.</p>
-			<button type="submit">Guardar revisión</button>
+			<p>Estas confirmaciones quedarán registradas en el historial de auditoría.</p>
+			<button type="submit">Guardar confirmaciones</button>
 			{#if data.canMarkReadyToIssue}
-				<button type="submit" formaction="?/ready">Marcar lista para emitir</button>
+				<button type="submit" formaction="?/ready">Marcar como lista para emitir</button>
 			{/if}
 		</form>
 		{#if data.canIssueCertificate}
@@ -177,6 +180,6 @@ const verification = $derived(formVerification ?? review.verification ?? emptyVe
 			<p><a href={data.certificateHref}>Descargar certificado emitido</a></p>
 		{/if}
 
-		<p><a href="/dashboard">Volver al panel</a></p>
+		<p><a href="/dashboard">Volver al panel de la organización</a></p>
 	</section>
 </main>
