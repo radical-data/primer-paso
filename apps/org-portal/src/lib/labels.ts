@@ -61,7 +61,11 @@ export const auditEventLabel = (eventType: string) =>
 		'certificate.downloaded': 'Certificado descargado',
 		'organisation.member_saved': 'Miembro guardado',
 		'organisation.member_role_updated': 'Rol de miembro actualizado',
-		'organisation.member_disabled': 'Miembro desactivado'
+		'organisation.member_disabled': 'Miembro desactivado',
+		'organisation.profile_updated': 'Datos de organización actualizados',
+		'organisation.signing_certificate_replaced': 'Certificado de firma reemplazado',
+		'organisation.signing_certificate_replace_failed': 'Error al reemplazar certificado de firma',
+		'organisation.signing_certificate_disabled': 'Certificado de firma desactivado'
 	})[eventType] ?? eventType
 
 const auditEventDataKeyLabel = (key: string) =>
@@ -75,7 +79,15 @@ const auditEventDataKeyLabel = (key: string) =>
 		referenceCode: 'código de referencia',
 		blockedUntil: 'bloqueado hasta',
 		filename: 'archivo',
-		issuedCertificateId: 'certificado emitido'
+		issuedCertificateId: 'certificado emitido',
+		signingCertificateId: 'certificado de firma',
+		signingCertificateFingerprintSha256: 'huella SHA-256 del certificado',
+		fingerprintSha256: 'huella SHA-256',
+		subject: 'titular',
+		issuer: 'emisor',
+		notAfter: 'válido hasta',
+		message: 'mensaje',
+		organisationId: 'organización'
 	})[key] ?? key
 
 const auditEventDataValueLabel = (key: string, value: unknown) => {

@@ -1,4 +1,5 @@
 <script lang="ts">
+import Building2Icon from '@lucide/svelte/icons/building-2'
 import ClipboardListIcon from '@lucide/svelte/icons/clipboard-list'
 import HistoryIcon from '@lucide/svelte/icons/history'
 import UsersIcon from '@lucide/svelte/icons/users'
@@ -54,7 +55,7 @@ let { data } = $props()
 		</CardContent>
 	</Card>
 
-	{#if data.adminLinks.canManageMembers || data.adminLinks.canReadAudit}
+	{#if data.adminLinks.canManageOrganisation || data.adminLinks.canManageMembers || data.adminLinks.canReadAudit}
 		<Card>
 			<CardHeader>
 				<CardTitle>Administración de la organización</CardTitle>
@@ -62,6 +63,20 @@ let { data } = $props()
 			</CardHeader>
 			<CardContent>
 				<div class="grid gap-3 md:grid-cols-2">
+					{#if data.adminLinks.canManageOrganisation}
+						<a
+							href="/admin/organisation"
+							class="panel-subtle flex items-start gap-3 no-underline transition-colors hover:bg-accent/60"
+						>
+							<Building2Icon class="size-5 mt-0.5 text-muted-foreground" aria-hidden="true" />
+							<span class="grid gap-1">
+								<span class="section-title">Datos de organización</span>
+								<span class="hint">
+									Actualiza los datos de la organización y su certificado de firma.
+								</span>
+							</span>
+						</a>
+					{/if}
 					{#if data.adminLinks.canManageMembers}
 						<a
 							href="/admin/members"

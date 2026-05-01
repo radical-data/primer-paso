@@ -14,6 +14,9 @@ const navItems = $derived(
 				...(session.permissions.includes('organisation:manage_members')
 					? [{ href: '/admin/members', label: 'Miembros' }]
 					: []),
+				...(session.permissions.includes('organisation:manage_profile')
+					? [{ href: '/admin/organisation', label: 'Organización' }]
+					: []),
 				...(session.permissions.includes('audit:read')
 					? [{ href: '/admin/audit', label: 'Auditoría' }]
 					: [])
