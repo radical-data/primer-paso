@@ -6,7 +6,9 @@ apps/org-portal/src/lib/server/signing-secret-crypto.ts
 apps/org-portal/src/routes/reviews/[id]/+page.server.ts
 apps/org-portal/src/routes/reviews/[id]/certificate.pdf/+server.ts
 packages/db/src/org-portal.ts
+scripts/test-pdf-signing-service.mjs
 .env.example
 package.json
 pnpm-workspace.yaml
 docs/adr/**
+docs/deployment-certificate-pilot.md

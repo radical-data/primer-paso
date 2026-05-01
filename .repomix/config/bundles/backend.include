@@ -9,9 +9,12 @@ apps/org-portal/src/routes/**/+server.ts
 packages/auth/**
 packages/db/**
 scripts/check-matomo-env.mjs
+scripts/check-org-portal-env.mjs
+scripts/check-db-runtime.mjs
 .env.example
 .env.test
-netlify.toml
+apps/public/netlify.toml
+apps/org-portal/netlify.toml
 package.json
 pnpm-workspace.yaml
 .github/workflows/ci.yml
