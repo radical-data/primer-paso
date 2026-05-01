@@ -3,13 +3,7 @@
 import { readFile } from 'node:fs/promises'
 import { stdin as input, stdout as output } from 'node:process'
 import { createInterface } from 'node:readline/promises'
-/**
- * Adapt this import if your DB package exports a different helper.
- *
- * Expected shape:
- *   sql`...`
- */
-import { sql } from '@primer-paso/db'
+import { createPostgresOrgPortalRepository } from '@primer-paso/db'
 import { inspectSigningCertificate } from '@primer-paso/signing-client'
 import {
 	encryptSigningSecret,
@@ -24,9 +18,17 @@ type Args = {
 
 const args = parseArgs(process.argv.slice(2))
 
+const databaseUrl = process.env.PRIVATE_DATABASE_URL?.trim() || process.env.DATABASE_URL?.trim()
+if (!databaseUrl) {
+	console.error('Set PRIVATE_DATABASE_URL or DATABASE_URL before running this script.')
+	process.exit(1)
+}
+
 const signerUrl = requiredEnv('PRIVATE_PDF_SIGNER_URL')
 const signerToken = requiredEnv('PRIVATE_PDF_SIGNER_TOKEN')
 const encryptionKey = requiredEnv('PRIVATE_SIGNING_CERT_ENCRYPTION_KEY')
+
+const repository = createPostgresOrgPortalRepository({ databaseUrl })
 
 const certBytes = await readFile(args.certPath)
 const passphrase = await promptHidden('Certificate password: ')
@@ -41,48 +43,22 @@ const metadata = await inspectSigningCertificate({
 const encryptedPkcs12 = encryptSigningSecret(certBytes, encryptionKey)
 const encryptedPassphrase = encryptSigningText(passphrase, encryptionKey)
 
-await sql`
-  insert into organisation_signing_certificates (
-    organisation_id,
-    encrypted_pkcs12,
-    encrypted_passphrase,
-    subject,
-    issuer,
-    serial_number,
-    fingerprint_sha256,
-    not_before,
-    not_after,
-    created_by_member_id
-  )
-  values (
-    ${args.organisationId},
-    ${encryptedPkcs12},
-    ${encryptedPassphrase},
-    ${metadata.signerSubject},
-    ${metadata.signerIssuer},
-    ${metadata.certificateSerialNumber},
-    ${metadata.certificateFingerprintSha256},
-    ${metadata.notBefore},
-    ${metadata.notAfter},
-    ${args.createdByMemberId}
-  )
-  on conflict (organisation_id)
-  where disabled_at is null
-  do update set
-    encrypted_pkcs12 = excluded.encrypted_pkcs12,
-    encrypted_passphrase = excluded.encrypted_passphrase,
-    subject = excluded.subject,
-    issuer = excluded.issuer,
-    serial_number = excluded.serial_number,
-    fingerprint_sha256 = excluded.fingerprint_sha256,
-    not_before = excluded.not_before,
-    not_after = excluded.not_after,
-    created_by_member_id = excluded.created_by_member_id,
-    created_at = now()
-`
+const signingCertificate = await repository.replaceOrganisationSigningCertificate({
+	organisationId: args.organisationId,
+	createdByMemberId: args.createdByMemberId,
+	encryptedPkcs12,
+	encryptedPassphrase,
+	subject: metadata.signerSubject,
+	issuer: metadata.signerIssuer,
+	serialNumber: metadata.certificateSerialNumber,
+	fingerprintSha256: metadata.certificateFingerprintSha256,
+	notBefore: metadata.notBefore?.toISOString(),
+	notAfter: metadata.notAfter?.toISOString()
+})
 
 console.log('Stored organisation signing certificate')
 console.log(`Organisation: ${args.organisationId}`)
+console.log(`Certificate row id: ${signingCertificate.id}`)
 console.log(`Subject: ${metadata.signerSubject}`)
 console.log(`Issuer: ${metadata.signerIssuer}`)
 console.log(`Serial: ${metadata.certificateSerialNumber}`)

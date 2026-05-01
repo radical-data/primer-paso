@@ -59,6 +59,8 @@
 		]
 	},
 	"devDependencies": {
+		"@primer-paso/db": "workspace:*",
+		"@primer-paso/signing-client": "workspace:*",
 		"@biomejs/biome": "2.4.8",
 		"@types/node": "^24",
 		"netlify-cli": "^25.0.1",

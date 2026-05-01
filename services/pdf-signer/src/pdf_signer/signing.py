@@ -85,6 +85,16 @@ def _certificate_validity_time(cert: Any, field_name: str) -> datetime | None:
     return _normalise_cert_time(value)
 
 
+def _validate_certificate_is_current(cert: Any) -> None:
+    now = datetime.now(UTC)
+    not_before = _certificate_validity_time(cert, "not_before")
+    not_after = _certificate_validity_time(cert, "not_after")
+    if not_before is not None and not_before > now:
+        raise SigningInputError("signing certificate is not valid yet")
+    if not_after is not None and not_after <= now:
+        raise SigningInputError("signing certificate has expired")
+
+
 def inspect_certificate(
     request: InspectCertificateRequest,
 ) -> InspectCertificateResponse:
@@ -97,7 +107,7 @@ def inspect_certificate(
     signing_cert = signer.signing_cert
     if signing_cert is None:
         raise SigningInputError("PKCS#12 certificate has no signing certificate")
-
+    _validate_certificate_is_current(signing_cert)
     return InspectCertificateResponse(
         signer_subject=signing_cert.subject.human_friendly,
         signer_issuer=signing_cert.issuer.human_friendly,
@@ -155,6 +165,7 @@ def sign_pdf(request: SignPdfRequest) -> SignPdfResponse:
     signing_cert = signer.signing_cert
     if signing_cert is None:
         raise SigningInputError("PKCS#12 certificate has no signing certificate")
+    _validate_certificate_is_current(signing_cert)
     return SignPdfResponse(
         signed_pdf_base64=base64.b64encode(signed_pdf).decode("ascii"),
         signer_subject=signing_cert.subject.human_friendly,

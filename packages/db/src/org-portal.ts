@@ -194,6 +194,38 @@ export interface DisableOrganisationMemberInput {
 	now?: Date
 }
 
+export interface UpdateOrganisationProfileInput {
+	organisationId: string
+	name: string
+	registrationNumber?: string
+	nifCif?: string
+	address?: string
+	email?: string
+	phone?: string
+	entityType: OrganisationRecord['entityType']
+	now?: Date
+}
+
+export interface ReplaceOrganisationSigningCertificateInput {
+	organisationId: string
+	createdByMemberId: string | null
+	encryptedPkcs12: string
+	encryptedPassphrase: string
+	subject: string
+	issuer: string
+	serialNumber: string
+	fingerprintSha256: string
+	notBefore?: string
+	notAfter?: string
+	now?: Date
+}
+
+export interface DisableOrganisationSigningCertificateInput {
+	organisationId: string
+	certificateId: string
+	now?: Date
+}
+
 export class OrgPortalRepositoryError extends Error {
 	constructor(
 		message: string,
@@ -220,6 +252,7 @@ export interface UpdateCertificateHandoffReviewVerificationInput {
 }
 
 export interface OrgPortalRepository {
+	updateOrganisationProfile: (input: UpdateOrganisationProfileInput) => Promise<OrganisationRecord>
 	findOrganisationById: (id: string) => Promise<OrganisationRecord | null>
 	findOrganisationMemberById: (id: string) => Promise<OrganisationMemberRecord | null>
 	findActiveOrganisationMemberByEmail: (email: string) => Promise<OrganisationMemberRecord | null>
@@ -256,6 +289,12 @@ export interface OrgPortalRepository {
 	findActiveOrganisationSigningCertificate: (
 		organisationId: string
 	) => Promise<OrganisationSigningCertificateRecord | null>
+	replaceOrganisationSigningCertificate: (
+		input: ReplaceOrganisationSigningCertificateInput
+	) => Promise<OrganisationSigningCertificateRecord>
+	disableOrganisationSigningCertificate: (
+		input: DisableOrganisationSigningCertificateInput
+	) => Promise<void>
 	createAuditEvent: (input: CreateAuditEventInput) => Promise<void>
 	recordOrganisationAuthAttempt: (
 		input: RecordOrganisationAuthAttemptInput
@@ -516,6 +555,36 @@ export const createPostgresOrgPortalRepository = ({
 
 	return {
 		findOrganisationById: (id) => findOrganisationById(sql, id),
+		updateOrganisationProfile: async ({
+			organisationId,
+			name,
+			registrationNumber,
+			nifCif,
+			address,
+			email,
+			phone,
+			entityType,
+			now = new Date()
+		}) => {
+			const rows = await sql`
+				update organisations
+				set
+					name = ${name},
+					registration_number = ${registrationNumber ?? null},
+					nif_cif = ${nifCif ?? null},
+					address = ${address ?? null},
+					email = ${email ?? null},
+					phone = ${phone ?? null},
+					entity_type = ${entityType},
+					updated_at = ${now.toISOString()}
+				where id = ${organisationId}
+				returning *
+			`
+			if (!rows[0]) {
+				throw new OrgPortalRepositoryError('Organisation not found.', 'not_found')
+			}
+			return organisationFromRow(rows[0])
+		},
 		findOrganisationMemberById: (id) => findMemberById(sql, id),
 		listOrganisationMembers: async (organisationId) => {
 			const rows = await sql`
@@ -977,6 +1046,76 @@ export const createPostgresOrgPortalRepository = ({
 				limit 1
 			`
 			return rows[0] ? organisationSigningCertificateFromRow(rows[0]) : null
+		},
+		replaceOrganisationSigningCertificate: async ({
+			organisationId,
+			createdByMemberId,
+			encryptedPkcs12,
+			encryptedPassphrase,
+			subject,
+			issuer,
+			serialNumber,
+			fingerprintSha256,
+			notBefore,
+			notAfter,
+			now = new Date()
+		}) =>
+			sql.begin(async (tx) => {
+				await tx`
+					update organisation_signing_certificates
+					set disabled_at = coalesce(disabled_at, ${now.toISOString()})
+					where organisation_id = ${organisationId}
+					and disabled_at is null
+				`
+
+				const rows = await tx`
+					insert into organisation_signing_certificates (
+						id,
+						organisation_id,
+						encrypted_pkcs12,
+						encrypted_passphrase,
+						subject,
+						issuer,
+						serial_number,
+						fingerprint_sha256,
+						not_before,
+						not_after,
+						created_by_member_id,
+						created_at,
+						disabled_at
+					)
+					values (
+						${randomUUID()},
+						${organisationId},
+						${encryptedPkcs12},
+						${encryptedPassphrase},
+						${subject},
+						${issuer},
+						${serialNumber},
+						${fingerprintSha256},
+						${notBefore ?? null},
+						${notAfter ?? null},
+						${createdByMemberId},
+						${now.toISOString()},
+						null
+					)
+					returning *
+				`
+
+				return organisationSigningCertificateFromRow(rows[0])
+			}),
+		disableOrganisationSigningCertificate: async ({
+			organisationId,
+			certificateId,
+			now = new Date()
+		}) => {
+			await sql`
+				update organisation_signing_certificates
+				set disabled_at = coalesce(disabled_at, ${now.toISOString()})
+				where organisation_id = ${organisationId}
+				and id = ${certificateId}
+				and disabled_at is null
+			`
 		},
 
 		createAuditEvent: async ({

@@ -14,6 +14,12 @@ importers:
       '@biomejs/biome':
         specifier: 2.4.8
         version: 2.4.8
+      '@primer-paso/db':
+        specifier: workspace:*
+        version: link:packages/db
+      '@primer-paso/signing-client':
+        specifier: workspace:*
+        version: link:packages/signing-client
       '@types/node':
         specifier: ^24
         version: 24.12.2
