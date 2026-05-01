@@ -63,7 +63,7 @@ The application calls Supabase with:
 supabase.auth.signInWithOtp({
   email,
   options: {
-    shouldCreateUser: false,
+    shouldCreateUser: true,
     emailRedirectTo: 'https://org.primerpaso.org/auth/confirm'
   }
 })
