@@ -7,9 +7,7 @@ const status = $derived(page.status)
 const message = $derived(page.error?.message ?? 'Algo ha salido mal.')
 </script>
 
-<svelte:head>
-	<title>{status} | Portal de organizaciones de Primer Paso</title>
-</svelte:head>
+<svelte:head> <title>{status} | Portal de organizaciones de Primer Paso</title> </svelte:head>
 
 <div class="stack-lg">
 	<Card>

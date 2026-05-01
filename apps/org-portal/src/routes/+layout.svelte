@@ -10,17 +10,17 @@ const path = $derived(page.url.pathname)
 const navItems = $derived(
 	session
 		? [
-				{ href: '/dashboard', label: 'Dashboard' },
+				{ href: '/dashboard', label: 'Panel' },
 				...(session.permissions.includes('organisation:manage_members')
-					? [{ href: '/admin/members', label: 'Members' }]
+					? [{ href: '/admin/members', label: 'Miembros' }]
 					: []),
 				...(session.permissions.includes('audit:read')
-					? [{ href: '/admin/audit', label: 'Audit log' }]
+					? [{ href: '/admin/audit', label: 'Auditoría' }]
 					: [])
 			]
 		: [
-				{ href: '/', label: 'Home' },
-				{ href: '/login', label: 'Sign in' }
+				{ href: '/', label: 'Inicio' },
+				{ href: '/login', label: 'Iniciar sesión' }
 			]
 )
 
@@ -30,16 +30,16 @@ const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`)
 <svelte:head> <meta name="robots" content="noindex, nofollow"> </svelte:head>
 
 <div class="app-shell">
-	<a class="skip-link" href="#main-content">Skip to main content</a>
+	<a class="skip-link" href="#main-content">Saltar al contenido principal</a>
 
 	<header class="site-header">
 		<div class="site-header-inner site-width">
 			<a class="brand" href={session ? '/dashboard' : '/'}>
 				<span class="brand-mark">Primer Paso</span>
-				<span class="brand-tagline">Organisation portal</span>
+				<span class="brand-tagline">Portal de organizaciones</span>
 			</a>
 
-			<nav class="site-nav" aria-label="Portal navigation">
+			<nav class="site-nav" aria-label="Navegación del portal">
 				<ul class="site-nav-list">
 					{#each navItems as item (item.href)}
 						<li>
@@ -59,7 +59,7 @@ const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`)
 				<div class="site-header-actions">
 					<span class="hint hidden md:inline">{session.email}</span>
 					<form method="POST" action="/logout">
-						<button class="site-nav-link" type="submit">Sign out</button>
+						<button class="site-nav-link" type="submit">Cerrar sesión</button>
 					</form>
 				</div>
 			{/if}
@@ -71,7 +71,7 @@ const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`)
 	<footer class="site-footer">
 		<div class="site-footer-inner site-width">
 			<span>© Primer Paso</span>
-			<span>Authorised users only · Activity is logged</span>
+			<span>Solo personas autorizadas · La actividad queda registrada</span>
 		</div>
 	</footer>
 </div>
