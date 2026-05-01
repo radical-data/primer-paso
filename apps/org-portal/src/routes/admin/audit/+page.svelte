@@ -8,66 +8,63 @@ import {
 	TableHeader,
 	TableRow
 } from '@primer-paso/ui/table'
+import { auditEventLabel, formatAuditEventData } from '$lib/labels'
 
 let { data } = $props()
 
 const formatDate = (value: string) =>
-	new Intl.DateTimeFormat('en-GB', {
+	new Intl.DateTimeFormat('es-ES', {
 		dateStyle: 'medium',
 		timeStyle: 'short',
 		timeZone: 'Europe/Madrid'
 	}).format(new Date(value))
-
-const formatEventData = (eventData: Record<string, unknown>) => {
-	const entries = Object.entries(eventData)
-	if (entries.length === 0) return '—'
-
-	return entries
-		.map(([key, value]) => `${key}: ${typeof value === 'string' ? value : JSON.stringify(value)}`)
-		.join(', ')
-}
 </script>
 
 <svelte:head>
-	<title>Audit log | Primer Paso organisation portal</title>
+	<title>Registro de auditoría | Portal de organizaciones de Primer Paso</title>
 	<meta name="robots" content="noindex, nofollow">
 </svelte:head>
 
 <main class="shell">
 	<section class="card">
-		<p class="eyebrow">Organisation admin</p>
-		<h1>Audit log</h1>
-		<p>Latest recorded actions for <strong>{data.organisation.name}</strong>.</p>
+		<p class="eyebrow">Administración de la organización</p>
+		<h1>Registro de auditoría</h1>
+		<p>Últimas acciones registradas para <strong>{data.organisation.name}</strong>.</p>
 
-		<p><a href="/dashboard">Back to dashboard</a></p>
+		<p>Este historial ayuda a comprobar quién ha accedido, revisado o emitido certificados.</p>
+		<p><a href="/dashboard">Volver al panel de la organización</a></p>
 
 		{#if data.events.length === 0}
-			<p>No audit events have been recorded yet.</p>
+			<p>Aún no se ha registrado ningún evento de auditoría.</p>
 		{:else}
 			<Table>
 				<TableHeader>
 					<TableRow>
-						<TableHead>Time</TableHead>
-						<TableHead>Event</TableHead>
+						<TableHead>Hora</TableHead>
+						<TableHead>Evento</TableHead>
 						<TableHead>Actor</TableHead>
-						<TableHead>Review</TableHead>
-						<TableHead>Details</TableHead>
+						<TableHead>Revisión</TableHead>
+						<TableHead>Detalles</TableHead>
 					</TableRow>
 				</TableHeader>
 				<TableBody>
 					{#each data.events as event}
 						<TableRow>
 							<TableCell>{formatDate(event.createdAt)}</TableCell>
-							<TableCell> <Badge variant="secondary">{event.eventType}</Badge> </TableCell>
-							<TableCell>{event.memberEmail ?? 'System'}</TableCell>
+							<TableCell>
+								<Badge variant="secondary">{auditEventLabel(event.eventType)}</Badge>
+							</TableCell>
+							<TableCell>{event.memberEmail ?? 'Sistema'}</TableCell>
 							<TableCell>
 								{#if event.reviewId}
-									<a href={`/reviews/${event.reviewId}`}>Open review</a>
+									<a href={`/reviews/${event.reviewId}`}>Ver revisión</a>
 								{:else}
 									<span>—</span>
 								{/if}
 							</TableCell>
-							<TableCell class="whitespace-normal">{formatEventData(event.eventData)}</TableCell>
+							<TableCell class="whitespace-normal"
+								>{formatAuditEventData(event.eventData)}</TableCell
+							>
 						</TableRow>
 					{/each}
 				</TableBody>

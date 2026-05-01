@@ -10,7 +10,7 @@ export const load: PageServerLoad = async ({ locals, params, request }) => {
 	const repository = getOrgPortalRepository()
 
 	if (!repository) {
-		error(503, 'Organisation portal storage is not configured.')
+		error(503, 'El almacenamiento del portal de organizaciones no está configurado.')
 	}
 
 	const handoff = await repository.findActiveHandoffByToken(params.token)
@@ -26,7 +26,7 @@ export const load: PageServerLoad = async ({ locals, params, request }) => {
 
 		error(
 			404,
-			'This handoff could not be opened. It may have expired, already been used, or the link may be wrong.'
+			'No se pudo abrir este borrador. Puede haber caducado, haberse utilizado ya o el enlace puede ser incorrecto.'
 		)
 	}
 
@@ -41,7 +41,7 @@ export const load: PageServerLoad = async ({ locals, params, request }) => {
 			request
 		})
 
-		error(422, 'This handoff contains an invalid certificate draft.')
+		error(422, 'Este enlace contiene un borrador de certificado no válido.')
 	}
 
 	const opened = await repository.markHandoffOpened(params.token)
