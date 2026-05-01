@@ -59,12 +59,12 @@
 		]
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.4.8",
+		"@biomejs/biome": "2.4.13",
 		"@types/node": "^24",
 		"netlify-cli": "^25.0.1",
 		"postgres": "^3.4.9",
-		"repomix": "^1.13.1",
-		"supabase": "^2.78.1",
+		"repomix": "^1.14.0",
+		"supabase": "^2.98.0",
 		"tsx": "^4.20.6",
 		"vite": "^8.0.7"
 	}
