@@ -3,7 +3,8 @@ package.json
 pnpm-workspace.yaml
 biome.jsonc
 mise.toml
-netlify.toml
+apps/public/netlify.toml
+apps/org-portal/netlify.toml
 .github/workflows/ci.yml
 .env.example
 .env.test
@@ -14,7 +15,6 @@ apps/*/package.json
 apps/*/svelte.config.js
 apps/*/vite.config.ts
 apps/*/tsconfig.json
-apps/*/app.d.ts
 apps/*/src/app.d.ts
 apps/*/src/app.html
 apps/*/src/hooks.server.ts
@@ -54,6 +54,10 @@ docs/analytics.md
 docs/design-spec.md
 docs/journey-future.md
 docs/policy-context.md
+docs/local-supabase.md
+docs/supabase-org-auth.md
+docs/deployment-certificate-pilot.md
+docs/deployment-supabase-postgres.md
 docs/triage-rules.md
 
 # Repomix config itself

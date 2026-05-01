@@ -6,6 +6,6 @@ docs/policy-context.md
 docs/triage-rules.md
 .env.example
 .env.test
-netlify.toml
+apps/public/netlify.toml
 package.json
 pnpm-workspace.yaml

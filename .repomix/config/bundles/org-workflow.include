@@ -14,6 +14,9 @@ docs/adr/013-split-public-and-organisation-apps.md
 docs/adr/014-token-based-certificate-handoff.md
 docs/adr/016-certificate-issuance-belongs-to-organisation-portal.md
 docs/adr/018-organisation-portal-auth-and-review-workflow.md
+docs/adr/020-integrated-organisation-pdf-signing.md
+docs/supabase-org-auth.md
+supabase/migrations/005_org_auth_rate_limits.sql
 .env.example
 .env.test
 package.json
