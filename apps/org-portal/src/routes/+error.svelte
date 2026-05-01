@@ -4,10 +4,12 @@ import { Card, CardContent } from '@primer-paso/ui/card'
 import { page } from '$app/state'
 
 const status = $derived(page.status)
-const message = $derived(page.error?.message ?? 'Something went wrong.')
+const message = $derived(page.error?.message ?? 'Algo ha salido mal.')
 </script>
 
-<svelte:head> <title>{status} | Primer Paso organisation portal</title> </svelte:head>
+<svelte:head>
+	<title>{status} | Portal de organizaciones de Primer Paso</title>
+</svelte:head>
 
 <div class="stack-lg">
 	<Card>
@@ -15,17 +17,17 @@ const message = $derived(page.error?.message ?? 'Something went wrong.')
 			<p class="eyebrow">Error {status}</p>
 			<h1 class="text-balance text-[clamp(1.5rem,2.5vw,2rem)] font-semibold tracking-tight">
 				{#if status === 404}
-					Page not found
+					Página no encontrada
 				{:else if status === 403}
-					Not authorised
+					Sin autorización
 				{:else}
-					Something went wrong
+					Algo ha salido mal
 				{/if}
 			</h1>
 			<p class="supporting-text text-pretty">{message}</p>
 			<div class="actions justify-center pt-2">
-				<Button href="/dashboard">Go to dashboard</Button>
-				<Button href="/" variant="ghost">Back to start</Button>
+				<Button href="/dashboard">Ir al panel</Button>
+				<Button href="/" variant="ghost">Volver al inicio</Button>
 			</div>
 		</CardContent>
 	</Card>

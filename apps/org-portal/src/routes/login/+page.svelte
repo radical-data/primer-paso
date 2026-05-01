@@ -7,22 +7,22 @@ import { Label } from '@primer-paso/ui/label'
 let { data, form } = $props()
 </script>
 
-<svelte:head> <title>Sign in | Primer Paso organisation portal</title> </svelte:head>
+<svelte:head> <title>Iniciar sesión | Portal de organizaciones de Primer Paso</title> </svelte:head>
 
 <div class="stack-lg">
 	<div class="section-block">
 		<p class="eyebrow">Primer Paso</p>
-		<h1 class="page-title">Sign in to the organisation portal</h1>
+		<h1 class="page-title">Iniciar sesión en el portal de organizaciones</h1>
 	</div>
 
 	<Card>
 		<CardHeader>
-			<CardTitle>Send a sign-in link</CardTitle>
+			<CardTitle>Enviar enlace de acceso</CardTitle>
 			<CardDescription>
 				{#if data.hasPendingHandoff}
-					Sign in to open the certificate handoff.
+					Inicia sesión para abrir el borrador de certificado.
 				{:else}
-					Enter your organisation email. We'll send you a secure sign-in link.
+					Introduce el correo de tu organización. Te enviaremos un enlace de acceso seguro.
 				{/if}
 			</CardDescription>
 		</CardHeader>
@@ -30,20 +30,20 @@ let { data, form } = $props()
 			{#if form?.success}
 				<div class="panel-subtle" role="status">
 					<p class="text-pretty">
-						{form.message ?? 'Check your email. The sign-in link will open this portal.'}
+						{form.message ?? 'Revisa tu correo. El enlace de acceso abrirá este portal.'}
 					</p>
 				</div>
 			{:else}
 				{#if form?.error}
 					<div class="error-summary" role="alert">
-						<p class="error-summary-title">Could not send sign-in link</p>
+						<p class="error-summary-title">No se pudo enviar el enlace de acceso</p>
 						<p class="error-text">{form.error}</p>
 					</div>
 				{/if}
 				<form method="POST" class="stack">
 					<input type="hidden" name="next" value={data.next}>
 					<div class="form-field">
-						<Label for="email">Organisation email</Label>
+						<Label for="email">Correo de la organización</Label>
 						<Input
 							id="email"
 							name="email"
@@ -53,12 +53,14 @@ let { data, form } = $props()
 							value={form?.email ?? data.email ?? ''}
 						/>
 					</div>
-					<div class="actions"><Button type="submit">Send sign-in link</Button></div>
+					<div class="actions"><Button type="submit">Enviar enlace de acceso</Button></div>
 				</form>
 			{/if}
 
 			{#if !form?.success}
-				<p class="hint">Access is limited to authorised members of collaborating organisations.</p>
+				<p class="hint">
+					El acceso está limitado a miembros activos de organizaciones colaboradoras.
+				</p>
 			{/if}
 		</CardContent>
 	</Card>

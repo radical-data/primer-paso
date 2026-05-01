@@ -33,37 +33,38 @@ const activeMembers = $derived(data.members.filter((member) => member.status ===
 const inactiveMembers = $derived(data.members.filter((member) => member.status !== 'active'))
 </script>
 
-<svelte:head> <title>Members | Primer Paso organisation portal</title> </svelte:head>
+<svelte:head> <title>Miembros | Portal de organizaciones de Primer Paso</title> </svelte:head>
 
 <div class="stack-lg">
 	<header class="section-block">
-		<p class="eyebrow">Organisation admin</p>
-		<h1 class="page-title">Members</h1>
+		<p class="eyebrow">Administración de la organización</p>
+		<h1 class="page-title">Miembros</h1>
 		<p class="supporting-text">
-			Manage who can use the organisation portal for <strong>{data.organisation.name}</strong>.
+			Gestiona quién puede usar el portal de organizaciones de
+			<strong>{data.organisation.name}</strong>.
 		</p>
 	</header>
 
 	{#if form?.error}
 		<div class="error-summary" role="alert">
-			<p class="error-summary-title">Could not save changes</p>
+			<p class="error-summary-title">No se pudieron guardar los cambios</p>
 			<p class="error-text">{form.error}</p>
 		</div>
 	{/if}
 
 	<Card>
 		<CardHeader>
-			<CardTitle id="add-member-title">Add or reactivate a member</CardTitle>
+			<CardTitle id="add-member-title">Añadir o reactivar un miembro</CardTitle>
 			<CardDescription>
-				This uses the current pilot login mechanism. A member can sign in with their email and the
-				shared organisation access code until email delivery replaces it.
+				Añade aquí a las personas autorizadas de la organización. Podrán iniciar sesión con su
+				correo electrónico mediante un enlace de acceso seguro.
 			</CardDescription>
 		</CardHeader>
 		<CardContent>
 			<form method="POST" action="?/add" class="stack" aria-labelledby="add-member-title">
 				<div class="grid gap-4 md:grid-cols-3">
 					<div class="form-field">
-						<Label for="name">Name</Label>
+						<Label for="name">Nombre</Label>
 						<Input
 							id="name"
 							name="name"
@@ -73,7 +74,7 @@ const inactiveMembers = $derived(data.members.filter((member) => member.status !
 						/>
 					</div>
 					<div class="form-field">
-						<Label for="email">Email</Label>
+						<Label for="email">Correo electrónico</Label>
 						<Input
 							id="email"
 							name="email"
@@ -84,7 +85,7 @@ const inactiveMembers = $derived(data.members.filter((member) => member.status !
 						/>
 					</div>
 					<div class="form-field">
-						<Label for="role">Role</Label>
+						<Label for="role">Rol</Label>
 						<NativeSelect id="role" name="role" required>
 							{#each data.roles as role}
 								<NativeSelectOption
@@ -99,17 +100,20 @@ const inactiveMembers = $derived(data.members.filter((member) => member.status !
 						</NativeSelect>
 					</div>
 				</div>
-				<div class="actions"><Button type="submit">Save member</Button></div>
+				<div class="actions"><Button type="submit">Guardar miembro</Button></div>
 			</form>
 		</CardContent>
 	</Card>
 
 	<Card>
 		<CardHeader>
-			<CardTitle id="active-members-title">Active members</CardTitle>
+			<CardTitle id="active-members-title">Miembros activos</CardTitle>
 			<CardDescription>
 				{activeMembers.length}
-				active member{activeMembers.length === 1 ? '' : 's'}.
+				miembro{activeMembers.length === 1 ? '' : 's'}
+				activo{activeMembers.length === 1
+					? ''
+					: 's'}.
 			</CardDescription>
 		</CardHeader>
 		<CardContent>
@@ -171,10 +175,13 @@ const inactiveMembers = $derived(data.members.filter((member) => member.status !
 	{#if inactiveMembers.length > 0}
 		<Card>
 			<CardHeader>
-				<CardTitle id="inactive-members-title">Inactive members</CardTitle>
+				<CardTitle id="inactive-members-title">Miembros inactivos</CardTitle>
 				<CardDescription>
 					{inactiveMembers.length}
-					inactive member{inactiveMembers.length === 1 ? '' : 's'}.
+					miembro{inactiveMembers.length === 1 ? '' : 's'}
+					inactivo{inactiveMembers.length === 1
+						? ''
+						: 's'}.
 				</CardDescription>
 			</CardHeader>
 			<CardContent>
@@ -214,7 +221,7 @@ const inactiveMembers = $derived(data.members.filter((member) => member.status !
 	<div class="actions">
 		<Button href="/dashboard" variant="ghost">
 			<ArrowLeftIcon class="size-4" aria-hidden="true" />
-			Back to dashboard
+			Volver al panel
 		</Button>
 	</div>
 </div>

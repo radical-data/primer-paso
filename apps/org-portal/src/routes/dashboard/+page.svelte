@@ -7,28 +7,27 @@ import { Button } from '@primer-paso/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@primer-paso/ui/card'
 import { Input } from '@primer-paso/ui/input'
 import { Label } from '@primer-paso/ui/label'
+import { roleLabel } from '$lib/labels'
 
 let { data } = $props()
 </script>
 
-<svelte:head> <title>Dashboard | Primer Paso organisation portal</title> </svelte:head>
+<svelte:head> <title>Panel | Portal de organizaciones de Primer Paso</title> </svelte:head>
 
 <div class="stack-lg">
 	<header class="section-block">
 		<p class="eyebrow">Primer Paso</p>
-		<h1 class="page-title">Organisation dashboard</h1>
+		<h1 class="page-title">Panel de la organización</h1>
 		<div class="actions">
-			<span class="hint">Signed in as</span>
-			<Badge variant="secondary">{data.session.role}</Badge>
+			<span class="hint">Sesión iniciada como</span>
+			<Badge variant="secondary">{roleLabel(data.session.role)}</Badge>
 		</div>
 	</header>
 
 	{#if data.permissionError}
 		<div class="error-summary" role="alert">
-			<p class="error-summary-title">Permission denied</p>
-			<p class="error-text">
-				You do not have permission to perform that action for this organisation.
-			</p>
+			<p class="error-summary-title">Permiso denegado</p>
+			<p class="error-text">No tienes permiso para realizar esa acción en esta organización.</p>
 		</div>
 	{/if}
 
@@ -37,20 +36,20 @@ let { data } = $props()
 			<CardTitle>
 				<span class="inline-flex items-center gap-2">
 					<ClipboardListIcon class="size-5 text-muted-foreground" aria-hidden="true" />
-					Open a certificate handoff
+					Abrir un borrador de certificado
 				</span>
 			</CardTitle>
 			<CardDescription>
-				Open this page from a Primer Paso QR code, or paste the handoff link or token below.
+				Escanea un código QR de Primer Paso o pega abajo el enlace o código del borrador.
 			</CardDescription>
 		</CardHeader>
 		<CardContent>
 			<form method="GET" action="/handoff" class="stack">
 				<div class="form-field">
-					<Label for="token">Handoff token or link</Label>
-					<Input id="token" name="token" autocomplete="off" placeholder="Paste a token or URL" />
+					<Label for="token">Enlace o código del borrador</Label>
+					<Input id="token" name="token" autocomplete="off" placeholder="Pega un enlace o código" />
 				</div>
-				<div class="actions"><Button type="submit">Open handoff</Button></div>
+				<div class="actions"><Button type="submit">Abrir borrador</Button></div>
 			</form>
 		</CardContent>
 	</Card>
@@ -58,8 +57,8 @@ let { data } = $props()
 	{#if data.adminLinks.canManageMembers || data.adminLinks.canReadAudit}
 		<Card>
 			<CardHeader>
-				<CardTitle>Organisation admin</CardTitle>
-				<CardDescription>Tools available to your role.</CardDescription>
+				<CardTitle>Administración de la organización</CardTitle>
+				<CardDescription>Herramientas disponibles según tu permiso.</CardDescription>
 			</CardHeader>
 			<CardContent>
 				<div class="grid gap-3 md:grid-cols-2">
@@ -70,8 +69,10 @@ let { data } = $props()
 						>
 							<UsersIcon class="size-5 mt-0.5 text-muted-foreground" aria-hidden="true" />
 							<span class="grid gap-1">
-								<span class="section-title">Manage members</span>
-								<span class="hint">Add, deactivate, or change roles for organisation members.</span>
+								<span class="section-title">Gestionar miembros</span>
+								<span class="hint">
+									Añade, desactiva o cambia el rol de los miembros de la organización.
+								</span>
 							</span>
 						</a>
 					{/if}
@@ -82,8 +83,10 @@ let { data } = $props()
 						>
 							<HistoryIcon class="size-5 mt-0.5 text-muted-foreground" aria-hidden="true" />
 							<span class="grid gap-1">
-								<span class="section-title">View audit log</span>
-								<span class="hint">Review actions taken in the portal for this organisation.</span>
+								<span class="section-title">Ver registro de auditoría</span>
+								<span class="hint">
+									Revisa las acciones realizadas en el portal para esta organización.
+								</span>
 							</span>
 						</a>
 					{/if}

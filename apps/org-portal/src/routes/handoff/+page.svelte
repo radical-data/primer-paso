@@ -7,28 +7,30 @@ import { Label } from '@primer-paso/ui/label'
 let { data } = $props()
 </script>
 
-<svelte:head> <title>Certificate handoff | Primer Paso organisation portal</title> </svelte:head>
+<svelte:head>
+	<title>Borrador de certificado | Portal de organizaciones de Primer Paso</title>
+</svelte:head>
 
 <div class="stack-lg">
 	<header class="section-block">
 		<p class="eyebrow">Primer Paso</p>
-		<h1 class="page-title">Certificate handoff</h1>
+		<h1 class="page-title">Borrador de certificado</h1>
 	</header>
 
 	<Card>
 		<CardHeader>
 			<CardTitle>
 				{#if data.hasToken}
-					Handoff reference received
+					Referencia de borrador recibida
 				{:else}
-					No handoff reference
+					Sin referencia de borrador
 				{/if}
 			</CardTitle>
 			<CardDescription>
 				{#if data.hasToken}
-					Sign in as an authorised organisation user to open the draft.
+					Inicia sesión como persona autorizada de la organización para abrir el borrador.
 				{:else}
-					Open this page from a Primer Paso certificate handoff QR code or link.
+					Abre esta página desde un código QR de Primer Paso o pega el enlace o código del borrador.
 				{/if}
 			</CardDescription>
 		</CardHeader>
@@ -36,10 +38,15 @@ let { data } = $props()
 			<CardContent>
 				<form method="GET" action="/handoff" class="stack">
 					<div class="form-field">
-						<Label for="token">Handoff token or link</Label>
-						<Input id="token" name="token" autocomplete="off" placeholder="Paste a token or URL" />
+						<Label for="token">Enlace o código del borrador</Label>
+						<Input
+							id="token"
+							name="token"
+							autocomplete="off"
+							placeholder="Pega un enlace o código"
+						/>
 					</div>
-					<div class="actions"><Button type="submit">Open handoff</Button></div>
+					<div class="actions"><Button type="submit">Abrir borrador</Button></div>
 				</form>
 			</CardContent>
 		{/if}
