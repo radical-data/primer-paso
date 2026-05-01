@@ -1,6 +1,9 @@
 <script lang="ts">
+import ArrowLeftIcon from '@lucide/svelte/icons/arrow-left'
+import HistoryIcon from '@lucide/svelte/icons/history'
 import { Badge } from '@primer-paso/ui/badge'
 import { Button } from '@primer-paso/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@primer-paso/ui/card'
 import { Input } from '@primer-paso/ui/input'
 import { Label } from '@primer-paso/ui/label'
 import { NativeSelect, NativeSelectOption } from '@primer-paso/ui/native-select'
@@ -31,84 +34,97 @@ const activeMembers = $derived(data.members.filter((member) => member.status ===
 const inactiveMembers = $derived(data.members.filter((member) => member.status !== 'active'))
 </script>
 
-<svelte:head>
-	<title>Miembros | Portal de organizaciones de Primer Paso</title>
-	<meta name="robots" content="noindex, nofollow">
-</svelte:head>
+<svelte:head> <title>Members | Primer Paso organisation portal</title> </svelte:head>
 
-<main class="shell">
-	<section class="card">
-		<p class="eyebrow">Administración de la organización</p>
-		<h1>Miembros</h1>
-		<p>
-			Gestiona quién puede usar el portal de organizaciones de
-			<strong>{data.organisation.name}</strong>.
+<div class="stack-lg">
+	<header class="section-block">
+		<p class="eyebrow">Organisation admin</p>
+		<h1 class="page-title">Members</h1>
+		<p class="supporting-text">
+			Manage who can use the organisation portal for <strong>{data.organisation.name}</strong>.
 		</p>
+	</header>
 
-		<p>
-			<a href="/dashboard">Volver al panel de la organización</a>
-			{' · '}
-			<a href="/admin/audit">Ver registro de auditoría</a>
-		</p>
+	<div class="actions">
+		<Button href="/dashboard" variant="ghost">
+			<ArrowLeftIcon class="size-4" aria-hidden="true" />
+			Back to dashboard
+		</Button>
+		<Button href="/admin/audit" variant="ghost">
+			<HistoryIcon class="size-4" aria-hidden="true" />
+			View audit log
+		</Button>
+	</div>
 
-		{#if form?.error}
-			<p role="alert">{form.error}</p>
-		{/if}
+	{#if form?.error}
+		<div class="error-summary" role="alert">
+			<p class="error-summary-title">Could not save changes</p>
+			<p class="error-text">{form.error}</p>
+		</div>
+	{/if}
 
-		<section aria-labelledby="add-member-title">
-			<h2 id="add-member-title">Añadir o reactivar un miembro</h2>
-			<p>
-				Añade aquí a las personas autorizadas de la organización. Podrán iniciar sesión con su
-				correo electrónico mediante un enlace de acceso seguro.
-			</p>
-
-			<form method="POST" action="?/add">
-				<div>
-					<Label for="name">Nombre</Label>
-					<Input
-						id="name"
-						name="name"
-						autocomplete="name"
-						required
-						value={form?.intent === 'add' ? form.value?.name : ''}
-					/>
+	<Card>
+		<CardHeader>
+			<CardTitle id="add-member-title">Add or reactivate a member</CardTitle>
+			<CardDescription>
+				This uses the current pilot login mechanism. A member can sign in with their email and the
+				shared organisation access code until email delivery replaces it.
+			</CardDescription>
+		</CardHeader>
+		<CardContent>
+			<form method="POST" action="?/add" class="stack" aria-labelledby="add-member-title">
+				<div class="grid gap-4 md:grid-cols-3">
+					<div class="form-field">
+						<Label for="name">Name</Label>
+						<Input
+							id="name"
+							name="name"
+							autocomplete="name"
+							required
+							value={form?.intent === 'add' ? form.value?.name : ''}
+						/>
+					</div>
+					<div class="form-field">
+						<Label for="email">Email</Label>
+						<Input
+							id="email"
+							name="email"
+							type="email"
+							autocomplete="email"
+							required
+							value={form?.intent === 'add' ? form.value?.email : ''}
+						/>
+					</div>
+					<div class="form-field">
+						<Label for="role">Role</Label>
+						<NativeSelect id="role" name="role" required>
+							{#each data.roles as role}
+								<NativeSelectOption
+									value={role}
+									selected={form?.intent === 'add'
+										? form.value?.role === role
+										: role === 'intake_volunteer'}
+								>
+									{roleLabel(role)}
+								</NativeSelectOption>
+							{/each}
+						</NativeSelect>
+					</div>
 				</div>
-
-				<div>
-					<Label for="email">Correo electrónico</Label>
-					<Input
-						id="email"
-						name="email"
-						type="email"
-						autocomplete="email"
-						required
-						value={form?.intent === 'add' ? form.value?.email : ''}
-					/>
-				</div>
-
-				<div>
-					<Label for="role">Rol</Label>
-					<NativeSelect id="role" name="role" required>
-						{#each data.roles as role}
-							<NativeSelectOption
-								value={role}
-								selected={form?.intent === 'add'
-									? form.value?.role === role
-									: role === 'intake_volunteer'}
-							>
-								{roleLabel(role)}
-							</NativeSelectOption>
-						{/each}
-					</NativeSelect>
-				</div>
-
-				<p><Button type="submit">Guardar miembro</Button></p>
+				<div class="actions"><Button type="submit">Save member</Button></div>
 			</form>
-		</section>
+		</CardContent>
+	</Card>
 
-		<section aria-labelledby="active-members-title">
-			<h2 id="active-members-title">Miembros activos</h2>
-
+	<Card>
+		<CardHeader>
+			<CardTitle id="active-members-title">Active members</CardTitle>
+			<CardDescription>
+				{activeMembers.length}
+				active member{activeMembers.length === 1 ? '' : 's'}.
+			</CardDescription>
+		</CardHeader>
+		<CardContent>
 			<Table>
 				<TableHeader>
 					<TableRow>
@@ -123,8 +139,10 @@ const inactiveMembers = $derived(data.members.filter((member) => member.status !
 					{#each activeMembers as member}
 						<TableRow>
 							<TableCell>
-								<strong>{member.name}</strong><br>
-								<span>{member.email}</span>
+								<div class="grid gap-0.5">
+									<strong>{member.name}</strong>
+									<span class="hint">{member.email}</span>
+								</div>
 							</TableCell>
 							<TableCell>
 								<Badge variant={statusVariant(member.status)}
@@ -132,7 +150,7 @@ const inactiveMembers = $derived(data.members.filter((member) => member.status !
 								>
 							</TableCell>
 							<TableCell>
-								<form method="POST" action="?/role">
+								<form method="POST" action="?/role" class="flex flex-wrap items-center gap-2">
 									<input type="hidden" name="memberId" value={member.id}>
 									<NativeSelect name="role" aria-label={`Rol de ${member.email}`}>
 										{#each data.roles as role}
@@ -144,7 +162,7 @@ const inactiveMembers = $derived(data.members.filter((member) => member.status !
 									<Button type="submit" variant="outline" size="sm">Guardar rol</Button>
 								</form>
 							</TableCell>
-							<TableCell>{formatDate(member.createdAt)}</TableCell>
+							<TableCell class="whitespace-nowrap">{formatDate(member.createdAt)}</TableCell>
 							<TableCell>
 								{#if member.id === data.currentMemberId}
 									<Badge variant="outline">Usuario actual</Badge>
@@ -159,12 +177,19 @@ const inactiveMembers = $derived(data.members.filter((member) => member.status !
 					{/each}
 				</TableBody>
 			</Table>
-		</section>
+		</CardContent>
+	</Card>
 
-		{#if inactiveMembers.length > 0}
-			<section aria-labelledby="inactive-members-title">
-				<h2 id="inactive-members-title">Miembros inactivos</h2>
-
+	{#if inactiveMembers.length > 0}
+		<Card>
+			<CardHeader>
+				<CardTitle id="inactive-members-title">Inactive members</CardTitle>
+				<CardDescription>
+					{inactiveMembers.length}
+					inactive member{inactiveMembers.length === 1 ? '' : 's'}.
+				</CardDescription>
+			</CardHeader>
+			<CardContent>
 				<Table>
 					<TableHeader>
 						<TableRow>
@@ -178,8 +203,10 @@ const inactiveMembers = $derived(data.members.filter((member) => member.status !
 						{#each inactiveMembers as member}
 							<TableRow>
 								<TableCell>
-									<strong>{member.name}</strong><br>
-									<span>{member.email}</span>
+									<div class="grid gap-0.5">
+										<strong>{member.name}</strong>
+										<span class="hint">{member.email}</span>
+									</div>
 								</TableCell>
 								<TableCell>
 									<Badge variant={statusVariant(member.status)}
@@ -187,12 +214,12 @@ const inactiveMembers = $derived(data.members.filter((member) => member.status !
 									>
 								</TableCell>
 								<TableCell>{roleLabel(member.role)}</TableCell>
-								<TableCell>{formatDate(member.disabledAt)}</TableCell>
+								<TableCell class="whitespace-nowrap">{formatDate(member.disabledAt)}</TableCell>
 							</TableRow>
 						{/each}
 					</TableBody>
 				</Table>
-			</section>
-		{/if}
-	</section>
-</main>
+			</CardContent>
+		</Card>
+	{/if}
+</div>

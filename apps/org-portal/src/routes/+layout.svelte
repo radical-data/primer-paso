@@ -1,6 +1,76 @@
 <script lang="ts">
+import { page } from '$app/state'
 import '../app.css'
-let { children } = $props()
+
+let { children, data } = $props()
+
+const session = $derived(data.session)
+
+const navItems = $derived(
+	session
+		? [
+				{ href: '/dashboard', label: 'Dashboard' },
+				...(session.permissions.includes('organisation:manage_members')
+					? [{ href: '/admin/members', label: 'Members' }]
+					: []),
+				...(session.permissions.includes('audit:read')
+					? [{ href: '/admin/audit', label: 'Audit log' }]
+					: [])
+			]
+		: []
+)
+
+const isCurrent = (href: string) => {
+	const path = page.url.pathname
+	return path === href || path.startsWith(`${href}/`)
+}
 </script>
 
-{@render children()}
+<svelte:head> <meta name="robots" content="noindex, nofollow"> </svelte:head>
+
+<div class="app-shell">
+	<a class="skip-link" href="#main-content">Skip to main content</a>
+
+	<header class="site-header">
+		<div class="site-header-inner site-width">
+			<a class="brand" href={session ? '/dashboard' : '/'}>
+				<span class="brand-mark">Primer Paso</span>
+				<span class="brand-tagline">Organisation portal</span>
+			</a>
+
+			{#if session}
+				<nav class="site-nav" aria-label="Portal navigation">
+					<ul class="site-nav-list">
+						{#each navItems as item (item.href)}
+							<li>
+								<a
+									class="site-nav-link"
+									href={item.href}
+									aria-current={isCurrent(item.href) ? 'page' : undefined}
+								>
+									{item.label}
+								</a>
+							</li>
+						{/each}
+					</ul>
+				</nav>
+
+				<div class="site-header-actions">
+					<span class="hint hidden md:inline">{session.email}</span>
+					<form method="POST" action="/logout">
+						<button class="site-nav-link" type="submit">Sign out</button>
+					</form>
+				</div>
+			{/if}
+		</div>
+	</header>
+
+	<main id="main-content" class="site-width py-8 pb-16">{@render children()}</main>
+
+	<footer class="site-footer">
+		<div class="site-footer-inner site-width">
+			<span>© Primer Paso</span>
+			<span>Authorised users only · Activity is logged</span>
+		</div>
+	</footer>
+</div>
