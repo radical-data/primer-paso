@@ -1,5 +1,8 @@
 <script lang="ts">
+import ArrowLeftIcon from '@lucide/svelte/icons/arrow-left'
 import { Badge } from '@primer-paso/ui/badge'
+import { Button } from '@primer-paso/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@primer-paso/ui/card'
 import {
 	Table,
 	TableBody,
@@ -22,53 +25,81 @@ const formatDate = (value: string) =>
 
 <svelte:head>
 	<title>Registro de auditoría | Portal de organizaciones de Primer Paso</title>
-	<meta name="robots" content="noindex, nofollow">
 </svelte:head>
 
-<main class="shell">
-	<section class="card">
+<div class="stack-lg">
+	<header class="section-block">
 		<p class="eyebrow">Administración de la organización</p>
-		<h1>Registro de auditoría</h1>
-		<p>Últimas acciones registradas para <strong>{data.organisation.name}</strong>.</p>
+		<h1 class="page-title">Registro de auditoría</h1>
+		<p class="supporting-text">
+			Últimas acciones registradas para <strong>{data.organisation.name}</strong>.
+		</p>
+	</header>
 
-		<p>Este historial ayuda a comprobar quién ha accedido, revisado o emitido certificados.</p>
-		<p><a href="/dashboard">Volver al panel de la organización</a></p>
+	<div class="bleed-wide">
+		<Card>
+			<CardHeader>
+				<CardTitle>Eventos recientes</CardTitle>
+				<CardDescription>
+					{data.events.length}
+					evento{data.events.length === 1 ? '' : 's'}
+					registrado{data.events.length === 1
+						? ''
+						: 's'}.
+				</CardDescription>
+			</CardHeader>
+			<CardContent>
+				{#if data.events.length === 0}
+					<p class="hint">Aún no se ha registrado ningún evento de auditoría.</p>
+				{:else}
+					<div class="max-h-[60vh] overflow-auto rounded-lg border border-border/60">
+						<Table>
+							<TableHeader class="sticky top-0 bg-muted/80 backdrop-blur z-10">
+								<TableRow>
+									<TableHead>Hora</TableHead>
+									<TableHead>Evento</TableHead>
+									<TableHead>Actor</TableHead>
+									<TableHead>Revisión</TableHead>
+									<TableHead>Detalles</TableHead>
+								</TableRow>
+							</TableHeader>
+							<TableBody>
+								{#each data.events as event}
+									<TableRow>
+										<TableCell class="whitespace-nowrap">{formatDate(event.createdAt)}</TableCell>
+										<TableCell>
+											<Badge variant="secondary">{auditEventLabel(event.eventType)}</Badge>
+										</TableCell>
+										<TableCell>{event.memberEmail ?? 'Sistema'}</TableCell>
+										<TableCell>
+											{#if event.reviewId}
+												<a
+													class="text-primary underline-offset-4 hover:underline"
+													href={`/reviews/${event.reviewId}`}
+												>
+													Ver revisión
+												</a>
+											{:else}
+												<span class="text-muted-foreground">—</span>
+											{/if}
+										</TableCell>
+										<TableCell class="whitespace-normal text-muted-foreground">
+											{formatAuditEventData(event.eventData)}
+										</TableCell>
+									</TableRow>
+								{/each}
+							</TableBody>
+						</Table>
+					</div>
+				{/if}
+			</CardContent>
+		</Card>
+	</div>
 
-		{#if data.events.length === 0}
-			<p>Aún no se ha registrado ningún evento de auditoría.</p>
-		{:else}
-			<Table>
-				<TableHeader>
-					<TableRow>
-						<TableHead>Hora</TableHead>
-						<TableHead>Evento</TableHead>
-						<TableHead>Actor</TableHead>
-						<TableHead>Revisión</TableHead>
-						<TableHead>Detalles</TableHead>
-					</TableRow>
-				</TableHeader>
-				<TableBody>
-					{#each data.events as event}
-						<TableRow>
-							<TableCell>{formatDate(event.createdAt)}</TableCell>
-							<TableCell>
-								<Badge variant="secondary">{auditEventLabel(event.eventType)}</Badge>
-							</TableCell>
-							<TableCell>{event.memberEmail ?? 'Sistema'}</TableCell>
-							<TableCell>
-								{#if event.reviewId}
-									<a href={`/reviews/${event.reviewId}`}>Ver revisión</a>
-								{:else}
-									<span>—</span>
-								{/if}
-							</TableCell>
-							<TableCell class="whitespace-normal"
-								>{formatAuditEventData(event.eventData)}</TableCell
-							>
-						</TableRow>
-					{/each}
-				</TableBody>
-			</Table>
-		{/if}
-	</section>
-</main>
+	<div class="actions">
+		<Button href="/dashboard" variant="ghost">
+			<ArrowLeftIcon class="size-4" aria-hidden="true" />
+			Volver al panel
+		</Button>
+	</div>
+</div>

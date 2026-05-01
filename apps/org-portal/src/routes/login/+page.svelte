@@ -1,48 +1,67 @@
 <script lang="ts">
+import { Button } from '@primer-paso/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@primer-paso/ui/card'
+import { Input } from '@primer-paso/ui/input'
+import { Label } from '@primer-paso/ui/label'
+
 let { data, form } = $props()
 </script>
 
-<svelte:head>
-	<title>Iniciar sesión | Portal de organizaciones de Primer Paso</title>
-	<meta name="robots" content="noindex, nofollow">
-</svelte:head>
+<svelte:head> <title>Iniciar sesión | Portal de organizaciones de Primer Paso</title> </svelte:head>
 
-<main class="shell">
-	<section class="card">
+<div class="stack-lg">
+	<div class="section-block">
 		<p class="eyebrow">Primer Paso</p>
-		<h1>Iniciar sesión en el portal de organizaciones</h1>
+		<h1 class="page-title">Iniciar sesión en el portal de organizaciones</h1>
+	</div>
 
-		{#if data.hasPendingHandoff}
-			<p>Inicia sesión para abrir el borrador de certificado.</p>
-		{:else}
-			<p>Introduce el correo de tu organización. Te enviaremos un enlace de acceso seguro.</p>
-		{/if}
-
-		{#if form?.success}
-			<p role="status">
-				{form.message ?? 'Revisa tu correo. El enlace de acceso abrirá este portal.'}
-			</p>
-		{:else}
-			{#if form?.error}
-				<p role="alert">{form.error}</p>
+	<Card>
+		<CardHeader>
+			<CardTitle>Enviar enlace de acceso</CardTitle>
+			<CardDescription>
+				{#if data.hasPendingHandoff}
+					Inicia sesión para abrir el borrador de certificado.
+				{:else}
+					Introduce el correo de tu organización. Te enviaremos un enlace de acceso seguro.
+				{/if}
+			</CardDescription>
+		</CardHeader>
+		<CardContent class="stack">
+			{#if form?.success}
+				<div class="panel-subtle" role="status">
+					<p class="text-pretty">
+						{form.message ?? 'Revisa tu correo. El enlace de acceso abrirá este portal.'}
+					</p>
+				</div>
+			{:else}
+				{#if form?.error}
+					<div class="error-summary" role="alert">
+						<p class="error-summary-title">No se pudo enviar el enlace de acceso</p>
+						<p class="error-text">{form.error}</p>
+					</div>
+				{/if}
+				<form method="POST" class="stack">
+					<input type="hidden" name="next" value={data.next}>
+					<div class="form-field">
+						<Label for="email">Correo de la organización</Label>
+						<Input
+							id="email"
+							name="email"
+							type="email"
+							autocomplete="email"
+							required
+							value={form?.email ?? data.email ?? ''}
+						/>
+					</div>
+					<div class="actions"><Button type="submit">Enviar enlace de acceso</Button></div>
+				</form>
 			{/if}
-			<form method="POST" class="stack">
-				<input type="hidden" name="next" value={data.next}>
-				<label for="email">Correo de la organización</label>
-				<input
-					id="email"
-					name="email"
-					type="email"
-					autocomplete="email"
-					required
-					value={form?.email ?? data.email ?? ''}
-				>
-				<button type="submit">Enviar enlace de acceso</button>
-			</form>
-		{/if}
 
-		{#if !form?.success}
-			<p>El acceso está limitado a miembros activos de organizaciones colaboradoras.</p>
-		{/if}
-	</section>
-</main>
+			{#if !form?.success}
+				<p class="hint">
+					El acceso está limitado a miembros activos de organizaciones colaboradoras.
+				</p>
+			{/if}
+		</CardContent>
+	</Card>
+</div>
