@@ -1,26 +1,26 @@
 import { redirect } from '@sveltejs/kit'
 import { requirePermission, setPendingHandoffToken } from '$lib/server/auth'
+import { extractHandoffToken, looksLikeReferenceCode } from '$lib/server/handoff-token-input'
 import type { PageServerLoad } from './$types'
 
-const extractToken = (value: string) => {
-	const trimmed = value.trim()
-	if (!trimmed) return ''
-
-	try {
-		const url = new URL(trimmed)
-		return url.searchParams.get('token')?.trim() ?? ''
-	} catch {
-		return trimmed
-	}
-}
-
 export const load: PageServerLoad = ({ cookies, locals, url }) => {
-	const token = extractToken(url.searchParams.get('token') ?? '')
+	const rawTokenParam = url.searchParams.get('token')
+	const hasTokenParam = url.searchParams.has('token')
+	const token = extractHandoffToken(rawTokenParam ?? '')
 
 	if (!token) {
 		return {
 			hasToken: false,
-			signedIn: Boolean(locals.session)
+			signedIn: Boolean(locals.session),
+			error: hasTokenParam ? 'missing_token' : undefined
+		}
+	}
+
+	if (looksLikeReferenceCode(token)) {
+		return {
+			hasToken: false,
+			signedIn: Boolean(locals.session),
+			error: 'reference_code_not_supported'
 		}
 	}
 

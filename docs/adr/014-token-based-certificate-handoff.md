@@ -18,7 +18,13 @@ QR codes are useful for in-person handoff, but storing the full sensitive payloa
 
 ## Decision
 
-Certificate handoff QR codes will contain a random handoff URL or reference token, not the full certificate data.
+Certificate handoff QR codes will encode the canonical organisation handoff URL carrying a high-entropy opaque token, not the full certificate data.
+
+The QR code and visible organisation handoff link encode the same high-entropy opaque token URL.
+
+The human-readable reference code is not an access credential and must not be usable to open a certificate draft. It exists only as a support identifier.
+
+We are intentionally not implementing reference-code lookup in the pilot because it would create a lower-entropy second access path requiring additional rate limiting, enumeration protection, audit review, support procedures, and ongoing maintenance.
 
 The certificate draft data will be stored server-side with an expiry time and accessed only through the organisation portal after authentication and authorisation checks.
 
