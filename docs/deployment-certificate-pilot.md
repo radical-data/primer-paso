@@ -4,6 +4,8 @@ This note records the minimum deployment setup for testing the certificate draft
 
 It covers deployment only. Certificate issue, email login, audit viewing, member management, retention jobs, rate limiting, and tenant isolation hardening are later production-hardening work.
 
+Certificate handoff access is QR/link-only. The organisation must scan the QR code or use the secure handoff link. The reference code is only a support identifier and cannot open a draft.
+
 ## Deployment shape
 
 Deploy the public service and organisation portal as separate sites:
