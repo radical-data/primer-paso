@@ -25,7 +25,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	if (isSensitivePath(event.url.pathname)) {
 		response.headers.set('cache-control', 'no-store')
 		response.headers.set('x-robots-tag', 'noindex, nofollow, noarchive')
-		response.headers.set('referrer-policy', 'no-referrer')
+		response.headers.set('referrer-policy', 'same-origin')
 		response.headers.set('x-content-type-options', 'nosniff')
 	}
 
