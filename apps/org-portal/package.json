@@ -36,11 +36,11 @@
 		"@sveltejs/vite-plugin-svelte": "^7.0.0",
 		"@tailwindcss/vite": "^4.2.2",
 		"@types/node": "^24",
-		"svelte": "^5.55.2",
+		"svelte": "^5.55.5",
 		"svelte-check": "^4.4.6",
 		"tailwindcss": "^4.2.2",
 		"typescript": "^6.0.2",
-		"vite": "^8.0.7",
-		"vitest": "^3.0.0"
+		"vite": "^8.0.10",
+		"vitest": "^4.1.5"
 	}
 }
