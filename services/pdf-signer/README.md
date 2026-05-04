@@ -30,6 +30,32 @@ PDF_SIGNER_MAX_PDF_BYTES="10485760"
 PDF_SIGNER_MAX_PKCS12_BYTES="2097152"
 ```
 
+## Docker
+
+Build from the repository root:
+
+```bash
+pnpm pdf-signer:docker:build
+```
+
+Run locally:
+
+```bash
+pnpm pdf-signer:docker:run
+```
+
+Or run directly from this directory:
+
+```bash
+docker build -t primer-paso-pdf-signer:local .
+docker run --rm \
+	-p 8080:8080 \
+	--env PDF_SIGNER_TOKEN=dev-pdf-signer-token \
+	primer-paso-pdf-signer:local
+```
+
+The container listens on port 8080.
+
 ## Local development
 
 ```bash
@@ -85,5 +111,26 @@ Response:
   "certificate_serial_number": "...",
   "certificate_fingerprint_sha256": "..."
 }
+```
+
+## Organisation portal integration
+
+The organisation portal calls this service over HTTP. Configure the portal with:
+
+```bash
+PRIVATE_PDF_SIGNER_URL="http://127.0.0.1:8080" PRIVATE_PDF_SIGNER_TOKEN="dev-pdf-signer-token"
+```
+
+For production, `PRIVATE_PDF_SIGNER_TOKEN` must match the signer's
+`PDF_SIGNER_TOKEN` bearer token.
+
+The signer should be deployed as an internal service where possible. If it must
+be reachable over public HTTPS, keep OpenAPI docs disabled, use a high-entropy
+bearer token, and restrict network access at the hosting layer where available.
+
+Health check:
+
+```bash
+curl http://127.0.0.1:8080/healthz
 ```
 

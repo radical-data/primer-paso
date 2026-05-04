@@ -39,6 +39,59 @@ Apply migrations before enabling handoff creation:
 pnpm db:migrate
 ```
 
+## PDF signer service
+
+Certificate issue requires the internal PDF signer service.
+
+The signer is a separate containerised service, built from:
+
+```txt
+services/pdf-signer/Dockerfile
+```
+
+Build locally from the repository root:
+
+```sh
+pnpm pdf-signer:docker:build
+```
+
+Run locally:
+
+```sh
+pnpm pdf-signer:docker:run
+```
+
+The container exposes port `8080` and requires:
+
+```txt
+PDF_SIGNER_TOKEN
+```
+
+The organisation portal must be configured with:
+
+```txt
+PRIVATE_PDF_SIGNER_URL=https://<pdf-signer-service>
+PRIVATE_PDF_SIGNER_TOKEN=<the bearer token configured as PDF_SIGNER_TOKEN on the signer>
+PRIVATE_SIGNING_CERT_ENCRYPTION_KEY=<base64 32-byte key>
+```
+
+Generate the signing-certificate encryption key with:
+
+```sh
+openssl rand -base64 32
+```
+
+The PDF signer should be deployed as an internal service where the hosting
+platform supports private networking. If it must be exposed over HTTPS, it must
+remain protected by the bearer token and by any available platform-level network
+restrictions.
+
+Health check:
+
+```sh
+curl https://<pdf-signer-service>/healthz
+```
+
 Applied migrations are tracked in:
 
 ```txt
