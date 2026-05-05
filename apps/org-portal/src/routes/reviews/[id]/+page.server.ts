@@ -1,10 +1,13 @@
 import {
+	CERTIFICATE_DRAFT_REVIEW_FIELDS,
 	type CertificateDraft,
 	generateVulnerabilityCertificatePdf,
+	getCertificateDraftReviewFieldValue,
 	parseCertificateDraft,
 	parseCertificateIssueRequest,
 	VULNERABILITY_REASON_VALUES,
-	validateCertificateDraft
+	validateCertificateDraft,
+	withCertificateDraftReviewDataFromForm
 } from '@primer-paso/certificate'
 import type { CertificateCorrectionType, VerificationReview } from '@primer-paso/db'
 import { signPdfWithOrganisationCertificate } from '@primer-paso/signing-client'
@@ -50,101 +53,12 @@ const getOptionalString = (formData: FormData, name: string) => {
 	return value.length > 0 ? value : undefined
 }
 
-const getStringList = (formData: FormData, name: string) =>
-	formData.getAll(name).map(String).filter(Boolean)
-
 const getCorrectionType = (formData: FormData): CertificateCorrectionType => {
 	const value = String(formData.get('correctionType') ?? 'confirmed_with_applicant')
 	return CORRECTION_TYPES.includes(value as CertificateCorrectionType)
 		? (value as CertificateCorrectionType)
 		: 'confirmed_with_applicant'
 }
-
-const withReviewedDataFromForm = (
-	draft: CertificateDraft,
-	formData: FormData
-): CertificateDraft => ({
-	...draft,
-	userData: {
-		...draft.userData,
-		identity: {
-			...draft.userData.identity,
-			givenNames: getString(formData, 'givenNames'),
-			familyNames: getString(formData, 'familyNames'),
-			documentType: getString(
-				formData,
-				'documentType'
-			) as CertificateDraft['userData']['identity']['documentType'],
-			documentNumber: getString(formData, 'documentNumber'),
-			dateOfBirth: getOptionalString(formData, 'dateOfBirth'),
-			nationality: getOptionalString(formData, 'nationality')
-		},
-		contact: {
-			...draft.userData.contact,
-			email: getString(formData, 'email'),
-			phone: getOptionalString(formData, 'phone')
-		},
-		location: {
-			...draft.userData.location,
-			addressLine1: getString(formData, 'addressLine1'),
-			addressLine2: getOptionalString(formData, 'addressLine2'),
-			municipality: getString(formData, 'municipality'),
-			province: getString(formData, 'province'),
-			postalCode: getOptionalString(formData, 'postalCode')
-		},
-		vulnerability: {
-			...draft.userData.vulnerability,
-			reasons: getStringList(
-				formData,
-				'vulnerabilityReasons'
-			) as CertificateDraft['userData']['vulnerability']['reasons']
-		}
-	}
-})
-
-const correctionFields = [
-	['userData.identity.givenNames', (draft: CertificateDraft) => draft.userData.identity.givenNames],
-	[
-		'userData.identity.familyNames',
-		(draft: CertificateDraft) => draft.userData.identity.familyNames
-	],
-	[
-		'userData.identity.documentType',
-		(draft: CertificateDraft) => draft.userData.identity.documentType
-	],
-	[
-		'userData.identity.documentNumber',
-		(draft: CertificateDraft) => draft.userData.identity.documentNumber
-	],
-	[
-		'userData.identity.dateOfBirth',
-		(draft: CertificateDraft) => draft.userData.identity.dateOfBirth
-	],
-	[
-		'userData.identity.nationality',
-		(draft: CertificateDraft) => draft.userData.identity.nationality
-	],
-	['userData.contact.email', (draft: CertificateDraft) => draft.userData.contact.email],
-	['userData.contact.phone', (draft: CertificateDraft) => draft.userData.contact.phone],
-	[
-		'userData.location.addressLine1',
-		(draft: CertificateDraft) => draft.userData.location.addressLine1
-	],
-	[
-		'userData.location.addressLine2',
-		(draft: CertificateDraft) => draft.userData.location.addressLine2
-	],
-	[
-		'userData.location.municipality',
-		(draft: CertificateDraft) => draft.userData.location.municipality
-	],
-	['userData.location.province', (draft: CertificateDraft) => draft.userData.location.province],
-	['userData.location.postalCode', (draft: CertificateDraft) => draft.userData.location.postalCode],
-	[
-		'userData.vulnerability.reasons',
-		(draft: CertificateDraft) => draft.userData.vulnerability.reasons
-	]
-] as const
 
 const valueChanged = (from: unknown, to: unknown) =>
 	JSON.stringify(from ?? null) !== JSON.stringify(to ?? null)
@@ -155,15 +69,13 @@ const buildCorrections = (
 	type: CertificateCorrectionType,
 	note?: string
 ) =>
-	correctionFields
-		.map(([fieldPath, getter]) => ({
-			fieldPath,
-			from: getter(before) ?? null,
-			to: getter(after) ?? null,
-			type,
-			note
-		}))
-		.filter((correction) => valueChanged(correction.from, correction.to))
+	CERTIFICATE_DRAFT_REVIEW_FIELDS.map((field) => ({
+		fieldPath: field.path,
+		from: getCertificateDraftReviewFieldValue(before, field.path) ?? null,
+		to: getCertificateDraftReviewFieldValue(after, field.path) ?? null,
+		type,
+		note
+	})).filter((correction) => valueChanged(correction.from, correction.to))
 
 export const load: PageServerLoad = async ({ locals, params }) => {
 	const session = requirePermission(locals, 'handoff:review')
@@ -227,7 +139,7 @@ export const actions: Actions = {
 		}
 
 		const formData = await request.formData()
-		const reviewedData = withReviewedDataFromForm(review.reviewedData, formData)
+		const reviewedData = withCertificateDraftReviewDataFromForm(review.reviewedData, formData)
 		const validation = validateCertificateDraft(reviewedData)
 
 		if (!validation.ok) {
