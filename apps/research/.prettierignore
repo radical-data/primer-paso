@@ -1,0 +1,8 @@
+node_modules
+dist
+.astro
+
+# Only format content + astro
+*.ts
+*.js
+*.json

@@ -2,8 +2,26 @@
 	"files.associations": {
 		"*.css": "tailwindcss"
 	},
+
+	// Default: Biome for code
 	"editor.defaultFormatter": "biomejs.biome",
-	"editor.formatOnSave": false,
-	"biome.enabled": true,
-	"prettier.enable": false
+
+	// Use Prettier for content
+	"[astro]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[markdown]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[mdx]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+
+	// Required so Prettier recognises Astro
+	"prettier.documentSelectors": ["**/*.astro"],
+
+	// Make it automatic
+	"editor.formatOnSave": true,
+
+	"biome.enabled": true
 }
