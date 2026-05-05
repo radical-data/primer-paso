@@ -40,7 +40,7 @@ describe('content localisation', () => {
 		expect(translate('ar', 'chrome.brand')).toBe('Primer Paso')
 		expect(translate('en', 'chrome.nav.home')).toBe('Home')
 		expect(translate('es', 'chrome.nav.organisations')).toBe('Buscar organizaciones')
-		expect(translate('fr', 'pages.home.title')).toBe('Choisissez comment commencer')
+		expect(translate('fr', 'pages.home.title')).toBe('Votre parcours vers la régularisation')
 		expect(translate('ar', 'pages.organisations.title')).toBe('البحث عن جهة متعاونة')
 		expect(translate('en', 'pages.organisations.summary.many', { count: '4' })).toBe(
 			'4 organisations found'

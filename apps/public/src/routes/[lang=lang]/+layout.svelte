@@ -2,11 +2,13 @@
 import ExternalLinkIcon from '@lucide/svelte/icons/external-link'
 import LanguagesIcon from '@lucide/svelte/icons/languages'
 import '../../app.css'
+import { Select, SelectContent, SelectItem, SelectTrigger } from '@primer-paso/ui/select'
+import { goto } from '$app/navigation'
 import { resolve } from '$app/paths'
 import { page } from '$app/state'
 import faviconUrl from '$lib/assets/favicon.svg?url'
 import MatomoTracker from '$lib/components/analytics/MatomoTracker.svelte'
-import { getTranslator, type Locale } from '$lib/content'
+import { getTranslator, isLocale, type Locale } from '$lib/content'
 import {
 	getAlternateLocaleHrefs,
 	getDefaultLocaleHref,
@@ -33,10 +35,15 @@ const languages: { value: Locale; label: string }[] = [
 
 const getLanguageHref = (languageValue: Locale) => replaceLocaleInHref(currentPath, languageValue)
 
+const onLanguageChange = (value: string) => {
+	if (!isLocale(value) || value === locale) return
+	goto(getLanguageHref(value))
+}
+
+const currentLanguageLabel = $derived(languages.find((l) => l.value === locale)?.label ?? 'Español')
+
 const navigationItems = $derived([
-	{ href: localiseHref(locale, '/'), label: tt('chrome.nav.home') },
-	{ href: localiseHref(locale, '/screener'), label: tt('chrome.nav.start') },
-	{ href: localiseHref(locale, '/organisations'), label: tt('chrome.nav.organisations') }
+	{ href: localiseHref(locale, '/'), label: tt('chrome.nav.home') }
 ])
 
 const alternateLinks = $derived(
@@ -103,27 +110,39 @@ const isCurrentNavItem = (href: string) => {
 					</ul>
 				</nav>
 
-				<nav class="language-nav" aria-label={tt('chrome.language_switcher_label')}>
-					<span class="language-nav-label">
-						<span class="inline-flex items-center gap-2" aria-hidden="true">
-							<LanguagesIcon class="size-3.5" aria-hidden="true" />
-						</span>
-						{tt('chrome.language_switcher_label')}
-					</span>
-					<ul class="language-list site-header-actions">
-						{#each languages as language (language.value)}
-							<li>
-								<a
-									class="language-link"
-									href={getLanguageHref(language.value)}
-									aria-current={language.value === locale ? 'true' : undefined}
-									rel="nofollow"
-									>{language.label}</a
-								>
-							</li>
-						{/each}
-					</ul>
-				</nav>
+				<div class="language-nav">
+					<Select type="single" value={locale} onValueChange={onLanguageChange}>
+						<SelectTrigger
+							class="language-select-trigger"
+							aria-label={tt('chrome.language_switcher_label')}
+						>
+							<LanguagesIcon class="language-select-icon size-4 shrink-0" aria-hidden="true" />
+							<span class="language-select-value">{currentLanguageLabel}</span>
+						</SelectTrigger>
+						<SelectContent class="language-select-content" align="end">
+							{#each languages as language (language.value)}
+								<SelectItem value={language.value} label={language.label}>
+									{language.label}
+								</SelectItem>
+							{/each}
+						</SelectContent>
+					</Select>
+					<noscript>
+						<ul class="language-list">
+							{#each languages as language (language.value)}
+								<li>
+									<a
+										class="language-link"
+										href={getLanguageHref(language.value)}
+										aria-current={language.value === locale ? 'true' : undefined}
+										rel="nofollow"
+										>{language.label}</a
+									>
+								</li>
+							{/each}
+						</ul>
+					</noscript>
+				</div>
 			</div>
 		</div>
 	</header>
