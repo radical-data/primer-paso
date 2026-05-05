@@ -9,7 +9,7 @@ import {
 import type { RequestHandler } from './$types'
 
 const safeNextPath = (value: string | null) => {
-	if (!value || !value.startsWith('/') || value.startsWith('//')) {
+	if (!value?.startsWith('/') || value.startsWith('//')) {
 		return '/dashboard'
 	}
 	if (value === '/login' || value.startsWith('/auth/')) {
