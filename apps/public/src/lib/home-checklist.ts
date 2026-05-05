@@ -1,13 +1,22 @@
-const STEPS_KEY = 'pp:home:steps'
+const ELIGIBILITY_KEY = 'pp:home:eligibility'
+const SUBMISSION_KEY = 'pp:home:submission'
 const DOCS_KEY = 'pp:home:docs'
 
-export interface StepState {
-	eligibility: boolean
-	documents: boolean
-	submission: boolean
+const isBrowser = () => typeof window !== 'undefined' && typeof window.localStorage !== 'undefined'
+
+const readBool = (key: string): boolean => {
+	if (!isBrowser()) return false
+	return window.localStorage.getItem(key) === 'true'
 }
 
-const isBrowser = () => typeof window !== 'undefined' && typeof window.localStorage !== 'undefined'
+const writeBool = (key: string, value: boolean) => {
+	if (!isBrowser()) return
+	try {
+		window.localStorage.setItem(key, value ? 'true' : 'false')
+	} catch {
+		// localStorage may be disabled (private mode, quota, etc.) — fail silently
+	}
+}
 
 const readJson = <T>(key: string, fallback: T): T => {
 	if (!isBrowser()) return fallback
@@ -30,26 +39,14 @@ const writeJson = (key: string, value: unknown) => {
 	}
 }
 
-export const loadSteps = (): StepState => {
-	const raw = readJson<Partial<StepState>>(STEPS_KEY, {})
-	return {
-		eligibility: raw.eligibility === true,
-		documents: raw.documents === true,
-		submission: raw.submission === true
-	}
-}
-
-export const setStep = (key: keyof StepState, value: boolean): StepState => {
-	const next = { ...loadSteps(), [key]: value }
-	writeJson(STEPS_KEY, next)
-	return next
-}
-
+export const loadEligibility = (): boolean => readBool(ELIGIBILITY_KEY)
+export const setEligibility = (value: boolean) => writeBool(ELIGIBILITY_KEY, value)
 export const markEligibilityChecked = () => {
-	const current = loadSteps()
-	if (current.eligibility) return
-	writeJson(STEPS_KEY, { ...current, eligibility: true })
+	if (!loadEligibility()) writeBool(ELIGIBILITY_KEY, true)
 }
+
+export const loadSubmission = (): boolean => readBool(SUBMISSION_KEY)
+export const setSubmission = (value: boolean) => writeBool(SUBMISSION_KEY, value)
 
 export const loadDocs = (): Record<string, boolean> =>
 	readJson<Record<string, boolean>>(DOCS_KEY, {})
