@@ -38,42 +38,37 @@ export const fr = {
 	'chrome.footer.disclaimer': 'Il ne remplace ni un conseil juridique ni une décision officielle.',
 	'chrome.footer.link.official_portal': 'Portail officiel',
 	'chrome.language_switcher_label': 'Langue',
-	'pages.home.eyebrow': 'Pour commencer',
-	'pages.home.title': 'Choisissez comment commencer',
+	'pages.home.eyebrow': 'Commencez ici',
+	'pages.home.title': 'Votre parcours vers la régularisation',
 	'pages.home.meta_title':
 		'Aide pour la régularisation extraordinaire 2026 en Espagne | Primer Paso',
 	'pages.home.meta_description':
 		'Primer Paso aide à comprendre la régularisation extraordinaire de 2026 en Espagne, à repérer les documents éventuellement manquants et à choisir entre le portail officiel et une organisation collaboratrice.',
 	'pages.home.lead':
-		'Vous pouvez utiliser le questionnaire pour vérifier la prochaine étape ou accéder directement au répertoire des organisations collaboratrices.',
-	'pages.home.choose': 'Choisissez une option',
-	'pages.home.quiz_title': 'Vérifier ma prochaine étape',
-	'pages.home.quiz_body':
-		'Répondez à quelques questions pour obtenir une orientation prudente sur la voie qui peut le mieux correspondre à votre situation.',
-	'pages.home.quiz_action': 'Commencer le questionnaire',
-	'pages.home.directory_title': 'Trouver une organisation collaboratrice',
-	'pages.home.directory_body':
-		'Consultez le répertoire sans remplir le formulaire. Recherchez par nom, province ou coordonnées.',
-	'pages.home.note_title': 'Avant de commencer',
-	'pages.home.note_body':
-		'Ce service fournit une orientation pratique. Il ne remplace ni un conseil juridique ni une décision officielle.',
-	'pages.home.seo_intro_title': 'Une orientation claire avant de commencer',
-	'pages.home.seo_intro_body_1':
-		'Sur Primer Paso, vous pouvez choisir comment commencer : répondre à un court questionnaire ou consulter directement l’annuaire des organisations collaboratrices.',
-	'pages.home.seo_intro_body_2':
-		"Cet outil s'adresse aux personnes qui cherchent de l'aide pour le processus extraordinaire de régularisation de 2026 en Espagne. Il aide à comprendre quelles informations comptent, quels documents peuvent encore manquer et quand il vaut mieux demander un accompagnement humain.",
-	'pages.home.seo_intro_body_3':
-		"Le service reste prudent. Il ne remplace ni un conseil juridique ni une décision officielle. Il sert à préparer la suite et à trouver plus vite le bon point d'entrée.",
-	'pages.home.seo_help_title': 'Ce que vous pouvez faire ici',
-	'pages.home.seo_help_item_1': 'Répondre à une question à la fois puis relire vos réponses.',
-	'pages.home.seo_help_item_2':
-		'Comprendre si le portail officiel peut convenir à votre situation.',
-	'pages.home.seo_help_item_3':
-		'Trouver des organisations collaboratrices pouvant offrir un soutien en Espagne.',
-	'pages.home.seo_help_item_4': 'Préparer un résumé imprimable des informations déjà réunies.',
-	'pages.home.seo_support_title': 'Vous cherchez un accompagnement concret en Espagne ?',
-	'pages.home.seo_support_body':
-		"Si vous savez déjà que vous voulez un accompagnement humain, vous pouvez ouvrir directement l'annuaire des organisations. Si vous préférez d'abord comprendre votre situation, commencez par le questionnaire puis choisissez entre le portail officiel et une organisation collaboratrice.",
+		'Primer Paso vous aide à préparer votre demande étape par étape. Cochez chaque partie au fur et à mesure.',
+	'pages.home.steps.step_label': 'Étape {current} sur {total}',
+	'pages.home.steps.toggle_aria': "Marquer l'étape comme terminée",
+	'pages.home.steps.eligibility.title': 'Trouvez votre première étape',
+	'pages.home.steps.eligibility.description':
+		'Répondez à un court questionnaire pour savoir quelle voie correspond à votre situation, quels documents vous avez déjà et lesquels manquent encore.',
+	'pages.home.steps.eligibility.locked_hint':
+		'Cette étape se coche automatiquement à la fin du questionnaire.',
+	'pages.home.steps.eligibility.completed_hint':
+		'Vous avez terminé le questionnaire. Vous pouvez le revoir quand vous le souhaitez.',
+	'pages.home.steps.eligibility.cta': 'Commencer le questionnaire',
+	'pages.home.steps.eligibility.cta_again': 'Revoir le questionnaire',
+	'pages.home.steps.documents.title': 'Réunissez les documents nécessaires',
+	'pages.home.steps.documents.description_personalised':
+		'Liste personnalisée selon vos réponses. Cochez les documents que vous avez déjà.',
+	'pages.home.steps.documents.description_generic':
+		'Voici les documents souvent demandés. Remplissez le questionnaire pour obtenir une liste personnalisée.',
+	'pages.home.steps.documents.empty':
+		'Aucun document pour le moment. Remplissez le questionnaire pour voir ce qui peut s’appliquer à vous.',
+	'pages.home.steps.submission.title': 'Déposez votre demande',
+	'pages.home.steps.submission.digital_intro':
+		'Si vous avez une identité numérique, vous pouvez la déposer via le portail officiel.',
+	'pages.home.steps.submission.collaborating_intro':
+		"Sinon, vous pouvez la déposer avec l'aide d'une organisation collaboratrice.",
 	'pages.home.official_portal_action': 'Portail officiel de régularisation',
 	'pages.start.eyebrow': 'Étape 1',
 	'pages.organisations.meta_title': 'Trouver des organisations',

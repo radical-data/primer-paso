@@ -4,11 +4,17 @@ import FileDownIcon from '@lucide/svelte/icons/file-down'
 import ListChecksIcon from '@lucide/svelte/icons/list-checks'
 import { Badge } from '@primer-paso/ui/badge'
 import { Button } from '@primer-paso/ui/button'
+import { onMount } from 'svelte'
 import { trackEvent } from '$lib/analytics/matomo'
 import { getTranslator } from '$lib/content'
+import { markEligibilityChecked } from '$lib/home-checklist'
 import { localiseHref } from '$lib/i18n/routing'
 
 let { data } = $props()
+
+onMount(() => {
+	markEligibilityChecked()
+})
 
 const tt = $derived(getTranslator(data.locale ?? 'es'))
 

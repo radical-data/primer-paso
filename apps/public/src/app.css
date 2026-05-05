@@ -285,7 +285,7 @@
 	}
 
 	.site-header-main {
-		@apply grid min-w-0 gap-3;
+		@apply flex min-w-0 flex-wrap items-center justify-between gap-3;
 	}
 
 	.service-nav {
@@ -293,7 +293,7 @@
 	}
 
 	.service-nav-list {
-		@apply m-0 grid list-none gap-2 p-0;
+		@apply m-0 flex list-none flex-wrap items-center gap-2 p-0;
 	}
 
 	.service-nav-link {
@@ -313,11 +313,23 @@
 	}
 
 	.language-nav {
-		@apply grid justify-items-start gap-1;
+		@apply inline-flex items-center;
 	}
 
-	.language-nav-label {
-		@apply text-muted-foreground inline-flex min-h-8 items-center gap-2 text-[0.7rem] font-semibold tracking-[0.08em] uppercase whitespace-nowrap;
+	.language-select-trigger {
+		@apply border-border/70 bg-background text-foreground hover:border-primary/45 hover:bg-accent/40 inline-flex h-10 items-center gap-2 rounded-full border px-3.5 text-sm font-medium shadow-xs transition-[border-color,background-color,box-shadow];
+	}
+
+	.language-select-icon {
+		@apply text-muted-foreground;
+	}
+
+	.language-select-value {
+		@apply text-foreground;
+	}
+
+	.language-select-content {
+		@apply bg-popover text-popover-foreground border-border/80 min-w-[10rem] rounded-2xl border p-1.5 shadow-lg;
 	}
 
 	.language-list {

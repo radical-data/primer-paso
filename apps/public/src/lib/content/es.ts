@@ -40,43 +40,37 @@ export const es = {
 	'chrome.footer.disclaimer': 'No sustituye asesoría legal ni constituye una decisión oficial.',
 	'chrome.footer.link.official_portal': 'Portal oficial',
 	'chrome.language_switcher_label': 'Idioma',
-	'pages.home.eyebrow': 'Empezar',
-	'pages.home.title': 'Elige cómo quieres empezar',
+	'pages.home.eyebrow': 'Empieza aquí',
+	'pages.home.title': 'Tu camino hacia la regularización',
 	'pages.home.meta_title':
 		'Ayuda para la regularización extraordinaria 2026 en España | Primer Paso',
 	'pages.home.meta_description':
 		'Primer Paso ayuda a entender el proceso extraordinario de regularización en España, revisar qué documentos pueden faltar y decidir si conviene usar el portal oficial o buscar apoyo de una organización colaboradora.',
 	'pages.home.lead':
-		'Puedes usar el orientador para revisar tu siguiente paso o explorar directamente el directorio de organizaciones colaboradoras.',
-	'pages.home.choose': 'Elige una opción',
-	'pages.home.quiz_title': 'Revisar mi siguiente paso',
-	'pages.home.quiz_body':
-		'Responde unas preguntas para recibir una orientación cautelosa sobre qué vía puede encajar mejor contigo.',
-	'pages.home.quiz_action': 'Empezar el orientador',
-	'pages.home.directory_title': 'Buscar una organización colaboradora',
-	'pages.home.directory_body':
-		'Explora el directorio sin hacer el formulario. Busca por nombre, provincia o datos de contacto.',
-	'pages.home.note_title': 'Antes de empezar',
-	'pages.home.note_body':
-		'Este servicio ofrece orientación práctica. No sustituye el asesoramiento jurídico ni una decisión oficial.',
-	'pages.home.seo_intro_title': 'Orientación clara antes de empezar',
-	'pages.home.seo_intro_body_1':
-		'En Primer Paso puedes elegir cómo quieres empezar: responder un cuestionario breve o ir directamente al directorio de organizaciones colaboradoras.',
-	'pages.home.seo_intro_body_2':
-		'La herramienta está pensada para personas que buscan apoyo con la regularización extraordinaria de 2026 en España. Sirve para entender qué información importa, qué documentos pueden faltar y cuándo conviene seguir por el portal oficial o pedir ayuda presencial a una organización colaboradora.',
-	'pages.home.seo_intro_body_3':
-		'El enfoque es prudente. No sustituye asesoría legal ni una decisión oficial. Su objetivo es ayudarte a prepararte mejor, reducir dudas y llegar más rápido al siguiente paso adecuado.',
-	'pages.home.seo_help_title': 'Qué puedes hacer aquí',
-	'pages.home.seo_help_item_1':
-		'Responder una pregunta por página y revisar las respuestas antes de ver el resultado.',
-	'pages.home.seo_help_item_2': 'Entender si el portal oficial puede encajar con tu situación.',
-	'pages.home.seo_help_item_3':
-		'Encontrar organizaciones colaboradoras que puedan apoyar el proceso en España.',
-	'pages.home.seo_help_item_4':
-		'Preparar un resumen imprimible con la información clave ya reunida.',
-	'pages.home.seo_support_title': '¿Buscas apoyo práctico en España?',
-	'pages.home.seo_support_body':
-		'Si ya sabes que prefieres apoyo humano, puedes abrir directamente el directorio de organizaciones. Si primero quieres orientarte, empieza por el cuestionario y luego decide si conviene usar la vía oficial o pedir ayuda a una entidad colaboradora.',
+		'Primer Paso te ayuda a preparar tu solicitud paso a paso. Marca cada parte cuando la completes.',
+	'pages.home.steps.step_label': 'Paso {current} de {total}',
+	'pages.home.steps.toggle_aria': 'Marcar paso como completado',
+	'pages.home.steps.eligibility.title': 'Conoce tu primer paso',
+	'pages.home.steps.eligibility.description':
+		'Responde un cuestionario breve para saber qué vía encaja con tu situación, qué documentos ya tienes y cuáles te faltan.',
+	'pages.home.steps.eligibility.locked_hint':
+		'Este paso se marca automáticamente al terminar el cuestionario.',
+	'pages.home.steps.eligibility.completed_hint':
+		'Has completado el cuestionario. Puedes revisarlo cuando quieras.',
+	'pages.home.steps.eligibility.cta': 'Empezar el cuestionario',
+	'pages.home.steps.eligibility.cta_again': 'Revisar el cuestionario',
+	'pages.home.steps.documents.title': 'Reúne los documentos',
+	'pages.home.steps.documents.description_personalised':
+		'Lista personalizada según tus respuestas. Marca los documentos que ya tienes.',
+	'pages.home.steps.documents.description_generic':
+		'Estos son documentos que suelen pedirse. Completa el cuestionario para ver una lista personalizada.',
+	'pages.home.steps.documents.empty':
+		'Aún no hay documentos. Completa el cuestionario para ver cuáles pueden aplicarte.',
+	'pages.home.steps.submission.title': 'Presenta tu solicitud',
+	'pages.home.steps.submission.digital_intro':
+		'Si tienes identidad digital, puedes presentarla por el portal oficial.',
+	'pages.home.steps.submission.collaborating_intro':
+		'Si no, puedes presentarla con el apoyo de una organización colaboradora.',
 	'pages.home.official_portal_action': 'Portal oficial de regularización',
 	'pages.start.eyebrow': 'Hito 1',
 	'pages.organisations.meta_title': 'Buscar organizaciones',
