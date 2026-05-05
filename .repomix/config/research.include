@@ -1,0 +1,6 @@
+package.json
+pnpm-workspace.yaml
+mise.toml
+.vscode
+justfile
+biome.jsonc

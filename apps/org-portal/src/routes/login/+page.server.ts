@@ -13,7 +13,7 @@ import { getOrgPortalRepository } from '$lib/server/repository'
 import type { Actions, PageServerLoad } from './$types'
 
 const safeNextPath = (value: string | null) => {
-	if (!value || !value.startsWith('/') || value.startsWith('//')) {
+	if (!value?.startsWith('/') || value.startsWith('//')) {
 		return '/dashboard'
 	}
 	if (value === '/login' || value.startsWith('/auth/')) {
@@ -47,7 +47,7 @@ export const actions: Actions = {
 		const email = normaliseEmail(String(formData.get('email') ?? ''))
 		const next = safeNextPath(String(formData.get('next') ?? url.searchParams.get('next') ?? ''))
 
-		if (!email || !email.includes('@')) {
+		if (!email?.includes('@')) {
 			return fail(400, {
 				error: 'Introduce el correo electrónico que usas con tu organización.',
 				email

@@ -3,6 +3,9 @@
 	"files": {
 		"includes": [
 			"**",
+			"!**/*.md",
+			"!**/*.mdx",
+			"!**/*.astro",
 			"!supabase/templates/**/*.html",
 			"!**/build",
 			"!**/.svelte-kit",
@@ -10,7 +13,8 @@
 			"!**/static",
 			"!**/.netlify",
 			"!**/.pnpm-store",
-			"!**/.venv"
+			"!**/.venv",
+			"!**/.astro"
 		]
 	},
 	"formatter": {

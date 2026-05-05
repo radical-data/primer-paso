@@ -26,7 +26,7 @@ const safeRelativePath = (value: string | null, fallback: string) => {
 		return fallback
 	}
 
-	if (!value || !value.startsWith('/') || value.startsWith('//')) {
+	if (!value?.startsWith('/') || value.startsWith('//')) {
 		return fallback
 	}
 

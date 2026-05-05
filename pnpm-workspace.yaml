@@ -7,3 +7,4 @@ onlyBuiltDependencies:
   - esbuild
   - '@sveltejs/kit'
   - '@tailwindcss/oxide'
+  - sharp

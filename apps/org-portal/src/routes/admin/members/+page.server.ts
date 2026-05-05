@@ -61,7 +61,7 @@ export const actions: Actions = {
 		const name = readString(formData, 'name')
 		const role = readString(formData, 'role')
 
-		if (!email || !email.includes('@')) {
+		if (!email?.includes('@')) {
 			return fail(400, {
 				intent: 'add',
 				error: 'Introduce una dirección de correo electrónico válida.',

@@ -25,8 +25,8 @@ let {
 			)}
 			{...restProps}
 		>
-			{#snippet child({ props })}
-				<InputGroup.Input {...props} bind:value bind:ref />
+			{#snippet child({ props: _props })}
+				<InputGroup.Input {..._props} bind:value bind:ref />
 			{/snippet}
 		</CommandPrimitive.Input>
 		<InputGroup.Addon> <SearchIcon class="size-4 shrink-0 opacity-50" /> </InputGroup.Addon>

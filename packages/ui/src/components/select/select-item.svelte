@@ -23,14 +23,14 @@ let {
 	)}
 	{...restProps}
 >
-	{#snippet children({ selected, highlighted })}
+	{#snippet children({ selected: _selected, highlighted: _highlighted })}
 		<span class="absolute end-2 flex size-3.5 items-center justify-center">
-			{#if selected}
+			{#if _selected}
 				<CheckIcon class="cn-select-item-indicator-icon" />
 			{/if}
 		</span>
 		{#if childrenProp}
-			{@render childrenProp({ selected, highlighted })}
+			{@render childrenProp({ selected: _selected, highlighted: _highlighted })}
 		{:else}
 			{label || value}
 		{/if}

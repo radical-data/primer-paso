@@ -1,0 +1,28 @@
+{
+	"name": "@primer-paso/research",
+	"private": true,
+	"version": "0.0.1",
+	"type": "module",
+	"scripts": {
+		"dev": "astro dev --port 5175",
+		"build": "astro build",
+		"preview": "astro preview --port 4175",
+		"check": "astro check && biome check .",
+		"typecheck": "astro check",
+		"astro": "astro",
+		"format": "prettier --write \"src/**/*.{md,mdx,astro}\"",
+		"format:check": "prettier --check \"src/**/*.{md,mdx,astro}\""
+	},
+	"dependencies": {
+		"@astrojs/starlight": "^0.38.5",
+		"astro": "^6.2.2",
+		"sharp": "^0.34.5"
+	},
+	"devDependencies": {
+		"@astrojs/check": "^0.9.4",
+		"@biomejs/biome": "2.4.14",
+		"prettier": "^3.8.3",
+		"prettier-plugin-astro": "^0.14.1",
+		"typescript": "^6.0.3"
+	}
+}
