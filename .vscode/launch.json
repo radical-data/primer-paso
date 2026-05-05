@@ -1,0 +1,23 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"command": "pnpm dev:public",
+			"name": "Public dev server",
+			"request": "launch",
+			"type": "node-terminal"
+		},
+		{
+			"command": "pnpm dev:org",
+			"name": "Organisation portal dev server",
+			"request": "launch",
+			"type": "node-terminal"
+		},
+		{
+			"command": "pnpm --filter @primer-paso/research dev",
+			"name": "Research dev server",
+			"request": "launch",
+			"type": "node-terminal"
+		}
+	]
+}

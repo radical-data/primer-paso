@@ -26,6 +26,15 @@ org-typecheck:
 org-test:
   pnpm --filter @primer-paso/org-portal test
 
+research-dev:
+  pnpm --filter @primer-paso/research dev
+
+research-build:
+  pnpm --filter @primer-paso/research build
+
+research-typecheck:
+  pnpm --filter @primer-paso/research typecheck
+
 db-typecheck:
   pnpm --filter @primer-paso/db typecheck
 

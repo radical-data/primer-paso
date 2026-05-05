@@ -38,6 +38,18 @@ run = "pnpm --filter @primer-paso/public dev"
 description = "Run the organisation portal app"
 run = "pnpm --filter @primer-paso/org-portal dev"
 
+[tasks."dev:research"]
+description = "Run the Primer Paso Research site"
+run = "pnpm --filter @primer-paso/research dev"
+
+[tasks."build:research"]
+description = "Build the Primer Paso Research site"
+run = "pnpm --filter @primer-paso/research build"
+
+[tasks."check:research"]
+description = "Check the Primer Paso Research site"
+run = "pnpm --filter @primer-paso/research check"
+
 [tasks."supabase:start"]
 description = "Start the local Supabase stack"
 run = "pnpm supabase:start"

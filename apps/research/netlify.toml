@@ -1,0 +1,8 @@
+[build]
+	base = "apps/research"
+	command = "pnpm build"
+	publish = "dist"
+
+[build.environment]
+	NODE_VERSION = "24.10.0"
+	ASTRO_TELEMETRY_DISABLED = "1"

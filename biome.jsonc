@@ -10,7 +10,8 @@
 			"!**/static",
 			"!**/.netlify",
 			"!**/.pnpm-store",
-			"!**/.venv"
+			"!**/.venv",
+			"!**/.astro"
 		]
 	},
 	"formatter": {
