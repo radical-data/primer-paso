@@ -1,7 +1,6 @@
 import {
 	CERTIFICATE_DRAFT_REVIEW_FIELDS,
 	type CertificateDraft,
-	generateVulnerabilityCertificatePdf,
 	getCertificateDraftReviewFieldValue,
 	parseCertificateDraft,
 	parseCertificateIssueRequest,
@@ -9,6 +8,7 @@ import {
 	validateCertificateDraft,
 	withCertificateDraftReviewDataFromForm
 } from '@primer-paso/certificate'
+import { generateVulnerabilityCertificatePdf } from '@primer-paso/certificate/pdf'
 import type { CertificateCorrectionType, VerificationReview } from '@primer-paso/db'
 import { signPdfWithOrganisationCertificate } from '@primer-paso/signing-client'
 import { error, fail, redirect } from '@sveltejs/kit'
@@ -69,13 +69,17 @@ const buildCorrections = (
 	type: CertificateCorrectionType,
 	note?: string
 ) =>
-	CERTIFICATE_DRAFT_REVIEW_FIELDS.map((field) => ({
-		fieldPath: field.path,
-		from: getCertificateDraftReviewFieldValue(before, field.path) ?? null,
-		to: getCertificateDraftReviewFieldValue(after, field.path) ?? null,
-		type,
-		note
-	})).filter((correction) => valueChanged(correction.from, correction.to))
+	CERTIFICATE_DRAFT_REVIEW_FIELDS.map((field) => {
+		const from = getCertificateDraftReviewFieldValue(before, field.path) ?? null
+		const to = getCertificateDraftReviewFieldValue(after, field.path) ?? null
+		return {
+			fieldPath: field.path,
+			from,
+			to,
+			type,
+			note
+		}
+	}).filter(({ from, to }) => valueChanged(from, to))
 
 export const load: PageServerLoad = async ({ locals, params }) => {
 	const session = requirePermission(locals, 'handoff:review')

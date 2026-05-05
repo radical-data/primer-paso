@@ -2,11 +2,18 @@
 import ArrowLeftIcon from '@lucide/svelte/icons/arrow-left'
 import DownloadIcon from '@lucide/svelte/icons/download'
 import PencilIcon from '@lucide/svelte/icons/pencil'
-import type { VulnerabilityReason } from '@primer-paso/certificate'
+import {
+	type CertificateDraft,
+	getCertificateDraftReviewFieldValue,
+	type VulnerabilityReason
+} from '@primer-paso/certificate'
 import { Button } from '@primer-paso/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@primer-paso/ui/card'
 import { Separator } from '@primer-paso/ui/separator'
+import { certificateReviewFields } from '$lib/certificate-review-fields'
 import { reviewStatusLabel, vulnerabilityReasonLabel } from '$lib/labels'
+import ModifiedNote from '$lib/ModifiedNote.svelte'
+import ReviewInputField from '$lib/ReviewInputField.svelte'
 
 let { data, form } = $props()
 
@@ -102,99 +109,40 @@ const display = (value: unknown) => {
 	return String(value)
 }
 
-const savedModifications = $derived.by<Modification[]>(() =>
-	[
-		['Nombres', persisted.userData.identity.givenNames, original.userData.identity.givenNames],
-		['Apellidos', persisted.userData.identity.familyNames, original.userData.identity.familyNames],
-		[
-			'Tipo de documento',
-			persisted.userData.identity.documentType,
-			original.userData.identity.documentType
-		],
-		[
-			'Número de documento',
-			persisted.userData.identity.documentNumber,
-			original.userData.identity.documentNumber
-		],
-		[
-			'Fecha de nacimiento',
-			persisted.userData.identity.dateOfBirth,
-			original.userData.identity.dateOfBirth
-		],
-		[
-			'Nacionalidad',
-			persisted.userData.identity.nationality,
-			original.userData.identity.nationality
-		],
-		['Correo electrónico', persisted.userData.contact.email, original.userData.contact.email],
-		['Teléfono', persisted.userData.contact.phone, original.userData.contact.phone],
-		[
-			'Dirección',
-			persisted.userData.location.addressLine1,
-			original.userData.location.addressLine1
-		],
-		[
-			'Dirección, línea 2',
-			persisted.userData.location.addressLine2,
-			original.userData.location.addressLine2
-		],
-		[
-			'Municipio',
-			persisted.userData.location.municipality,
-			original.userData.location.municipality
-		],
-		['Provincia', persisted.userData.location.province, original.userData.location.province],
-		[
-			'Código postal',
-			persisted.userData.location.postalCode,
-			original.userData.location.postalCode
-		],
-		[
-			'Circunstancias de vulnerabilidad',
-			persisted.userData.vulnerability.reasons,
-			original.userData.vulnerability.reasons
-		]
-	]
-		.filter(([, current, previous]) => differs(current, previous))
-		.map(([label, current, previous]) => ({
-			label: String(label),
-			from: display(previous),
-			to: display(current)
-		}))
-)
+const reviewedDraft = $derived({
+	...persisted,
+	userData: {
+		...persisted.userData,
+		identity: reviewedIdentity,
+		contact: reviewedContact,
+		location: reviewedLocation,
+		vulnerability: {
+			...persisted.userData.vulnerability,
+			reasons: reviewedVulnerabilityReasons
+		}
+	}
+})
 
-const pendingModifications = $derived.by<Modification[]>(() =>
-	[
-		['Nombres', reviewedIdentity.givenNames, persisted.userData.identity.givenNames],
-		['Apellidos', reviewedIdentity.familyNames, persisted.userData.identity.familyNames],
-		['Tipo de documento', reviewedIdentity.documentType, persisted.userData.identity.documentType],
-		[
-			'Número de documento',
-			reviewedIdentity.documentNumber,
-			persisted.userData.identity.documentNumber
-		],
-		['Fecha de nacimiento', reviewedIdentity.dateOfBirth, persisted.userData.identity.dateOfBirth],
-		['Nacionalidad', reviewedIdentity.nationality, persisted.userData.identity.nationality],
-		['Correo electrónico', reviewedContact.email, persisted.userData.contact.email],
-		['Teléfono', reviewedContact.phone, persisted.userData.contact.phone],
-		['Dirección', reviewedLocation.addressLine1, persisted.userData.location.addressLine1],
-		['Dirección, línea 2', reviewedLocation.addressLine2, persisted.userData.location.addressLine2],
-		['Municipio', reviewedLocation.municipality, persisted.userData.location.municipality],
-		['Provincia', reviewedLocation.province, persisted.userData.location.province],
-		['Código postal', reviewedLocation.postalCode, persisted.userData.location.postalCode],
-		[
-			'Circunstancias de vulnerabilidad',
-			reviewedVulnerabilityReasons,
-			persisted.userData.vulnerability.reasons
-		]
-	]
-		.filter(([, current, previous]) => differs(current, previous))
-		.map(([label, current, previous]) => ({
-			label: String(label),
-			from: display(previous),
-			to: display(current)
-		}))
-)
+const buildModifications = (
+	fromDraft: CertificateDraft,
+	toDraft: CertificateDraft
+): Modification[] =>
+	certificateReviewFields
+		.map((field) => {
+			const from = getCertificateDraftReviewFieldValue(fromDraft, field.path)
+			const to = getCertificateDraftReviewFieldValue(toDraft, field.path)
+			return {
+				label: field.label,
+				from: display(from),
+				to: display(to),
+				changed: differs(from, to)
+			}
+		})
+		.filter((modification) => modification.changed)
+		.map(({ label, from, to }) => ({ label, from, to }))
+
+const savedModifications = $derived(buildModifications(original, persisted))
+const pendingModifications = $derived(buildModifications(persisted, reviewedDraft))
 
 const hasPendingModifications = $derived(pendingModifications.length > 0)
 
@@ -259,114 +207,79 @@ const statusTone = $derived(
 								onclick={() => (editingIdentity = !editingIdentity)}
 							>
 								<PencilIcon class="size-4" aria-hidden="true" />
-								{editingIdentity ? 'Bloquear identidad' : 'Corregir identidad'}
+								{editingIdentity ? "Bloquear identidad" : "Corregir identidad"}
 							</Button>
 						{/if}
 					</div>
 
 					<div class="summary-grid">
-						<div class="form-field">
-							<label for="givenNames">Nombres</label>
-							<input
-								id="givenNames"
-								name="givenNames"
-								bind:value={reviewedIdentity.givenNames}
-								readonly={!canCorrect || !editingIdentity}
-								data-modified={differs(reviewedIdentity.givenNames, original.userData.identity.givenNames)}
-							>
-							{#if differs(reviewedIdentity.givenNames, original.userData.identity.givenNames)}
-								<p class="modified-note">
-									Modificado. Original: {display(original.userData.identity.givenNames)}
-								</p>
-							{/if}
-						</div>
-
-						<div class="form-field">
-							<label for="familyNames">Apellidos</label>
-							<input
-								id="familyNames"
-								name="familyNames"
-								bind:value={reviewedIdentity.familyNames}
-								readonly={!canCorrect || !editingIdentity}
-								data-modified={differs(reviewedIdentity.familyNames, original.userData.identity.familyNames)}
-							>
-							{#if differs(reviewedIdentity.familyNames, original.userData.identity.familyNames)}
-								<p class="modified-note">
-									Modificado. Original: {display(original.userData.identity.familyNames)}
-								</p>
-							{/if}
-						</div>
-
-						<div class="form-field">
-							<label for="documentType">Tipo de documento</label>
-							<input
-								id="documentType"
-								name="documentType"
-								bind:value={reviewedIdentity.documentType}
-								readonly={!canCorrect || !editingIdentity}
-								data-modified={differs(
-									reviewedIdentity.documentType,
-									original.userData.identity.documentType
-								)}
-							>
-							{#if differs(reviewedIdentity.documentType, original.userData.identity.documentType)}
-								<p class="modified-note">
-									Modificado. Original: {display(original.userData.identity.documentType)}
-								</p>
-							{/if}
-						</div>
-
-						<div class="form-field">
-							<label for="documentNumber">Número de documento</label>
-							<input
-								id="documentNumber"
-								name="documentNumber"
-								bind:value={reviewedIdentity.documentNumber}
-								readonly={!canCorrect || !editingIdentity}
-								data-modified={differs(
-									reviewedIdentity.documentNumber,
-									original.userData.identity.documentNumber
-								)}
-							>
-							{#if differs(reviewedIdentity.documentNumber, original.userData.identity.documentNumber)}
-								<p class="modified-note">
-									Modificado. Original: {display(original.userData.identity.documentNumber)}
-								</p>
-							{/if}
-						</div>
-
-						<div class="form-field">
-							<label for="dateOfBirth">Fecha de nacimiento</label>
-							<input
-								id="dateOfBirth"
-								name="dateOfBirth"
-								type="date"
-								bind:value={reviewedIdentity.dateOfBirth}
-								readonly={!canCorrect || !editingIdentity}
-								data-modified={differs(reviewedIdentity.dateOfBirth, original.userData.identity.dateOfBirth)}
-							>
-							{#if differs(reviewedIdentity.dateOfBirth, original.userData.identity.dateOfBirth)}
-								<p class="modified-note">
-									Modificado. Original: {display(original.userData.identity.dateOfBirth)}
-								</p>
-							{/if}
-						</div>
-
-						<div class="form-field">
-							<label for="nationality">Nacionalidad</label>
-							<input
-								id="nationality"
-								name="nationality"
-								bind:value={reviewedIdentity.nationality}
-								readonly={!canCorrect || !editingIdentity}
-								data-modified={differs(reviewedIdentity.nationality, original.userData.identity.nationality)}
-							>
-							{#if differs(reviewedIdentity.nationality, original.userData.identity.nationality)}
-								<p class="modified-note">
-									Modificado. Original: {display(original.userData.identity.nationality)}
-								</p>
-							{/if}
-						</div>
+						<ReviewInputField
+							label="Nombres"
+							name="givenNames"
+							bind:value={reviewedIdentity.givenNames}
+							readonly={!canCorrect || !editingIdentity}
+							modified={differs(
+                reviewedIdentity.givenNames,
+                original.userData.identity.givenNames,
+              )}
+							original={display(original.userData.identity.givenNames)}
+						/>
+						<ReviewInputField
+							label="Apellidos"
+							name="familyNames"
+							bind:value={reviewedIdentity.familyNames}
+							readonly={!canCorrect || !editingIdentity}
+							modified={differs(
+                reviewedIdentity.familyNames,
+                original.userData.identity.familyNames,
+              )}
+							original={display(original.userData.identity.familyNames)}
+						/>
+						<ReviewInputField
+							label="Tipo de documento"
+							name="documentType"
+							bind:value={reviewedIdentity.documentType}
+							readonly={!canCorrect || !editingIdentity}
+							modified={differs(
+                reviewedIdentity.documentType,
+                original.userData.identity.documentType,
+              )}
+							original={display(original.userData.identity.documentType)}
+						/>
+						<ReviewInputField
+							label="Número de documento"
+							name="documentNumber"
+							bind:value={reviewedIdentity.documentNumber}
+							readonly={!canCorrect || !editingIdentity}
+							modified={differs(
+                reviewedIdentity.documentNumber,
+                original.userData.identity.documentNumber,
+              )}
+							original={display(original.userData.identity.documentNumber)}
+						/>
+						<ReviewInputField
+							label="Fecha de nacimiento"
+							name="dateOfBirth"
+							type="date"
+							bind:value={reviewedIdentity.dateOfBirth}
+							readonly={!canCorrect || !editingIdentity}
+							modified={differs(
+                reviewedIdentity.dateOfBirth,
+                original.userData.identity.dateOfBirth,
+              )}
+							original={display(original.userData.identity.dateOfBirth)}
+						/>
+						<ReviewInputField
+							label="Nacionalidad"
+							name="nationality"
+							bind:value={reviewedIdentity.nationality}
+							readonly={!canCorrect || !editingIdentity}
+							modified={differs(
+                reviewedIdentity.nationality,
+                original.userData.identity.nationality,
+              )}
+							original={display(original.userData.identity.nationality)}
+						/>
 					</div>
 				</section>
 
@@ -383,133 +296,78 @@ const statusTone = $derived(
 								onclick={() => (editingContact = !editingContact)}
 							>
 								<PencilIcon class="size-4" aria-hidden="true" />
-								{editingContact ? 'Bloquear contacto' : 'Corregir contacto'}
+								{editingContact ? "Bloquear contacto" : "Corregir contacto"}
 							</Button>
 						{/if}
 					</div>
 
 					<div class="summary-grid">
-						<div class="form-field">
-							<label for="email">Correo electrónico</label>
-							<input
-								id="email"
-								name="email"
-								type="email"
-								bind:value={reviewedContact.email}
-								readonly={!canCorrect || !editingContact}
-								data-modified={differs(reviewedContact.email, original.userData.contact.email)}
-							>
-							{#if differs(reviewedContact.email, original.userData.contact.email)}
-								<p class="modified-note">
-									Modificado. Original: {display(original.userData.contact.email)}
-								</p>
-							{/if}
-						</div>
-
-						<div class="form-field">
-							<label for="phone">Teléfono</label>
-							<input
-								id="phone"
-								name="phone"
-								bind:value={reviewedContact.phone}
-								readonly={!canCorrect || !editingContact}
-								data-modified={differs(reviewedContact.phone, original.userData.contact.phone)}
-							>
-							{#if differs(reviewedContact.phone, original.userData.contact.phone)}
-								<p class="modified-note">
-									Modificado. Original: {display(original.userData.contact.phone)}
-								</p>
-							{/if}
-						</div>
-
-						<div class="form-field">
-							<label for="addressLine1">Dirección</label>
-							<input
-								id="addressLine1"
-								name="addressLine1"
-								bind:value={reviewedLocation.addressLine1}
-								readonly={!canCorrect || !editingContact}
-								data-modified={differs(
-									reviewedLocation.addressLine1,
-									original.userData.location.addressLine1
-								)}
-							>
-							{#if differs(reviewedLocation.addressLine1, original.userData.location.addressLine1)}
-								<p class="modified-note">
-									Modificado. Original: {display(original.userData.location.addressLine1)}
-								</p>
-							{/if}
-						</div>
-
-						<div class="form-field">
-							<label for="addressLine2">Dirección, línea 2</label>
-							<input
-								id="addressLine2"
-								name="addressLine2"
-								bind:value={reviewedLocation.addressLine2}
-								readonly={!canCorrect || !editingContact}
-								data-modified={differs(
-									reviewedLocation.addressLine2,
-									original.userData.location.addressLine2
-								)}
-							>
-							{#if differs(reviewedLocation.addressLine2, original.userData.location.addressLine2)}
-								<p class="modified-note">
-									Modificado. Original: {display(original.userData.location.addressLine2)}
-								</p>
-							{/if}
-						</div>
-
-						<div class="form-field">
-							<label for="municipality">Municipio</label>
-							<input
-								id="municipality"
-								name="municipality"
-								bind:value={reviewedLocation.municipality}
-								readonly={!canCorrect || !editingContact}
-								data-modified={differs(
-									reviewedLocation.municipality,
-									original.userData.location.municipality
-								)}
-							>
-							{#if differs(reviewedLocation.municipality, original.userData.location.municipality)}
-								<p class="modified-note">
-									Modificado. Original: {display(original.userData.location.municipality)}
-								</p>
-							{/if}
-						</div>
-
-						<div class="form-field">
-							<label for="province">Provincia</label>
-							<input
-								id="province"
-								name="province"
-								bind:value={reviewedLocation.province}
-								readonly={!canCorrect || !editingContact}
-								data-modified={differs(reviewedLocation.province, original.userData.location.province)}
-							>
-							{#if differs(reviewedLocation.province, original.userData.location.province)}
-								<p class="modified-note">
-									Modificado. Original: {display(original.userData.location.province)}
-								</p>
-							{/if}
-						</div>
-
-						<div class="form-field">
-							<label for="postalCode">Código postal</label>
-							<input
-								id="postalCode"
-								name="postalCode"
-								bind:value={reviewedLocation.postalCode}
-								readonly={!canCorrect || !editingContact}
-								data-modified={differs(reviewedLocation.postalCode, original.userData.location.postalCode)}
-							>
-							{#if differs(reviewedLocation.postalCode, original.userData.location.postalCode)}
-								<p class="modified-note">
-									Modificado. Original: {display(original.userData.location.postalCode)}
-								</p>
-							{/if}
-						</div>
+						<ReviewInputField
+							label="Correo electrónico"
+							name="email"
+							type="email"
+							bind:value={reviewedContact.email}
+							readonly={!canCorrect || !editingContact}
+							modified={differs(reviewedContact.email, original.userData.contact.email)}
+							original={display(original.userData.contact.email)}
+						/>
+						<ReviewInputField
+							label="Teléfono"
+							name="phone"
+							bind:value={reviewedContact.phone}
+							readonly={!canCorrect || !editingContact}
+							modified={differs(reviewedContact.phone, original.userData.contact.phone)}
+							original={display(original.userData.contact.phone)}
+						/>
+						<ReviewInputField
+							label="Dirección"
+							name="addressLine1"
+							bind:value={reviewedLocation.addressLine1}
+							readonly={!canCorrect || !editingContact}
+							modified={differs(
+                reviewedLocation.addressLine1,
+                original.userData.location.addressLine1,
+              )}
+							original={display(original.userData.location.addressLine1)}
+						/>
+						<ReviewInputField
+							label="Dirección, línea 2"
+							name="addressLine2"
+							bind:value={reviewedLocation.addressLine2}
+							readonly={!canCorrect || !editingContact}
+							modified={differs(
+                reviewedLocation.addressLine2,
+                original.userData.location.addressLine2,
+              )}
+							original={display(original.userData.location.addressLine2)}
+						/>
+						<ReviewInputField
+							label="Municipio"
+							name="municipality"
+							bind:value={reviewedLocation.municipality}
+							readonly={!canCorrect || !editingContact}
+							modified={differs(
+                reviewedLocation.municipality,
+                original.userData.location.municipality,
+              )}
+							original={display(original.userData.location.municipality)}
+						/>
+						<ReviewInputField
+							label="Provincia"
+							name="province"
+							bind:value={reviewedLocation.province}
+							readonly={!canCorrect || !editingContact}
+							modified={differs(reviewedLocation.province, original.userData.location.province)}
+							original={display(original.userData.location.province)}
+						/>
+						<ReviewInputField
+							label="Código postal"
+							name="postalCode"
+							bind:value={reviewedLocation.postalCode}
+							readonly={!canCorrect || !editingContact}
+							modified={differs(reviewedLocation.postalCode, original.userData.location.postalCode)}
+							original={display(original.userData.location.postalCode)}
+						/>
 					</div>
 				</section>
 
@@ -526,13 +384,17 @@ const statusTone = $derived(
 								onclick={() => (editingVulnerability = !editingVulnerability)}
 							>
 								<PencilIcon class="size-4" aria-hidden="true" />
-								{editingVulnerability ? 'Bloquear circunstancias' : 'Corregir circunstancias'}
+								{editingVulnerability
+                  ? "Bloquear circunstancias"
+                  : "Corregir circunstancias"}
 							</Button>
 						{/if}
 					</div>
 					<fieldset class="form-field">
 						{#each data.vulnerabilityReasonOptions as option}
-							{@const checked = reviewedVulnerabilityReasons.includes(option.value)}
+							{@const checked = reviewedVulnerabilityReasons.includes(
+                option.value,
+              )}
 							<label class="check-row">
 								<input
 									type="checkbox"
@@ -550,9 +412,9 @@ const statusTone = $derived(
 						{/each}
 
 						{#if differs(reviewedVulnerabilityReasons, original.userData.vulnerability.reasons)}
-							<p class="modified-note">
-								Modificado. Original: {display(original.userData.vulnerability.reasons)}
-							</p>
+							<ModifiedNote
+								original={display(original.userData.vulnerability.reasons)}
+							/>
 						{/if}
 					</fieldset>
 				</section>
@@ -658,8 +520,7 @@ const statusTone = $derived(
 				<div class="error-summary" role="alert">
 					<p class="error-summary-title">Hay modificaciones sin guardar</p>
 					<p class="error-text">
-						Guarda o descarta las modificaciones antes de confirmar la verificación. Si continúas
-						sin guardarlas, el certificado se emitiría con los datos guardados anteriormente.
+						Guarda o descarta las modificaciones antes de confirmar la verificación.
 					</p>
 				</div>
 			{/if}
@@ -748,7 +609,7 @@ const statusTone = $derived(
 
 	{#if data.certificateHref}
 		<Card>
-			<CardHeader> <CardTitle>Certificado emitido</CardTitle> </CardHeader>
+			<CardHeader><CardTitle>Certificado emitido</CardTitle></CardHeader>
 			<CardContent>
 				<Button href={data.certificateHref} variant="outline">
 					<DownloadIcon class="size-4" aria-hidden="true" />
@@ -767,23 +628,6 @@ const statusTone = $derived(
 </div>
 
 <style>
-input[data-modified="true"],
-input[readonly][data-modified="true"] {
-	border-color: var(--color-warning, #b7791f);
-	background: color-mix(in srgb, var(--color-warning, #b7791f) 8%, transparent);
-}
-
-input[readonly] {
-	cursor: default;
-}
-
-.modified-note {
-	margin-top: 0.25rem;
-	font-size: 0.875rem;
-	font-weight: 600;
-	color: var(--color-warning-text, #92400e);
-}
-
 .modified-summary-item {
 	display: grid;
 	gap: 0.25rem;
