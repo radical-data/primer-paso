@@ -8,7 +8,13 @@ import { onMount } from 'svelte'
 import { trackEvent } from '$lib/analytics/matomo'
 import type { Locale, MessageKey } from '$lib/content'
 import { getTranslator } from '$lib/content'
-import { loadDocs, loadSteps, type StepState, setDoc, setStep } from '$lib/home-checklist'
+import {
+	loadDocs,
+	loadEligibility,
+	loadSubmission,
+	setDoc,
+	setSubmission
+} from '$lib/home-checklist'
 import { localiseHref } from '$lib/i18n/routing'
 
 let { data } = $props()
@@ -19,55 +25,42 @@ const hasCompletedScreener = $derived(data.hasCompletedScreener)
 
 const TOTAL_STEPS = '3'
 
-let steps = $state<StepState>({ eligibility: false, documents: false, submission: false })
-let docState = $state<Record<string, boolean>>({})
+let eligibility = $state(false)
+let submission = $state(false)
+const docState = $state<Record<string, boolean>>({})
 let hydrated = $state(false)
 
 onMount(() => {
-	steps = loadSteps()
-	docState = loadDocs()
+	eligibility = loadEligibility()
+	submission = loadSubmission()
+	Object.assign(docState, loadDocs())
 	hydrated = true
 })
 
-const eligibilityChecked = $derived(steps.eligibility)
-
 const officialPortalUrl = 'https://inclusion.gob.es/regularizacion'
 
-const allDocsChecked = $derived(
+const documentsChecked = $derived(
 	documents.length > 0 && documents.every((doc) => docState[doc] === true)
 )
 
-$effect(() => {
-	if (!hydrated) return
-	if (steps.documents !== allDocsChecked) {
-		steps = { ...steps, documents: allDocsChecked }
-		setStep('documents', allDocsChecked)
+const toggleSubmission = () => {
+	submission = !submission
+	setSubmission(submission)
+	trackEvent('Home checklist', submission ? 'Check step' : 'Uncheck step', 'submission')
+}
+
+const toggleDocumentsStep = () => {
+	const next = !documentsChecked
+	for (const docKey of documents) {
+		docState[docKey] = next
+		setDoc(docKey, next)
 	}
-})
-
-const toggleStep = (key: keyof StepState) => {
-	const next = !steps[key]
-
-	if (key === 'documents') {
-		steps = { ...steps, documents: next }
-		setStep('documents', next)
-		const updatedDocs: Record<string, boolean> = { ...docState }
-		for (const docKey of documents) {
-			updatedDocs[docKey] = next
-			setDoc(docKey, next)
-		}
-		docState = updatedDocs
-	} else {
-		steps = { ...steps, [key]: next }
-		setStep(key, next)
-	}
-
-	trackEvent('Home checklist', next ? 'Check step' : 'Uncheck step', key)
+	trackEvent('Home checklist', next ? 'Check step' : 'Uncheck step', 'documents')
 }
 
 const toggleDoc = (key: string) => {
 	const next = !docState[key]
-	docState = { ...docState, [key]: next }
+	docState[key] = next
 	setDoc(key, next)
 }
 
@@ -104,15 +97,15 @@ const structuredData = $derived(
 
 	<ol class="step-list" aria-label={tt('pages.home.title')}>
 		<li>
-			<Card class="step-card" data-checked={eligibilityChecked}>
+			<Card class="step-card" data-checked={eligibility}>
 				<CardHeader class="step-card-header">
 					<span
 						class="step-indicator"
-						data-checked={eligibilityChecked}
+						data-checked={eligibility}
 						data-locked="true"
 						aria-hidden="true"
 					>
-						{#if eligibilityChecked}
+						{#if eligibility}
 							<CheckIcon class="size-4" />
 						{:else}
 							<LockIcon class="size-3.5" />
@@ -128,7 +121,7 @@ const structuredData = $derived(
 				</CardHeader>
 				<CardContent class="step-card-content">
 					<p class="hint">
-						{eligibilityChecked
+						{eligibility
 							? tt('pages.home.steps.eligibility.completed_hint')
 							: tt('pages.home.steps.eligibility.locked_hint')}
 					</p>
@@ -137,7 +130,7 @@ const structuredData = $derived(
 							href={localiseHref(locale, '/screener')}
 							onclick={() => trackEvent('Journey', 'Open start', 'home')}
 						>
-							{eligibilityChecked
+							{eligibility
 								? tt('pages.home.steps.eligibility.cta_again')
 								: tt('pages.home.steps.eligibility.cta')}
 						</Button>
@@ -147,18 +140,18 @@ const structuredData = $derived(
 		</li>
 
 		<li>
-			<Card class="step-card" data-checked={steps.documents}>
+			<Card class="step-card" data-checked={documentsChecked}>
 				<CardHeader class="step-card-header">
 					<button
 						type="button"
 						class="step-indicator-button"
-						aria-pressed={steps.documents}
+						aria-pressed={documentsChecked}
 						aria-label={tt('pages.home.steps.toggle_aria')}
-						onclick={() => toggleStep('documents')}
+						onclick={toggleDocumentsStep}
 						disabled={!hydrated}
 					>
-						<span class="step-indicator" data-checked={steps.documents} aria-hidden="true">
-							{#if steps.documents}
+						<span class="step-indicator" data-checked={documentsChecked} aria-hidden="true">
+							{#if documentsChecked}
 								<CheckIcon class="size-4" />
 							{/if}
 						</span>
@@ -206,18 +199,18 @@ const structuredData = $derived(
 		</li>
 
 		<li>
-			<Card class="step-card" data-checked={steps.submission}>
+			<Card class="step-card" data-checked={submission}>
 				<CardHeader class="step-card-header">
 					<button
 						type="button"
 						class="step-indicator-button"
-						aria-pressed={steps.submission}
+						aria-pressed={submission}
 						aria-label={tt('pages.home.steps.toggle_aria')}
-						onclick={() => toggleStep('submission')}
+						onclick={toggleSubmission}
 						disabled={!hydrated}
 					>
-						<span class="step-indicator" data-checked={steps.submission} aria-hidden="true">
-							{#if steps.submission}
+						<span class="step-indicator" data-checked={submission} aria-hidden="true">
+							{#if submission}
 								<CheckIcon class="size-4" />
 							{/if}
 						</span>
