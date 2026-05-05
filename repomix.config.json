@@ -8,7 +8,7 @@
 		"files": true,
 		"removeComments": true,
 		"removeEmptyLines": true,
-		"compress": false,
+		"compress": true,
 		"topFilesLength": 5
 	}
 }

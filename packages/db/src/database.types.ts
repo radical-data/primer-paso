@@ -73,6 +73,7 @@ export type Database = {
 			}
 			certificate_handoff_reviews: {
 				Row: {
+					corrections: Json
 					created_at: string
 					draft_snapshot: Json
 					handoff_id: string
@@ -87,6 +88,7 @@ export type Database = {
 					verification: Json | null
 				}
 				Insert: {
+					corrections?: Json
 					created_at?: string
 					draft_snapshot: Json
 					handoff_id: string
@@ -101,6 +103,7 @@ export type Database = {
 					verification?: Json | null
 				}
 				Update: {
+					corrections?: Json
 					created_at?: string
 					draft_snapshot?: Json
 					handoff_id?: string

@@ -15,6 +15,12 @@ import {
 
 export type OrganisationMemberStatus = 'invited' | 'active' | 'disabled'
 export type CertificateHandoffReviewStatus = 'in_review' | 'ready_to_issue' | 'issued' | 'cancelled'
+export type CertificateCorrectionType =
+	| 'typo'
+	| 'confirmed_with_applicant'
+	| 'document_verified'
+	| 'standardised_format'
+	| 'other'
 
 export interface OrganisationRecord {
 	id: string
@@ -78,6 +84,16 @@ export interface VerificationReview {
 	vulnerabilityInformationReviewed: boolean
 }
 
+export interface CertificateFieldCorrection {
+	fieldPath: string
+	from: JSONValue
+	to: JSONValue
+	type: CertificateCorrectionType
+	note?: string
+	correctedByMemberId: string
+	correctedAt: string
+}
+
 export interface CertificateHandoffReviewRecord {
 	id: string
 	handoffId: string
@@ -87,6 +103,7 @@ export interface CertificateHandoffReviewRecord {
 	draftSnapshot: CertificateDraft
 	reviewedData: CertificateDraft
 	verification?: VerificationReview
+	corrections: CertificateFieldCorrection[]
 	createdAt: string
 	updatedAt: string
 	readyToIssueAt?: string
@@ -251,6 +268,14 @@ export interface UpdateCertificateHandoffReviewVerificationInput {
 	now?: Date
 }
 
+export interface UpdateCertificateHandoffReviewReviewedDataInput {
+	reviewId: string
+	memberId: string
+	reviewedData: CertificateDraft
+	corrections: Omit<CertificateFieldCorrection, 'correctedByMemberId' | 'correctedAt'>[]
+	now?: Date
+}
+
 export interface OrgPortalRepository {
 	updateOrganisationProfile: (input: UpdateOrganisationProfileInput) => Promise<OrganisationRecord>
 	findOrganisationById: (id: string) => Promise<OrganisationRecord | null>
@@ -283,6 +308,9 @@ export interface OrgPortalRepository {
 	findCertificateHandoffReviewById: (id: string) => Promise<CertificateHandoffReviewRecord | null>
 	updateCertificateHandoffReviewVerification: (
 		input: UpdateCertificateHandoffReviewVerificationInput
+	) => Promise<CertificateHandoffReviewRecord | null>
+	updateCertificateHandoffReviewReviewedData: (
+		input: UpdateCertificateHandoffReviewReviewedDataInput
 	) => Promise<CertificateHandoffReviewRecord | null>
 	createIssuedCertificate: (input: CreateIssuedCertificateInput) => Promise<IssuedCertificateRecord>
 	findIssuedCertificateByReviewId: (reviewId: string) => Promise<IssuedCertificateRecord | null>
@@ -390,6 +418,7 @@ const reviewFromRow = (row: Record<string, unknown>): CertificateHandoffReviewRe
 	draftSnapshot: row.draft_snapshot as CertificateDraft,
 	reviewedData: row.reviewed_data as CertificateDraft,
 	verification: row.verification as VerificationReview | undefined,
+	corrections: (row.corrections ?? []) as CertificateFieldCorrection[],
 	createdAt: date(row.created_at),
 	updatedAt: date(row.updated_at),
 	readyToIssueAt: optionalDate(row.ready_to_issue_at),
@@ -967,6 +996,37 @@ export const createPostgresOrgPortalRepository = ({
 					updated_at = ${now.toISOString()},
 					ready_to_issue_at = coalesce(ready_to_issue_at, ${readyToIssueAt})
 				where id = ${reviewId}
+				returning *
+			`
+
+			return rows[0] ? reviewFromRow(rows[0]) : null
+		},
+
+		updateCertificateHandoffReviewReviewedData: async ({
+			reviewId,
+			memberId,
+			reviewedData,
+			corrections,
+			now = new Date()
+		}) => {
+			const correctedAt = now.toISOString()
+			const persistedCorrections = corrections.map((correction) => ({
+				...correction,
+				correctedByMemberId: memberId,
+				correctedAt
+			}))
+
+			const rows = await sql`
+				update certificate_handoff_reviews
+				set
+					reviewed_data = ${sql.json(toJsonValue(reviewedData))},
+					corrections = corrections || ${sql.json(toJsonValue(persistedCorrections))},
+					verification = null,
+					status = 'in_review',
+					ready_to_issue_at = null,
+					updated_at = ${now.toISOString()}
+				where id = ${reviewId}
+					and status = 'in_review'
 				returning *
 			`
 
