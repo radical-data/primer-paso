@@ -8,7 +8,8 @@ let {
 	value = $bindable(),
 	readonly,
 	modified,
-	original
+	original,
+	oninput: oninputProp
 } = $props<{
 	label: string
 	name: string
@@ -17,20 +18,33 @@ let {
 	readonly: boolean
 	modified: boolean
 	original: string
+	oninput?: (event: Event & { currentTarget: HTMLInputElement }) => void
 }>()
 </script>
 
 <div class="form-field">
 	<label for={name}>{label}</label>
-	<input id={name} {name} {type} bind:value {readonly} data-modified={modified}>
+	{#if oninputProp}
+		<input
+			id={name}
+			{name}
+			{type}
+			value={value ?? ''}
+			{readonly}
+			data-modified={modified}
+			oninput={oninputProp}
+		>
+	{:else}
+		<input id={name} {name} {type} bind:value {readonly} data-modified={modified}>
+	{/if}
 	{#if modified}
 		<ModifiedNote {original} />
 	{/if}
 </div>
 
 <style>
-input[data-modified='true'],
-input[readonly][data-modified='true'] {
+input[data-modified="true"],
+input[readonly][data-modified="true"] {
 	border-color: var(--color-warning, #b7791f);
 	background: color-mix(in srgb, var(--color-warning, #b7791f) 8%, transparent);
 }
