@@ -41,7 +41,7 @@ export const en = {
 	'pages.home.meta_description':
 		"Primer Paso helps people understand Spain's 2026 extraordinary regularisation process, check what documents may be missing, and decide whether to use the official portal or seek support from a collaborating organisation.",
 	'pages.home.lead':
-		'Follow these three steps to prepare your application. Tick the checkbox for each step as you complete it — the questionnaire marks step 1 automatically.',
+		'Follow these three steps to prepare your application. Tick each step as you complete it.',
 	'pages.home.steps.step_label': 'Step {current} of {total}',
 	'pages.home.steps.toggle_aria': 'Mark step as complete',
 	'pages.home.steps.eligibility.title': 'Find out your first step',
