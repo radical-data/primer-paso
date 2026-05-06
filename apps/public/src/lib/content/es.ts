@@ -47,7 +47,7 @@ export const es = {
 	'pages.home.meta_description':
 		'Primer Paso ayuda a entender el proceso extraordinario de regularización en España, revisar qué documentos pueden faltar y decidir si conviene usar el portal oficial o buscar apoyo de una organización colaboradora.',
 	'pages.home.lead':
-		'Sigue estos tres pasos para preparar tu solicitud. Marca la casilla de cada paso al completarlo — el cuestionario marca el paso 1 automáticamente.',
+		'Sigue estos tres pasos para preparar tu solicitud. Marca cada paso al completarlo.',
 	'pages.home.steps.step_label': 'Paso {current} de {total}',
 	'pages.home.steps.toggle_aria': 'Marcar paso como completado',
 	'pages.home.steps.eligibility.title': 'Conoce tu primer paso',

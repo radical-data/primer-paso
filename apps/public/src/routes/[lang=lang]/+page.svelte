@@ -43,6 +43,13 @@ const documentsChecked = $derived(
 	documents.length > 0 && documents.every((doc) => docState[doc] === true)
 )
 
+const nextStep = $derived.by(() => {
+	if (!eligibility && !hasCompletedScreener) return 1
+	if (!documentsChecked) return 2
+	if (!submission) return 3
+	return null
+})
+
 const toggleEligibility = () => {
 	eligibility = !eligibility
 	setEligibility(eligibility)
@@ -95,6 +102,46 @@ const structuredData = $derived(
 </svelte:head>
 
 <section class="stack">
+	{#snippet stepHeader({
+		stepNumber,
+		checked,
+		title,
+		description,
+		onToggle
+	}: {
+		stepNumber: number
+		checked: boolean
+		title: string
+		description?: string
+		onToggle: () => void
+	})}
+		<CardHeader class="step-card-header">
+			<button
+				type="button"
+				class="step-indicator-button"
+				aria-pressed={checked}
+				aria-label={tt('pages.home.steps.toggle_aria')}
+				onclick={onToggle}
+				disabled={!hydrated}
+			>
+				<span class="step-indicator" data-checked={checked} aria-hidden="true">
+					{#if checked}
+						<CheckIcon class="size-4" />
+					{/if}
+				</span>
+			</button>
+			<div class="step-card-text">
+				<p class="eyebrow">
+					{tt('pages.home.steps.step_label', { current: String(stepNumber), total: TOTAL_STEPS })}
+				</p>
+				<CardTitle>{title}</CardTitle>
+				{#if description}
+					<CardDescription>{description}</CardDescription>
+				{/if}
+			</div>
+		</CardHeader>
+	{/snippet}
+
 	<header class="section-block">
 		<p class="eyebrow">{tt('pages.home.eyebrow')}</p>
 		<h1 class="page-title">{tt('pages.home.title')}</h1>
@@ -103,30 +150,14 @@ const structuredData = $derived(
 
 	<ol class="step-list" aria-label={tt('pages.home.title')}>
 		<li>
-			<Card class="step-card" data-checked={eligibility}>
-				<CardHeader class="step-card-header">
-					<button
-						type="button"
-						class="step-indicator-button"
-						aria-pressed={eligibility}
-						aria-label={tt('pages.home.steps.toggle_aria')}
-						onclick={toggleEligibility}
-						disabled={!hydrated}
-					>
-						<span class="step-indicator" data-checked={eligibility} aria-hidden="true">
-							{#if eligibility}
-								<CheckIcon class="size-4" />
-							{/if}
-						</span>
-					</button>
-					<div class="step-card-text">
-						<p class="eyebrow">
-							{tt('pages.home.steps.step_label', { current: '1', total: TOTAL_STEPS })}
-						</p>
-						<CardTitle>{tt('pages.home.steps.eligibility.title')}</CardTitle>
-						<CardDescription>{tt('pages.home.steps.eligibility.description')}</CardDescription>
-					</div>
-				</CardHeader>
+			<Card class="step-card" data-checked={eligibility} data-primary={nextStep === 1}>
+				{@render stepHeader({
+					stepNumber: 1,
+					checked: eligibility,
+					title: tt('pages.home.steps.eligibility.title'),
+					description: tt('pages.home.steps.eligibility.description'),
+					onToggle: toggleEligibility
+				})}
 				<CardContent class="step-card-content">
 					<p class="hint">{tt('pages.home.steps.eligibility.hint')}</p>
 					<div class="actions">
@@ -158,34 +189,14 @@ const structuredData = $derived(
 		</li>
 
 		<li>
-			<Card class="step-card" data-checked={documentsChecked}>
-				<CardHeader class="step-card-header">
-					<button
-						type="button"
-						class="step-indicator-button"
-						aria-pressed={documentsChecked}
-						aria-label={tt('pages.home.steps.toggle_aria')}
-						onclick={toggleDocumentsStep}
-						disabled={!hydrated}
-					>
-						<span class="step-indicator" data-checked={documentsChecked} aria-hidden="true">
-							{#if documentsChecked}
-								<CheckIcon class="size-4" />
-							{/if}
-						</span>
-					</button>
-					<div class="step-card-text">
-						<p class="eyebrow">
-							{tt('pages.home.steps.step_label', { current: '2', total: TOTAL_STEPS })}
-						</p>
-						<CardTitle>{tt('pages.home.steps.documents.title')}</CardTitle>
-						<CardDescription>
-							{hasCompletedScreener
-								? tt('pages.home.steps.documents.description_personalised')
-								: tt('pages.home.steps.documents.description_generic')}
-						</CardDescription>
-					</div>
-				</CardHeader>
+			<Card class="step-card" data-checked={documentsChecked} data-primary={nextStep === 2}>
+				{@render stepHeader({
+					stepNumber: 2,
+					checked: documentsChecked,
+					title: tt('pages.home.steps.documents.title'),
+					description: tt('pages.home.steps.documents.description_generic'),
+					onToggle: toggleDocumentsStep
+				})}
 				<CardContent class="step-card-content">
 					{#if documents.length > 0}
 						<ul class="doc-list">
@@ -217,29 +228,13 @@ const structuredData = $derived(
 		</li>
 
 		<li>
-			<Card class="step-card" data-checked={submission}>
-				<CardHeader class="step-card-header">
-					<button
-						type="button"
-						class="step-indicator-button"
-						aria-pressed={submission}
-						aria-label={tt('pages.home.steps.toggle_aria')}
-						onclick={toggleSubmission}
-						disabled={!hydrated}
-					>
-						<span class="step-indicator" data-checked={submission} aria-hidden="true">
-							{#if submission}
-								<CheckIcon class="size-4" />
-							{/if}
-						</span>
-					</button>
-					<div class="step-card-text">
-						<p class="eyebrow">
-							{tt('pages.home.steps.step_label', { current: '3', total: TOTAL_STEPS })}
-						</p>
-						<CardTitle>{tt('pages.home.steps.submission.title')}</CardTitle>
-					</div>
-				</CardHeader>
+			<Card class="step-card" data-checked={submission} data-primary={nextStep === 3}>
+				{@render stepHeader({
+					stepNumber: 3,
+					checked: submission,
+					title: tt('pages.home.steps.submission.title'),
+					onToggle: toggleSubmission
+				})}
 				<CardContent class="step-card-content">
 					<div class="submission-option">
 						<p class="supporting-text">{tt('pages.home.steps.submission.digital_intro')}</p>
@@ -283,11 +278,34 @@ const structuredData = $derived(
 }
 
 :global(.step-card) {
-	transition: border-color 0.16s ease;
+	transition:
+		border-color 0.25s ease,
+		background-color 0.25s ease,
+		box-shadow 0.25s ease;
+}
+
+:global(.step-card) :global([data-slot="card-title"]) {
+	transition:
+		font-size 0.25s ease,
+		letter-spacing 0.25s ease,
+		font-weight 0.25s ease;
 }
 
 :global(.step-card[data-checked="true"]) {
 	border-color: color-mix(in oklab, var(--color-primary) 30%, var(--color-border));
+}
+
+:global(.step-card[data-primary="true"]) {
+	border-color: var(--color-primary);
+	background: color-mix(in oklab, var(--color-primary) 5%, var(--color-card));
+	box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-primary) 18%, transparent);
+}
+
+:global(.step-card[data-primary="true"]) :global([data-slot="card-title"]) {
+	font-size: 1.6rem;
+	font-weight: 700;
+	line-height: 1.2;
+	letter-spacing: -0.015em;
 }
 
 :global(.step-card-header) {
@@ -362,17 +380,21 @@ const structuredData = $derived(
 	align-items: start;
 	padding: 0.625rem 0.75rem;
 	border-radius: 0.75rem;
-	border: 1px solid color-mix(in oklab, var(--color-border) 70%, transparent);
 	background: var(--color-background);
 	cursor: pointer;
-	transition:
-		border-color 0.16s ease,
-		background-color 0.16s ease;
+	transition: background-color 0.16s ease;
 }
 
 .doc-row:hover {
-	border-color: color-mix(in oklab, var(--color-primary) 35%, var(--color-border));
 	background: color-mix(in oklab, var(--color-accent) 30%, var(--color-background));
+}
+
+:global(.step-card[data-primary="true"]) .doc-row {
+	background: color-mix(in oklab, var(--color-primary) 4%, var(--color-background));
+}
+
+:global(.step-card[data-primary="true"]) .doc-row:hover {
+	background: color-mix(in oklab, var(--color-primary) 9%, var(--color-background));
 }
 
 .doc-row-input {

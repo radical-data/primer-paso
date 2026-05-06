@@ -45,7 +45,7 @@ export const fr = {
 	'pages.home.meta_description':
 		'Primer Paso aide à comprendre la régularisation extraordinaire de 2026 en Espagne, à repérer les documents éventuellement manquants et à choisir entre le portail officiel et une organisation collaboratrice.',
 	'pages.home.lead':
-		"Suivez ces trois étapes pour préparer votre demande. Cochez la case de chaque étape lorsque vous l'avez terminée — le questionnaire coche l'étape 1 automatiquement.",
+		'Suivez ces trois étapes pour préparer votre demande. Cochez chaque étape au fur et à mesure.',
 	'pages.home.steps.step_label': 'Étape {current} sur {total}',
 	'pages.home.steps.toggle_aria': "Marquer l'étape comme terminée",
 	'pages.home.steps.eligibility.title': 'Trouvez votre première étape',
