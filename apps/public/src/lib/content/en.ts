@@ -23,8 +23,8 @@ export const en = {
 	'chrome.brand': 'Primer Paso',
 	'chrome.tagline': "Independent guidance for Spain's 2026 regularisation process",
 	'chrome.primary_navigation': 'Primary navigation',
-	'chrome.nav.home': 'Home',
-	'chrome.nav.start': 'Check next step',
+	'chrome.nav.home': 'See my path',
+	'chrome.nav.start': 'See my first step',
 	'chrome.nav.organisations': 'Find organisations',
 	'chrome.footer.eyebrow': 'Primer Paso',
 	'chrome.footer.title': 'About this tool',
@@ -41,16 +41,14 @@ export const en = {
 	'pages.home.meta_description':
 		"Primer Paso helps people understand Spain's 2026 extraordinary regularisation process, check what documents may be missing, and decide whether to use the official portal or seek support from a collaborating organisation.",
 	'pages.home.lead':
-		'Primer Paso helps you prepare your application step by step. Tick off each part as you go.',
+		'Follow these three steps to prepare your application. Tick the checkbox for each step as you complete it — the questionnaire marks step 1 automatically.',
 	'pages.home.steps.step_label': 'Step {current} of {total}',
 	'pages.home.steps.toggle_aria': 'Mark step as complete',
 	'pages.home.steps.eligibility.title': 'Find out your first step',
 	'pages.home.steps.eligibility.description':
 		'Answer a short questionnaire to see which of the four routes fits, which documents you already have, and which ones are still missing.',
-	'pages.home.steps.eligibility.locked_hint':
-		'This step is checked automatically when you finish the questionnaire.',
-	'pages.home.steps.eligibility.completed_hint':
-		'You have completed the questionnaire. You can review it whenever you need to.',
+	'pages.home.steps.eligibility.hint':
+		'This step is checked automatically when you finish the questionnaire — or you can mark it manually.',
 	'pages.home.steps.eligibility.cta': 'Start the questionnaire',
 	'pages.home.steps.eligibility.cta_again': 'Review the questionnaire',
 	'pages.home.steps.documents.title': 'Get the documents you need',
@@ -128,6 +126,16 @@ export const en = {
 	'pages.result.eligibility_title': 'Your result',
 	'pages.result.next_step_title': 'Your next step',
 	'pages.result.why_title': 'Why we think this',
+	'pages.result.continue_title': 'How to continue',
+	'pages.result.continue_body':
+		'Continue on your path and tick each step as you complete it. There you can review and check off your personalised document list.',
+	'pages.result.continue_action': 'Go to my path',
+	'pages.result.review_documents_action': 'Review which documents I need',
+	'pages.result.review_documents_body':
+		'Continue with the documents checklist on the home page — your list is now personalised based on your answers.',
+	'pages.result.summary_actions_title': 'Your summary',
+	'pages.result.summary_actions_body':
+		'You can save this summary to come back to it later, or start the questionnaire again.',
 	'pages.result.checklist_title': 'What to get ready',
 	'pages.result.checklist.already_have': 'What you already have',
 	'pages.result.checklist.still_need': 'What you may still need',

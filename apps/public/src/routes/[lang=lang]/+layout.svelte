@@ -42,9 +42,8 @@ const onLanguageChange = (value: string) => {
 
 const currentLanguageLabel = $derived(languages.find((l) => l.value === locale)?.label ?? 'Español')
 
-const navigationItems = $derived([
-	{ href: localiseHref(locale, '/'), label: tt('chrome.nav.home') }
-])
+const homeHref = $derived(localiseHref(locale, '/'))
+const screenerHref = $derived(localiseHref(locale, '/screener'))
 
 const alternateLinks = $derived(
 	getAlternateLocaleHrefs(currentHref).map(({ locale, href }) => ({
@@ -96,17 +95,24 @@ const isCurrentNavItem = (href: string) => {
 			<div class="site-header-main">
 				<nav class="service-nav" aria-label={tt('chrome.primary_navigation')}>
 					<ul class="service-nav-list">
-						{#each navigationItems as item (item.href)}
-							<li>
-								<a
-									class="service-nav-link"
-									href={item.href}
-									aria-current={isCurrentNavItem(item.href) ? 'page' : undefined}
-								>
-									{item.label}
-								</a>
-							</li>
-						{/each}
+						<li>
+							<a
+								class="service-nav-link"
+								href={homeHref}
+								aria-current={isCurrentNavItem(homeHref) ? 'page' : undefined}
+							>
+								{tt('chrome.nav.home')}
+							</a>
+						</li>
+						<li>
+							<a
+								class="service-nav-link"
+								href={screenerHref}
+								aria-current={isCurrentNavItem(screenerHref) ? 'page' : undefined}
+							>
+								{tt('chrome.nav.start')}
+							</a>
+						</li>
 					</ul>
 				</nav>
 
@@ -175,9 +181,8 @@ const isCurrentNavItem = (href: string) => {
 			<nav class="site-footer-nav" aria-label={tt('chrome.footer.title')}>
 				<h2 class="site-footer-title">{tt('chrome.primary_navigation')}</h2>
 				<ul class="site-footer-links">
-					{#each navigationItems as item (item.href)}
-						<li><a class="site-footer-link" href={item.href}>{item.label}</a></li>
-					{/each}
+					<li><a class="site-footer-link" href={homeHref}>{tt('chrome.nav.home')}</a></li>
+					<li><a class="site-footer-link" href={screenerHref}>{tt('chrome.nav.start')}</a></li>
 					<li>
 						<a
 							class="site-footer-link"

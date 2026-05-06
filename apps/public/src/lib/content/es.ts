@@ -28,8 +28,8 @@ export const es = {
 	'chrome.brand': 'Primer Paso',
 	'chrome.tagline': 'Orientación independiente para el proceso de regularización de España de 2026',
 	'chrome.primary_navigation': 'Navegación principal',
-	'chrome.nav.home': 'Inicio',
-	'chrome.nav.start': 'Ver siguiente paso',
+	'chrome.nav.home': 'Ver mi camino',
+	'chrome.nav.start': 'Ver mi primer paso',
 	'chrome.nav.organisations': 'Buscar organizaciones',
 	'chrome.footer.eyebrow': 'Primer Paso',
 	'chrome.footer.title': 'Sobre esta herramienta',
@@ -47,16 +47,14 @@ export const es = {
 	'pages.home.meta_description':
 		'Primer Paso ayuda a entender el proceso extraordinario de regularización en España, revisar qué documentos pueden faltar y decidir si conviene usar el portal oficial o buscar apoyo de una organización colaboradora.',
 	'pages.home.lead':
-		'Primer Paso te ayuda a preparar tu solicitud paso a paso. Marca cada parte cuando la completes.',
+		'Sigue estos tres pasos para preparar tu solicitud. Marca la casilla de cada paso al completarlo — el cuestionario marca el paso 1 automáticamente.',
 	'pages.home.steps.step_label': 'Paso {current} de {total}',
 	'pages.home.steps.toggle_aria': 'Marcar paso como completado',
 	'pages.home.steps.eligibility.title': 'Conoce tu primer paso',
 	'pages.home.steps.eligibility.description':
 		'Responde un cuestionario breve para saber qué vía encaja con tu situación, qué documentos ya tienes y cuáles te faltan.',
-	'pages.home.steps.eligibility.locked_hint':
-		'Este paso se marca automáticamente al terminar el cuestionario.',
-	'pages.home.steps.eligibility.completed_hint':
-		'Has completado el cuestionario. Puedes revisarlo cuando quieras.',
+	'pages.home.steps.eligibility.hint':
+		'Este paso se marca automáticamente al terminar el cuestionario — o puedes marcarlo a mano.',
 	'pages.home.steps.eligibility.cta': 'Empezar el cuestionario',
 	'pages.home.steps.eligibility.cta_again': 'Revisar el cuestionario',
 	'pages.home.steps.documents.title': 'Reúne los documentos',
@@ -138,6 +136,16 @@ export const es = {
 	'pages.result.eligibility_title': 'Tu resultado',
 	'pages.result.next_step_title': 'Tu siguiente paso',
 	'pages.result.why_title': 'Por qué pensamos esto',
+	'pages.result.continue_title': 'Cómo continuar',
+	'pages.result.continue_body':
+		'Sigue tu camino y marca cada paso al completarlo. Allí podrás revisar y marcar tus documentos personalizados.',
+	'pages.result.continue_action': 'Ir a mi camino',
+	'pages.result.review_documents_action': 'Revisar qué documentos me hacen falta',
+	'pages.result.review_documents_body':
+		'Continúa con la lista de documentos en el inicio — ahora está personalizada según tus respuestas.',
+	'pages.result.summary_actions_title': 'Tu resumen',
+	'pages.result.summary_actions_body':
+		'Puedes guardar este resumen para consultarlo más tarde o reiniciar el cuestionario.',
 	'pages.result.checklist_title': 'Qué conviene preparar',
 	'pages.result.checklist.already_have': 'Lo que ya tienes',
 	'pages.result.checklist.still_need': 'Lo que aún podrías necesitar',
