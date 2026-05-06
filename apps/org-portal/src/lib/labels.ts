@@ -55,6 +55,7 @@ export const auditEventLabel = (eventType: string) =>
 		'handoff.open_failed': 'Error al abrir borrador',
 		'handoff.invalid_draft': 'Borrador no válido',
 		'review.updated': 'Confirmaciones guardadas',
+		'certificate.review.corrected': 'Datos revisados corregidos',
 		'review.ready_to_issue': 'Revisión marcada como lista para emitir',
 		'certificate.issued': 'Certificado emitido',
 		'certificate.issue_failed': 'Error al emitir certificado',

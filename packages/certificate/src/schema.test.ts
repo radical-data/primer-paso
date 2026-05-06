@@ -1,11 +1,15 @@
 import { describe, expect, it } from 'vitest'
 import fixture from '../fixtures/vulnerability-certificate.issue-request.fixture.json'
 import {
+	CERTIFICATE_DRAFT_REVIEW_FIELDS,
 	certificateDraftSchema,
 	certificateIssueRequestSchema,
+	getCertificateDraftReviewFieldValue,
+	parseCertificateDraft,
 	parseCertificateIssueRequest,
 	validateCertificateDraft,
-	validateCertificateIssueRequest
+	validateCertificateIssueRequest,
+	withCertificateDraftReviewDataFromForm
 } from './schema'
 import { VULNERABILITY_REASON_VALUES } from './types'
 
@@ -107,5 +111,57 @@ describe('certificate schema', () => {
 		const result = validateCertificateDraft(fixture.draft)
 
 		expect(result.ok).toBe(true)
+	})
+
+	it('declares stable form field names for every reviewable draft field', () => {
+		expect(CERTIFICATE_DRAFT_REVIEW_FIELDS.map((field) => field.formName)).toEqual([
+			'givenNames',
+			'familyNames',
+			'documentType',
+			'documentNumber',
+			'dateOfBirth',
+			'nationality',
+			'email',
+			'phone',
+			'addressLine1',
+			'addressLine2',
+			'municipality',
+			'province',
+			'postalCode',
+			'vulnerabilityReasons'
+		])
+	})
+
+	it('reads reviewable values by path', () => {
+		const draft = parseCertificateDraft(fixture.draft)
+		expect(getCertificateDraftReviewFieldValue(draft, 'userData.identity.givenNames')).toBe('Amina')
+		expect(getCertificateDraftReviewFieldValue(draft, 'userData.vulnerability.reasons')).toEqual([
+			'vulnerable_family_unit',
+			'psychosocial_risks'
+		])
+	})
+
+	it('builds reviewed draft data from form fields', () => {
+		const draft = parseCertificateDraft(fixture.draft)
+		const formData = new FormData()
+		formData.set('givenNames', 'Aminata')
+		formData.set('familyNames', 'Benali')
+		formData.set('documentType', 'passport')
+		formData.set('documentNumber', 'P7654321')
+		formData.set('dateOfBirth', '1992-04-18')
+		formData.set('nationality', 'Marruecos')
+		formData.set('email', 'aminata@example.invalid')
+		formData.set('phone', '')
+		formData.set('addressLine1', 'Calle Nueva 1')
+		formData.set('addressLine2', '')
+		formData.set('municipality', 'Madrid')
+		formData.set('province', 'Madrid')
+		formData.set('postalCode', '28001')
+		formData.append('vulnerabilityReasons', 'psychosocial_risks')
+		const reviewed = withCertificateDraftReviewDataFromForm(draft, formData)
+		expect(reviewed.userData.identity.givenNames).toBe('Aminata')
+		expect(reviewed.userData.contact.phone).toBeUndefined()
+		expect(reviewed.userData.vulnerability.reasons).toEqual(['psychosocial_risks'])
+		expect(validateCertificateDraft(reviewed).ok).toBe(true)
 	})
 })

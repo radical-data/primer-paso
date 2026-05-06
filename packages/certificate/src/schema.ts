@@ -3,10 +3,12 @@ import {
 	type CertificateDraft,
 	type CertificateIssueRequest,
 	DOCUMENT_TYPE_VALUES,
+	type DocumentType,
 	GENDER_MARKER_VALUES,
 	type ValidationIssue,
 	type ValidationResult,
-	VULNERABILITY_REASON_VALUES
+	VULNERABILITY_REASON_VALUES,
+	type VulnerabilityReason
 } from './types'
 
 type UnknownRecord = Record<string, unknown>
@@ -21,6 +23,58 @@ export interface FieldSchema {
 export interface ObjectSchema {
 	[key: string]: FieldSchema | ObjectSchema
 }
+
+export type CertificateDraftReviewFieldPath =
+	| 'userData.identity.givenNames'
+	| 'userData.identity.familyNames'
+	| 'userData.identity.documentType'
+	| 'userData.identity.documentNumber'
+	| 'userData.identity.dateOfBirth'
+	| 'userData.identity.nationality'
+	| 'userData.contact.email'
+	| 'userData.contact.phone'
+	| 'userData.location.addressLine1'
+	| 'userData.location.addressLine2'
+	| 'userData.location.municipality'
+	| 'userData.location.province'
+	| 'userData.location.postalCode'
+	| 'userData.vulnerability.reasons'
+
+export type CertificateDraftReviewFieldKind = 'string' | 'optional-string' | 'enum' | 'array'
+
+export interface CertificateDraftReviewField {
+	path: CertificateDraftReviewFieldPath
+	formName: string
+	kind: CertificateDraftReviewFieldKind
+	values?: readonly string[]
+}
+
+export const CERTIFICATE_DRAFT_REVIEW_FIELDS = [
+	{ path: 'userData.identity.givenNames', formName: 'givenNames', kind: 'string' },
+	{ path: 'userData.identity.familyNames', formName: 'familyNames', kind: 'string' },
+	{
+		path: 'userData.identity.documentType',
+		formName: 'documentType',
+		kind: 'enum',
+		values: DOCUMENT_TYPE_VALUES
+	},
+	{ path: 'userData.identity.documentNumber', formName: 'documentNumber', kind: 'string' },
+	{ path: 'userData.identity.dateOfBirth', formName: 'dateOfBirth', kind: 'optional-string' },
+	{ path: 'userData.identity.nationality', formName: 'nationality', kind: 'optional-string' },
+	{ path: 'userData.contact.email', formName: 'email', kind: 'string' },
+	{ path: 'userData.contact.phone', formName: 'phone', kind: 'optional-string' },
+	{ path: 'userData.location.addressLine1', formName: 'addressLine1', kind: 'string' },
+	{ path: 'userData.location.addressLine2', formName: 'addressLine2', kind: 'optional-string' },
+	{ path: 'userData.location.municipality', formName: 'municipality', kind: 'string' },
+	{ path: 'userData.location.province', formName: 'province', kind: 'string' },
+	{ path: 'userData.location.postalCode', formName: 'postalCode', kind: 'optional-string' },
+	{
+		path: 'userData.vulnerability.reasons',
+		formName: 'vulnerabilityReasons',
+		kind: 'array',
+		values: VULNERABILITY_REASON_VALUES
+	}
+] as const satisfies readonly CertificateDraftReviewField[]
 
 export const certificateDraftSchema = {
 	version: {
@@ -223,6 +277,88 @@ export const certificateIssueRequestSchema = {
 		description: 'ISO timestamp when the organisation issued the certificate.'
 	}
 } satisfies ObjectSchema
+
+const getString = (formData: FormData, name: string) => String(formData.get(name) ?? '').trim()
+
+const getOptionalString = (formData: FormData, name: string) => {
+	const value = getString(formData, name)
+	return value.length > 0 ? value : undefined
+}
+
+const getStringList = (formData: FormData, name: string) =>
+	formData.getAll(name).map(String).filter(Boolean)
+
+export const getCertificateDraftReviewFieldValue = (
+	draft: CertificateDraft,
+	path: CertificateDraftReviewFieldPath
+) => {
+	switch (path) {
+		case 'userData.identity.givenNames':
+			return draft.userData.identity.givenNames
+		case 'userData.identity.familyNames':
+			return draft.userData.identity.familyNames
+		case 'userData.identity.documentType':
+			return draft.userData.identity.documentType
+		case 'userData.identity.documentNumber':
+			return draft.userData.identity.documentNumber
+		case 'userData.identity.dateOfBirth':
+			return draft.userData.identity.dateOfBirth
+		case 'userData.identity.nationality':
+			return draft.userData.identity.nationality
+		case 'userData.contact.email':
+			return draft.userData.contact.email
+		case 'userData.contact.phone':
+			return draft.userData.contact.phone
+		case 'userData.location.addressLine1':
+			return draft.userData.location.addressLine1
+		case 'userData.location.addressLine2':
+			return draft.userData.location.addressLine2
+		case 'userData.location.municipality':
+			return draft.userData.location.municipality
+		case 'userData.location.province':
+			return draft.userData.location.province
+		case 'userData.location.postalCode':
+			return draft.userData.location.postalCode
+		case 'userData.vulnerability.reasons':
+			return draft.userData.vulnerability.reasons
+	}
+}
+
+export const withCertificateDraftReviewDataFromForm = (
+	draft: CertificateDraft,
+	formData: FormData
+): CertificateDraft => ({
+	...draft,
+	userData: {
+		...draft.userData,
+		identity: {
+			...draft.userData.identity,
+			givenNames: getString(formData, 'givenNames'),
+			familyNames: getString(formData, 'familyNames'),
+			documentType: getString(formData, 'documentType') as DocumentType,
+			documentNumber: getString(formData, 'documentNumber'),
+			dateOfBirth: getOptionalString(formData, 'dateOfBirth'),
+			nationality: getOptionalString(formData, 'nationality')
+		},
+		contact: {
+			...draft.userData.contact,
+			email: getString(formData, 'email'),
+			phone: getOptionalString(formData, 'phone')
+		},
+		location: {
+			...draft.userData.location,
+			addressLine1: getString(formData, 'addressLine1'),
+			addressLine2: getOptionalString(formData, 'addressLine2'),
+			municipality: getString(formData, 'municipality'),
+			province: getString(formData, 'province'),
+			postalCode: getOptionalString(formData, 'postalCode')
+		},
+		vulnerability: {
+			...draft.userData.vulnerability,
+			reasons: getStringList(formData, 'vulnerabilityReasons') as VulnerabilityReason[]
+		}
+	}
+})
 
 const isRecord = (value: unknown): value is UnknownRecord =>
 	Boolean(value) && typeof value === 'object' && !Array.isArray(value)

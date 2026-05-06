@@ -1,17 +1,32 @@
 import {
-	generateVulnerabilityCertificatePdf,
+	CERTIFICATE_DRAFT_REVIEW_FIELDS,
+	type CertificateDraft,
+	getCertificateDraftReviewFieldValue,
 	parseCertificateDraft,
-	parseCertificateIssueRequest
+	parseCertificateIssueRequest,
+	VULNERABILITY_REASON_VALUES,
+	validateCertificateDraft,
+	withCertificateDraftReviewDataFromForm
 } from '@primer-paso/certificate'
-import type { VerificationReview } from '@primer-paso/db'
+import { generateVulnerabilityCertificatePdf } from '@primer-paso/certificate/pdf'
+import type { CertificateCorrectionType, VerificationReview } from '@primer-paso/db'
 import { signPdfWithOrganisationCertificate } from '@primer-paso/signing-client'
 import { error, fail, redirect } from '@sveltejs/kit'
 import { env } from '$env/dynamic/private'
+import { vulnerabilityReasonLabel } from '$lib/labels'
 import { writeAuditEvent } from '$lib/server/audit'
 import { requirePermission } from '$lib/server/auth'
 import { getOrgPortalRepository } from '$lib/server/repository'
 import { decryptSigningSecret, decryptSigningText } from '$lib/server/signing-secret-crypto'
 import type { Actions, PageServerLoad } from './$types'
+
+const CORRECTION_TYPES = [
+	'typo',
+	'confirmed_with_applicant',
+	'document_verified',
+	'standardised_format',
+	'other'
+] as const satisfies readonly CertificateCorrectionType[]
 
 const parseVerification = (formData: FormData) => ({
 	passportOrIdentityDocumentChecked: formData.get('passportOrIdentityDocumentChecked') === 'yes',
@@ -27,9 +42,44 @@ const verificationComplete = (verification: ReturnType<typeof parseVerification>
 const storedVerificationComplete = (verification: VerificationReview | undefined) =>
 	Boolean(
 		verification?.passportOrIdentityDocumentChecked &&
-			verification.userInformationConfirmed &&
-			verification.vulnerabilityInformationReviewed
+			verification?.userInformationConfirmed &&
+			verification?.vulnerabilityInformationReviewed
 	)
+
+const getString = (formData: FormData, name: string) => String(formData.get(name) ?? '').trim()
+
+const getOptionalString = (formData: FormData, name: string) => {
+	const value = getString(formData, name)
+	return value.length > 0 ? value : undefined
+}
+
+const getCorrectionType = (formData: FormData): CertificateCorrectionType => {
+	const value = String(formData.get('correctionType') ?? 'confirmed_with_applicant')
+	return CORRECTION_TYPES.includes(value as CertificateCorrectionType)
+		? (value as CertificateCorrectionType)
+		: 'confirmed_with_applicant'
+}
+
+const valueChanged = (from: unknown, to: unknown) =>
+	JSON.stringify(from ?? null) !== JSON.stringify(to ?? null)
+
+const buildCorrections = (
+	before: CertificateDraft,
+	after: CertificateDraft,
+	type: CertificateCorrectionType,
+	note?: string
+) =>
+	CERTIFICATE_DRAFT_REVIEW_FIELDS.map((field) => {
+		const from = getCertificateDraftReviewFieldValue(before, field.path) ?? null
+		const to = getCertificateDraftReviewFieldValue(after, field.path) ?? null
+		return {
+			fieldPath: field.path,
+			from,
+			to,
+			type,
+			note
+		}
+	}).filter(({ from, to }) => valueChanged(from, to))
 
 export const load: PageServerLoad = async ({ locals, params }) => {
 	const session = requirePermission(locals, 'handoff:review')
@@ -54,9 +104,14 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 			status: review.status,
 			createdAt: review.createdAt,
 			updatedAt: review.updatedAt,
-			verification: review.verification
+			verification: review.verification,
+			draftSnapshot: parseCertificateDraft(review.draftSnapshot)
 		},
 		draft,
+		vulnerabilityReasonOptions: VULNERABILITY_REASON_VALUES.map((value) => ({
+			value,
+			label: vulnerabilityReasonLabel(value)
+		})),
 		canMarkReadyToIssue: session.permissions.includes('certificate:prepare'),
 		canIssueCertificate:
 			session.permissions.includes('certificate:issue') &&
@@ -67,6 +122,89 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 }
 
 export const actions: Actions = {
+	updateReviewedData: async ({ request, params, locals }) => {
+		const session = requirePermission(locals, 'handoff:review')
+		const repository = getOrgPortalRepository()
+
+		if (!repository) {
+			error(503, 'El almacenamiento del portal de organizaciones no está configurado.')
+		}
+
+		const review = await repository.findCertificateHandoffReviewById(params.id)
+
+		if (!review || review.organisationId !== session.organisationId) {
+			error(404, 'Revisión no encontrada.')
+		}
+
+		if (review.status !== 'in_review') {
+			return fail(400, {
+				error: 'Solo se pueden corregir datos mientras la revisión está en curso.'
+			})
+		}
+
+		const formData = await request.formData()
+		const reviewedData = withCertificateDraftReviewDataFromForm(review.reviewedData, formData)
+		const validation = validateCertificateDraft(reviewedData)
+
+		if (!validation.ok) {
+			return fail(400, {
+				error: 'Revisa los datos corregidos del certificado.',
+				issues: validation.issues
+			})
+		}
+
+		const corrections = buildCorrections(
+			review.reviewedData,
+			validation.value,
+			getCorrectionType(formData),
+			getOptionalString(formData, 'correctionNote')
+		)
+
+		if (corrections.length === 0) {
+			return fail(400, { error: 'No se ha modificado ningún dato.' })
+		}
+
+		if (formData.get('correctionsConfirmed') !== 'yes') {
+			return fail(400, {
+				error:
+					'Confirma que la organización ha comprobado y asume responsabilidad por las modificaciones.'
+			})
+		}
+
+		const updated = await repository.updateCertificateHandoffReviewReviewedData({
+			reviewId: review.id,
+			memberId: session.memberId,
+			reviewedData: validation.value,
+			corrections
+		})
+
+		if (!updated) {
+			error(409, 'No se pudo actualizar la revisión.')
+		}
+
+		await writeAuditEvent({
+			organisationId: review.organisationId,
+			memberId: session.memberId,
+			handoffId: review.handoffId,
+			reviewId: review.id,
+			eventType: 'certificate.review.corrected',
+			eventData: {
+				correctionType: getCorrectionType(formData),
+				correctionNote: getOptionalString(formData, 'correctionNote'),
+				verificationReset: true,
+				changes: corrections.map(({ fieldPath, from, to, type }) => ({
+					fieldPath,
+					from,
+					to,
+					type
+				}))
+			},
+			request
+		})
+
+		redirect(303, `/reviews/${review.id}`)
+	},
+
 	save: async ({ locals, params, request }) => {
 		const session = requirePermission(locals, 'handoff:review')
 		const repository = getOrgPortalRepository()
