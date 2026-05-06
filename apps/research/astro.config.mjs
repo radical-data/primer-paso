@@ -1,5 +1,6 @@
 import starlight from '@astrojs/starlight'
 import { defineConfig } from 'astro/config'
+import mermaid from 'astro-mermaid'
 
 export default defineConfig({
 	site: 'https://research.primerpaso.org',
@@ -24,6 +25,15 @@ export default defineConfig({
 					autogenerate: { directory: 'civic-tech' }
 				}
 			]
+		}),
+		mermaid({
+			theme: 'forest',
+			autoTheme: true,
+			mermaidConfig: {
+				flowchart: {
+					curve: 'basis'
+				}
+			}
 		})
 	]
 })
