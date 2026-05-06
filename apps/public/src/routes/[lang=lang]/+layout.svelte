@@ -8,7 +8,7 @@ import { resolve } from '$app/paths'
 import { page } from '$app/state'
 import faviconUrl from '$lib/assets/favicon.svg?url'
 import MatomoTracker from '$lib/components/analytics/MatomoTracker.svelte'
-import { getTranslator, isLocale, type Locale } from '$lib/content'
+import { getTextDirection, getTranslator, isLocale, type Locale } from '$lib/content'
 import {
 	getAlternateLocaleHrefs,
 	getDefaultLocaleHref,
@@ -56,6 +56,15 @@ const isCurrentNavItem = (href: string) => {
 	if (href === localiseHref(locale, '/')) return page.url.pathname === href
 	return page.url.pathname === href || page.url.pathname.startsWith(`${href}/`)
 }
+
+// Sync <html lang> and <html dir> on client-side navigation. SSR sets them
+// once via hooks.server.ts, but client-side `goto()` does not re-render the
+// document element — so without this, switching to/from Arabic only takes
+// effect after a full page reload.
+$effect(() => {
+	document.documentElement.lang = locale
+	document.documentElement.dir = getTextDirection(locale)
+})
 </script>
 
 <svelte:head>
