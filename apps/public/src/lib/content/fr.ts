@@ -26,8 +26,8 @@ export const fr = {
 	'chrome.tagline':
 		'Orientation indépendante pour la procédure de régularisation de l’Espagne en 2026',
 	'chrome.primary_navigation': 'Navigation principale',
-	'chrome.nav.home': 'Accueil',
-	'chrome.nav.start': 'Vérifier la prochaine étape',
+	'chrome.nav.home': 'Voir mon parcours',
+	'chrome.nav.start': 'Voir ma première étape',
 	'chrome.nav.organisations': 'Trouver des organisations',
 	'chrome.footer.eyebrow': 'Primer Paso',
 	'chrome.footer.title': 'À propos de cet outil',
@@ -45,16 +45,14 @@ export const fr = {
 	'pages.home.meta_description':
 		'Primer Paso aide à comprendre la régularisation extraordinaire de 2026 en Espagne, à repérer les documents éventuellement manquants et à choisir entre le portail officiel et une organisation collaboratrice.',
 	'pages.home.lead':
-		'Primer Paso vous aide à préparer votre demande étape par étape. Cochez chaque partie au fur et à mesure.',
+		"Suivez ces trois étapes pour préparer votre demande. Cochez la case de chaque étape lorsque vous l'avez terminée — le questionnaire coche l'étape 1 automatiquement.",
 	'pages.home.steps.step_label': 'Étape {current} sur {total}',
 	'pages.home.steps.toggle_aria': "Marquer l'étape comme terminée",
 	'pages.home.steps.eligibility.title': 'Trouvez votre première étape',
 	'pages.home.steps.eligibility.description':
 		'Répondez à un court questionnaire pour savoir quelle voie correspond à votre situation, quels documents vous avez déjà et lesquels manquent encore.',
-	'pages.home.steps.eligibility.locked_hint':
-		'Cette étape se coche automatiquement à la fin du questionnaire.',
-	'pages.home.steps.eligibility.completed_hint':
-		'Vous avez terminé le questionnaire. Vous pouvez le revoir quand vous le souhaitez.',
+	'pages.home.steps.eligibility.hint':
+		'Cette étape se coche automatiquement à la fin du questionnaire — ou vous pouvez la cocher manuellement.',
 	'pages.home.steps.eligibility.cta': 'Commencer le questionnaire',
 	'pages.home.steps.eligibility.cta_again': 'Revoir le questionnaire',
 	'pages.home.steps.documents.title': 'Réunissez les documents nécessaires',
@@ -138,6 +136,16 @@ export const fr = {
 	'pages.result.eligibility_title': 'Votre résultat',
 	'pages.result.next_step_title': 'Votre prochaine étape',
 	'pages.result.why_title': 'Pourquoi nous pensons cela',
+	'pages.result.continue_title': 'Comment continuer',
+	'pages.result.continue_body':
+		"Suivez votre parcours et cochez chaque étape lorsque vous l'avez terminée. Là, vous pouvez revoir et cocher votre liste de documents personnalisée.",
+	'pages.result.continue_action': 'Aller à mon parcours',
+	'pages.result.review_documents_action': 'Voir quels documents me manquent',
+	'pages.result.review_documents_body':
+		"Continuez avec la liste des documents sur la page d'accueil — elle est maintenant personnalisée selon vos réponses.",
+	'pages.result.summary_actions_title': 'Votre résumé',
+	'pages.result.summary_actions_body':
+		'Vous pouvez enregistrer ce résumé pour le consulter plus tard, ou recommencer le questionnaire.',
 	'pages.result.checklist_title': 'Ce qu’il faut préparer',
 	'pages.result.checklist.already_have': 'Ce que vous avez déjà',
 	'pages.result.checklist.still_need': 'Ce qui peut encore manquer',

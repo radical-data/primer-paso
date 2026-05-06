@@ -25,8 +25,8 @@ export const ar = {
 	'chrome.brand': 'Primer Paso',
 	'chrome.tagline': 'إرشاد مستقل بشأن عملية التسوية في إسبانيا لعام 2026',
 	'chrome.primary_navigation': 'التنقل الرئيسي',
-	'chrome.nav.home': 'الرئيسية',
-	'chrome.nav.start': 'التحقق من الخطوة التالية',
+	'chrome.nav.home': 'مساري',
+	'chrome.nav.start': 'خطوتي الأولى',
 	'chrome.nav.organisations': 'البحث عن منظمات',
 	'chrome.footer.eyebrow': 'Primer Paso',
 	'chrome.footer.title': 'حول هذه الأداة',
@@ -43,14 +43,14 @@ export const ar = {
 	'pages.home.meta_description':
 		'يساعد Primer Paso الأشخاص على فهم عملية التسوية الاستثنائية في إسبانيا لعام 2026، ومعرفة الوثائق التي قد تكون ناقصة، واتخاذ قرار بين البوابة الرسمية أو طلب الدعم من منظمة متعاونة.',
 	'pages.home.lead':
-		'يساعدك Primer Paso على إعداد طلبك خطوة بخطوة. ضع علامة على كل قسم عندما تكمله.',
+		'اتبع هذه الخطوات الثلاث لإعداد طلبك. ضع علامة في خانة كل خطوة عند إكمالها — يقوم الاستبيان بتحديد الخطوة 1 تلقائياً.',
 	'pages.home.steps.step_label': 'الخطوة {current} من {total}',
 	'pages.home.steps.toggle_aria': 'تحديد الخطوة كمكتملة',
 	'pages.home.steps.eligibility.title': 'اعرف خطوتك الأولى',
 	'pages.home.steps.eligibility.description':
 		'أجب عن استبيان قصير لمعرفة المسار الذي يناسب حالتك، والوثائق التي لديك بالفعل، وتلك التي ما زالت ناقصة.',
-	'pages.home.steps.eligibility.locked_hint': 'يتم تحديد هذه الخطوة تلقائياً عند إنهاء الاستبيان.',
-	'pages.home.steps.eligibility.completed_hint': 'لقد أكملت الاستبيان. يمكنك مراجعته في أي وقت.',
+	'pages.home.steps.eligibility.hint':
+		'يتم تحديد هذه الخطوة تلقائياً عند إنهاء الاستبيان — أو يمكنك تحديدها يدوياً.',
 	'pages.home.steps.eligibility.cta': 'ابدأ الاستبيان',
 	'pages.home.steps.eligibility.cta_again': 'مراجعة الاستبيان',
 	'pages.home.steps.documents.title': 'اجمع الوثائق المطلوبة',
@@ -127,6 +127,16 @@ export const ar = {
 	'pages.result.eligibility_title': 'نتيجتك',
 	'pages.result.next_step_title': 'خطوتك التالية',
 	'pages.result.why_title': 'لماذا نعتقد ذلك',
+	'pages.result.continue_title': 'كيف تتابع',
+	'pages.result.continue_body':
+		'تابع مسارك وضع علامة على كل خطوة عند إكمالها. هناك يمكنك مراجعة قائمة الوثائق المخصصة وتحديدها.',
+	'pages.result.continue_action': 'الذهاب إلى مساري',
+	'pages.result.review_documents_action': 'مراجعة الوثائق التي أحتاجها',
+	'pages.result.review_documents_body':
+		'تابع مع قائمة الوثائق في الصفحة الرئيسية — أصبحت الآن مخصصة بناءً على إجاباتك.',
+	'pages.result.summary_actions_title': 'ملخصك',
+	'pages.result.summary_actions_body':
+		'يمكنك حفظ هذا الملخص للرجوع إليه لاحقاً، أو إعادة بدء الاستبيان.',
 	'pages.result.checklist_title': 'ما الذي ينبغي تجهيزه',
 	'pages.result.checklist.already_have': 'ما لديك بالفعل',
 	'pages.result.checklist.still_need': 'ما قد لا يزال ينقصك',

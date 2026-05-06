@@ -16,7 +16,8 @@ onMount(() => {
 	markEligibilityChecked()
 })
 
-const tt = $derived(getTranslator(data.locale ?? 'es'))
+const locale = $derived(data.locale ?? 'es')
+const tt = $derived(getTranslator(locale))
 
 const badgeVariant = $derived.by(() => {
 	switch (data.result.resultState) {
@@ -42,9 +43,31 @@ const heroTone = $derived.by(() => {
 	}
 })
 
-const isAnotherRoute = $derived(data.result.resultState === 'another_route_may_fit_better')
-const checkAnswersHref = $derived(localiseHref(data.locale ?? 'es', '/check-answers'))
-const startAgainHref = $derived(localiseHref(data.locale ?? 'es', '/screener?new=1'))
+const isEligible = $derived(
+	data.result.resultState === 'likely_in_scope' ||
+		data.result.resultState === 'possible_but_needs_more_evidence'
+)
+const startAgainHref = $derived(localiseHref(locale, '/screener?new=1'))
+const homeHref = $derived(localiseHref(locale, '/'))
+
+const checklistGroups = $derived([
+	{
+		labelKey: 'pages.result.checklist.already_have' as const,
+		items: data.result.checklist.alreadyHave
+	},
+	{
+		labelKey: 'pages.result.checklist.still_need' as const,
+		items: data.result.checklist.stillNeed
+	},
+	{
+		labelKey: 'pages.result.checklist.discuss_with_support' as const,
+		items: data.result.checklist.discussWithSupport
+	},
+	{
+		labelKey: 'pages.result.checklist.unresolved' as const,
+		items: data.result.checklist.unresolved
+	}
+])
 </script>
 <svelte:head> <meta name="robots" content="noindex, nofollow"> </svelte:head>
 <section class="stack">
@@ -70,59 +93,7 @@ const startAgainHref = $derived(localiseHref(data.locale ?? 'es', '/screener?new
 			</section>
 		{/if}
 
-		{#if isAnotherRoute}
-			<section class="cta-panel">
-				<div class="section-block">
-					<h2 class="section-title">{tt('pages.result.another_route.do_now_title')}</h2>
-					<p class="lead-text">{tt('pages.result.another_route.do_now.body')}</p>
-				</div>
-				<div class="actions">
-					<Button
-						href={checkAnswersHref}
-						variant="default"
-						onclick={() => trackEvent('Journey', 'Review answers', data.result.resultState)}
-					>
-						{tt('common.review_answers')}
-					</Button>
-					<Button
-						href={data.handoverHref}
-						variant="secondary"
-						onclick={() =>
-							trackEvent('Journey', 'Download handover PDF', data.result.resultState)}
-					>
-						{tt('common.download_handover_pdf')}
-						<FileDownIcon class="size-4" />
-					</Button>
-				</div>
-			</section>
-
-			<section class="panel-subtle section-block">
-				<h2 class="section-title">{tt('pages.result.support_title')}</h2>
-				<p class="supporting-text">{tt('pages.result.another_route.support_body')}</p>
-				<div class="actions">
-					<Button
-						href={data.organisationsHref}
-						variant="outline"
-						onclick={() =>
-							trackEvent('Directory', 'Open directory', data.result.resultState)}
-					>
-						{tt('common.see_support_options')}
-					</Button>
-				</div>
-			</section>
-
-			<section class="panel-subtle">
-				<div class="actions">
-					<Button
-						href={startAgainHref}
-						variant="outline"
-						onclick={() => trackEvent('Journey', 'Start again', data.result.resultState)}
-					>
-						{tt('common.start_again')}
-					</Button>
-				</div>
-			</section>
-		{:else}
+		{#if isEligible}
 			<section class="cta-panel">
 				<div class="section-block">
 					<h2 class="section-title">{tt('pages.result.next_step_title')}</h2>
@@ -152,149 +123,78 @@ const startAgainHref = $derived(localiseHref(data.locale ?? 'es', '/screener?new
 					<div class="actions">
 						<Button
 							href={data.organisationsHref}
-							onclick={() =>
-								trackEvent('Directory', 'Open directory', data.result.resultState)}
+							onclick={() => trackEvent('Directory', 'Open directory', data.result.resultState)}
 							>{tt('common.open_directory')}</Button
 						>
 					</div>
 				{/if}
 			</section>
+		{/if}
 
-			{#if data.result.recommendedRoute === 'collaborating_organisation'}
-				<section class="panel section-block">
-					<h2 class="section-title">Prepare a certificate draft</h2>
-					<p class="lead-text">
-						You can prepare draft information for a collaborating organisation to review. This does
-						not issue a certificate.
-					</p>
-					<div class="actions">
-						<Button href={data.certificateHref}>Prepare certificate draft</Button>
-					</div>
-				</section>
-			{/if}
-
-			<section class="panel section-block">
-				<h2 class="section-title">{tt('pages.result.collaborating_cta.title')}</h2>
-				<p class="lead-text">{tt('pages.result.collaborating_cta.lead')}</p>
-				<div class="actions">
-					<Button
-						href={data.organisationsHref}
-						variant={data.result.recommendedRoute === 'collaborating_organisation'
-							? 'default'
-							: 'secondary'}
-						onclick={() =>
-							trackEvent('Directory', 'Open directory', data.result.resultState)}
-					>
-						{tt('common.open_directory')}
-					</Button>
-					{#if data.result.recommendedRoute === 'official_portal'}
-						<Button
-							href={data.officialPortalUrl}
-							target="_blank"
-							rel="noreferrer"
-							variant="outline"
-							onclick={() =>
-								trackEvent('Journey', 'Open official portal', data.result.resultState)}
-						>
-							{tt('common.open_official_portal')}
-						</Button>
-					{/if}
-				</div>
-			</section>
-
-			<section class="panel section-block">
-				<div class="section-block">
-					<h2 class="section-title inline-flex items-center gap-2">
-						<ListChecksIcon class="size-5" aria-hidden="true" />
-						{tt('pages.result.checklist_title')}
-					</h2>
-				</div>
-				<div class="result-grid">
-					{#if data.result.checklist.alreadyHave.length > 0}
+		<section class="panel section-block">
+			<div class="section-block">
+				<h2 class="section-title inline-flex items-center gap-2">
+					<ListChecksIcon class="size-5" aria-hidden="true" />
+					{tt('pages.result.checklist_title')}
+				</h2>
+			</div>
+			<div class="result-grid">
+				{#each checklistGroups as group (group.labelKey)}
+					{#if group.items.length > 0}
 						<div class="list-section">
-							<h3>{tt('pages.result.checklist.already_have')}</h3>
+							<h3>{tt(group.labelKey)}</h3>
 							<ul>
-								{#each data.result.checklist.alreadyHave as itemKey (itemKey)}
+								{#each group.items as itemKey (itemKey)}
 									<li>{tt(itemKey)}</li>
 								{/each}
 							</ul>
 						</div>
 					{/if}
-					{#if data.result.checklist.stillNeed.length > 0}
-						<div class="list-section">
-							<h3>{tt('pages.result.checklist.still_need')}</h3>
-							<ul>
-								{#each data.result.checklist.stillNeed as itemKey (itemKey)}
-									<li>{tt(itemKey)}</li>
-								{/each}
-							</ul>
-						</div>
-					{/if}
-					{#if data.result.checklist.discussWithSupport.length > 0}
-						<div class="list-section">
-							<h3>{tt('pages.result.checklist.discuss_with_support')}</h3>
-							<ul>
-								{#each data.result.checklist.discussWithSupport as itemKey (itemKey)}
-									<li>{tt(itemKey)}</li>
-								{/each}
-							</ul>
-						</div>
-					{/if}
-					{#if data.result.checklist.unresolved.length > 0}
-						<div class="list-section">
-							<h3>{tt('pages.result.checklist.unresolved')}</h3>
-							<ul>
-								{#each data.result.checklist.unresolved as itemKey (itemKey)}
-									<li>{tt(itemKey)}</li>
-								{/each}
-							</ul>
-						</div>
-					{/if}
-				</div>
-			</section>
+				{/each}
+			</div>
+		</section>
 
-			{#if data.result.recommendedRoute === 'official_portal' && data.result.showHowToApply}
-				<section class="panel-subtle section-block">
-					<h2 class="section-title">{tt('pages.result.how_to_apply_title')}</h2>
-					<p class="lead-text">{tt('pages.result.how_to_apply.body')}</p>
-					<p class="hint">{tt('pages.result.how_to_apply.hint')}</p>
-				</section>
-			{/if}
-
+		{#if isEligible && data.result.recommendedRoute === 'official_portal' && data.result.showHowToApply}
 			<section class="panel-subtle section-block">
-				<h2 class="section-title">{tt('pages.result.handover_title')}</h2>
-				<p class="lead-text">{tt('pages.result.handover.body')}</p>
-				<div class="actions">
-					<Button
-						href={data.handoverHref}
-						variant="secondary"
-						onclick={() =>
-							trackEvent('Journey', 'Download handover PDF', data.result.resultState)}
-					>
-						{tt('common.download_handover_pdf')}
-						<FileDownIcon class="size-4" />
-					</Button>
-				</div>
-			</section>
-
-			<section class="panel-subtle">
-				<div class="actions">
-					<Button
-						href={checkAnswersHref}
-						variant="outline"
-						onclick={() => trackEvent('Journey', 'Review answers', data.result.resultState)}
-					>
-						{tt('common.back_to_answers')}
-					</Button>
-					<Button
-						href={startAgainHref}
-						variant="outline"
-						onclick={() => trackEvent('Journey', 'Start again', data.result.resultState)}
-					>
-						{tt('common.start_again')}
-					</Button>
-				</div>
+				<h2 class="section-title">{tt('pages.result.how_to_apply_title')}</h2>
+				<p class="lead-text">{tt('pages.result.how_to_apply.body')}</p>
+				<p class="hint">{tt('pages.result.how_to_apply.hint')}</p>
 			</section>
 		{/if}
+
+		<section class="panel section-block">
+			<h2 class="section-title">{tt('pages.result.continue_title')}</h2>
+			<p class="lead-text">{tt('pages.result.continue_body')}</p>
+			<div class="actions">
+				<Button
+					href={homeHref}
+					onclick={() => trackEvent('Journey', 'Continue to home', data.result.resultState)}
+				>
+					{tt('pages.result.continue_action')}
+				</Button>
+			</div>
+		</section>
+
+		<section class="panel-subtle section-block">
+			<h2 class="section-title">{tt('pages.result.handover_title')}</h2>
+			<p class="lead-text">{tt('pages.result.handover.body')}</p>
+			<div class="actions">
+				<Button
+					href={data.handoverHref}
+					variant="default"
+					onclick={() => trackEvent('Journey', 'Download handover PDF', data.result.resultState)}
+				>
+					{tt('common.download_handover_pdf')}
+					<FileDownIcon class="size-4" />
+				</Button>
+				<Button
+					href={startAgainHref}
+					variant="outline"
+					onclick={() => trackEvent('Journey', 'Start again', data.result.resultState)}
+				>
+					{tt('common.start_again')}
+				</Button>
+			</div>
+		</section>
 	</div>
 </section>

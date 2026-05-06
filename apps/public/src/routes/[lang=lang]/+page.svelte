@@ -1,7 +1,6 @@
 <script lang="ts">
 import CheckIcon from '@lucide/svelte/icons/check'
 import ExternalLinkIcon from '@lucide/svelte/icons/external-link'
-import LockIcon from '@lucide/svelte/icons/lock'
 import { Button } from '@primer-paso/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@primer-paso/ui/card'
 import { onMount } from 'svelte'
@@ -13,6 +12,7 @@ import {
 	loadEligibility,
 	loadSubmission,
 	setDoc,
+	setEligibility,
 	setSubmission
 } from '$lib/home-checklist'
 import { localiseHref } from '$lib/i18n/routing'
@@ -42,6 +42,12 @@ const officialPortalUrl = 'https://inclusion.gob.es/regularizacion'
 const documentsChecked = $derived(
 	documents.length > 0 && documents.every((doc) => docState[doc] === true)
 )
+
+const toggleEligibility = () => {
+	eligibility = !eligibility
+	setEligibility(eligibility)
+	trackEvent('Home checklist', eligibility ? 'Check step' : 'Uncheck step', 'eligibility')
+}
 
 const toggleSubmission = () => {
 	submission = !submission
@@ -99,18 +105,20 @@ const structuredData = $derived(
 		<li>
 			<Card class="step-card" data-checked={eligibility}>
 				<CardHeader class="step-card-header">
-					<span
-						class="step-indicator"
-						data-checked={eligibility}
-						data-locked="true"
-						aria-hidden="true"
+					<button
+						type="button"
+						class="step-indicator-button"
+						aria-pressed={eligibility}
+						aria-label={tt('pages.home.steps.toggle_aria')}
+						onclick={toggleEligibility}
+						disabled={!hydrated}
 					>
-						{#if eligibility}
-							<CheckIcon class="size-4" />
-						{:else}
-							<LockIcon class="size-3.5" />
-						{/if}
-					</span>
+						<span class="step-indicator" data-checked={eligibility} aria-hidden="true">
+							{#if eligibility}
+								<CheckIcon class="size-4" />
+							{/if}
+						</span>
+					</button>
 					<div class="step-card-text">
 						<p class="eyebrow">
 							{tt('pages.home.steps.step_label', { current: '1', total: TOTAL_STEPS })}
@@ -120,20 +128,30 @@ const structuredData = $derived(
 					</div>
 				</CardHeader>
 				<CardContent class="step-card-content">
-					<p class="hint">
-						{eligibility
-							? tt('pages.home.steps.eligibility.completed_hint')
-							: tt('pages.home.steps.eligibility.locked_hint')}
-					</p>
+					<p class="hint">{tt('pages.home.steps.eligibility.hint')}</p>
 					<div class="actions">
-						<Button
-							href={localiseHref(locale, '/screener')}
-							onclick={() => trackEvent('Journey', 'Open start', 'home')}
-						>
-							{eligibility
-								? tt('pages.home.steps.eligibility.cta_again')
-								: tt('pages.home.steps.eligibility.cta')}
-						</Button>
+						{#if hasCompletedScreener}
+							<Button
+								href={localiseHref(locale, '/result')}
+								onclick={() => trackEvent('Journey', 'See result', 'home')}
+							>
+								{tt('common.see_result')}
+							</Button>
+							<Button
+								href={localiseHref(locale, '/screener')}
+								variant="secondary"
+								onclick={() => trackEvent('Journey', 'Review screener', 'home')}
+							>
+								{tt('pages.home.steps.eligibility.cta_again')}
+							</Button>
+						{:else}
+							<Button
+								href={localiseHref(locale, '/screener')}
+								onclick={() => trackEvent('Journey', 'Open start', 'home')}
+							>
+								{tt('pages.home.steps.eligibility.cta')}
+							</Button>
+						{/if}
 					</div>
 				</CardContent>
 			</Card>
@@ -305,12 +323,6 @@ const structuredData = $derived(
 .step-indicator[data-checked="true"] {
 	background: var(--color-primary);
 	border-color: var(--color-primary);
-}
-
-.step-indicator[data-locked="true"]:not([data-checked="true"]) {
-	background: var(--color-muted);
-	border-color: color-mix(in oklab, var(--color-border) 70%, transparent);
-	color: var(--color-muted-foreground);
 }
 
 .step-indicator-button {
