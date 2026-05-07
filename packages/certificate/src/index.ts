@@ -1,5 +1,6 @@
 export const CERTIFICATE_PACKAGE_VERSION = '0.0.1'
 
+export * from './applicant-confirmation'
 export type { CertificateDraftReviewField, CertificateDraftReviewFieldPath } from './schema'
 export {
 	CERTIFICATE_DRAFT_REVIEW_FIELDS,

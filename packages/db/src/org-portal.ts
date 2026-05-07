@@ -1,6 +1,7 @@
 import { createHash, randomBytes, randomUUID } from 'node:crypto'
 import { isOrgRole, type OrgRole } from '@primer-paso/auth'
 import type {
+	CertificateApplicantConfirmation,
 	CertificateDraft,
 	CertificateIssueRequest,
 	GeneratedCertificatePdf
@@ -15,6 +16,7 @@ import {
 
 export type OrganisationMemberStatus = 'invited' | 'active' | 'disabled'
 export type CertificateHandoffReviewStatus = 'in_review' | 'ready_to_issue' | 'issued' | 'cancelled'
+export type CertificateReviewOrigin = 'public_handoff' | 'organisation_created'
 export type CertificateCorrectionType =
 	| 'typo'
 	| 'confirmed_with_applicant'
@@ -96,12 +98,14 @@ export interface CertificateFieldCorrection {
 
 export interface CertificateHandoffReviewRecord {
 	id: string
-	handoffId: string
+	handoffId?: string
+	origin: CertificateReviewOrigin
 	organisationId: string
 	reviewerMemberId: string
 	status: CertificateHandoffReviewStatus
 	draftSnapshot: CertificateDraft
 	reviewedData: CertificateDraft
+	applicantConfirmation?: CertificateApplicantConfirmation
 	verification?: VerificationReview
 	corrections: CertificateFieldCorrection[]
 	createdAt: string
@@ -113,7 +117,7 @@ export interface CertificateHandoffReviewRecord {
 export interface IssuedCertificateRecord {
 	id: string
 	reviewId: string
-	handoffId: string
+	handoffId?: string
 	organisationId: string
 	signerMemberId: string
 	issueRequest: CertificateIssueRequest
@@ -165,7 +169,7 @@ export interface CreateAuditEventInput {
 
 export interface CreateIssuedCertificateInput {
 	reviewId: string
-	handoffId: string
+	handoffId?: string
 	organisationId: string
 	signerMemberId: string
 	issueRequest: CertificateIssueRequest
@@ -258,6 +262,22 @@ export interface CreateOrFindCertificateHandoffReviewInput {
 	reviewerMemberId: string
 	draftSnapshot: CertificateDraft
 	reviewedData: CertificateDraft
+	applicantConfirmation?: CertificateApplicantConfirmation
+	now?: Date
+}
+
+export interface CreateOrganisationCertificateReviewInput {
+	organisationId: string
+	reviewerMemberId: string
+	draftSnapshot: CertificateDraft
+	reviewedData: CertificateDraft
+	applicantConfirmation?: CertificateApplicantConfirmation
+	now?: Date
+}
+
+export interface UpdateCertificateHandoffReviewApplicantConfirmationInput {
+	reviewId: string
+	applicantConfirmation: CertificateApplicantConfirmation
 	now?: Date
 }
 
@@ -305,7 +325,13 @@ export interface OrgPortalRepository {
 	createOrFindCertificateHandoffReview: (
 		input: CreateOrFindCertificateHandoffReviewInput
 	) => Promise<CertificateHandoffReviewRecord>
+	createOrganisationCertificateReview: (
+		input: CreateOrganisationCertificateReviewInput
+	) => Promise<CertificateHandoffReviewRecord>
 	findCertificateHandoffReviewById: (id: string) => Promise<CertificateHandoffReviewRecord | null>
+	updateCertificateHandoffReviewApplicantConfirmation: (
+		input: UpdateCertificateHandoffReviewApplicantConfirmationInput
+	) => Promise<CertificateHandoffReviewRecord | null>
 	updateCertificateHandoffReviewVerification: (
 		input: UpdateCertificateHandoffReviewVerificationInput
 	) => Promise<CertificateHandoffReviewRecord | null>
@@ -411,12 +437,16 @@ const handoffFromRow = (row: Record<string, unknown>): CertificateHandoffRecord 
 
 const reviewFromRow = (row: Record<string, unknown>): CertificateHandoffReviewRecord => ({
 	id: String(row.id),
-	handoffId: String(row.handoff_id),
+	handoffId: optionalString(row.handoff_id),
+	origin: String(row.origin ?? 'public_handoff') as CertificateReviewOrigin,
 	organisationId: String(row.organisation_id),
 	reviewerMemberId: String(row.reviewer_member_id),
 	status: String(row.status) as CertificateHandoffReviewStatus,
 	draftSnapshot: row.draft_snapshot as CertificateDraft,
 	reviewedData: row.reviewed_data as CertificateDraft,
+	applicantConfirmation: row.applicant_confirmation
+		? (row.applicant_confirmation as CertificateApplicantConfirmation)
+		: undefined,
 	verification: row.verification as VerificationReview | undefined,
 	corrections: (row.corrections ?? []) as CertificateFieldCorrection[],
 	createdAt: date(row.created_at),
@@ -428,7 +458,7 @@ const reviewFromRow = (row: Record<string, unknown>): CertificateHandoffReviewRe
 const issuedCertificateFromRow = (row: Record<string, unknown>): IssuedCertificateRecord => ({
 	id: String(row.id),
 	reviewId: String(row.review_id),
-	handoffId: String(row.handoff_id),
+	handoffId: optionalString(row.handoff_id),
 	organisationId: String(row.organisation_id),
 	signerMemberId: String(row.signer_member_id),
 	issueRequest: row.issue_request as CertificateIssueRequest,
@@ -928,6 +958,7 @@ export const createPostgresOrgPortalRepository = ({
 			reviewerMemberId,
 			draftSnapshot,
 			reviewedData,
+			applicantConfirmation,
 			now = new Date()
 		}) => {
 			const existing = await sql`
@@ -938,29 +969,46 @@ export const createPostgresOrgPortalRepository = ({
 				limit 1
 			`
 
-			if (existing[0]) return reviewFromRow(existing[0])
+			if (existing[0]) {
+				if (applicantConfirmation && !existing[0].applicant_confirmation) {
+					const [updated] = await sql`
+						update certificate_handoff_reviews
+						set
+							applicant_confirmation = ${sql.json(toJsonValue(applicantConfirmation))},
+							updated_at = ${now.toISOString()}
+						where id = ${existing[0].id}
+						returning *
+					`
+					return reviewFromRow(updated)
+				}
+				return reviewFromRow(existing[0])
+			}
 
 			const id = randomUUID()
 			const rows = await sql`
 				insert into certificate_handoff_reviews (
 					id,
 					handoff_id,
+					origin,
 					organisation_id,
 					reviewer_member_id,
 					status,
 					draft_snapshot,
 					reviewed_data,
+					applicant_confirmation,
 					created_at,
 					updated_at
 				)
 				values (
 					${id},
 					${handoffId},
+					${'public_handoff'},
 					${organisationId},
 					${reviewerMemberId},
 					'in_review',
 					${sql.json(toJsonValue(draftSnapshot))},
 					${sql.json(toJsonValue(reviewedData))},
+					${sql.json(toJsonValue(applicantConfirmation ?? null))},
 					${now.toISOString()},
 					${now.toISOString()}
 				)
@@ -968,6 +1016,49 @@ export const createPostgresOrgPortalRepository = ({
 			`
 
 			return reviewFromRow(rows[0])
+		},
+
+		createOrganisationCertificateReview: async ({
+			organisationId,
+			reviewerMemberId,
+			draftSnapshot,
+			reviewedData,
+			applicantConfirmation,
+			now = new Date()
+		}) => {
+			const id = randomUUID()
+			const [row] = await sql`
+				insert into certificate_handoff_reviews (
+					id,
+					handoff_id,
+					origin,
+					organisation_id,
+					reviewer_member_id,
+					status,
+					draft_snapshot,
+					reviewed_data,
+					applicant_confirmation,
+					corrections,
+					created_at,
+					updated_at
+				)
+				values (
+					${id},
+					${null},
+					${'organisation_created'},
+					${organisationId},
+					${reviewerMemberId},
+					${'in_review'},
+					${sql.json(toJsonValue(draftSnapshot))},
+					${sql.json(toJsonValue(reviewedData))},
+					${sql.json(toJsonValue(applicantConfirmation ?? null))},
+					${sql.json(toJsonValue([]))},
+					${now.toISOString()},
+					${now.toISOString()}
+				)
+				returning *
+			`
+			return reviewFromRow(row)
 		},
 
 		findCertificateHandoffReviewById: async (id) => {
@@ -979,6 +1070,22 @@ export const createPostgresOrgPortalRepository = ({
 			`
 
 			return rows[0] ? reviewFromRow(rows[0]) : null
+		},
+
+		updateCertificateHandoffReviewApplicantConfirmation: async ({
+			reviewId,
+			applicantConfirmation,
+			now = new Date()
+		}) => {
+			const [row] = await sql`
+				update certificate_handoff_reviews
+				set
+					applicant_confirmation = ${sql.json(toJsonValue(applicantConfirmation))},
+					updated_at = ${now.toISOString()}
+				where id = ${reviewId}
+				returning *
+			`
+			return row ? reviewFromRow(row) : null
 		},
 
 		updateCertificateHandoffReviewVerification: async ({
@@ -1063,7 +1170,7 @@ export const createPostgresOrgPortalRepository = ({
 					values (
 						${id},
 						${reviewId},
-						${handoffId},
+						${handoffId ?? null},
 						${organisationId},
 						${signerMemberId},
 						${tx.json(toJsonValue(issueRequest))},
@@ -1084,13 +1191,15 @@ export const createPostgresOrgPortalRepository = ({
 					where id = ${reviewId}
 				`
 
-				await tx`
-					update certificate_handoffs
-					set
-						status = 'issued',
-						issued_certificate_id = ${id}
-					where id = ${handoffId}
-				`
+				if (handoffId) {
+					await tx`
+						update certificate_handoffs
+						set
+							status = 'issued',
+							issued_certificate_id = ${id}
+						where id = ${handoffId}
+					`
+				}
 
 				return issuedCertificateFromRow(rows[0])
 			})

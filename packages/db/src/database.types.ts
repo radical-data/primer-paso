@@ -73,12 +73,14 @@ export type Database = {
 			}
 			certificate_handoff_reviews: {
 				Row: {
+					applicant_confirmation: Json | null
 					corrections: Json
 					created_at: string
 					draft_snapshot: Json
-					handoff_id: string
+					handoff_id: string | null
 					id: string
 					issued_at: string | null
+					origin: string
 					organisation_id: string
 					ready_to_issue_at: string | null
 					reviewed_data: Json
@@ -88,12 +90,14 @@ export type Database = {
 					verification: Json | null
 				}
 				Insert: {
+					applicant_confirmation?: Json | null
 					corrections?: Json
 					created_at?: string
 					draft_snapshot: Json
-					handoff_id: string
+					handoff_id?: string | null
 					id: string
 					issued_at?: string | null
+					origin?: string
 					organisation_id: string
 					ready_to_issue_at?: string | null
 					reviewed_data: Json
@@ -103,12 +107,14 @@ export type Database = {
 					verification?: Json | null
 				}
 				Update: {
+					applicant_confirmation?: Json | null
 					corrections?: Json
 					created_at?: string
 					draft_snapshot?: Json
-					handoff_id?: string
+					handoff_id?: string | null
 					id?: string
 					issued_at?: string | null
+					origin?: string
 					organisation_id?: string
 					ready_to_issue_at?: string | null
 					reviewed_data?: Json
@@ -191,7 +197,7 @@ export type Database = {
 					content_type: string
 					created_at: string
 					filename: string
-					handoff_id: string
+					handoff_id: string | null
 					id: string
 					issue_request: Json
 					organisation_id: string
@@ -203,7 +209,7 @@ export type Database = {
 					content_type: string
 					created_at?: string
 					filename: string
-					handoff_id: string
+					handoff_id?: string | null
 					id: string
 					issue_request: Json
 					organisation_id: string
@@ -215,7 +221,7 @@ export type Database = {
 					content_type?: string
 					created_at?: string
 					filename?: string
-					handoff_id?: string
+					handoff_id?: string | null
 					id?: string
 					issue_request?: Json
 					organisation_id?: string

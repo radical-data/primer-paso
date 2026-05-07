@@ -1,4 +1,9 @@
 export const CERTIFICATE_DRAFT_VERSION = 1
+export const CERTIFICATE_DRAFT_SOURCE_VALUES = [
+	'primer-paso-public',
+	'organisation-portal'
+] as const
+export type CertificateDraftSource = (typeof CERTIFICATE_DRAFT_SOURCE_VALUES)[number]
 
 export const DOCUMENT_TYPE_VALUES = ['passport', 'national_id', 'travel_document', 'other'] as const
 export type DocumentType = (typeof DOCUMENT_TYPE_VALUES)[number]
@@ -57,7 +62,7 @@ export interface CertificateDraftUserData {
 }
 
 export interface CertificateDraftMetadata {
-	source: 'primer-paso-public'
+	source: CertificateDraftSource
 	locale: string
 	createdAt: string
 	expiresAt?: string

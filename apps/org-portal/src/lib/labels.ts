@@ -1,5 +1,5 @@
 import type { OrgRole } from '@primer-paso/auth'
-import type { VulnerabilityReason } from '@primer-paso/certificate'
+import type { DocumentType, VulnerabilityReason } from '@primer-paso/certificate'
 import type { CertificateHandoffReviewStatus, OrganisationMemberStatus } from '@primer-paso/db'
 
 export const roleLabel = (role: OrgRole | string) =>
@@ -24,6 +24,14 @@ export const reviewStatusLabel = (status: CertificateHandoffReviewStatus | strin
 		issued: 'Certificado emitido',
 		cancelled: 'Cancelada'
 	})[status] ?? status
+
+export const documentTypeLabel = (documentType: DocumentType | string) =>
+	({
+		passport: 'Pasaporte',
+		national_id: 'Documento nacional de identidad',
+		travel_document: 'Documento de viaje',
+		other: 'Otro documento'
+	})[documentType] ?? documentType
 
 export const vulnerabilityReasonLabel = (reason: VulnerabilityReason | string) =>
 	({
@@ -56,6 +64,10 @@ export const auditEventLabel = (eventType: string) =>
 		'handoff.invalid_draft': 'Borrador no válido',
 		'review.updated': 'Confirmaciones guardadas',
 		'certificate.review.corrected': 'Datos revisados corregidos',
+		'certificate_review.created_from_handoff_import': 'Revisión creada desde handoff',
+		'certificate_review.created_from_portal': 'Revisión creada en el portal',
+		'certificate_review.applicant_confirmation_updated':
+			'Confirmación de la persona solicitante actualizada',
 		'review.ready_to_issue': 'Revisión marcada como lista para emitir',
 		'certificate.issued': 'Certificado emitido',
 		'certificate.issue_failed': 'Error al emitir certificado',
@@ -78,6 +90,8 @@ const auditEventDataKeyLabel = (key: string) =>
 		memberId: 'miembro',
 		supabaseUserId: 'usuario de autenticación',
 		referenceCode: 'código de referencia',
+		origin: 'origen',
+		method: 'método',
 		blockedUntil: 'bloqueado hasta',
 		filename: 'archivo',
 		issuedCertificateId: 'certificado emitido',
@@ -98,6 +112,24 @@ const auditEventDataValueLabel = (key: string, value: unknown) => {
 
 	if (key === 'role') return roleLabel(value)
 	if (key === 'status') return memberStatusLabel(value)
+	if (key === 'origin') {
+		return (
+			{
+				public_handoff: 'handoff público',
+				organisation_created: 'creada por la organización'
+			}[value] ?? value
+		)
+	}
+	if (key === 'method') {
+		return (
+			{
+				public_handoff: 'handoff público',
+				organisation_in_person: 'presencial',
+				organisation_phone_or_remote: 'teléfono o remoto',
+				authorised_representative: 'representante autorizado'
+			}[value] ?? value
+		)
+	}
 	if (key === 'reason') {
 		return (
 			{
@@ -114,7 +146,7 @@ const auditEventDataValueLabel = (key: string, value: unknown) => {
 
 export const formatAuditEventData = (eventData: Record<string, unknown>) => {
 	const entries = Object.entries(eventData)
-	if (entries.length === 0) return '—'
+	if (entries.length === 0) return '?'
 
 	return entries
 		.map(
