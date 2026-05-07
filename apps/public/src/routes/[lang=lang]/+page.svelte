@@ -434,11 +434,11 @@ const structuredData = $derived(
 }
 
 :global(.step-card[data-primary="true"]) .doc-row {
-	background: color-mix(in oklab, var(--color-primary) 4%, var(--color-background));
+	background: color-mix(in oklab, var(--color-primary) 16%, var(--color-background));
 }
 
 :global(.step-card[data-primary="true"]) .doc-row:hover {
-	background: color-mix(in oklab, var(--color-primary) 9%, var(--color-background));
+	background: color-mix(in oklab, var(--color-primary) 24%, var(--color-background));
 }
 
 .doc-row-input {
