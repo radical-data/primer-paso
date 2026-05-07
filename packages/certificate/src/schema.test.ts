@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import fixture from '../fixtures/vulnerability-certificate.issue-request.fixture.json'
+import { applicantConfirmationComplete } from './applicant-confirmation'
 import {
 	CERTIFICATE_DRAFT_REVIEW_FIELDS,
 	certificateDraftSchema,
@@ -63,6 +64,44 @@ describe('certificate schema', () => {
 		})
 
 		expect(result.ok).toBe(true)
+	})
+
+	it('accepts organisation portal as a certificate draft source', () => {
+		const result = validateCertificateDraft({
+			...fixture.draft,
+			metadata: {
+				...fixture.draft.metadata,
+				source: 'organisation-portal'
+			}
+		})
+		expect(result.ok).toBe(true)
+	})
+
+	it('checks applicant confirmation completeness', () => {
+		expect(
+			applicantConfirmationComplete({
+				informationAccurate: true,
+				understandsNotIssuedByPrimerPaso: true,
+				understandsOrganisationWillReview: true,
+				consentsToDataUseForCertificate: true,
+				consentsToStoreForAuditAndIssue: true,
+				method: 'organisation_in_person',
+				confirmedAt: '2026-05-07T10:00:00.000Z',
+				confirmedByMemberId: 'member_1'
+			})
+		).toBe(true)
+		expect(
+			applicantConfirmationComplete({
+				informationAccurate: true,
+				understandsNotIssuedByPrimerPaso: true,
+				understandsOrganisationWillReview: true,
+				consentsToDataUseForCertificate: false,
+				consentsToStoreForAuditAndIssue: true,
+				method: 'organisation_in_person',
+				confirmedAt: '2026-05-07T10:00:00.000Z',
+				confirmedByMemberId: 'member_1'
+			})
+		).toBe(false)
 	})
 
 	it.each([

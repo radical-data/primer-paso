@@ -75,7 +75,7 @@ const formatDate = (value: string) =>
 											{#if event.reviewId}
 												<a
 													class="text-primary underline-offset-4 hover:underline"
-													href={`/reviews/${event.reviewId}`}
+													href={`/certificates/review/${event.reviewId}`}
 												>
 													Ver revisión
 												</a>

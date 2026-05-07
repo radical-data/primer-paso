@@ -1,4 +1,5 @@
 import {
+	CERTIFICATE_DRAFT_SOURCE_VALUES,
 	CERTIFICATE_DRAFT_VERSION,
 	type CertificateDraft,
 	type CertificateIssueRequest,
@@ -176,9 +177,9 @@ export const certificateDraftSchema = {
 	},
 	metadata: {
 		source: {
-			type: 'literal',
+			type: 'enum',
 			required: true,
-			values: ['primer-paso-public'],
+			values: CERTIFICATE_DRAFT_SOURCE_VALUES,
 			description: 'Source application that created the draft.'
 		},
 		locale: {
@@ -578,9 +579,13 @@ export const validateCertificateDraft = (value: unknown): ValidationResult<Certi
 	if (!isRecord(metadata)) {
 		issues.push({ path: 'metadata', message: 'Metadata is required.' })
 	} else {
-		if (metadata.source !== 'primer-paso-public') {
-			issues.push({ path: 'metadata.source', message: 'Source must be primer-paso-public.' })
-		}
+		addEnumIssue(
+			issues,
+			metadata.source,
+			CERTIFICATE_DRAFT_SOURCE_VALUES,
+			'metadata.source',
+			'draft source'
+		)
 		addRequiredStringIssue(issues, metadata.locale, 'metadata.locale', 'Locale')
 		addIsoDateIssue(issues, metadata.createdAt, 'metadata.createdAt', 'Created timestamp', true)
 		addIsoDateIssue(issues, metadata.expiresAt, 'metadata.expiresAt', 'Expiry timestamp', false)

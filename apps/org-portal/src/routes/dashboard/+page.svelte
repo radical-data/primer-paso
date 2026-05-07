@@ -1,6 +1,7 @@
 <script lang="ts">
 import Building2Icon from '@lucide/svelte/icons/building-2'
 import ClipboardListIcon from '@lucide/svelte/icons/clipboard-list'
+import FilePlusIcon from '@lucide/svelte/icons/file-plus'
 import HistoryIcon from '@lucide/svelte/icons/history'
 import UsersIcon from '@lucide/svelte/icons/users'
 import { Badge } from '@primer-paso/ui/badge'
@@ -19,10 +20,6 @@ let { data } = $props()
 	<header class="section-block">
 		<p class="eyebrow">Primer Paso</p>
 		<h1 class="page-title">Panel de la organización</h1>
-		<div class="actions">
-			<span class="hint">Sesión iniciada como</span>
-			<Badge variant="secondary">{roleLabel(data.session.role)}</Badge>
-		</div>
 	</header>
 
 	{#if data.permissionError}
@@ -34,24 +31,59 @@ let { data } = $props()
 
 	<Card>
 		<CardHeader>
-			<CardTitle>
-				<span class="inline-flex items-center gap-2">
-					<ClipboardListIcon class="size-5 text-muted-foreground" aria-hidden="true" />
-					Abrir un borrador de certificado
-				</span>
-			</CardTitle>
+			<CardTitle>Certificados de vulnerabilidad</CardTitle>
 			<CardDescription>
-				Escanea un código QR de Primer Paso o pega abajo el enlace o código del borrador.
+				Abre un borrador enviado desde el servicio público o crea una revisión desde cero.
 			</CardDescription>
 		</CardHeader>
 		<CardContent>
-			<form method="GET" action="/handoff" class="stack">
-				<div class="form-field">
-					<Label for="token">Enlace o código del borrador</Label>
-					<Input id="token" name="token" autocomplete="off" placeholder="Pega un enlace o código" />
-				</div>
-				<div class="actions"><Button type="submit">Abrir borrador</Button></div>
-			</form>
+			<div class="grid gap-3 md:grid-cols-2">
+				{#if data.session.permissions.includes("certificate:prepare")}
+					<a
+						href="/certificates/new"
+						class="panel-subtle flex items-start gap-3 no-underline transition-colors hover:bg-accent/60"
+					>
+						<FilePlusIcon class="mt-0.5 size-5 shrink-0 text-muted-foreground" aria-hidden="true" />
+						<span class="grid gap-1">
+							<span class="section-title">Crear revisión nueva</span>
+							<span class="hint">
+								Introduce los datos iniciales cuando no hay borrador público. La confirmación de la
+								persona solicitante se completa antes de emitir.
+							</span>
+						</span>
+					</a>
+				{/if}
+
+				<form
+					method="GET"
+					action="/handoff"
+					class="panel-subtle flex items-start gap-3 transition-colors hover:bg-accent/60"
+				>
+					<ClipboardListIcon
+						class="mt-0.5 size-5 shrink-0 text-muted-foreground"
+						aria-hidden="true"
+					/>
+					<div class="grid flex-1 gap-3">
+						<span class="grid gap-1">
+							<span class="section-title">Abrir borrador público</span>
+							<span class="hint"> Usa el enlace de handoff generado en el servicio público. </span>
+						</span>
+
+						<div class="grid gap-2">
+							<Label for="token">Enlace de handoff</Label>
+							<div class="flex flex-col gap-2 sm:flex-row">
+								<Input
+									id="token"
+									name="token"
+									autocomplete="off"
+									placeholder="Pega el enlace de handoff"
+								/>
+								<Button type="submit">Abrir borrador</Button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
 		</CardContent>
 	</Card>
 
@@ -68,7 +100,10 @@ let { data } = $props()
 							href="/admin/organisation"
 							class="panel-subtle flex items-start gap-3 no-underline transition-colors hover:bg-accent/60"
 						>
-							<Building2Icon class="size-5 mt-0.5 text-muted-foreground" aria-hidden="true" />
+							<Building2Icon
+								class="mt-0.5 size-5 shrink-0 text-muted-foreground"
+								aria-hidden="true"
+							/>
 							<span class="grid gap-1">
 								<span class="section-title">Datos de organización</span>
 								<span class="hint">
@@ -82,7 +117,7 @@ let { data } = $props()
 							href="/admin/members"
 							class="panel-subtle flex items-start gap-3 no-underline transition-colors hover:bg-accent/60"
 						>
-							<UsersIcon class="size-5 mt-0.5 text-muted-foreground" aria-hidden="true" />
+							<UsersIcon class="mt-0.5 size-5 shrink-0 text-muted-foreground" aria-hidden="true" />
 							<span class="grid gap-1">
 								<span class="section-title">Gestionar miembros</span>
 								<span class="hint">
@@ -96,7 +131,10 @@ let { data } = $props()
 							href="/admin/audit"
 							class="panel-subtle flex items-start gap-3 no-underline transition-colors hover:bg-accent/60"
 						>
-							<HistoryIcon class="size-5 mt-0.5 text-muted-foreground" aria-hidden="true" />
+							<HistoryIcon
+								class="mt-0.5 size-5 shrink-0 text-muted-foreground"
+								aria-hidden="true"
+							/>
 							<span class="grid gap-1">
 								<span class="section-title">Ver registro de auditoría</span>
 								<span class="hint">
