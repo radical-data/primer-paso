@@ -53,6 +53,11 @@ export const ar = {
 	'pages.home.steps.eligibility.cta': 'ابدأ الاستبيان',
 	'pages.home.steps.eligibility.cta_again': 'مراجعة الاستبيان',
 	'pages.home.clear_progress_action': 'مسح تقدمي',
+	'pages.home.clear_confirm.title': 'هل تريد مسح تقدمك؟',
+	'pages.home.clear_confirm.description':
+		'سيؤدي هذا إلى إعادة تعيين إجاباتك المحفوظة والوثائق التي وضعت عليها علامة على هذا الجهاز.',
+	'pages.home.clear_confirm.confirm': 'نعم، امسح التقدم',
+	'pages.home.clear_confirm.cancel': 'إلغاء',
 	'pages.home.steps.documents.title': 'اجمع الوثائق المطلوبة',
 	'pages.home.steps.documents.description_personalised':
 		'قائمة مخصصة بناءً على إجاباتك. ضع علامة على الوثائق التي لديك بالفعل.',

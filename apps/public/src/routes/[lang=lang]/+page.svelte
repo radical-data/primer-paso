@@ -3,6 +3,7 @@ import CheckIcon from '@lucide/svelte/icons/check'
 import ExternalLinkIcon from '@lucide/svelte/icons/external-link'
 import { Button } from '@primer-paso/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@primer-paso/ui/card'
+import * as Dialog from '@primer-paso/ui/dialog'
 import type { SubmitFunction } from '@sveltejs/kit'
 import { onMount } from 'svelte'
 import { enhance } from '$app/forms'
@@ -32,6 +33,7 @@ let eligibility = $state(false)
 let submission = $state(false)
 const docState = $state<Record<string, boolean>>({})
 let hydrated = $state(false)
+let clearDialogOpen = $state(false)
 
 onMount(() => {
 	eligibility = loadEligibility()
@@ -74,6 +76,7 @@ const onClearProgressSubmit: SubmitFunction = () => {
 			}
 
 			trackEvent('Journey', 'Clear progress', 'home')
+			clearDialogOpen = false
 			await update()
 		}
 	}
@@ -202,11 +205,9 @@ const structuredData = $derived(
 							>
 								{tt('pages.home.steps.eligibility.cta_again')}
 							</Button>
-							<form method="POST" action="?/clear" use:enhance={onClearProgressSubmit}>
-								<Button type="submit" variant="ghost">
-									{tt('pages.home.clear_progress_action')}
-								</Button>
-							</form>
+							<Button variant="ghost" onclick={() => (clearDialogOpen = true)}>
+								{tt('pages.home.clear_progress_action')}
+							</Button>
 						{:else}
 							<Button
 								href={localiseHref(locale, '/screener')}
@@ -299,6 +300,27 @@ const structuredData = $derived(
 		</li>
 	</ol>
 </section>
+
+<Dialog.Root bind:open={clearDialogOpen}>
+	<Dialog.Content class="clear-confirm-dialog text-base">
+		<Dialog.Header>
+			<Dialog.Title class="text-xl">{tt('pages.home.clear_confirm.title')}</Dialog.Title>
+			<Dialog.Description class="text-base">
+				{tt('pages.home.clear_confirm.description')}
+			</Dialog.Description>
+		</Dialog.Header>
+		<Dialog.Footer>
+			<Button variant="ghost" onclick={() => (clearDialogOpen = false)}>
+				{tt('pages.home.clear_confirm.cancel')}
+			</Button>
+			<form method="POST" action="?/clear" use:enhance={onClearProgressSubmit}>
+				<Button type="submit">
+					{tt('pages.home.clear_confirm.confirm')}
+				</Button>
+			</form>
+		</Dialog.Footer>
+	</Dialog.Content>
+</Dialog.Root>
 
 <style>
 .step-list {
@@ -431,7 +453,7 @@ const structuredData = $derived(
 	align-items: start;
 	padding: 0.625rem 0.75rem;
 	border-radius: 0.75rem;
-	background: var(--color-background);
+	background: transparent;
 	cursor: pointer;
 	transition: background-color 0.16s ease;
 }

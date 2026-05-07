@@ -56,6 +56,11 @@ export const fr = {
 	'pages.home.steps.eligibility.cta': 'Commencer le questionnaire',
 	'pages.home.steps.eligibility.cta_again': 'Revoir le questionnaire',
 	'pages.home.clear_progress_action': 'Effacer ma progression',
+	'pages.home.clear_confirm.title': 'Effacer votre progression ?',
+	'pages.home.clear_confirm.description':
+		'Cela réinitialisera vos réponses enregistrées et les documents cochés sur cet appareil.',
+	'pages.home.clear_confirm.confirm': 'Oui, effacer la progression',
+	'pages.home.clear_confirm.cancel': 'Annuler',
 	'pages.home.steps.documents.title': 'Réunissez les documents nécessaires',
 	'pages.home.steps.documents.description_personalised':
 		'Liste personnalisée selon vos réponses. Cochez les documents que vous avez déjà.',

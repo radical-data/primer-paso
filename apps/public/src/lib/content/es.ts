@@ -58,6 +58,11 @@ export const es = {
 	'pages.home.steps.eligibility.cta': 'Empezar el cuestionario',
 	'pages.home.steps.eligibility.cta_again': 'Revisar el cuestionario',
 	'pages.home.clear_progress_action': 'Borrar mi progreso',
+	'pages.home.clear_confirm.title': '¿Borrar tu progreso?',
+	'pages.home.clear_confirm.description':
+		'Esto restablecerá tus respuestas guardadas y los documentos marcados en este dispositivo.',
+	'pages.home.clear_confirm.confirm': 'Sí, borrar progreso',
+	'pages.home.clear_confirm.cancel': 'Cancelar',
 	'pages.home.steps.documents.title': 'Reúne los documentos',
 	'pages.home.steps.documents.description_personalised':
 		'Lista personalizada según tus respuestas. Marca los documentos que ya tienes.',

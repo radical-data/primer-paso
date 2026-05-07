@@ -52,6 +52,11 @@ export const en = {
 	'pages.home.steps.eligibility.cta': 'Start the questionnaire',
 	'pages.home.steps.eligibility.cta_again': 'Review the questionnaire',
 	'pages.home.clear_progress_action': 'Clear my progress',
+	'pages.home.clear_confirm.title': 'Clear your progress?',
+	'pages.home.clear_confirm.description':
+		'This will reset your saved answers and document checks on this device.',
+	'pages.home.clear_confirm.confirm': 'Yes, clear progress',
+	'pages.home.clear_confirm.cancel': 'Cancel',
 	'pages.home.steps.documents.title': 'Get the documents you need',
 	'pages.home.steps.documents.description_personalised':
 		'Personalised list based on your answers. Tick the documents you already have.',
