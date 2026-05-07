@@ -25,7 +25,7 @@ export const ar = {
 	'chrome.brand': 'Primer Paso',
 	'chrome.tagline': 'إرشاد مستقل بشأن عملية التسوية في إسبانيا لعام 2026',
 	'chrome.primary_navigation': 'التنقل الرئيسي',
-	'chrome.nav.home': 'مساري',
+	'chrome.nav.home': 'الرئيسية',
 	'chrome.nav.start': 'خطوتي الأولى',
 	'chrome.nav.organisations': 'البحث عن منظمات',
 	'chrome.footer.eyebrow': 'Primer Paso',
@@ -52,6 +52,7 @@ export const ar = {
 		'يتم تحديد هذه الخطوة تلقائياً عند إنهاء الاستبيان — أو يمكنك تحديدها يدوياً.',
 	'pages.home.steps.eligibility.cta': 'ابدأ الاستبيان',
 	'pages.home.steps.eligibility.cta_again': 'مراجعة الاستبيان',
+	'pages.home.clear_progress_action': 'مسح تقدمي',
 	'pages.home.steps.documents.title': 'اجمع الوثائق المطلوبة',
 	'pages.home.steps.documents.description_personalised':
 		'قائمة مخصصة بناءً على إجاباتك. ضع علامة على الوثائق التي لديك بالفعل.',
@@ -128,8 +129,8 @@ export const ar = {
 	'pages.result.why_title': 'لماذا نعتقد ذلك',
 	'pages.result.continue_title': 'كيف تتابع',
 	'pages.result.continue_body':
-		'تابع مسارك وضع علامة على كل خطوة عند إكمالها. هناك يمكنك مراجعة قائمة الوثائق المخصصة وتحديدها.',
-	'pages.result.continue_action': 'الذهاب إلى مساري',
+		'تابع طلبك وضع علامة على كل خطوة عند إكمالها. هناك يمكنك مراجعة وتحديد وثائقك.',
+	'pages.result.continue_action': 'الذهاب إلى طلبي',
 	'pages.result.review_documents_action': 'مراجعة الوثائق التي أحتاجها',
 	'pages.result.review_documents_body':
 		'تابع مع قائمة الوثائق في الصفحة الرئيسية — أصبحت الآن مخصصة بناءً على إجاباتك.',
@@ -335,7 +336,7 @@ export const ar = {
 	'result.checklist.item.asylum_case_documents_needed':
 		'أي أوراق ما زالت لديك عن قضية لجوء أو حماية، إذا كان ذلك ينطبق على وضعك.',
 	'result.checklist.item.official_document_requirements':
-		'أحدث المتطلبات الرسمية للمستندات، بما في ذلك مستندات السجل الجنائي إذا كانت تنطبق على حالتك.',
+		'شهادة السوابق الجنائية إذا كانت تنطبق على حالتك.',
 	'result.checklist.item.practical_support_helpful':
 		'مساعدة في اللغة أو الوصول الرقمي أو المسح الضوئي أو الطباعة أو فهم المستندات الأكثر أهمية.',
 	'result.checklist.item.complex_case_review':

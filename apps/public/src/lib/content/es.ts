@@ -28,7 +28,7 @@ export const es = {
 	'chrome.brand': 'Primer Paso',
 	'chrome.tagline': 'Orientación independiente para el proceso de regularización de España de 2026',
 	'chrome.primary_navigation': 'Navegación principal',
-	'chrome.nav.home': 'Ver mi camino',
+	'chrome.nav.home': 'Inicio',
 	'chrome.nav.start': 'Ver mi primer paso',
 	'chrome.nav.organisations': 'Buscar organizaciones',
 	'chrome.footer.eyebrow': 'Primer Paso',
@@ -57,6 +57,7 @@ export const es = {
 		'Este paso se marca automáticamente al terminar el cuestionario — o puedes marcarlo a mano.',
 	'pages.home.steps.eligibility.cta': 'Empezar el cuestionario',
 	'pages.home.steps.eligibility.cta_again': 'Revisar el cuestionario',
+	'pages.home.clear_progress_action': 'Borrar mi progreso',
 	'pages.home.steps.documents.title': 'Reúne los documentos',
 	'pages.home.steps.documents.description_personalised':
 		'Lista personalizada según tus respuestas. Marca los documentos que ya tienes.',
@@ -138,8 +139,8 @@ export const es = {
 	'pages.result.why_title': 'Por qué pensamos esto',
 	'pages.result.continue_title': 'Cómo continuar',
 	'pages.result.continue_body':
-		'Sigue tu camino y marca cada paso al completarlo. Allí podrás revisar y marcar tus documentos personalizados.',
-	'pages.result.continue_action': 'Ir a mi camino',
+		'Sigue con tu solicitud y marca cada paso al completarlo. Allí podrás revisar y marcar tus documentos.',
+	'pages.result.continue_action': 'Ir a mi solicitud',
 	'pages.result.review_documents_action': 'Revisar qué documentos me hacen falta',
 	'pages.result.review_documents_body':
 		'Continúa con la lista de documentos en el inicio — ahora está personalizada según tus respuestas.',
@@ -361,7 +362,7 @@ export const es = {
 	'result.checklist.item.asylum_case_documents_needed':
 		'Cualquier documento que todavía tengas sobre un caso de asilo o protección, si eso aplica a tu situación.',
 	'result.checklist.item.official_document_requirements':
-		'Los requisitos oficiales más recientes, incluidos los certificados o documentos de antecedentes penales si aplican a tu caso.',
+		'Certificado de antecedentes penales si aplica a tu caso.',
 	'result.checklist.item.practical_support_helpful':
 		'Ayuda con el idioma, el acceso digital, escanear, imprimir o entender qué documentos importan.',
 	'result.checklist.item.complex_case_review':

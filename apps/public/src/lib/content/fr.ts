@@ -26,7 +26,7 @@ export const fr = {
 	'chrome.tagline':
 		'Orientation indépendante pour la procédure de régularisation de l’Espagne en 2026',
 	'chrome.primary_navigation': 'Navigation principale',
-	'chrome.nav.home': 'Voir mon parcours',
+	'chrome.nav.home': 'Accueil',
 	'chrome.nav.start': 'Voir ma première étape',
 	'chrome.nav.organisations': 'Trouver des organisations',
 	'chrome.footer.eyebrow': 'Primer Paso',
@@ -55,6 +55,7 @@ export const fr = {
 		'Cette étape se coche automatiquement à la fin du questionnaire — ou vous pouvez la cocher manuellement.',
 	'pages.home.steps.eligibility.cta': 'Commencer le questionnaire',
 	'pages.home.steps.eligibility.cta_again': 'Revoir le questionnaire',
+	'pages.home.clear_progress_action': 'Effacer ma progression',
 	'pages.home.steps.documents.title': 'Réunissez les documents nécessaires',
 	'pages.home.steps.documents.description_personalised':
 		'Liste personnalisée selon vos réponses. Cochez les documents que vous avez déjà.',
@@ -138,8 +139,8 @@ export const fr = {
 	'pages.result.why_title': 'Pourquoi nous pensons cela',
 	'pages.result.continue_title': 'Comment continuer',
 	'pages.result.continue_body':
-		"Suivez votre parcours et cochez chaque étape lorsque vous l'avez terminée. Là, vous pouvez revoir et cocher votre liste de documents personnalisée.",
-	'pages.result.continue_action': 'Aller à mon parcours',
+		"Continuez avec votre demande et cochez chaque étape lorsque vous l'avez terminée. Là, vous pouvez revoir et cocher vos documents.",
+	'pages.result.continue_action': 'Aller à ma demande',
 	'pages.result.review_documents_action': 'Voir quels documents me manquent',
 	'pages.result.review_documents_body':
 		"Continuez avec la liste des documents sur la page d'accueil — elle est maintenant personnalisée selon vos réponses.",
@@ -376,7 +377,7 @@ export const fr = {
 	'result.checklist.item.asylum_case_documents_needed':
 		'Tout document que vous avez encore sur une procédure d’asile ou de protection, si cela concerne votre situation.',
 	'result.checklist.item.official_document_requirements':
-		'Les exigences officielles les plus récentes, y compris les documents de casier judiciaire si elles s’appliquent à votre situation.',
+		'Certificat de casier judiciaire si applicable à votre cas.',
 	'result.checklist.item.practical_support_helpful':
 		'De l’aide pour la langue, l’accès numérique, le scan, l’impression ou pour comprendre quels documents comptent.',
 	'result.checklist.item.complex_case_review':

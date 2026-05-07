@@ -142,21 +142,6 @@ $effect(() => {
 							{/each}
 						</SelectContent>
 					</Select>
-					<noscript>
-						<ul class="language-list">
-							{#each languages as language (language.value)}
-								<li>
-									<a
-										class="language-link"
-										href={getLanguageHref(language.value)}
-										aria-current={language.value === locale ? 'true' : undefined}
-										rel="nofollow"
-										>{language.label}</a
-									>
-								</li>
-							{/each}
-						</ul>
-					</noscript>
 				</div>
 			</div>
 		</div>
@@ -173,7 +158,7 @@ $effect(() => {
 						{tt('chrome.footer.attribution_prefix')}
 						{' '}
 						<a
-							class="site-footer-link !inline !min-h-0"
+							class="site-footer-link !inline !min-h-0 underline underline-offset-4"
 							href={radicalDataUrl}
 							target="_blank"
 							rel="noreferrer"

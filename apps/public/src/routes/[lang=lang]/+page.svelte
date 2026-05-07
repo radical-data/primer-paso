@@ -3,7 +3,9 @@ import CheckIcon from '@lucide/svelte/icons/check'
 import ExternalLinkIcon from '@lucide/svelte/icons/external-link'
 import { Button } from '@primer-paso/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@primer-paso/ui/card'
+import type { SubmitFunction } from '@sveltejs/kit'
 import { onMount } from 'svelte'
+import { enhance } from '$app/forms'
 import { trackEvent } from '$lib/analytics/matomo'
 import type { Locale, MessageKey } from '$lib/content'
 import { getTranslator } from '$lib/content'
@@ -50,10 +52,30 @@ const nextStep = $derived.by(() => {
 	return null
 })
 
+const eligibilityLocked = $derived(hasCompletedScreener && eligibility)
+
 const toggleEligibility = () => {
+	if (eligibilityLocked) return
 	eligibility = !eligibility
 	setEligibility(eligibility)
 	trackEvent('Home checklist', eligibility ? 'Check step' : 'Uncheck step', 'eligibility')
+}
+
+const onClearProgressSubmit: SubmitFunction = () => {
+	return async ({ result, update }) => {
+		if (result.type === 'success') {
+			eligibility = false
+			submission = false
+			for (const docKey of documents) {
+				docState[docKey] = false
+				setDoc(docKey, false)
+			}
+			setEligibility(false)
+			setSubmission(false)
+			trackEvent('Journey', 'Clear progress', 'home')
+			await update()
+		}
+	}
 }
 
 const toggleSubmission = () => {
@@ -107,13 +129,15 @@ const structuredData = $derived(
 		checked,
 		title,
 		description,
-		onToggle
+		onToggle,
+		locked = false
 	}: {
 		stepNumber: number
 		checked: boolean
 		title: string
 		description?: string
 		onToggle: () => void
+		locked?: boolean
 	})}
 		<CardHeader class="step-card-header">
 			<button
@@ -122,7 +146,7 @@ const structuredData = $derived(
 				aria-pressed={checked}
 				aria-label={tt('pages.home.steps.toggle_aria')}
 				onclick={onToggle}
-				disabled={!hydrated}
+				disabled={!hydrated || locked}
 			>
 				<span class="step-indicator" data-checked={checked} aria-hidden="true">
 					{#if checked}
@@ -143,7 +167,6 @@ const structuredData = $derived(
 	{/snippet}
 
 	<header class="section-block">
-		<p class="eyebrow">{tt('pages.home.eyebrow')}</p>
 		<h1 class="page-title">{tt('pages.home.title')}</h1>
 		<p class="lead-text">{tt('pages.home.lead')}</p>
 	</header>
@@ -156,7 +179,8 @@ const structuredData = $derived(
 					checked: eligibility,
 					title: tt('pages.home.steps.eligibility.title'),
 					description: tt('pages.home.steps.eligibility.description'),
-					onToggle: toggleEligibility
+					onToggle: toggleEligibility,
+					locked: eligibilityLocked
 				})}
 				<CardContent class="step-card-content">
 					<p class="hint">{tt('pages.home.steps.eligibility.hint')}</p>
@@ -175,6 +199,11 @@ const structuredData = $derived(
 							>
 								{tt('pages.home.steps.eligibility.cta_again')}
 							</Button>
+							<form method="POST" action="?/clear" use:enhance={onClearProgressSubmit}>
+								<Button type="submit" variant="ghost">
+									{tt('pages.home.clear_progress_action')}
+								</Button>
+							</form>
 						{:else}
 							<Button
 								href={localiseHref(locale, '/screener')}
@@ -297,15 +326,30 @@ const structuredData = $derived(
 
 :global(.step-card[data-primary="true"]) {
 	border-color: var(--color-primary);
-	background: color-mix(in oklab, var(--color-primary) 5%, var(--color-card));
-	box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-primary) 18%, transparent);
+	background: color-mix(in oklab, var(--color-primary) 9%, var(--color-card));
+	box-shadow: 0 0 0 4px color-mix(in oklab, var(--color-primary) 28%, transparent);
 }
 
 :global(.step-card[data-primary="true"]) :global([data-slot="card-title"]) {
-	font-size: 1.6rem;
+	font-size: 2rem;
 	font-weight: 700;
-	line-height: 1.2;
-	letter-spacing: -0.015em;
+	line-height: 1.15;
+	letter-spacing: -0.02em;
+	color: var(--color-foreground);
+}
+
+:global(.step-card[data-primary="true"]) :global([data-slot="card-description"]) {
+	font-size: 1.0625rem;
+	line-height: 1.55;
+	color: var(--color-foreground);
+}
+
+:global(.step-card[data-primary="true"]) .hint {
+	color: var(--color-foreground);
+}
+
+:global(.step-card[data-primary="true"]) .step-card-text > .eyebrow {
+	color: color-mix(in oklab, var(--color-primary) 80%, var(--color-foreground));
 }
 
 :global(.step-card-header) {

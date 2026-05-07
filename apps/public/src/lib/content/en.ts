@@ -23,7 +23,7 @@ export const en = {
 	'chrome.brand': 'Primer Paso',
 	'chrome.tagline': "Independent guidance for Spain's 2026 regularisation process",
 	'chrome.primary_navigation': 'Primary navigation',
-	'chrome.nav.home': 'See my path',
+	'chrome.nav.home': 'Home',
 	'chrome.nav.start': 'See my first step',
 	'chrome.nav.organisations': 'Find organisations',
 	'chrome.footer.eyebrow': 'Primer Paso',
@@ -51,6 +51,7 @@ export const en = {
 		'This step is checked automatically when you finish the questionnaire — or you can mark it manually.',
 	'pages.home.steps.eligibility.cta': 'Start the questionnaire',
 	'pages.home.steps.eligibility.cta_again': 'Review the questionnaire',
+	'pages.home.clear_progress_action': 'Clear my progress',
 	'pages.home.steps.documents.title': 'Get the documents you need',
 	'pages.home.steps.documents.description_personalised':
 		'Personalised list based on your answers. Tick the documents you already have.',
@@ -128,8 +129,8 @@ export const en = {
 	'pages.result.why_title': 'Why we think this',
 	'pages.result.continue_title': 'How to continue',
 	'pages.result.continue_body':
-		'Continue on your path and tick each step as you complete it. There you can review and check off your personalised document list.',
-	'pages.result.continue_action': 'Go to my path',
+		'Continue with your application and tick each step as you complete it. There you can review and check off your documents.',
+	'pages.result.continue_action': 'Go to my application',
 	'pages.result.review_documents_action': 'Review which documents I need',
 	'pages.result.review_documents_body':
 		'Continue with the documents checklist on the home page — your list is now personalised based on your answers.',
@@ -344,7 +345,7 @@ export const en = {
 	'result.checklist.item.asylum_case_documents_needed':
 		'Any papers you still have about an asylum or protection case, if that applies to you.',
 	'result.checklist.item.official_document_requirements':
-		'The latest official document requirements, including criminal record documents if they apply to you.',
+		'Criminal record certificate if applicable to your case.',
 	'result.checklist.item.practical_support_helpful':
 		'Help with language, digital access, scanning, printing or understanding which papers matter.',
 	'result.checklist.item.complex_case_review':

@@ -1,11 +1,10 @@
 import type { MessageKey } from '$lib/content'
-import { getJourneyState } from '$lib/server/journey'
-import type { PageServerLoad } from './$types'
+import { clearJourneyState, getJourneyState } from '$lib/server/journey'
+import type { Actions, PageServerLoad } from './$types'
 
 const DEFAULT_DOCUMENT_KEYS: MessageKey[] = [
 	'result.checklist.item.identity_document_needed',
 	'result.checklist.item.before_cutoff_evidence_needed',
-	'result.checklist.item.recent_evidence_needed',
 	'result.checklist.item.official_document_requirements'
 ]
 
@@ -19,5 +18,12 @@ export const load: PageServerLoad = ({ cookies, params }) => {
 		locale: params.lang,
 		hasCompletedScreener: hasStartedScreener,
 		documents: DEFAULT_DOCUMENT_KEYS
+	}
+}
+
+export const actions: Actions = {
+	clear: ({ cookies }) => {
+		clearJourneyState(cookies)
+		return { cleared: true }
 	}
 }
