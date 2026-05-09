@@ -1,12 +1,13 @@
 <script lang="ts">
 import { Button } from '@primer-paso/ui/button'
+import { ErrorSummary, type ErrorSummaryItem } from '@primer-paso/ui/error-summary'
 import { trackEvent } from '$lib/analytics/matomo'
 import type { Locale } from '$lib/content'
 import { getTranslator } from '$lib/content'
 
 interface Props {
 	eyebrow?: string
-	error?: string
+	errors?: ErrorSummaryItem[]
 	returnTo?: string
 	backHref: string
 	stepSlug?: string
@@ -14,7 +15,15 @@ interface Props {
 	children?: import('svelte').Snippet
 }
 
-let { eyebrow, error, returnTo, backHref, stepSlug, locale = 'es', children }: Props = $props()
+let {
+	eyebrow,
+	errors = [],
+	returnTo,
+	backHref,
+	stepSlug,
+	locale = 'es',
+	children
+}: Props = $props()
 const tt = $derived(getTranslator(locale))
 const trackContinue = () => trackEvent('Journey', 'Continue question', stepSlug)
 </script>
@@ -25,11 +34,8 @@ const trackContinue = () => trackEvent('Journey', 'Continue question', stepSlug)
 	{/if}
 
 	<div class="app-card stack">
-		{#if error}
-			<div class="error-summary" aria-live="assertive">
-				<h2 class="error-summary-title">{tt('common.problem')}</h2>
-				<p class="error-text">{error}</p>
-			</div>
+		{#if errors.length > 0}
+			<ErrorSummary title={tt('common.problem')} {errors} />
 		{/if}
 
 		<form method="POST" class="result-grid">
