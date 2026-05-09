@@ -26,7 +26,7 @@ export const ar = {
 	'chrome.tagline': 'إرشاد مستقل بشأن عملية التسوية في إسبانيا لعام 2026',
 	'chrome.primary_navigation': 'التنقل الرئيسي',
 	'chrome.nav.home': 'الرئيسية',
-	'chrome.nav.start': 'التحقق من الخطوة التالية',
+	'chrome.nav.start': 'خطوتي الأولى',
 	'chrome.nav.organisations': 'البحث عن منظمات',
 	'chrome.footer.eyebrow': 'Primer Paso',
 	'chrome.footer.title': 'حول هذه الأداة',
@@ -37,38 +37,38 @@ export const ar = {
 	'chrome.footer.disclaimer': 'لا تحل محل الاستشارة القانونية ولا تشكل قراراً رسمياً.',
 	'chrome.footer.link.official_portal': 'البوابة الرسمية',
 	'chrome.language_switcher_label': 'اللغة',
-	'pages.home.eyebrow': 'البدء',
-	'pages.home.title': 'اختر كيف تريد أن تبدأ',
+	'pages.home.eyebrow': 'ابدأ من هنا',
+	'pages.home.title': 'مسارك نحو التسوية',
 	'pages.home.meta_title': 'دعم لعملية التسوية الاستثنائية في إسبانيا 2026 | Primer Paso',
 	'pages.home.meta_description':
 		'يساعد Primer Paso الأشخاص على فهم عملية التسوية الاستثنائية في إسبانيا لعام 2026، ومعرفة الوثائق التي قد تكون ناقصة، واتخاذ قرار بين البوابة الرسمية أو طلب الدعم من منظمة متعاونة.',
-	'pages.home.lead':
-		'يمكنك استخدام الأداة لمعرفة الخطوة التالية أو الذهاب مباشرة إلى دليل الجهات المتعاونة.',
-	'pages.home.choose': 'اختر خياراً',
-	'pages.home.quiz_title': 'معرفة الخطوة التالية',
-	'pages.home.quiz_body': 'أجب عن بعض الأسئلة للحصول على توجيه حذر حول المسار الذي قد يناسب حالتك.',
-	'pages.home.quiz_action': 'ابدأ الأداة',
-	'pages.home.directory_title': 'البحث عن جهة متعاونة',
-	'pages.home.directory_body':
-		'تصفح الدليل من دون إكمال النموذج. ابحث بالاسم أو المقاطعة أو بيانات الاتصال.',
-	'pages.home.note_title': 'قبل أن تبدأ',
-	'pages.home.note_body':
-		'هذه الخدمة تقدم إرشاداً عملياً ولا تحل محل الاستشارة القانونية أو القرار الرسمي.',
-	'pages.home.seo_intro_title': 'إرشاد واضح قبل البدء',
-	'pages.home.seo_intro_body_1':
-		'في Primer Paso يمكنك اختيار كيف تريد أن تبدأ: استبيان قصير أو الانتقال مباشرة إلى دليل المنظمات المتعاونة.',
-	'pages.home.seo_intro_body_2':
-		'هذه الأداة مخصّصة للأشخاص الذين يبحثون عن دعم في عملية التسوية الاستثنائية في إسبانيا لعام 2026. تساعدك على فهم المعلومات المهمة، والوثائق التي قد ما زلت تحتاج إليها، ومتى يكون من الأفضل طلب دعم بشري مباشر.',
-	'pages.home.seo_intro_body_3':
-		'هذه أداة إرشادية بحذر. لا تحل محل الاستشارة القانونية ولا تمثل قراراً رسمياً. هدفها مساعدتك على الاستعداد واختيار الخطوة التالية المناسبة بسرعة أكبر.',
-	'pages.home.seo_help_title': 'ما الذي يمكنك فعله هنا',
-	'pages.home.seo_help_item_1': 'الإجابة عن سؤال واحد في كل صفحة ثم مراجعة الإجابات قبل النتيجة.',
-	'pages.home.seo_help_item_2': 'فهم ما إذا كانت البوابة الرسمية قد تناسب حالتك.',
-	'pages.home.seo_help_item_3': 'العثور على منظمات متعاونة قد تقدم دعماً داخل إسبانيا.',
-	'pages.home.seo_help_item_4': 'إعداد ملخص يمكن طباعته بالمعلومات الأساسية التي جمعتها.',
-	'pages.home.seo_support_title': 'هل تبحث عن دعم عملي داخل إسبانيا؟',
-	'pages.home.seo_support_body':
-		'إذا كنت تعرف مسبقاً أنك تريد دعماً بشرياً، يمكنك الذهاب مباشرة إلى دليل المنظمات. وإذا كنت تفضل فهم وضعك أولاً، فابدأ بالاستبيان ثم قرر بين المسار الرسمي أو طلب المساعدة من منظمة متعاونة.',
+	'pages.home.lead': 'اتبع هذه الخطوات الثلاث لإعداد طلبك. ضع علامة على كل خطوة عند إكمالها.',
+	'pages.home.steps.step_label': 'الخطوة {current} من {total}',
+	'pages.home.steps.toggle_aria': 'تحديد الخطوة كمكتملة',
+	'pages.home.steps.eligibility.title': 'اعرف خطوتك الأولى',
+	'pages.home.steps.eligibility.description':
+		'أجب عن استبيان قصير لمعرفة المسار الذي يناسب حالتك، والوثائق التي لديك بالفعل، وتلك التي ما زالت ناقصة.',
+	'pages.home.steps.eligibility.hint':
+		'يتم تحديد هذه الخطوة تلقائياً عند إنهاء الاستبيان — أو يمكنك تحديدها يدوياً.',
+	'pages.home.steps.eligibility.cta': 'ابدأ الاستبيان',
+	'pages.home.steps.eligibility.cta_again': 'مراجعة الاستبيان',
+	'pages.home.clear_progress_action': 'مسح تقدمي',
+	'pages.home.clear_confirm.title': 'هل تريد مسح تقدمك؟',
+	'pages.home.clear_confirm.description':
+		'سيؤدي هذا إلى إعادة تعيين إجاباتك المحفوظة والوثائق التي وضعت عليها علامة على هذا الجهاز.',
+	'pages.home.clear_confirm.confirm': 'نعم، امسح التقدم',
+	'pages.home.clear_confirm.cancel': 'إلغاء',
+	'pages.home.steps.documents.title': 'اجمع الوثائق المطلوبة',
+	'pages.home.steps.documents.description_personalised':
+		'قائمة مخصصة بناءً على إجاباتك. ضع علامة على الوثائق التي لديك بالفعل.',
+	'pages.home.steps.documents.description_generic':
+		'هذه وثائق تُطلب عادةً. أكمل الاستبيان للحصول على قائمة مخصصة.',
+	'pages.home.steps.documents.empty': 'لا توجد وثائق بعد. أكمل الاستبيان لمعرفة ما قد ينطبق عليك.',
+	'pages.home.steps.submission.title': 'قدّم طلبك',
+	'pages.home.steps.submission.digital_intro':
+		'إذا كانت لديك هوية رقمية، يمكنك التقديم عبر البوابة الرسمية.',
+	'pages.home.steps.submission.collaborating_intro':
+		'وإذا لم يكن لديك ذلك، يمكنك التقديم بمساعدة منظمة متعاونة.',
 	'pages.home.official_portal_action': 'البوابة الرسمية للتسوية',
 	'pages.start.eyebrow': 'المرحلة 1',
 	'pages.organisations.meta_title': 'البحث عن الجهات',
@@ -132,6 +132,16 @@ export const ar = {
 	'pages.result.eligibility_title': 'نتيجتك',
 	'pages.result.next_step_title': 'خطوتك التالية',
 	'pages.result.why_title': 'لماذا نعتقد ذلك',
+	'pages.result.continue_title': 'كيف تتابع',
+	'pages.result.continue_body':
+		'تابع طلبك وضع علامة على كل خطوة عند إكمالها. هناك يمكنك مراجعة وتحديد وثائقك.',
+	'pages.result.continue_action': 'الذهاب إلى طلبي',
+	'pages.result.review_documents_action': 'مراجعة الوثائق التي أحتاجها',
+	'pages.result.review_documents_body':
+		'تابع مع قائمة الوثائق في الصفحة الرئيسية — أصبحت الآن مخصصة بناءً على إجاباتك.',
+	'pages.result.summary_actions_title': 'ملخصك',
+	'pages.result.summary_actions_body':
+		'يمكنك حفظ هذا الملخص للرجوع إليه لاحقاً، أو إعادة بدء الاستبيان.',
 	'pages.result.checklist_title': 'ما الذي ينبغي تجهيزه',
 	'pages.result.checklist.already_have': 'ما لديك بالفعل',
 	'pages.result.checklist.still_need': 'ما قد لا يزال ينقصك',
@@ -331,7 +341,7 @@ export const ar = {
 	'result.checklist.item.asylum_case_documents_needed':
 		'أي أوراق ما زالت لديك عن قضية لجوء أو حماية، إذا كان ذلك ينطبق على وضعك.',
 	'result.checklist.item.official_document_requirements':
-		'أحدث المتطلبات الرسمية للمستندات، بما في ذلك مستندات السجل الجنائي إذا كانت تنطبق على حالتك.',
+		'شهادة السوابق الجنائية إذا كانت تنطبق على حالتك.',
 	'result.checklist.item.practical_support_helpful':
 		'مساعدة في اللغة أو الوصول الرقمي أو المسح الضوئي أو الطباعة أو فهم المستندات الأكثر أهمية.',
 	'result.checklist.item.complex_case_review':

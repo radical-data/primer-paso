@@ -29,7 +29,7 @@ export const es = {
 	'chrome.tagline': 'Orientación independiente para el proceso de regularización de España de 2026',
 	'chrome.primary_navigation': 'Navegación principal',
 	'chrome.nav.home': 'Inicio',
-	'chrome.nav.start': 'Ver siguiente paso',
+	'chrome.nav.start': 'Ver mi primer paso',
 	'chrome.nav.organisations': 'Buscar organizaciones',
 	'chrome.footer.eyebrow': 'Primer Paso',
 	'chrome.footer.title': 'Sobre esta herramienta',
@@ -40,43 +40,41 @@ export const es = {
 	'chrome.footer.disclaimer': 'No sustituye asesoría legal ni constituye una decisión oficial.',
 	'chrome.footer.link.official_portal': 'Portal oficial',
 	'chrome.language_switcher_label': 'Idioma',
-	'pages.home.eyebrow': 'Empezar',
-	'pages.home.title': 'Elige cómo quieres empezar',
+	'pages.home.eyebrow': 'Empieza aquí',
+	'pages.home.title': 'Tu camino hacia la regularización',
 	'pages.home.meta_title':
 		'Ayuda para la regularización extraordinaria 2026 en España | Primer Paso',
 	'pages.home.meta_description':
 		'Primer Paso ayuda a entender el proceso extraordinario de regularización en España, revisar qué documentos pueden faltar y decidir si conviene usar el portal oficial o buscar apoyo de una organización colaboradora.',
 	'pages.home.lead':
-		'Puedes usar el orientador para revisar tu siguiente paso o explorar directamente el directorio de organizaciones colaboradoras.',
-	'pages.home.choose': 'Elige una opción',
-	'pages.home.quiz_title': 'Revisar mi siguiente paso',
-	'pages.home.quiz_body':
-		'Responde unas preguntas para recibir una orientación cautelosa sobre qué vía puede encajar mejor contigo.',
-	'pages.home.quiz_action': 'Empezar el orientador',
-	'pages.home.directory_title': 'Buscar una organización colaboradora',
-	'pages.home.directory_body':
-		'Explora el directorio sin hacer el formulario. Busca por nombre, provincia o datos de contacto.',
-	'pages.home.note_title': 'Antes de empezar',
-	'pages.home.note_body':
-		'Este servicio ofrece orientación práctica. No sustituye el asesoramiento jurídico ni una decisión oficial.',
-	'pages.home.seo_intro_title': 'Orientación clara antes de empezar',
-	'pages.home.seo_intro_body_1':
-		'En Primer Paso puedes elegir cómo quieres empezar: responder un cuestionario breve o ir directamente al directorio de organizaciones colaboradoras.',
-	'pages.home.seo_intro_body_2':
-		'La herramienta está pensada para personas que buscan apoyo con la regularización extraordinaria de 2026 en España. Sirve para entender qué información importa, qué documentos pueden faltar y cuándo conviene seguir por el portal oficial o pedir ayuda presencial a una organización colaboradora.',
-	'pages.home.seo_intro_body_3':
-		'El enfoque es prudente. No sustituye asesoría legal ni una decisión oficial. Su objetivo es ayudarte a prepararte mejor, reducir dudas y llegar más rápido al siguiente paso adecuado.',
-	'pages.home.seo_help_title': 'Qué puedes hacer aquí',
-	'pages.home.seo_help_item_1':
-		'Responder una pregunta por página y revisar las respuestas antes de ver el resultado.',
-	'pages.home.seo_help_item_2': 'Entender si el portal oficial puede encajar con tu situación.',
-	'pages.home.seo_help_item_3':
-		'Encontrar organizaciones colaboradoras que puedan apoyar el proceso en España.',
-	'pages.home.seo_help_item_4':
-		'Preparar un resumen imprimible con la información clave ya reunida.',
-	'pages.home.seo_support_title': '¿Buscas apoyo práctico en España?',
-	'pages.home.seo_support_body':
-		'Si ya sabes que prefieres apoyo humano, puedes abrir directamente el directorio de organizaciones. Si primero quieres orientarte, empieza por el cuestionario y luego decide si conviene usar la vía oficial o pedir ayuda a una entidad colaboradora.',
+		'Sigue estos tres pasos para preparar tu solicitud. Marca cada paso al completarlo.',
+	'pages.home.steps.step_label': 'Paso {current} de {total}',
+	'pages.home.steps.toggle_aria': 'Marcar paso como completado',
+	'pages.home.steps.eligibility.title': 'Conoce tu primer paso',
+	'pages.home.steps.eligibility.description':
+		'Responde un cuestionario breve para saber qué vía encaja con tu situación, qué documentos ya tienes y cuáles te faltan.',
+	'pages.home.steps.eligibility.hint':
+		'Este paso se marca automáticamente al terminar el cuestionario — o puedes marcarlo a mano.',
+	'pages.home.steps.eligibility.cta': 'Empezar el cuestionario',
+	'pages.home.steps.eligibility.cta_again': 'Revisar el cuestionario',
+	'pages.home.clear_progress_action': 'Borrar mi progreso',
+	'pages.home.clear_confirm.title': '¿Borrar tu progreso?',
+	'pages.home.clear_confirm.description':
+		'Esto restablecerá tus respuestas guardadas y los documentos marcados en este dispositivo.',
+	'pages.home.clear_confirm.confirm': 'Sí, borrar progreso',
+	'pages.home.clear_confirm.cancel': 'Cancelar',
+	'pages.home.steps.documents.title': 'Reúne los documentos',
+	'pages.home.steps.documents.description_personalised':
+		'Lista personalizada según tus respuestas. Marca los documentos que ya tienes.',
+	'pages.home.steps.documents.description_generic':
+		'Estos son documentos que suelen pedirse. Completa el cuestionario para ver una lista personalizada.',
+	'pages.home.steps.documents.empty':
+		'Aún no hay documentos. Completa el cuestionario para ver cuáles pueden aplicarte.',
+	'pages.home.steps.submission.title': 'Presenta tu solicitud',
+	'pages.home.steps.submission.digital_intro':
+		'Si tienes identidad digital, puedes presentarla por el portal oficial.',
+	'pages.home.steps.submission.collaborating_intro':
+		'Si no, puedes presentarla con el apoyo de una organización colaboradora.',
 	'pages.home.official_portal_action': 'Portal oficial de regularización',
 	'pages.start.eyebrow': 'Hito 1',
 	'pages.organisations.meta_title': 'Buscar organizaciones',
@@ -144,6 +142,16 @@ export const es = {
 	'pages.result.eligibility_title': 'Tu resultado',
 	'pages.result.next_step_title': 'Tu siguiente paso',
 	'pages.result.why_title': 'Por qué pensamos esto',
+	'pages.result.continue_title': 'Cómo continuar',
+	'pages.result.continue_body':
+		'Sigue con tu solicitud y marca cada paso al completarlo. Allí podrás revisar y marcar tus documentos.',
+	'pages.result.continue_action': 'Ir a mi solicitud',
+	'pages.result.review_documents_action': 'Revisar qué documentos me hacen falta',
+	'pages.result.review_documents_body':
+		'Continúa con la lista de documentos en el inicio — ahora está personalizada según tus respuestas.',
+	'pages.result.summary_actions_title': 'Tu resumen',
+	'pages.result.summary_actions_body':
+		'Puedes guardar este resumen para consultarlo más tarde o reiniciar el cuestionario.',
 	'pages.result.checklist_title': 'Qué conviene preparar',
 	'pages.result.checklist.already_have': 'Lo que ya tienes',
 	'pages.result.checklist.still_need': 'Lo que aún podrías necesitar',
@@ -359,7 +367,7 @@ export const es = {
 	'result.checklist.item.asylum_case_documents_needed':
 		'Cualquier documento que todavía tengas sobre un caso de asilo o protección, si eso aplica a tu situación.',
 	'result.checklist.item.official_document_requirements':
-		'Los requisitos oficiales más recientes, incluidos los certificados o documentos de antecedentes penales si aplican a tu caso.',
+		'Certificado de antecedentes penales si aplica a tu caso.',
 	'result.checklist.item.practical_support_helpful':
 		'Ayuda con el idioma, el acceso digital, escanear, imprimir o entender qué documentos importan.',
 	'result.checklist.item.complex_case_review':

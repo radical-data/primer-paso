@@ -24,7 +24,7 @@ export const en = {
 	'chrome.tagline': "Independent guidance for Spain's 2026 regularisation process",
 	'chrome.primary_navigation': 'Primary navigation',
 	'chrome.nav.home': 'Home',
-	'chrome.nav.start': 'Check next step',
+	'chrome.nav.start': 'See my first step',
 	'chrome.nav.organisations': 'Find organisations',
 	'chrome.footer.eyebrow': 'Primer Paso',
 	'chrome.footer.title': 'About this tool',
@@ -35,41 +35,40 @@ export const en = {
 	'chrome.footer.disclaimer': 'It does not replace legal advice or an official decision.',
 	'chrome.footer.link.official_portal': 'Official portal',
 	'chrome.language_switcher_label': 'Language',
-	'pages.home.eyebrow': 'Getting started',
-	'pages.home.title': 'Choose how you want to start',
+	'pages.home.eyebrow': 'Start here',
+	'pages.home.title': 'Your path to regularisation',
 	'pages.home.meta_title': "Support for Spain's 2026 regularisation process | Primer Paso",
 	'pages.home.meta_description':
 		"Primer Paso helps people understand Spain's 2026 extraordinary regularisation process, check what documents may be missing, and decide whether to use the official portal or seek support from a collaborating organisation.",
 	'pages.home.lead':
-		'You can use the screener to check your next step or go straight to the directory of collaborating organisations.',
-	'pages.home.choose': 'Choose an option',
-	'pages.home.quiz_title': 'Check my next step',
-	'pages.home.quiz_body':
-		'Answer a few questions to get cautious guidance on which route may fit your situation best.',
-	'pages.home.quiz_action': 'Start the screener',
-	'pages.home.directory_title': 'Find a collaborating organisation',
-	'pages.home.directory_body':
-		'Browse the directory without completing the form. Search by name, province, or contact details.',
-	'pages.home.note_title': 'Before you begin',
-	'pages.home.note_body':
-		'This service offers practical guidance. It does not replace legal advice or an official decision.',
-	'pages.home.seo_intro_title': 'Clear guidance before you start',
-	'pages.home.seo_intro_body_1':
-		'On Primer Paso, you can choose how you want to begin: use a short screener or go straight to the directory of collaborating organisations.',
-	'pages.home.seo_intro_body_2':
-		"This tool is designed for people looking for support with Spain's 2026 extraordinary regularisation process. It helps you understand what information matters, what documents you may still need, and when it may be better to ask for in-person support instead of continuing alone.",
-	'pages.home.seo_intro_body_3':
-		'The guidance is cautious. It does not replace legal advice, and it does not make an official decision. It helps people prepare, reduce confusion, and reach the right next step more quickly.',
-	'pages.home.seo_help_title': 'What you can do here',
-	'pages.home.seo_help_item_1':
-		'Answer one question at a time and review your answers before seeing a result.',
-	'pages.home.seo_help_item_2': 'Understand whether the official portal may fit your situation.',
-	'pages.home.seo_help_item_3': 'Find collaborating organisations that may offer support in Spain.',
-	'pages.home.seo_help_item_4':
-		'Prepare a handover summary with the key information you have already gathered.',
-	'pages.home.seo_support_title': 'Looking for practical support in Spain?',
-	'pages.home.seo_support_body':
-		'If you already know you want human support, you can go straight to the organisations directory. If you want to understand your situation first, start with the screener and then decide whether to use the official route or ask a collaborating organisation for help.',
+		'Follow these three steps to prepare your application. Tick each step as you complete it.',
+	'pages.home.steps.step_label': 'Step {current} of {total}',
+	'pages.home.steps.toggle_aria': 'Mark step as complete',
+	'pages.home.steps.eligibility.title': 'Find out your first step',
+	'pages.home.steps.eligibility.description':
+		'Answer a short questionnaire to see which of the four routes fits, which documents you already have, and which ones are still missing.',
+	'pages.home.steps.eligibility.hint':
+		'This step is checked automatically when you finish the questionnaire — or you can mark it manually.',
+	'pages.home.steps.eligibility.cta': 'Start the questionnaire',
+	'pages.home.steps.eligibility.cta_again': 'Review the questionnaire',
+	'pages.home.clear_progress_action': 'Clear my progress',
+	'pages.home.clear_confirm.title': 'Clear your progress?',
+	'pages.home.clear_confirm.description':
+		'This will reset your saved answers and document checks on this device.',
+	'pages.home.clear_confirm.confirm': 'Yes, clear progress',
+	'pages.home.clear_confirm.cancel': 'Cancel',
+	'pages.home.steps.documents.title': 'Get the documents you need',
+	'pages.home.steps.documents.description_personalised':
+		'Personalised list based on your answers. Tick the documents you already have.',
+	'pages.home.steps.documents.description_generic':
+		'These are documents people often need. Complete the questionnaire to see a personalised list.',
+	'pages.home.steps.documents.empty':
+		'No documents yet. Complete the questionnaire to see what may apply to you.',
+	'pages.home.steps.submission.title': 'Submit your application',
+	'pages.home.steps.submission.digital_intro':
+		'If you have a digital identity, you can submit through the official portal.',
+	'pages.home.steps.submission.collaborating_intro':
+		'If not, you can submit with the help of a collaborating organisation.',
 	'pages.home.official_portal_action': 'Official regularisation portal',
 	'pages.start.eyebrow': 'Milestone 1',
 	'pages.organisations.meta_title': 'Find organisations',
@@ -133,6 +132,16 @@ export const en = {
 	'pages.result.eligibility_title': 'Your result',
 	'pages.result.next_step_title': 'Your next step',
 	'pages.result.why_title': 'Why we think this',
+	'pages.result.continue_title': 'How to continue',
+	'pages.result.continue_body':
+		'Continue with your application and tick each step as you complete it. There you can review and check off your documents.',
+	'pages.result.continue_action': 'Go to my application',
+	'pages.result.review_documents_action': 'Review which documents I need',
+	'pages.result.review_documents_body':
+		'Continue with the documents checklist on the home page — your list is now personalised based on your answers.',
+	'pages.result.summary_actions_title': 'Your summary',
+	'pages.result.summary_actions_body':
+		'You can save this summary to come back to it later, or start the questionnaire again.',
 	'pages.result.checklist_title': 'What to get ready',
 	'pages.result.checklist.already_have': 'What you already have',
 	'pages.result.checklist.still_need': 'What you may still need',
@@ -341,7 +350,7 @@ export const en = {
 	'result.checklist.item.asylum_case_documents_needed':
 		'Any papers you still have about an asylum or protection case, if that applies to you.',
 	'result.checklist.item.official_document_requirements':
-		'The latest official document requirements, including criminal record documents if they apply to you.',
+		'Criminal record certificate if applicable to your case.',
 	'result.checklist.item.practical_support_helpful':
 		'Help with language, digital access, scanning, printing or understanding which papers matter.',
 	'result.checklist.item.complex_case_review':
