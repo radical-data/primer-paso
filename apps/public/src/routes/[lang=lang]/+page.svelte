@@ -10,6 +10,7 @@ import { trackEvent } from '$lib/analytics/matomo'
 import type { Locale, MessageKey } from '$lib/content'
 import { getTranslator } from '$lib/content'
 import {
+	clearHomeChecklist,
 	loadDocs,
 	loadEligibility,
 	loadSubmission,
@@ -64,14 +65,14 @@ const toggleEligibility = () => {
 const onClearProgressSubmit: SubmitFunction = () => {
 	return async ({ result, update }) => {
 		if (result.type === 'success') {
-			eligibility = false
-			submission = false
-			for (const docKey of documents) {
-				docState[docKey] = false
-				setDoc(docKey, false)
+			const cleared = clearHomeChecklist()
+
+			eligibility = cleared.eligibility
+			submission = cleared.submission
+			for (const docKey of Object.keys(docState)) {
+				delete docState[docKey]
 			}
-			setEligibility(false)
-			setSubmission(false)
+
 			trackEvent('Journey', 'Clear progress', 'home')
 			await update()
 		}
@@ -124,14 +125,7 @@ const structuredData = $derived(
 </svelte:head>
 
 <section class="stack">
-	{#snippet stepHeader({
-		stepNumber,
-		checked,
-		title,
-		description,
-		onToggle,
-		locked = false
-	}: {
+	{#snippet stepHeader(_props: {
 		stepNumber: number
 		checked: boolean
 		title: string
@@ -139,6 +133,15 @@ const structuredData = $derived(
 		onToggle: () => void
 		locked?: boolean
 	})}
+		{@const {
+			stepNumber,
+			checked,
+			title,
+			description,
+			onToggle,
+			locked = false
+		} = _props}
+
 		<CardHeader class="step-card-header">
 			<button
 				type="button"
@@ -158,9 +161,9 @@ const structuredData = $derived(
 				<p class="eyebrow">
 					{tt('pages.home.steps.step_label', { current: String(stepNumber), total: TOTAL_STEPS })}
 				</p>
-				<CardTitle>{title}</CardTitle>
+				<CardTitle class="step-card-title">{title}</CardTitle>
 				{#if description}
-					<CardDescription>{description}</CardDescription>
+					<CardDescription class="step-card-description">{description}</CardDescription>
 				{/if}
 			</div>
 		</CardHeader>
@@ -306,6 +309,10 @@ const structuredData = $derived(
 	padding: 0;
 }
 
+/*
+	These classes are passed to @primer-paso/ui component roots. Use :global so
+	Svelte does not drop the selectors as unused when scoping this page's CSS.
+*/
 :global(.step-card) {
 	transition:
 		border-color 0.25s ease,
@@ -313,7 +320,7 @@ const structuredData = $derived(
 		box-shadow 0.25s ease;
 }
 
-:global(.step-card) :global([data-slot="card-title"]) {
+:global(.step-card) :global(.step-card-title) {
 	transition:
 		font-size 0.25s ease,
 		letter-spacing 0.25s ease,
@@ -330,7 +337,7 @@ const structuredData = $derived(
 	box-shadow: 0 0 0 4px color-mix(in oklab, var(--color-primary) 28%, transparent);
 }
 
-:global(.step-card[data-primary="true"]) :global([data-slot="card-title"]) {
+:global(.step-card[data-primary="true"]) :global(.step-card-title) {
 	font-size: 2rem;
 	font-weight: 700;
 	line-height: 1.15;
@@ -338,7 +345,7 @@ const structuredData = $derived(
 	color: var(--color-foreground);
 }
 
-:global(.step-card[data-primary="true"]) :global([data-slot="card-description"]) {
+:global(.step-card[data-primary="true"]) :global(.step-card-description) {
 	font-size: 1.0625rem;
 	line-height: 1.55;
 	color: var(--color-foreground);
@@ -434,11 +441,11 @@ const structuredData = $derived(
 }
 
 :global(.step-card[data-primary="true"]) .doc-row {
-	background: color-mix(in oklab, var(--color-primary) 16%, var(--color-background));
+	background: color-mix(in oklab, var(--color-primary) 4%, var(--color-background));
 }
 
 :global(.step-card[data-primary="true"]) .doc-row:hover {
-	background: color-mix(in oklab, var(--color-primary) 24%, var(--color-background));
+	background: color-mix(in oklab, var(--color-primary) 9%, var(--color-background));
 }
 
 .doc-row-input {

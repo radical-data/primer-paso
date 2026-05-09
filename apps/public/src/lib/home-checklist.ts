@@ -1,6 +1,7 @@
-const ELIGIBILITY_KEY = 'pp:home:eligibility'
-const SUBMISSION_KEY = 'pp:home:submission'
-const DOCS_KEY = 'pp:home:docs'
+const STORAGE_PREFIX = 'primer-paso:home-checklist:v1'
+const ELIGIBILITY_KEY = `${STORAGE_PREFIX}:eligibility`
+const SUBMISSION_KEY = `${STORAGE_PREFIX}:submission`
+const DOCS_KEY = `${STORAGE_PREFIX}:docs`
 
 const isBrowser = () => typeof window !== 'undefined' && typeof window.localStorage !== 'undefined'
 
@@ -55,4 +56,18 @@ export const setDoc = (key: string, value: boolean): Record<string, boolean> => 
 	const next = { ...loadDocs(), [key]: value }
 	writeJson(DOCS_KEY, next)
 	return next
+}
+
+export const clearHomeChecklist = () => {
+	const cleared = {
+		eligibility: false,
+		submission: false,
+		docs: {} as Record<string, boolean>
+	}
+
+	setEligibility(cleared.eligibility)
+	setSubmission(cleared.submission)
+	writeJson(DOCS_KEY, cleared.docs)
+
+	return cleared
 }

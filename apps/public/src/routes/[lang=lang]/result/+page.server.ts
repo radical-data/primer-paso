@@ -1,18 +1,14 @@
 import { redirect } from '@sveltejs/kit'
 import { localiseHref } from '$lib/i18n/routing'
 import { OFFICIAL_PORTAL_URL } from '$lib/server/handover'
-import { getJourneyState } from '$lib/server/journey'
+import { getJourneyState, hasStartedJourney } from '$lib/server/journey'
 import { runTriage } from '$lib/triage/engine'
 import type { PageServerLoad } from './$types'
 
 export const load: PageServerLoad = ({ cookies, params }) => {
 	const state = getJourneyState(cookies)
-	// `language` is set on every visit by the layout; any other answer means the
-	// visitor has actually started the screener. If they haven't, the result page
-	// has nothing meaningful to show — send them home.
-	const hasStartedScreener = Object.keys(state.answers).some((key) => key !== 'language')
 
-	if (!hasStartedScreener) {
+	if (!hasStartedJourney(state.answers)) {
 		redirect(303, localiseHref(params.lang, '/'))
 	}
 
