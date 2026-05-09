@@ -391,6 +391,10 @@
 		border-color: color-mix(in oklab, var(--color-result-review) 24%, var(--color-border));
 	}
 
+	.status-panel[data-tone="neutral"] {
+		@apply border-border bg-card;
+	}
+
 	.cta-panel {
 		@apply grid gap-4 rounded-2xl border p-5 md:p-6;
 		background: linear-gradient(

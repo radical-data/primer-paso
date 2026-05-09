@@ -1,5 +1,6 @@
 <script lang="ts">
 import { Button } from '@primer-paso/ui/button'
+import { SummaryList } from '@primer-paso/ui/summary-list'
 import { trackEvent } from '$lib/analytics/matomo'
 import type { Locale } from '$lib/content'
 import { getTranslator } from '$lib/content'
@@ -16,6 +17,15 @@ let {
 } = $props()
 
 const tt = $derived(getTranslator(data.locale ?? 'es'))
+
+const summaryRows = $derived(
+	data.answers.map((a) => ({
+		key: a.label,
+		value: a.value,
+		actionHref: a.changeHref,
+		actionLabel: tt('common.change')
+	}))
+)
 </script>
 <svelte:head> <meta name="robots" content="noindex, nofollow"> </svelte:head>
 <section class="stack">
@@ -25,19 +35,7 @@ const tt = $derived(getTranslator(data.locale ?? 'es'))
 		<h1 class="page-title">{tt('pages.check_answers.title')}</h1>
 		<p class="hint">{tt('pages.check_answers.hint')}</p>
 
-		<div class="check-list">
-			{#each data.answers as answer}
-				<section class="check-row" aria-label={answer.label}>
-					<div class="stack">
-						<h2 class="section-title text-base">{answer.label}</h2>
-						<p>{answer.value}</p>
-					</div>
-					<Button href={answer.changeHref} variant="outline" size="sm"
-						>{tt('common.change')}</Button
-					>
-				</section>
-			{/each}
-		</div>
+		<SummaryList rows={summaryRows} />
 
 		<div class="actions">
 			<Button

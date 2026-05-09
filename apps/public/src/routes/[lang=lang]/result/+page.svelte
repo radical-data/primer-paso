@@ -4,9 +4,11 @@ import FileDownIcon from '@lucide/svelte/icons/file-down'
 import ListChecksIcon from '@lucide/svelte/icons/list-checks'
 import { Badge } from '@primer-paso/ui/badge'
 import { Button } from '@primer-paso/ui/button'
+import { StatusPanel } from '@primer-paso/ui/status-panel'
 import { trackEvent } from '$lib/analytics/matomo'
 import { getTranslator } from '$lib/content'
 import { localiseHref } from '$lib/i18n/routing'
+import { resultTone } from '$lib/result-ui'
 
 let { data } = $props()
 
@@ -24,17 +26,7 @@ const badgeVariant = $derived.by(() => {
 	}
 })
 
-const heroTone = $derived.by(() => {
-	switch (data.result.resultState) {
-		case 'likely_in_scope':
-			return 'positive'
-		case 'possible_but_needs_more_evidence':
-		case 'not_enough_information_yet':
-			return 'informational'
-		default:
-			return 'caution'
-	}
-})
+const statusTone = $derived(resultTone[data.result.resultState])
 
 const isAnotherRoute = $derived(data.result.resultState === 'another_route_may_fit_better')
 const checkAnswersHref = $derived(localiseHref(data.locale ?? 'es', '/check-answers'))
@@ -45,7 +37,7 @@ const startAgainHref = $derived(localiseHref(data.locale ?? 'es', '/screener?new
 	<p class="eyebrow">{tt('pages.result.eyebrow')}</p>
 
 	<div class="result-grid">
-		<section class="status-panel" data-tone={heroTone}>
+		<StatusPanel tone={statusTone}>
 			<div class="section-block">
 				<Badge class="result-pill" data-state={data.result.resultState} variant={badgeVariant}>
 					{tt(`result.title.${data.result.resultState}`)}
@@ -55,7 +47,7 @@ const startAgainHref = $derived(localiseHref(data.locale ?? 'es', '/screener?new
 					<p class="lead-text">{tt(data.result.explanationKey)}</p>
 				</div>
 			</div>
-		</section>
+		</StatusPanel>
 
 		{#if data.result.reasonKey}
 			<section class="panel section-block">

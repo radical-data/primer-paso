@@ -1,8 +1,9 @@
 <script lang="ts">
+import { CheckboxGroup } from '@primer-paso/ui/checkbox-group'
+import { Field } from '@primer-paso/ui/field'
 import { NativeSelect, NativeSelectOption } from '@primer-paso/ui/native-select'
+import { RadioGroup } from '@primer-paso/ui/radio-group'
 import { trackEvent } from '$lib/analytics/matomo'
-import FormField from '$lib/components/forms/FormField.svelte'
-import ChoiceGroup from '$lib/components/questions/ChoiceGroup.svelte'
 import QuestionPage from '$lib/components/questions/QuestionPage.svelte'
 import { getTranslator } from '$lib/content'
 
@@ -25,6 +26,17 @@ const multiValue = $derived(
 		: []
 )
 
+const errorSummaryItems = $derived(
+	currentError
+		? [
+				{
+					href: data.step.adapter === 'select' ? `#${provinceId}` : `#${data.step.field}`,
+					message: currentError
+				}
+			]
+		: []
+)
+
 let lastTrackedError = $state<string | null>(null)
 
 $effect(() => {
@@ -44,55 +56,76 @@ $effect(() => {
 <QuestionPage
 	eyebrow={data.step.eyebrow}
 	{locale}
-	error={currentError}
+	errors={errorSummaryItems}
 	returnTo={data.returnTo}
 	backHref={data.backHref}
 	stepSlug={data.step.slug}
 >
 	{#if data.step.adapter === 'single-choice'}
-		<ChoiceGroup
-			type="radio"
+		<Field
+			asFieldset
+			asPageHeading
+			id={data.step.field}
 			name={data.step.field}
-			question={data.step.title}
-			description={distinctBody}
-			hint={data.step.hint}
-			error={currentError}
-			options={data.step.options}
-			value={scalarValue}
-		/>
-	{:else if data.step.adapter === 'multi-choice'}
-		<ChoiceGroup
-			type="checkbox"
-			name={data.step.field}
-			question={data.step.title}
-			description={distinctBody}
-			hint={data.step.hint}
-			error={currentError}
-			options={data.step.options}
-			values={multiValue}
-		/>
-	{:else if data.step.adapter === 'select'}
-		<FormField
 			label={data.step.title}
 			description={distinctBody}
 			hint={data.step.hint}
 			error={currentError}
-			forId={provinceId}
+		>
+			{#snippet input(_props)}
+				<RadioGroup
+					name={data.step.field}
+					value={scalarValue}
+					options={data.step.options}
+					describedby={_props.describedby}
+				/>
+			{/snippet}
+		</Field>
+	{:else if data.step.adapter === 'multi-choice'}
+		<Field
+			asFieldset
+			asPageHeading
+			id={data.step.field}
+			name={data.step.field}
+			label={data.step.title}
+			description={distinctBody}
+			hint={data.step.hint}
+			error={currentError}
+		>
+			{#snippet input(_props)}
+				<CheckboxGroup
+					name={data.step.field}
+					values={multiValue}
+					options={data.step.options}
+					describedby={_props.describedby}
+				/>
+			{/snippet}
+		</Field>
+	{:else if data.step.adapter === 'select'}
+		<Field
+			id={provinceId}
+			name={data.step.field}
+			label={data.step.title}
+			description={distinctBody}
+			hint={data.step.hint}
+			error={currentError}
 			asPageHeading
 		>
-			<NativeSelect
-				id={provinceId}
-				name={data.step.field}
-				value={scalarValue}
-				class="w-full"
-				aria-invalid={currentError ? 'true' : undefined}
-				aria-describedby={`${provinceId}-hint ${provinceId}-error`}
-			>
-				<NativeSelectOption value="">{tt('common.choose_an_option')}</NativeSelectOption>
-				{#each data.step.options as option}
-					<NativeSelectOption value={option.value}>{option.label}</NativeSelectOption>
-				{/each}
-			</NativeSelect>
-		</FormField>
+			{#snippet input(_props)}
+				<NativeSelect
+					id={_props.id}
+					name={_props.name}
+					value={scalarValue}
+					class="w-full"
+					aria-invalid={_props.invalid ? 'true' : undefined}
+					aria-describedby={_props.describedby}
+				>
+					<NativeSelectOption value="">{tt('common.choose_an_option')}</NativeSelectOption>
+					{#each data.step.options as option}
+						<NativeSelectOption value={option.value}>{option.label}</NativeSelectOption>
+					{/each}
+				</NativeSelect>
+			{/snippet}
+		</Field>
 	{/if}
 </QuestionPage>
