@@ -314,9 +314,7 @@ const structuredData = $derived(
 				{tt('pages.home.clear_confirm.cancel')}
 			</Button>
 			<form method="POST" action="?/clear" use:enhance={onClearProgressSubmit}>
-				<Button type="submit">
-					{tt('pages.home.clear_confirm.confirm')}
-				</Button>
+				<Button type="submit"> {tt('pages.home.clear_confirm.confirm')} </Button>
 			</form>
 		</Dialog.Footer>
 	</Dialog.Content>
