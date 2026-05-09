@@ -106,6 +106,18 @@ const isJourneyState = (value: unknown): value is JourneyState => {
 	)
 }
 
+const isMeaningfulAnswer = (value: unknown) =>
+	Array.isArray(value) ? value.length > 0 : value !== undefined && value !== null
+
+export const hasStartedJourney = (answers: JourneyAnswers) => {
+	// `language` used to be collected as a screener answer. It is now controlled
+	// by the locale/navbar, so it must not make an otherwise empty journey look
+	// started.
+	const { language: _legacyLanguage, ...screenerAnswers } = answers
+
+	return Object.values(screenerAnswers).some(isMeaningfulAnswer)
+}
+
 export const getJourneyState = (cookies: Cookies) => {
 	const raw = cookies.get(JOURNEY_COOKIE)
 

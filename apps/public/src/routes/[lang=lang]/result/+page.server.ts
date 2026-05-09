@@ -1,11 +1,16 @@
+import { redirect } from '@sveltejs/kit'
 import { localiseHref } from '$lib/i18n/routing'
 import { OFFICIAL_PORTAL_URL } from '$lib/server/handover'
-import { getJourneyState } from '$lib/server/journey'
+import { getJourneyState, hasStartedJourney } from '$lib/server/journey'
 import { runTriage } from '$lib/triage/engine'
 import type { PageServerLoad } from './$types'
 
 export const load: PageServerLoad = ({ cookies, params }) => {
 	const state = getJourneyState(cookies)
+
+	if (!hasStartedJourney(state.answers)) {
+		redirect(303, localiseHref(params.lang, '/'))
+	}
 
 	const result = runTriage(state.answers)
 

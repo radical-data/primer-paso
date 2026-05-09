@@ -2,11 +2,13 @@
 import ExternalLinkIcon from '@lucide/svelte/icons/external-link'
 import LanguagesIcon from '@lucide/svelte/icons/languages'
 import '../../app.css'
+import { Select, SelectContent, SelectItem, SelectTrigger } from '@primer-paso/ui/select'
+import { goto } from '$app/navigation'
 import { resolve } from '$app/paths'
 import { page } from '$app/state'
 import faviconUrl from '$lib/assets/favicon.svg?url'
 import MatomoTracker from '$lib/components/analytics/MatomoTracker.svelte'
-import { getTranslator, type Locale } from '$lib/content'
+import { getTextDirection, getTranslator, isLocale, type Locale } from '$lib/content'
 import {
 	getAlternateLocaleHrefs,
 	getDefaultLocaleHref,
@@ -33,11 +35,15 @@ const languages: { value: Locale; label: string }[] = [
 
 const getLanguageHref = (languageValue: Locale) => replaceLocaleInHref(currentPath, languageValue)
 
-const navigationItems = $derived([
-	{ href: localiseHref(locale, '/'), label: tt('chrome.nav.home') },
-	{ href: localiseHref(locale, '/screener'), label: tt('chrome.nav.start') },
-	{ href: localiseHref(locale, '/organisations'), label: tt('chrome.nav.organisations') }
-])
+const onLanguageChange = (value: string) => {
+	if (!isLocale(value) || value === locale) return
+	goto(getLanguageHref(value))
+}
+
+const currentLanguageLabel = $derived(languages.find((l) => l.value === locale)?.label ?? 'Español')
+
+const homeHref = $derived(localiseHref(locale, '/'))
+const screenerHref = $derived(localiseHref(locale, '/screener'))
 
 const alternateLinks = $derived(
 	getAlternateLocaleHrefs(currentHref).map(({ locale, href }) => ({
@@ -50,6 +56,15 @@ const isCurrentNavItem = (href: string) => {
 	if (href === localiseHref(locale, '/')) return page.url.pathname === href
 	return page.url.pathname === href || page.url.pathname.startsWith(`${href}/`)
 }
+
+// Sync <html lang> and <html dir> on client-side navigation. SSR sets them
+// once via hooks.server.ts, but client-side `goto()` does not re-render the
+// document element — so without this, switching to/from Arabic only takes
+// effect after a full page reload.
+$effect(() => {
+	document.documentElement.lang = locale
+	document.documentElement.dir = getTextDirection(locale)
+})
 </script>
 
 <svelte:head>
@@ -89,41 +104,45 @@ const isCurrentNavItem = (href: string) => {
 			<div class="site-header-main">
 				<nav class="service-nav" aria-label={tt('chrome.primary_navigation')}>
 					<ul class="service-nav-list">
-						{#each navigationItems as item (item.href)}
-							<li>
-								<a
-									class="service-nav-link"
-									href={item.href}
-									aria-current={isCurrentNavItem(item.href) ? 'page' : undefined}
-								>
-									{item.label}
-								</a>
-							</li>
-						{/each}
+						<li>
+							<a
+								class="service-nav-link"
+								href={homeHref}
+								aria-current={isCurrentNavItem(homeHref) ? 'page' : undefined}
+							>
+								{tt('chrome.nav.home')}
+							</a>
+						</li>
+						<li>
+							<a
+								class="service-nav-link"
+								href={screenerHref}
+								aria-current={isCurrentNavItem(screenerHref) ? 'page' : undefined}
+							>
+								{tt('chrome.nav.start')}
+							</a>
+						</li>
 					</ul>
 				</nav>
 
-				<nav class="language-nav" aria-label={tt('chrome.language_switcher_label')}>
-					<span class="language-nav-label">
-						<span class="inline-flex items-center gap-2" aria-hidden="true">
-							<LanguagesIcon class="size-3.5" aria-hidden="true" />
-						</span>
-						{tt('chrome.language_switcher_label')}
-					</span>
-					<ul class="language-list site-header-actions">
-						{#each languages as language (language.value)}
-							<li>
-								<a
-									class="language-link"
-									href={getLanguageHref(language.value)}
-									aria-current={language.value === locale ? 'true' : undefined}
-									rel="nofollow"
-									>{language.label}</a
-								>
-							</li>
-						{/each}
-					</ul>
-				</nav>
+				<div class="language-nav">
+					<Select type="single" value={locale} onValueChange={onLanguageChange}>
+						<SelectTrigger
+							class="language-select-trigger"
+							aria-label={tt('chrome.language_switcher_label')}
+						>
+							<LanguagesIcon class="language-select-icon size-4 shrink-0" aria-hidden="true" />
+							<span class="language-select-value">{currentLanguageLabel}</span>
+						</SelectTrigger>
+						<SelectContent class="language-select-content" align="end">
+							{#each languages as language (language.value)}
+								<SelectItem value={language.value} label={language.label}>
+									{language.label}
+								</SelectItem>
+							{/each}
+						</SelectContent>
+					</Select>
+				</div>
 			</div>
 		</div>
 	</header>
@@ -139,7 +158,7 @@ const isCurrentNavItem = (href: string) => {
 						{tt('chrome.footer.attribution_prefix')}
 						{' '}
 						<a
-							class="site-footer-link !inline !min-h-0"
+							class="site-footer-link !inline !min-h-0 underline underline-offset-4"
 							href={radicalDataUrl}
 							target="_blank"
 							rel="noreferrer"
@@ -156,9 +175,8 @@ const isCurrentNavItem = (href: string) => {
 			<nav class="site-footer-nav" aria-label={tt('chrome.footer.title')}>
 				<h2 class="site-footer-title">{tt('chrome.primary_navigation')}</h2>
 				<ul class="site-footer-links">
-					{#each navigationItems as item (item.href)}
-						<li><a class="site-footer-link" href={item.href}>{item.label}</a></li>
-					{/each}
+					<li><a class="site-footer-link" href={homeHref}>{tt('chrome.nav.home')}</a></li>
+					<li><a class="site-footer-link" href={screenerHref}>{tt('chrome.nav.start')}</a></li>
 					<li>
 						<a
 							class="site-footer-link"

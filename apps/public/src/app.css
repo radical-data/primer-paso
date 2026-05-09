@@ -285,7 +285,7 @@
 	}
 
 	.site-header-main {
-		@apply grid min-w-0 gap-3;
+		@apply flex min-w-0 flex-wrap items-center justify-between gap-3;
 	}
 
 	.service-nav {
@@ -293,7 +293,7 @@
 	}
 
 	.service-nav-list {
-		@apply m-0 grid list-none gap-2 p-0;
+		@apply m-0 flex list-none flex-wrap items-center gap-2 p-0;
 	}
 
 	.service-nav-link {
@@ -313,31 +313,23 @@
 	}
 
 	.language-nav {
-		@apply grid justify-items-start gap-1;
+		@apply inline-flex items-center;
 	}
 
-	.language-nav-label {
-		@apply text-muted-foreground inline-flex min-h-8 items-center gap-2 text-[0.7rem] font-semibold tracking-[0.08em] uppercase whitespace-nowrap;
+	.language-select-trigger {
+		@apply border-border/70 bg-background text-foreground hover:border-primary/45 hover:bg-accent/40 inline-flex h-10 items-center gap-2 rounded-full border px-3.5 text-sm font-medium shadow-xs transition-[border-color,background-color,box-shadow];
 	}
 
-	.language-list {
-		@apply m-0 flex flex-wrap items-center gap-1 list-none p-0;
+	.language-select-icon {
+		@apply text-muted-foreground;
 	}
 
-	.language-link {
-		@apply text-muted-foreground hover:text-foreground focus-visible:ring-ring/50 inline-flex min-h-11 items-center rounded-lg px-3 text-sm font-medium no-underline underline-offset-4 transition-colors focus-visible:ring-3 whitespace-nowrap;
+	.language-select-value {
+		@apply text-foreground;
 	}
 
-	.language-link[aria-current="true"] {
-		@apply bg-muted text-foreground underline decoration-current;
-	}
-
-	.language-link:not([aria-current="true"]) {
-		@apply hover:bg-muted/60;
-	}
-
-	.language-link:focus-visible {
-		@apply rounded-lg;
+	.language-select-content {
+		@apply bg-popover text-popover-foreground border-border/80 min-w-[10rem] rounded-2xl border p-1.5 shadow-lg;
 	}
 
 	.task-grid {
@@ -615,10 +607,6 @@
 			@apply flex flex-wrap items-center gap-2;
 		}
 
-		.language-list {
-			@apply justify-end;
-		}
-
 		.language-nav {
 			@apply justify-items-end;
 		}
@@ -638,21 +626,12 @@
 		}
 
 		.brand,
-		.service-nav-link,
-		.language-link {
+		.service-nav-link {
 			min-height: 2.75rem;
-		}
-
-		.language-nav-label {
-			min-height: 2rem;
 		}
 
 		.service-nav-list {
 			grid-template-columns: 1fr;
-		}
-
-		.language-list {
-			@apply gap-1;
 		}
 	}
 
