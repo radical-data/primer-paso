@@ -168,6 +168,7 @@ REPOMIX_BUNDLE_CONFIG_DIR := ".repomix/config/bundles"
 #   just bundle copy
 #   just bundle style
 #   just bundle backend
+#   just bundle screener
 #   just bundle --diffs backend
 #   just bundle --compress copy
 [arg("diffs", long="diffs", short="D", value="true")]
