@@ -1,0 +1,724 @@
+---
+title: Designing Forms
+description: Designing good forms
+---
+
+A badly designed form is not just annoying; they exclude already vulnerable people, make it more difficult to access services, make those services often less efficient and erodes trust in institutions.
+
+They are the key route into many public sector services, determining how and whether we can access healthcare, housing, benefits, immigration systems, voting, and legal rights.
+
+Over the past two decades, government digital services in the UK, United States, and elsewhere have converged on a relatively consistent set of design principles for forms. The GOV.UK Design System, the US Web Design System (USWDS), the US Department of Veterans Affairs design system, and research from teams such as Healthcare.gov all point toward the same conclusion:
+
+Good forms:
+
+- reduce cognitive load
+- preserve user effort
+- minimise bureaucracy, and
+- help people complete tasks confidently.
+
+This document synthesises findings from government design systems, service design research, accessibility standards, and form design literature.
+
+## Core principles
+
+## Ask less
+
+Only ask for information that is genuinely necessary to deliver the service.
+
+Every question should have a clear purpose in the user journey. Questions that exist primarily to satisfy internal administrative processes should be challenged or removed.
+
+Reducing the number of questions:
+
+- lowers fatigue
+- reduces suspicion and distrust
+- shortens completion time
+- improves completion rates
+- reduces abandonment
+
+Luke Wroblewski's _Web Form Design_ and GOV.UK guidance both emphasise that improving forms often begins by removing questions rather than adding more.
+
+### Why this matters in civic services
+
+People completing government forms are often:
+
+- stressed
+- time constrained
+- unfamiliar with institutional language
+- completing forms in non-ideal environments
+- worried about legal or financial consequences
+
+Every unnecessary question increases the psychological and administrative burden of the task.
+
+## One thing at a time
+
+Use one question per page as the default pattern.
+
+This approach is heavily reinforced in GOV.UK patterns and modern civic-service research.
+
+Benefits include:
+
+- reduced cognitive load
+- reduced anxiety
+- clearer task progression
+- easier validation and error recovery
+- simpler branching logic
+- improved accessibility for screen reader users
+- better support for neurodivergent users
+
+Rather than presenting users with dense forms containing many unrelated questions, the interface focuses attention on a single decision or piece of information.
+
+### GOV.UK findings
+
+GOV.UK research consistently found that users complete long or high-stakes forms more successfully when the interaction is broken into small, focused steps.
+
+The GOV.UK Design System formalises this through the concept of:
+
+- question pages
+- check-your-answers pages
+- sequential task flow
+
+This structure mirrors how people naturally process information under uncertainty.
+
+## Never ask twice
+
+Do not ask users to re-enter information already provided during the same journey.
+
+This is now reinforced not only by service-design practice but also by WCAG 2.2's **Redundant Entry** success criterion.
+
+Repeated questions:
+
+- create frustration
+- signal organisational carelessness
+- increase input errors
+- disproportionately burden users with cognitive disabilities
+- make long forms feel punitive
+
+Good services carry answers forward and reuse information wherever possible.
+
+Examples:
+
+- reusing address information
+- pre-filling known data
+- carrying uploaded documents between steps
+- avoiding duplicate identity questions
+
+## Preserve effort
+
+Preserving user effort is one of the most important principles in civic-service design.
+
+Users should never lose work because of:
+
+- validation errors
+- session timeouts
+- language changes
+- accidental navigation
+- browser refreshes
+- upload failures
+
+When a form wipes entered information, users experience:
+
+- loss of trust
+- increased stress
+- fear of failure
+- abandonment
+
+In high-stakes contexts such as immigration, healthcare, taxation, or legal services, losing work can have serious consequences.
+
+### Design implications
+
+Forms should:
+
+- preserve entered answers wherever possible
+- maintain navigation state
+- persist uploaded files
+- autosave drafts where feasible
+- survive interrupted sessions
+
+The interface should behave as though the user's time and concentration are valuable.
+
+Because they are.
+
+## Support save-and-return
+
+Many civic forms cannot realistically be completed in one sitting.
+
+Users may need to:
+
+- find documents
+- consult family members
+- ask for translation help
+- regulate stress
+- switch devices
+- gather financial information
+- obtain legal advice
+
+Save-and-return should therefore be treated as a core workflow rather than an edge case.
+
+### Good save-and-return design
+
+Effective implementations:
+
+- preserve progress automatically
+- avoid forcing account creation unnecessarily
+- provide clear return mechanisms
+- explain how long drafts are stored
+- reassure users that progress is safe
+
+Research consistently shows that designing only for uninterrupted completion excludes many real users.
+
+## Keep users in one coherent flow
+
+Avoid sending users into disconnected side journeys.
+
+This means:
+
+- avoiding unnecessary new tabs or windows
+- embedding guidance inside the form flow
+- minimising context switching
+- avoiding external dead ends
+
+Screen reader users and keyboard users rely heavily on a stable navigation model.
+
+Breaking the journey into unrelated windows or external tools creates disorientation and undermines the user's mental model of progression.
+
+The strongest pattern is:
+
+> one coherent journey with contextual support embedded at the point of need.
+
+## Help at the point of need
+
+Users rarely want to leave the form to look for help elsewhere.
+
+They want the form itself to explain:
+
+- what information is required
+- why it matters
+- what format is expected
+- how to avoid mistakes
+
+Good forms use:
+
+- hint text
+- inline examples
+- expandable guidance
+- contextual explanations
+- accessible formatting instructions
+
+### GOV.UK guidance model
+
+GOV.UK distinguishes between:
+
+- concise hint text for formatting or short clarification
+- detailed guidance for contextual explanation
+
+This minimises interruption while still supporting comprehension.
+
+## Make errors repairable
+
+Error messages should help users recover, not punish them.
+
+Good civic-form errors:
+
+- explain exactly what is wrong
+- explain exactly how to fix it
+- avoid technical language
+- avoid blame
+- preserve entered information
+
+### Example
+
+Bad:
+
+> Invalid date.
+
+Better:
+
+> Enter a date in the correct format, for example 27 03 2005.
+
+This distinction matters because many users already fear making mistakes in government systems.
+
+Good error handling reframes failure as a straightforward repair task.
+
+## Show that the heavy lifting worked
+
+Risk-heavy interactions need immediate confirmation.
+
+Examples include:
+
+- file uploads
+- identity verification
+- document submission
+- payment processing
+
+Users should receive confirmation immediately after these actions succeed, not only after final submission.
+
+This reduces:
+
+- uncertainty
+- abandonment near completion
+- repeated uploads
+- support requests
+
+### Example pattern
+
+After a document upload:
+
+> Success — your file has been uploaded.
+
+This simple confirmation substantially increases confidence.
+
+## Let users check before they commit
+
+A dedicated check-your-answers step is now a standard government-service pattern.
+
+Good implementations:
+
+- summarise all entered information clearly
+- provide visible change links
+- preserve navigation context
+- support self-correction before submission
+
+This step is particularly important when:
+
+- legal declarations are involved
+- financial outcomes are affected
+- mistakes are difficult to reverse
+- users feel anxious about submission
+
+The review stage functions both as:
+
+- an accuracy mechanism
+- a trust-building mechanism
+
+## Close the loop
+
+Confirmation pages should behave like receipts.
+
+Users should never finish a form wondering:
+
+- whether submission succeeded
+- what happens next
+- how long they must wait
+- whether they need to do anything else
+
+A good confirmation page includes:
+
+- clear success confirmation
+- reference number
+- expected timelines
+- next steps
+- downloadable or printable confirmation
+- email or SMS confirmation where appropriate
+
+### Why reference numbers matter
+
+Research repeatedly shows that users interpret reference numbers as:
+
+- proof of submission
+- legal evidence
+- a form of administrative security
+
+Even when technically unnecessary, they increase confidence.
+
+## Optimise for familiar tools
+
+Good forms work with browsers and assistive technologies instead of fighting them.
+
+This means:
+
+- semantic HTML
+- native input types
+- proper autocomplete attributes
+- accessible labels
+- predictable keyboard interaction
+- support for browser autofill
+
+### Benefits
+
+Users complete forms faster and more accurately when:
+
+- browsers can autofill addresses and names
+- password managers function correctly
+- assistive technologies understand field purpose
+- mobile keyboards adapt to input types
+
+Custom UI components that override native behaviour often reduce accessibility and increase friction.
+
+## Support language without penalty
+
+Multilingual support should be part of the core journey.
+
+Users should be able to switch language:
+
+- at any time
+- without losing progress
+- without restarting the form
+
+Bilingual users frequently switch languages to:
+
+- verify legal wording
+- cross-check technical terminology
+- increase confidence before submission
+
+Resetting progress during language changes creates anxiety and discourages comprehension.
+
+## Avoid hat switching
+
+Users should not need to think like administrators to complete a form.
+
+Avoid:
+
+- department codes
+- internal process terminology
+- database-oriented labels
+- institutional jargon
+- information users do not naturally have available
+
+The user's task is to complete a real-world activity.
+
+It is not their job to decode organisational structure.
+
+### The three-layer model
+
+The Effortmark "three-layer model" argues that many forms fail because organisations expose internal data structures directly to users.
+
+Good service design instead:
+
+- hides administrative complexity
+- translates institutional logic into human tasks
+- structures interaction around user goals
+
+## Avoid unnecessary accounts
+
+Account creation introduces friction.
+
+Accounts require users to:
+
+- create passwords
+- remember credentials
+- manage recovery processes
+- maintain long-term access
+
+For many one-off civic tasks, this overhead is unnecessary.
+
+GOV.UK guidance explicitly recommends avoiding accounts unless users genuinely need:
+
+- ongoing access
+- repeated interaction
+- persistent data management
+
+For many services, a better pattern is:
+
+- reference number
+- email confirmation
+- optional return link
+
+rather than mandatory registration.
+
+# Structural patterns in modern civic forms
+
+## Sequential question pages
+
+The GOV.UK Design System strongly recommends using question pages rather than long multi-field forms.
+
+This pattern:
+
+- improves comprehension
+- simplifies branching logic
+- supports clearer validation
+- reduces overwhelm
+- improves mobile usability
+
+It also maps naturally onto:
+
+- progress indicators
+- save-and-return systems
+- step-based workflows
+
+## Check-your-answers pages
+
+A check-your-answers page provides:
+
+- review
+- confirmation
+- correction
+- reassurance
+
+Key features:
+
+- grouped summaries
+- accessible layout
+- explicit change actions
+- readable formatting
+
+This pattern is now foundational in GOV.UK services.
+
+## Conditional branching
+
+Modern civic forms increasingly use progressive disclosure and branching logic.
+
+Users should only see questions relevant to them.
+
+Benefits include:
+
+- shorter journeys
+- reduced cognitive burden
+- reduced confusion
+- fewer irrelevant questions
+
+However, branching logic should remain:
+
+- transparent
+- predictable
+- reversible
+
+Hidden logic that suddenly changes the journey without explanation can undermine trust.
+
+## Progressive disclosure
+
+Complexity should be revealed gradually.
+
+Rather than overwhelming users upfront, interfaces should:
+
+- introduce complexity step by step
+- defer advanced information until needed
+- keep primary tasks visually dominant
+
+This principle appears repeatedly across:
+
+- GOV.UK
+- USWDS
+- VA design guidance
+- Healthcare.gov research
+
+# Accessibility considerations
+
+## Cognitive accessibility
+
+Many modern form-design practices are fundamentally cognitive-accessibility practices.
+
+Examples include:
+
+- one question per page
+- preserving effort
+- reducing repeated entry
+- clear error recovery
+- save-and-return
+- predictable navigation
+
+These patterns benefit everyone but are particularly important for users with:
+
+- ADHD
+- dyslexia
+- autism
+- memory impairments
+- anxiety disorders
+- limited literacy
+
+## WCAG 2.2 and forms
+
+WCAG 2.2 introduced several criteria directly relevant to forms.
+
+Notable examples include:
+
+- Redundant Entry
+- Accessible Authentication
+- Focus Appearance
+- Dragging Movements
+
+These standards reinforce the broader principle that forms should reduce unnecessary effort and cognitive burden.
+
+## Mobile-first realities
+
+Many users complete civic forms primarily on mobile devices.
+
+This changes design priorities:
+
+- shorter screens are easier to process
+- native keyboards matter
+- autofill becomes critical
+- long pages become exhausting
+- interruption handling becomes more important
+
+The one-question-per-page model is particularly effective on mobile.
+
+# Institutional trust and form design
+
+Forms are often the primary interface between institutions and citizens.
+
+Users interpret form behaviour as evidence of:
+
+- competence
+- legitimacy
+- fairness
+- transparency
+- respect
+
+Small design failures can therefore have disproportionate effects.
+
+Examples:
+
+- losing progress suggests unreliability
+- vague errors suggest hostility
+- repeated questions suggest bureaucracy
+- hidden requirements suggest unfairness
+
+Good form design is therefore not merely a UX concern.
+
+It is part of democratic infrastructure.
+
+# Key references and systems
+
+## GOV.UK Design System
+
+The GOV.UK Design System is one of the most influential public-sector design systems globally.
+
+Particularly relevant resources include:
+
+- Form structure guidance
+- Question pages pattern
+- Check answers pattern
+- Error message guidance
+- Save-and-return patterns
+
+It strongly reinforces:
+
+- one question per page
+- minimising cognitive load
+- preserving user confidence
+- reducing administrative burden
+
+### References
+
+- [https://www.gov.uk/service-manual/design/form-structure](https://www.gov.uk/service-manual/design/form-structure)
+- [https://design-system.service.gov.uk/patterns/question-pages](https://design-system.service.gov.uk/patterns/question-pages)
+- [https://github.com/alphagov/govuk-design-system](https://github.com/alphagov/govuk-design-system)
+- [https://github.com/govuk-forms/forms](https://github.com/govuk-forms/forms)
+
+## US Web Design System (USWDS)
+
+The USWDS provides a comparable framework for US federal services.
+
+It emphasises:
+
+- accessibility
+- consistency
+- semantic structure
+- mobile-first design
+- usability across agencies
+
+### Reference
+
+- [https://designsystem.digital.gov/](https://designsystem.digital.gov/)
+
+## VA Design System
+
+The US Department of Veterans Affairs design system includes extensive guidance for long, high-stakes forms.
+
+It focuses heavily on:
+
+- accessibility
+- trust
+- task continuity
+- error reduction
+- complex workflows
+
+### Reference
+
+- [https://design.va.gov/templates/forms/](https://design.va.gov/templates/forms/)
+
+## Healthcare.gov research
+
+Research from the Healthcare.gov redesign provides particularly valuable insight into:
+
+- complex eligibility flows
+- progressive disclosure
+- branching logic
+- simplifying administrative complexity
+
+### Reference
+
+- [https://blog.navapbc.com/structuring-a-complex-eligibility-form-for-healthcare-gov-37d79a5ad6](https://blog.navapbc.com/structuring-a-complex-eligibility-form-for-healthcare-gov-37d79a5ad6)
+
+## The Question Protocol
+
+Caroline Jarrett's "Question Protocol" remains highly influential in form design.
+
+The core idea is simple:
+
+> Every question must justify its existence.
+
+Questions should exist only when:
+
+- the answer is genuinely needed
+- the organisation will actually use the answer
+- the question benefits the service outcome
+
+### Reference
+
+- [https://www.uxmatters.com/mt/archives/2010/06/the-question-protocol-how-to-make-sure-every-form-field-is-necessary.php](https://www.uxmatters.com/mt/archives/2010/06/the-question-protocol-how-to-make-sure-every-form-field-is-necessary.php)
+
+## Web Form Design
+
+Luke Wroblewski's _Web Form Design_ helped establish many contemporary interaction patterns for forms.
+
+Important themes include:
+
+- reducing friction
+- simplifying interaction
+- minimising fields
+- improving completion rates
+- aligning layout with human attention
+
+### Reference
+
+- [http://rosenfeldmedia.com/books/web-form-design/](http://rosenfeldmedia.com/books/web-form-design/)
+
+## The three-layer model
+
+The three-layer model argues that interfaces should separate:
+
+1. user goals
+2. service logic
+3. internal administrative structure
+
+Many poor forms expose internal systems directly to users.
+
+Better services translate institutional complexity into understandable tasks.
+
+### Reference
+
+- [http://www.effortmark.co.uk/three-layer-model/](http://www.effortmark.co.uk/three-layer-model/)
+
+# Synthesis
+
+Across government services, accessibility standards, and form-design research, the direction is remarkably consistent.
+
+Good forms:
+
+- ask less
+- reduce cognitive burden
+- preserve effort
+- minimise bureaucracy
+- support recovery
+- keep users oriented
+- reduce uncertainty
+- respect users' time and concentration
+
+The strongest modern pattern is not the traditional "form" at all.
+
+It is:
+
+- a guided sequence
+- focused on one task at a time
+- adaptive to user context
+- resilient to interruption
+- accessible by default
+- structured around confidence and completion
+
+In civic systems, this matters because forms are not merely interfaces.
+
+They are mechanisms through which people access rights, services, healthcare, representation, and institutional recognition.
+
+Poor forms create exclusion.
+
+Good forms reduce it.
