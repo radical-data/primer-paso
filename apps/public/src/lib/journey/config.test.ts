@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import type { JourneyAnswers } from '$lib/journey/types'
 
-import { journeySteps, resolveStepTarget } from './config'
+import { getJourneyStep, journeySteps, resolveStepTarget } from './config'
 import { fieldAdapters } from './field-adapters'
 
 const scenarios: JourneyAnswers[] = [
@@ -57,5 +57,94 @@ describe('journey config', () => {
 				expect(step.redirectIfGuardFails).toBeDefined()
 			}
 		}
+	})
+
+	it('uses applicant-facing vulnerability labels in the screener', () => {
+		const step = getJourneyStep('vulnerability-situation')
+		expect(step?.options).toContainEqual({
+			value: 'insufficient_income',
+			labelKey: 'vulnerability.applicant.insufficient_income'
+		})
+	})
+})
+
+describe('journey route order', () => {
+	const expectStepTarget = (slug: string, answers: JourneyAnswers, expectedTarget: string) => {
+		const step = getJourneyStep(slug)
+
+		expect(step).toBeDefined()
+		if (!step) return
+
+		expect(resolveStepTarget(step.next, answers)).toBe(expectedTarget)
+	}
+
+	it('asks asylum history after presence before cut-off', () => {
+		expectStepTarget('presence-before-cutoff', {}, '/asylum-history')
+	})
+
+	it('sends non-asylum users to five-month stay', () => {
+		expectStepTarget('asylum-history', { asylumHistory: 'no' }, '/five-month-stay')
+	})
+
+	it('sends pre-cutoff asylum users to identity documents', () => {
+		expectStepTarget(
+			'asylum-before-cutoff',
+			{ asylumHistory: 'yes', asylumBeforeCutoff: 'yes' },
+			'/identity-documents'
+		)
+	})
+
+	it('sends other users from five-month stay to family situation', () => {
+		expectStepTarget('five-month-stay', {}, '/family-situation')
+	})
+
+	it('asks vulnerability after work', () => {
+		expectStepTarget('work-situation', {}, '/vulnerability-situation')
+	})
+
+	it('asks province when the vulnerability route is recommended', () => {
+		expectStepTarget(
+			'specialist-flags',
+			{
+				presentBeforeCutoff: 'yes',
+				asylumHistory: 'no',
+				fiveMonthStay: 'yes',
+				familySituation: ['none'],
+				workSituation: ['none'],
+				vulnerabilitySituation: ['insufficient_income']
+			},
+			'/province'
+		)
+	})
+
+	it('skips province when specialist review is recommended and no vulnerability route', () => {
+		expectStepTarget(
+			'specialist-flags',
+			{
+				presentBeforeCutoff: 'yes',
+				asylumHistory: 'no',
+				fiveMonthStay: 'yes',
+				familySituation: ['none'],
+				workSituation: ['none'],
+				vulnerabilitySituation: ['none']
+			},
+			'/check-answers'
+		)
+	})
+
+	it('asks province when registered entity online submission path applies', () => {
+		expectStepTarget(
+			'specialist-flags',
+			{
+				presentBeforeCutoff: 'yes',
+				asylumHistory: 'no',
+				fiveMonthStay: 'yes',
+				familySituation: ['child_under_18'],
+				workSituation: ['none'],
+				vulnerabilitySituation: ['none'],
+				specialistFlags: ['none']
+			},
+			'/province'
+		)
 	})
 })

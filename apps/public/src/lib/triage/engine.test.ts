@@ -3,98 +3,149 @@ import { describe, expect, it } from 'vitest'
 import { runTriage } from './engine'
 
 describe('runTriage', () => {
-	it('routes out when the person was not living in Spain before the cutoff', () => {
+	it('recommends the international protection route', () => {
+		const result = runTriage({
+			presentBeforeCutoff: 'yes',
+			asylumHistory: 'yes',
+			asylumBeforeCutoff: 'yes'
+		})
+
+		expect(result.resultState).toBe('eligible')
+		expect(result.recommendedEligibilityRoute).toBe('international_protection')
+		expect(result.possibleEligibilityRoutes).toEqual(['international_protection'])
+	})
+
+	it('recommends family before work and vulnerability', () => {
+		const result = runTriage({
+			presentBeforeCutoff: 'yes',
+			asylumHistory: 'no',
+			fiveMonthStay: 'yes',
+			familySituation: ['child_under_18'],
+			workSituation: ['job_offer'],
+			vulnerabilitySituation: ['homelessness_or_precarious_housing']
+		})
+
+		expect(result.resultState).toBe('eligible')
+		expect(result.recommendedEligibilityRoute).toBe('family_unit')
+		expect(result.possibleEligibilityRoutes).toEqual([
+			'family_unit',
+			'work_or_intention',
+			'vulnerability'
+		])
+	})
+
+	it('recommends work when family is not selected', () => {
+		const result = runTriage({
+			presentBeforeCutoff: 'yes',
+			asylumHistory: 'no',
+			fiveMonthStay: 'yes',
+			familySituation: ['none'],
+			workSituation: ['want_to_work_for_myself'],
+			vulnerabilitySituation: ['none']
+		})
+
+		expect(result.resultState).toBe('eligible')
+		expect(result.recommendedEligibilityRoute).toBe('work_or_intention')
+		expect(result.possibleEligibilityRoutes).toEqual(['work_or_intention'])
+	})
+
+	it('recommends vulnerability when it is the only positive route', () => {
+		const result = runTriage({
+			presentBeforeCutoff: 'yes',
+			asylumHistory: 'no',
+			fiveMonthStay: 'yes',
+			familySituation: ['none'],
+			workSituation: ['none'],
+			vulnerabilitySituation: ['insufficient_income']
+		})
+
+		expect(result.resultState).toBe('eligible')
+		expect(result.recommendedEligibilityRoute).toBe('vulnerability')
+		expect(result.possibleEligibilityRoutes).toEqual(['vulnerability'])
+	})
+
+	it('returns needs_specialist_review when the person left Spain during the five-month period', () => {
+		const result = runTriage({
+			presentBeforeCutoff: 'yes',
+			asylumHistory: 'no',
+			fiveMonthStay: 'left_spain'
+		})
+
+		expect(result.resultState).toBe('needs_specialist_review')
+		expect(result.recommendedEligibilityRoute).toBe('needs_specialist_review')
+		expect(result.reasonKey).toBe('result.reason.five_month_stay_not_met')
+	})
+
+	it('returns not_this_process when the cut-off presence condition fails', () => {
 		const result = runTriage({
 			presentBeforeCutoff: 'no'
 		})
 
-		expect(result.resultState).toBe('another_route_may_fit_better')
+		expect(result.resultState).toBe('not_this_process')
+		expect(result.recommendedEligibilityRoute).toBe('not_this_process')
 	})
 
-	it('returns not enough information when the core timeline is uncertain', () => {
-		const result = runTriage({
-			presentBeforeCutoff: 'not_sure',
-			asylumBeforeCutoff: 'not_sure',
-			fiveMonthStay: 'not_sure'
-		})
-
-		expect(result.resultState).toBe('not_enough_information_yet')
-		expect(result.flags).toContain('result.flag.uncertain_timeline')
-	})
-
-	it('returns specialist review when the person left Spain during the 5-month period', () => {
+	it('returns specialist review when no positive route is selected', () => {
 		const result = runTriage({
 			presentBeforeCutoff: 'yes',
-			asylumBeforeCutoff: 'no',
-			fiveMonthStay: 'left_spain',
-			identityDocuments: ['current_passport'],
-			evidenceBeforeCutoff: ['padron_or_registration'],
-			evidenceRecentMonths: ['housing_papers']
-		})
-		expect(result.resultState).toBe('needs_specialist_review')
-		expect(result.flags).toContain('result.flag.five_month_requirement_risk')
-		expect(result.flags).toContain('result.flag.continuity_concern')
-	})
-	it('returns specialist review for criminal record concern', () => {
-		const result = runTriage({
-			presentBeforeCutoff: 'yes',
-			asylumBeforeCutoff: 'no',
+			asylumHistory: 'no',
 			fiveMonthStay: 'yes',
+			familySituation: ['none'],
+			workSituation: ['none'],
+			vulnerabilitySituation: ['none']
+		})
+
+		expect(result.resultState).toBe('needs_specialist_review')
+		expect(result.recommendedEligibilityRoute).toBe('needs_specialist_review')
+		expect(result.possibleEligibilityRoutes).toEqual([])
+	})
+
+	it('does not treat asylumBeforeCutoff uncertainty as relevant for non-asylum users', () => {
+		const result = runTriage({
+			presentBeforeCutoff: 'yes',
+			asylumHistory: 'no',
+			asylumBeforeCutoff: 'not_sure',
+			fiveMonthStay: 'yes',
+			familySituation: ['child_under_18'],
+			workSituation: ['none'],
+			vulnerabilitySituation: ['none']
+		})
+
+		expect(result.resultState).toBe('eligible')
+		expect(result.recommendedEligibilityRoute).toBe('family_unit')
+		expect(result.possibleEligibilityRoutes).toEqual(['family_unit'])
+	})
+
+	it('does not show a specialist-flag reason when a clear route is still recommended', () => {
+		const result = runTriage({
+			presentBeforeCutoff: 'yes',
+			asylumHistory: 'no',
+			fiveMonthStay: 'yes',
+			familySituation: ['child_under_18'],
+			workSituation: ['none'],
+			vulnerabilitySituation: ['none'],
+			specialistFlags: ['want_specialist']
+		})
+
+		expect(result.resultState).toBe('eligible')
+		expect(result.recommendedEligibilityRoute).toBe('family_unit')
+		expect(result.recommendedSubmissionPath).toBe('specialist_review_first')
+		expect(result.reasonKey).toBeUndefined()
+	})
+
+	it('shows a specialist-flag reason when specialist review is the recommended route', () => {
+		const result = runTriage({
+			presentBeforeCutoff: 'yes',
+			asylumHistory: 'no',
+			fiveMonthStay: 'yes',
+			familySituation: ['none'],
+			workSituation: ['none'],
+			vulnerabilitySituation: ['none'],
 			specialistFlags: ['criminal_record_worry']
 		})
 
 		expect(result.resultState).toBe('needs_specialist_review')
-	})
-
-	it('adds a family-support flag when extra dependant support is needed', () => {
-		const result = runTriage({
-			presentBeforeCutoff: 'yes',
-			asylumBeforeCutoff: 'no',
-			fiveMonthStay: 'yes',
-			identityDocuments: ['current_passport'],
-			evidenceBeforeCutoff: ['padron_or_registration'],
-			evidenceRecentMonths: ['housing_papers'],
-			supportNeeds: ['child_or_dependant_support']
-		})
-
-		expect(result.resultState).toBe('likely_in_scope')
-		expect(result.flags).toContain('result.flag.family_support_needs')
-	})
-
-	it('returns specialist review for safeguarding and urgent-support flags', () => {
-		const result = runTriage({
-			presentBeforeCutoff: 'yes',
-			asylumBeforeCutoff: 'no',
-			fiveMonthStay: 'yes',
-			specialistFlags: ['unsafe_sharing_digitally']
-		})
-
-		expect(result.resultState).toBe('needs_specialist_review')
-	})
-
-	it('returns evidence weak when timing fits but papers are thin', () => {
-		const result = runTriage({
-			presentBeforeCutoff: 'yes',
-			asylumBeforeCutoff: 'no',
-			fiveMonthStay: 'yes',
-			identityDocuments: ['current_passport'],
-			evidenceBeforeCutoff: ['organisation_or_church_letter'],
-			evidenceRecentMonths: ['travel_or_dated_receipts']
-		})
-
-		expect(result.resultState).toBe('possible_but_needs_more_evidence')
-	})
-
-	it('returns likely in scope when the person was in Spain before the cutoff and has strong evidence', () => {
-		const result = runTriage({
-			presentBeforeCutoff: 'yes',
-			asylumBeforeCutoff: 'no',
-			fiveMonthStay: 'yes',
-			identityDocuments: ['current_passport'],
-			evidenceBeforeCutoff: ['padron_or_registration', 'work_papers'],
-			evidenceRecentMonths: ['housing_papers', 'bank_or_money_transfer']
-		})
-
-		expect(result.resultState).toBe('likely_in_scope')
+		expect(result.recommendedEligibilityRoute).toBe('needs_specialist_review')
+		expect(result.reasonKey).toBe('result.reason.specialist_flags')
 	})
 })

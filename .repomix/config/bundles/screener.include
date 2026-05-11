@@ -1,0 +1,15 @@
+apps/public/src/lib/journey/**
+apps/public/src/lib/triage/**
+apps/public/src/lib/server/journey.ts
+apps/public/src/lib/server/handover.ts
+apps/public/src/lib/content/**
+apps/public/src/lib/i18n/routing.ts
+apps/public/src/lib/generated/provinces.ts
+apps/public/src/lib/result-ui.ts
+apps/public/src/lib/components/questions/**
+apps/public/src/lib/components/forms/**
+apps/public/src/params/lang.ts
+apps/public/src/routes/[lang=lang]/screener/**
+apps/public/src/routes/[lang=lang]/[step]/**
+apps/public/src/routes/[lang=lang]/check-answers/**
+apps/public/src/routes/[lang=lang]/result/**

@@ -41,11 +41,11 @@ export const vulnerabilityReasonLabel = (reason: VulnerabilityReason | string) =
 		insufficient_income: 'Ingresos insuficientes',
 		poverty_or_economic_exclusion_risk: 'Riesgo de pobreza o exclusión económica',
 		difficulty_accessing_employment: 'Dificultad para acceder al empleo',
-		dependants: 'Personas a cargo',
-		vulnerable_family_unit: 'Unidad familiar vulnerable',
-		single_parent_precarity: 'Precariedad en familia monomarental o monoparental',
+		dependants: 'Hijos u otras personas a cargo',
+		vulnerable_family_unit: 'Unidad familiar en situación de vulnerabilidad',
+		single_parent_precarity: 'Familia monoparental en circunstancias precarias',
 		psychosocial_risks: 'Riesgos psicosociales',
-		exploitation_or_abuse: 'Explotación o abuso'
+		exploitation_or_abuse: 'Exposición a explotación o abuso'
 	})[reason] ?? reason
 
 export const auditEventLabel = (eventType: string) =>

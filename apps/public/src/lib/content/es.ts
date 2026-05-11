@@ -140,6 +140,8 @@ export const es = {
 	'pages.handover.flags_title': 'Puntos que pueden necesitar atención',
 	'pages.result.eyebrow': 'Resultado',
 	'pages.result.eligibility_title': 'Tu resultado',
+	'pages.result.recommended_route_title': 'Vía recomendada',
+	'pages.result.other_possible_routes_title': 'Otras vías que también podrían aplicar',
 	'pages.result.next_step_title': 'Tu siguiente paso',
 	'pages.result.why_title': 'Por qué pensamos esto',
 	'pages.result.continue_title': 'Cómo continuar',
@@ -237,6 +239,36 @@ export const es = {
 		'Vivo con mi hijo o hija adulto/a que necesita mucho apoyo por discapacidad o problemas de salud',
 	'steps.family_situation.options.mother_or_father': 'Vivo con mi madre o mi padre',
 	'steps.family_situation.options.none': 'Ninguna de estas',
+	'steps.vulnerability_situation.title':
+		'¿Alguna de estas situaciones hace que tu caso sea especialmente difícil?',
+	'steps.vulnerability_situation.hint':
+		'Marca las que te parezcan relevantes. Esto solo ayuda a decidir si conviene revisar la vía de vulnerabilidad con una entidad o con servicios sociales.',
+	'steps.vulnerability_situation.error':
+		'Selecciona las situaciones que apliquen o elige «Ninguna de estas».',
+	'steps.vulnerability_situation.check_answers_label':
+		'Situaciones que podrían requerir revisión por la vía de vulnerabilidad',
+	'steps.vulnerability_situation.options.none': 'Ninguna de estas',
+	'vulnerability.applicant.social_isolation_or_lack_of_support_network':
+		'No tengo personas o servicios en los que pueda apoyarme',
+	'vulnerability.applicant.homelessness_or_precarious_housing':
+		'No tengo una vivienda estable o segura',
+	'vulnerability.applicant.discrimination_or_social_exclusion':
+		'Siento que sufro exclusión, discriminación o trato injusto',
+	'vulnerability.applicant.insufficient_income':
+		'No tengo ingresos suficientes para cubrir mis necesidades básicas',
+	'vulnerability.applicant.poverty_or_economic_exclusion_risk':
+		'Estoy en riesgo de pobreza o de una dificultad económica grave',
+	'vulnerability.applicant.difficulty_accessing_employment':
+		'Me está costando mucho conseguir o mantener un trabajo',
+	'vulnerability.applicant.dependants': 'Tengo hijos, hijas u otras personas a mi cargo',
+	'vulnerability.applicant.vulnerable_family_unit':
+		'La situación de mi familia o unidad de convivencia es especialmente difícil',
+	'vulnerability.applicant.single_parent_precarity':
+		'Crío hijos o hijas sin pareja y en circunstancias difíciles',
+	'vulnerability.applicant.psychosocial_risks':
+		'El estrés, el trauma, la salud mental o los problemas sociales están empeorando mi situación',
+	'vulnerability.applicant.exploitation_or_abuse':
+		'He vivido explotación, abuso, amenazas o presión',
 	'steps.identity_documents.title': '¿Qué documentos de identidad tienes?',
 	'steps.identity_documents.check_answers_label': 'Documentos de identidad',
 	'steps.identity_documents.error': 'Elige al menos una opción.',
@@ -255,7 +287,8 @@ export const es = {
 	'steps.evidence_before_cutoff.error': 'Elige al menos una opción.',
 	'steps.evidence_before_cutoff.options.padron_or_registration': 'Empadronamiento o registro',
 	'steps.evidence_before_cutoff.options.housing_papers': 'Documentos de vivienda',
-	'steps.evidence_before_cutoff.options.health_or_pharmacy': 'Documentos de salud o farmacia',
+	'steps.evidence_before_cutoff.options.health_or_pharmacy':
+		'Documentos de salud, citas médicas o recetas de farmacia',
 	'steps.evidence_before_cutoff.options.school_or_childcare':
 		'Documentos escolares o de cuidado infantil',
 	'steps.evidence_before_cutoff.options.work_papers': 'Documentos de trabajo',
@@ -267,17 +300,20 @@ export const es = {
 	'steps.evidence_before_cutoff.options.none_yet': 'Todavía no tengo ninguno de estos',
 	'steps.evidence_recent_months.title':
 		'¿Tienes algún documento de los últimos 5 meses que pueda ayudar a mostrar que has estado viviendo aquí recientemente?',
+	'steps.evidence_recent_months.hint':
+		'Recuerda que puedes presentar cualquier documento, papel o ticket que tenga tu nombre y la fecha',
 	'steps.evidence_recent_months.check_answers_label': 'Documentos de los últimos 5 meses',
 	'steps.evidence_recent_months.error': 'Elige al menos una opción.',
 	'steps.evidence_recent_months.options.housing_papers': 'Documentos de vivienda',
-	'steps.evidence_recent_months.options.health_or_pharmacy': 'Documentos de salud o farmacia',
+	'steps.evidence_recent_months.options.health_or_pharmacy':
+		'Documentos de salud, citas médicas o recetas de farmacia',
 	'steps.evidence_recent_months.options.school_or_childcare':
 		'Documentos escolares o de cuidado infantil',
 	'steps.evidence_recent_months.options.work_papers': 'Documentos de trabajo',
 	'steps.evidence_recent_months.options.organisation_or_church_letter':
 		'Cartas de una organización, iglesia o trabajador/a social',
 	'steps.evidence_recent_months.options.bank_or_money_transfer':
-		'Registros bancarios o de transferencias de dinero',
+		'Registros bancarios o justificantes de envío de dinero',
 	'steps.evidence_recent_months.options.travel_or_dated_receipts': 'Viajes o recibos con fecha',
 	'steps.evidence_recent_months.options.something_else_dated_named':
 		'Otro documento con fecha y mi nombre',
@@ -381,11 +417,36 @@ export const es = {
 		'Cualquier documento de identidad que falte o datos que no coincidan.',
 	'result.checklist.item.asylum_history_to_explain':
 		'Qué ocurrió en cualquier proceso de asilo o protección en España.',
-	'result.title.likely_in_scope': 'Probablemente dentro del alcance',
-	'result.title.possible_but_needs_more_evidence':
-		'Esta vía podría encajar, pero quizá necesites más documentos primero',
-	'result.title.needs_specialist_review': 'Necesita revisión especializada',
-	'result.title.another_route_may_fit_better': 'Probablemente esta no sea la vía adecuada para ti',
-	'result.title.not_enough_information_yet':
-		'Necesitamos un poco más de información antes de sugerir un siguiente paso'
+	'result.title.needs_specialist_review': 'Se recomienda revisión especializada',
+	'result.title.eligible': 'Vía recomendada encontrada',
+	'result.title.not_this_process': 'Este proceso puede no encajar',
+	'result.eligibility_route.international_protection':
+		'Vía de protección internacional / solicitante de asilo',
+	'result.eligibility_route.family_unit': 'Vía de unidad familiar',
+	'result.eligibility_route.work_or_intention': 'Vía de trabajo o intención de trabajar',
+	'result.eligibility_route.vulnerability': 'Vía de vulnerabilidad',
+	'result.explanation.international_protection':
+		'Según tus respuestas, la vía de protección internacional / solicitante de asilo parece la más clara para revisar primero.',
+	'result.explanation.family_unit':
+		'Según tus respuestas, la vía de unidad familiar parece la más clara para revisar primero.',
+	'result.explanation.work_or_intention':
+		'Según tus respuestas, la vía de trabajo o intención de trabajar parece la más clara para revisar primero.',
+	'result.explanation.vulnerability':
+		'Según tus respuestas, puede convenir revisar la vía de vulnerabilidad con una entidad o con servicios sociales. Esta vía suele requerir un certificado de vulnerabilidad firmado o sellado por un organismo habilitado.',
+	'result.explanation.needs_specialist_review':
+		'Tus respuestas no encajan claramente en una sola vía. Una organización especializada debería revisar el caso antes de presentar la solicitud.',
+	'result.explanation.not_this_process':
+		'Según tus respuestas, este proceso de regularización puede no ser el proceso adecuado.',
+	'result.reason.not_present_before_cutoff':
+		'Respondiste que no estabas en España antes de la fecha límite.',
+	'result.reason.five_month_stay_not_met':
+		'Respondiste que saliste de España durante los cinco meses anteriores a la solicitud.',
+	'result.reason.specialist_flags':
+		'Seleccionaste un asunto que debería revisar un especialista antes de presentar la solicitud.',
+	'result.reason.no_clear_route':
+		'Las respuestas aún no muestran una vía clara familiar, laboral, de vulnerabilidad o de protección internacional.',
+	'result.submission_path.registered_entity_online':
+		'El mejor siguiente paso es contactar, si es posible, con una entidad colaboradora registrada. Puede ayudarte a preparar y presentar la solicitud por vía electrónica.',
+	'result.submission_path.specialist_review_first':
+		'El mejor siguiente paso es obtener asesoramiento especializado antes de intentar presentar la solicitud.'
 } satisfies Partial<Record<MessageKey, string>>

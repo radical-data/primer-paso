@@ -492,21 +492,14 @@
 		@apply grid gap-5;
 	}
 
-	.result-pill[data-state="likely_in_scope"] {
+	.result-pill[data-state="eligible"] {
 		background: var(--color-result-likely-soft);
 		color: var(--color-result-likely-foreground);
 		border-color: color-mix(in oklab, var(--color-result-likely) 30%, transparent);
 	}
 
-	.result-pill[data-state="possible_but_needs_more_evidence"],
-	.result-pill[data-state="not_enough_information_yet"] {
-		background: var(--color-result-possible-soft);
-		color: var(--color-result-possible-foreground);
-		border-color: color-mix(in oklab, var(--color-result-possible) 30%, transparent);
-	}
-
 	.result-pill[data-state="needs_specialist_review"],
-	.result-pill[data-state="another_route_may_fit_better"] {
+	.result-pill[data-state="not_this_process"] {
 		background: var(--color-result-review-soft);
 		color: var(--color-result-review-foreground);
 		border-color: color-mix(in oklab, var(--color-result-review) 30%, transparent);

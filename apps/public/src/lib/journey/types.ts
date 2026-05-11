@@ -1,3 +1,4 @@
+import { VULNERABILITY_REASON_VALUES, type VulnerabilityReason } from '@primer-paso/certificate'
 import type { ProvinceValue } from '$lib/generated/provinces'
 import type { PublicCertificateDraftState } from '$lib/server/certificate'
 
@@ -29,6 +30,15 @@ export const FAMILY_SITUATION_VALUES = [
 	'not_sure'
 ] as const
 export type FamilySituationValue = (typeof FAMILY_SITUATION_VALUES)[number]
+
+export const VULNERABILITY_SITUATION_VALUES = [
+	...VULNERABILITY_REASON_VALUES,
+	'none',
+	'not_sure'
+] as const
+
+export type VulnerabilitySituationValue = (typeof VULNERABILITY_SITUATION_VALUES)[number]
+export type PositiveVulnerabilitySituationValue = VulnerabilityReason
 
 export const IDENTITY_DOCUMENT_VALUES = [
 	'current_passport',
@@ -105,6 +115,7 @@ export interface JourneyAnswers {
 	asylumCaseDocuments?: YesNoNotSureValue
 	workSituation?: WorkSituationValue[]
 	familySituation?: FamilySituationValue[]
+	vulnerabilitySituation?: VulnerabilitySituationValue[]
 	identityDocuments?: IdentityDocumentValue[]
 	evidenceBeforeCutoff?: EvidenceBeforeCutoffValue[]
 	evidenceRecentMonths?: EvidenceRecentValue[]

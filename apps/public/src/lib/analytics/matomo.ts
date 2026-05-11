@@ -1,5 +1,5 @@
 import { env } from '$env/dynamic/public'
-import type { RecommendedRoute, ResultState } from '$lib/triage/types'
+import type { ResultState, SubmissionPath } from '$lib/triage/types'
 
 declare global {
 	interface Window {
@@ -30,7 +30,7 @@ interface DimensionIds {
 	routeGroup: number | null
 	stepSlug: number | null
 	resultState: number | null
-	recommendedRoute: number | null
+	recommendedSubmissionPath: number | null
 }
 
 export interface PageViewDimensions {
@@ -40,7 +40,7 @@ export interface PageViewDimensions {
 
 	stepSlug?: string
 	resultState?: ResultState
-	recommendedRoute?: RecommendedRoute
+	recommendedSubmissionPath?: SubmissionPath
 	title: string
 	url: string
 }
@@ -56,7 +56,8 @@ const dimensionIds: DimensionIds = {
 	routeGroup: parseDimensionId(env.PUBLIC_MATOMO_DIMENSION_ROUTE_GROUP),
 	stepSlug: parseDimensionId(env.PUBLIC_MATOMO_DIMENSION_STEP_SLUG),
 	resultState: parseDimensionId(env.PUBLIC_MATOMO_DIMENSION_RESULT_STATE),
-	recommendedRoute: parseDimensionId(env.PUBLIC_MATOMO_DIMENSION_RECOMMENDED_ROUTE)
+	// Reuses the existing Matomo dimension slot previously named "recommended route".
+	recommendedSubmissionPath: parseDimensionId(env.PUBLIC_MATOMO_DIMENSION_RECOMMENDED_ROUTE)
 }
 
 const matomoUrl = (env.PUBLIC_MATOMO_URL ?? '').trim().replace(/\/+$/, '')
@@ -226,14 +227,14 @@ export const trackPageView = (dimensions: PageViewDimensions) => {
 	deleteDimension(dimensionIds.routeGroup)
 	deleteDimension(dimensionIds.stepSlug)
 	deleteDimension(dimensionIds.resultState)
-	deleteDimension(dimensionIds.recommendedRoute)
+	deleteDimension(dimensionIds.recommendedSubmissionPath)
 
 	setDimension(dimensionIds.locale, dimensions.locale)
 	setDimension(dimensionIds.environment, dimensions.environment)
 	setDimension(dimensionIds.routeGroup, dimensions.routeGroup)
 	setDimension(dimensionIds.stepSlug, dimensions.stepSlug)
 	setDimension(dimensionIds.resultState, dimensions.resultState)
-	setDimension(dimensionIds.recommendedRoute, dimensions.recommendedRoute)
+	setDimension(dimensionIds.recommendedSubmissionPath, dimensions.recommendedSubmissionPath)
 
 	push(['setCustomUrl', dimensions.url], ['setDocumentTitle', dimensions.title], ['trackPageView'])
 

@@ -3,7 +3,19 @@ import { journeySteps } from '$lib/journey/config'
 import { fieldAdapters } from '$lib/journey/field-adapters'
 import type { JourneyState } from '$lib/journey/types'
 import { runTriage } from '$lib/triage/engine'
-import type { RecommendedRoute, ResultState } from '$lib/triage/types'
+import type {
+	EligibilityRoute,
+	PositiveEligibilityRoute,
+	ResultState,
+	SubmissionPath
+} from '$lib/triage/types'
+
+type TranslatedChecklist = {
+	alreadyHave: string[]
+	stillNeed: string[]
+	discussWithSupport: string[]
+	unresolved: string[]
+}
 
 export const OFFICIAL_PORTAL_URL = 'https://inclusion.gob.es/regularizacion'
 export const COLLABORATORS_PDF_URL =
@@ -17,24 +29,18 @@ export interface HandoverPacket {
 	resultState: ResultState
 	resultTitle: string
 	eligibility: string
-	recommendedRoute: RecommendedRoute
+	recommendedEligibilityRoute: EligibilityRoute
+	possibleEligibilityRoutes: PositiveEligibilityRoute[]
+	recommendedSubmissionPath: SubmissionPath
 	routeBody: string
+	checklist: TranslatedChecklist
 	officialPortalUrl: string
 	collaboratorsPdfUrl: string
-	flags: string[]
-	checklist: {
-		alreadyHave: string[]
-		stillNeed: string[]
-		discussWithSupport: string[]
-		unresolved: string[]
-	}
 	answers: Array<{ label: string; value: string }>
 }
 
-const getRouteBodyKey = (recommendedRoute: RecommendedRoute): MessageKey =>
-	recommendedRoute === 'official_portal'
-		? 'pages.result.route.official_portal_body'
-		: 'pages.result.route.collaborating_organisation_body'
+const getRouteBodyKey = (submissionPath: SubmissionPath): MessageKey =>
+	`result.submission_path.${submissionPath}` as MessageKey
 
 export const buildHandoverPacket = (state: JourneyState, locale: Locale): HandoverPacket => {
 	const tt = getTranslator(locale)
@@ -60,17 +66,18 @@ export const buildHandoverPacket = (state: JourneyState, locale: Locale): Handov
 		resultState: result.resultState,
 		resultTitle: tt(`result.title.${result.resultState}` as MessageKey),
 		eligibility: tt(result.explanationKey),
-		recommendedRoute: result.recommendedRoute,
-		routeBody: tt(getRouteBodyKey(result.recommendedRoute)),
-		officialPortalUrl: OFFICIAL_PORTAL_URL,
-		collaboratorsPdfUrl: COLLABORATORS_PDF_URL,
-		flags: result.flags.map((flag) => tt(flag)),
+		recommendedEligibilityRoute: result.recommendedEligibilityRoute,
+		possibleEligibilityRoutes: result.possibleEligibilityRoutes,
+		recommendedSubmissionPath: result.recommendedSubmissionPath,
+		routeBody: tt(getRouteBodyKey(result.recommendedSubmissionPath)),
 		checklist: {
 			alreadyHave: result.checklist.alreadyHave.map((key) => tt(key)),
 			stillNeed: result.checklist.stillNeed.map((key) => tt(key)),
 			discussWithSupport: result.checklist.discussWithSupport.map((key) => tt(key)),
 			unresolved: result.checklist.unresolved.map((key) => tt(key))
 		},
+		officialPortalUrl: OFFICIAL_PORTAL_URL,
+		collaboratorsPdfUrl: COLLABORATORS_PDF_URL,
 		answers
 	}
 }

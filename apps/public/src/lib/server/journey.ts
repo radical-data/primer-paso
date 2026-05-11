@@ -11,6 +11,7 @@ import {
 	LANGUAGE_VALUES,
 	SPECIALIST_FLAG_VALUES,
 	SUPPORT_NEED_VALUES,
+	VULNERABILITY_SITUATION_VALUES,
 	WORK_SITUATION_VALUES,
 	YES_NO_NOT_SURE_VALUES
 } from '$lib/journey/types'
@@ -50,6 +51,7 @@ const isYesNoNotSureValue = isEnumValue(YES_NO_NOT_SURE_VALUES)
 const isFiveMonthStayValue = isEnumValue(FIVE_MONTH_STAY_VALUES)
 const isWorkSituationValue = isEnumValue(WORK_SITUATION_VALUES)
 const isFamilySituationValue = isEnumValue(FAMILY_SITUATION_VALUES)
+const isVulnerabilitySituationValue = isEnumValue(VULNERABILITY_SITUATION_VALUES)
 const isIdentityDocumentValue = isEnumValue(IDENTITY_DOCUMENT_VALUES)
 const isEvidenceBeforeCutoffValue = isEnumValue(EVIDENCE_BEFORE_CUTOFF_VALUES)
 const isEvidenceRecentValue = isEnumValue(EVIDENCE_RECENT_VALUES)
@@ -92,6 +94,8 @@ const isJourneyState = (value: unknown): value is JourneyState => {
 			isStringArrayOf(answers.workSituation, isWorkSituationValue)) &&
 		(answers.familySituation === undefined ||
 			isStringArrayOf(answers.familySituation, isFamilySituationValue)) &&
+		(answers.vulnerabilitySituation === undefined ||
+			isStringArrayOf(answers.vulnerabilitySituation, isVulnerabilitySituationValue)) &&
 		(answers.identityDocuments === undefined ||
 			isStringArrayOf(answers.identityDocuments, isIdentityDocumentValue)) &&
 		(answers.evidenceBeforeCutoff === undefined ||

@@ -8,7 +8,6 @@ import {
 	isCertificateApplicantConfirmationMethod,
 	parseCertificateDraft,
 	parseCertificateIssueRequest,
-	VULNERABILITY_REASON_VALUES,
 	validateCertificateDraft,
 	withCertificateDraftReviewDataFromForm
 } from '@primer-paso/certificate'
@@ -17,7 +16,8 @@ import type { CertificateCorrectionType, VerificationReview } from '@primer-paso
 import { signPdfWithOrganisationCertificate } from '@primer-paso/signing-client'
 import { error, fail, redirect } from '@sveltejs/kit'
 import { env } from '$env/dynamic/private'
-import { documentTypeLabel, vulnerabilityReasonLabel } from '$lib/labels'
+import { vulnerabilityReasonOptions } from '$lib/certificate/vulnerability-reasons'
+import { documentTypeLabel } from '$lib/labels'
 import { writeAuditEvent } from '$lib/server/audit'
 import { requirePermission } from '$lib/server/auth'
 import { getOrgPortalRepository } from '$lib/server/repository'
@@ -157,10 +157,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 			label: documentTypeLabel(value)
 		})),
 		applicantConfirmationComplete: applicantConfirmationComplete(review.applicantConfirmation),
-		vulnerabilityReasonOptions: VULNERABILITY_REASON_VALUES.map((value) => ({
-			value,
-			label: vulnerabilityReasonLabel(value)
-		})),
+		vulnerabilityReasonOptions,
 		correctionTypeOptions: [
 			{ value: 'confirmed_with_applicant', label: 'Confirmado con la persona solicitante' },
 			{ value: 'document_verified', label: 'Verificado con documento' },

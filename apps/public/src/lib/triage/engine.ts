@@ -1,50 +1,22 @@
 import type { MessageKey } from '$lib/content'
+import type { JourneyAnswers } from '$lib/journey/types'
 import type {
-	EvidenceBeforeCutoffValue,
-	EvidenceRecentValue,
-	JourneyAnswers
-} from '$lib/journey/types'
+	EligibilityRoute,
+	PositiveEligibilityRoute,
+	PreparationChecklist,
+	SubmissionPath,
+	TriageResult
+} from './types'
 
-import type { PreparationChecklist, TriageResult } from './types'
-
-const hasAnyStrongBeforeCutoffEvidence = (values: EvidenceBeforeCutoffValue[] = []) =>
-	values.some((value) =>
-		[
-			'padron_or_registration',
-			'housing_papers',
-			'health_or_pharmacy',
-			'school_or_childcare',
-			'work_papers'
-		].includes(value)
-	)
-
-const hasAnyStrongRecentEvidence = (values: EvidenceRecentValue[] = []) =>
-	values.some((value) =>
-		[
-			'housing_papers',
-			'health_or_pharmacy',
-			'school_or_childcare',
-			'work_papers',
-			'bank_or_money_transfer'
-		].includes(value)
-	)
+const hasPositiveChoice = (values: string[] | undefined) =>
+	(values ?? []).some((value) => !['none', 'none_yet', 'not_sure'].includes(value))
 
 const buildChecklist = (
 	answers: JourneyAnswers,
 	resultState: TriageResult['resultState']
 ): PreparationChecklist => {
-	const alreadyHave = new Set<MessageKey>()
-	const stillNeed = new Set<MessageKey>()
-	const discussWithSupport = new Set<MessageKey>()
-	const unresolved = new Set<MessageKey>()
-
-	if (resultState === 'another_route_may_fit_better') {
-		return {
-			alreadyHave: [],
-			stillNeed: [],
-			discussWithSupport: [],
-			unresolved: []
-		}
+	if (resultState === 'not_this_process') {
+		return { alreadyHave: [], stillNeed: [], discussWithSupport: [], unresolved: [] }
 	}
 
 	const identityDocuments = answers.identityDocuments ?? []
@@ -52,6 +24,13 @@ const buildChecklist = (
 	const evidenceRecentMonths = answers.evidenceRecentMonths ?? []
 	const supportNeeds = answers.supportNeeds ?? []
 	const specialistFlags = answers.specialistFlags ?? []
+	const timelineUncertain =
+		answers.presentBeforeCutoff === 'not_sure' ||
+		answers.presentBeforeCutoff === undefined ||
+		answers.asylumHistory === 'not_sure' ||
+		(answers.asylumHistory === 'yes' && answers.asylumBeforeCutoff === 'not_sure') ||
+		answers.fiveMonthStay === 'not_sure'
+
 	const hasIdentityDocument = identityDocuments.some((value) =>
 		[
 			'current_passport',
@@ -61,42 +40,29 @@ const buildChecklist = (
 			'travel_document'
 		].includes(value)
 	)
-	const timelineUncertain =
-		answers.presentBeforeCutoff === 'not_sure' ||
-		answers.presentBeforeCutoff === undefined ||
-		answers.asylumHistory === 'not_sure' ||
-		(answers.asylumHistory === 'yes' && answers.asylumBeforeCutoff === 'not_sure') ||
-		answers.fiveMonthStay === 'not_sure'
+	const hasBeforeCutoffEvidence = hasPositiveChoice(evidenceBeforeCutoff)
+	const hasRecentEvidence = hasPositiveChoice(evidenceRecentMonths)
+
+	const alreadyHave = new Set<MessageKey>()
+	const stillNeed = new Set<MessageKey>()
+	const discussWithSupport = new Set<MessageKey>()
+	const unresolved = new Set<MessageKey>()
 
 	if (hasIdentityDocument) alreadyHave.add('result.checklist.item.identity_document_available')
 	if (answers.asylumCaseDocuments === 'yes')
 		alreadyHave.add('result.checklist.item.asylum_case_documents_available')
-	if (hasAnyStrongBeforeCutoffEvidence(evidenceBeforeCutoff))
+	if (hasBeforeCutoffEvidence)
 		alreadyHave.add('result.checklist.item.before_cutoff_evidence_available')
-	if (hasAnyStrongRecentEvidence(evidenceRecentMonths))
-		alreadyHave.add('result.checklist.item.recent_evidence_available')
-	if (answers.fiveMonthStay === 'yes') {
+	if (hasRecentEvidence) alreadyHave.add('result.checklist.item.recent_evidence_available')
+	if (answers.fiveMonthStay === 'yes')
 		alreadyHave.add('result.checklist.item.continuity_answer_positive')
-	}
 
-	if (!hasIdentityDocument || identityDocuments.includes('no_identity_documents_now')) {
+	if (!hasIdentityDocument || identityDocuments.includes('no_identity_documents_now'))
 		stillNeed.add('result.checklist.item.identity_document_needed')
-	}
-	if (
-		!hasAnyStrongBeforeCutoffEvidence(evidenceBeforeCutoff) ||
-		evidenceBeforeCutoff.includes('none_yet')
-	) {
-		stillNeed.add('result.checklist.item.before_cutoff_evidence_needed')
-	}
-	if (
-		!hasAnyStrongRecentEvidence(evidenceRecentMonths) ||
-		evidenceRecentMonths.includes('none_yet')
-	) {
-		stillNeed.add('result.checklist.item.recent_evidence_needed')
-	}
-	if (answers.asylumBeforeCutoff === 'yes' && answers.asylumCaseDocuments !== 'yes') {
+	if (!hasBeforeCutoffEvidence) stillNeed.add('result.checklist.item.before_cutoff_evidence_needed')
+	if (!hasRecentEvidence) stillNeed.add('result.checklist.item.recent_evidence_needed')
+	if (answers.asylumBeforeCutoff === 'yes' && answers.asylumCaseDocuments !== 'yes')
 		stillNeed.add('result.checklist.item.asylum_case_documents_needed')
-	}
 	stillNeed.add('result.checklist.item.official_document_requirements')
 
 	if (supportNeeds.length > 0)
@@ -120,190 +86,128 @@ const buildChecklist = (
 	}
 }
 
-const getChecklist = (
-	answers: JourneyAnswers,
-	resultState: TriageResult['resultState'],
-	_recommendedRoute: TriageResult['recommendedRoute']
-) => buildChecklist(answers, resultState)
+const hasSpecialistFlag = (answers: JourneyAnswers) =>
+	(answers.specialistFlags ?? []).some((flag) => flag !== 'none')
 
-const getReasonKey = (answers: JourneyAnswers, fallback: MessageKey): MessageKey => {
-	const specialistFlags = answers.specialistFlags ?? []
-	if (specialistFlags.includes('criminal_record_worry')) {
-		return 'result.reason.specialist_review_criminal_record'
+const isAsylumRoute = (answers: JourneyAnswers) =>
+	answers.asylumHistory === 'yes' && answers.asylumBeforeCutoff === 'yes'
+
+const isFamilyRoute = (answers: JourneyAnswers) => hasPositiveChoice(answers.familySituation)
+
+const isWorkRoute = (answers: JourneyAnswers) => hasPositiveChoice(answers.workSituation)
+
+const isVulnerabilityRoute = (answers: JourneyAnswers) =>
+	hasPositiveChoice(answers.vulnerabilitySituation)
+
+export const getPossibleEligibilityRoutes = (
+	answers: JourneyAnswers
+): PositiveEligibilityRoute[] => {
+	if (isAsylumRoute(answers)) {
+		return ['international_protection']
 	}
-	if (specialistFlags.includes('identity_missing_or_mismatch')) {
-		return 'result.reason.specialist_review_identity'
+
+	const routes: PositiveEligibilityRoute[] = []
+
+	if (isFamilyRoute(answers)) routes.push('family_unit')
+	if (isWorkRoute(answers)) routes.push('work_or_intention')
+	if (isVulnerabilityRoute(answers)) routes.push('vulnerability')
+
+	return routes
+}
+
+export const getRecommendedEligibilityRoute = (answers: JourneyAnswers): EligibilityRoute => {
+	if (answers.presentBeforeCutoff === 'no') {
+		return 'not_this_process'
 	}
-	return fallback
+
+	if (isAsylumRoute(answers)) {
+		return 'international_protection'
+	}
+
+	if (answers.fiveMonthStay === 'left_spain') {
+		return 'needs_specialist_review'
+	}
+
+	if (
+		answers.presentBeforeCutoff === 'not_sure' ||
+		answers.asylumHistory === 'not_sure' ||
+		(answers.asylumHistory === 'yes' && answers.asylumBeforeCutoff === 'not_sure') ||
+		answers.fiveMonthStay === 'not_sure'
+	) {
+		return 'needs_specialist_review'
+	}
+
+	const possibleRoutes = getPossibleEligibilityRoutes(answers)
+
+	if (possibleRoutes.includes('family_unit')) return 'family_unit'
+	if (possibleRoutes.includes('work_or_intention')) return 'work_or_intention'
+	if (possibleRoutes.includes('vulnerability')) return 'vulnerability'
+
+	return 'needs_specialist_review'
+}
+
+const getRecommendedSubmissionPath = (
+	answers: JourneyAnswers,
+	recommendedEligibilityRoute: EligibilityRoute
+): SubmissionPath => {
+	if (
+		recommendedEligibilityRoute === 'not_this_process' ||
+		recommendedEligibilityRoute === 'needs_specialist_review' ||
+		hasSpecialistFlag(answers)
+	) {
+		return 'specialist_review_first'
+	}
+
+	return 'registered_entity_online'
+}
+
+const getResultState = (
+	recommendedEligibilityRoute: EligibilityRoute
+): TriageResult['resultState'] => {
+	if (recommendedEligibilityRoute === 'not_this_process') return 'not_this_process'
+	if (recommendedEligibilityRoute === 'needs_specialist_review') return 'needs_specialist_review'
+	return 'eligible'
+}
+
+const getExplanationKey = (route: EligibilityRoute): MessageKey =>
+	`result.explanation.${route}` as MessageKey
+
+const getReasonKey = (answers: JourneyAnswers, route: EligibilityRoute): MessageKey | undefined => {
+	if (answers.presentBeforeCutoff === 'no') {
+		return 'result.reason.not_present_before_cutoff' as MessageKey
+	}
+
+	if (answers.fiveMonthStay === 'left_spain') {
+		return 'result.reason.five_month_stay_not_met' as MessageKey
+	}
+
+	if (route === 'needs_specialist_review') {
+		if (hasSpecialistFlag(answers)) {
+			return 'result.reason.specialist_flags' as MessageKey
+		}
+
+		return 'result.reason.no_clear_route' as MessageKey
+	}
+
+	return undefined
 }
 
 export const runTriage = (answers: JourneyAnswers): TriageResult => {
-	const flags = new Set<MessageKey>()
-	const presentBeforeCutoff = answers.presentBeforeCutoff
-	const asylumHistory = answers.asylumHistory
-	const asylumBeforeCutoff = answers.asylumBeforeCutoff
-	const fiveMonthStay = answers.fiveMonthStay
-	const asylumCaseDocuments = answers.asylumCaseDocuments
-	const identityDocuments = answers.identityDocuments ?? []
-	const evidenceBeforeCutoff = answers.evidenceBeforeCutoff ?? []
-	const evidenceRecentMonths = answers.evidenceRecentMonths ?? []
-	const specialistFlags = answers.specialistFlags ?? []
-	const supportNeeds = answers.supportNeeds ?? []
+	const possibleEligibilityRoutes = getPossibleEligibilityRoutes(answers)
+	const recommendedEligibilityRoute = getRecommendedEligibilityRoute(answers)
+	const recommendedSubmissionPath = getRecommendedSubmissionPath(
+		answers,
+		recommendedEligibilityRoute
+	)
+	const resultState = getResultState(recommendedEligibilityRoute)
 
-	const hasStrongEvidence =
-		hasAnyStrongBeforeCutoffEvidence(evidenceBeforeCutoff) &&
-		hasAnyStrongRecentEvidence(evidenceRecentMonths)
-
-	const evidenceStrength =
-		evidenceBeforeCutoff.length === 0 || evidenceRecentMonths.length === 0
-			? 'unknown'
-			: hasStrongEvidence
-				? 'strong'
-				: 'thin'
-
-	if (
-		presentBeforeCutoff === undefined ||
-		presentBeforeCutoff === 'not_sure' ||
-		asylumHistory === 'not_sure' ||
-		(asylumHistory === 'yes' && asylumBeforeCutoff === 'not_sure') ||
-		fiveMonthStay === 'not_sure'
-	) {
-		flags.add('result.flag.uncertain_timeline')
-	}
-
-	if (fiveMonthStay === 'left_spain') {
-		flags.add('result.flag.five_month_requirement_risk')
-	}
-
-	if (presentBeforeCutoff === 'no') {
-		const resultState = 'another_route_may_fit_better'
-		const recommendedRoute = 'collaborating_organisation'
-		return {
-			resultState,
-			recommendedRoute,
-			flags: ['result.flag.hard_gate_after_cutoff'],
-			reasonKey: 'result.reason.after_cutoff',
-			evidenceStrength,
-			showHowToApply: false,
-			showSupportCta: true,
-			showDocumentCta: false,
-			checklist: getChecklist(answers, resultState, recommendedRoute),
-			explanationKey: 'result.explanation.after_cutoff',
-			humanReviewRecommended: false
-		}
-	}
-
-	if (
-		specialistFlags.includes('criminal_record_worry') ||
-		specialistFlags.includes('identity_missing_or_mismatch') ||
-		specialistFlags.includes('previous_refusal_needs_help') ||
-		specialistFlags.includes('asylum_case_not_clear') ||
-		specialistFlags.includes('unsafe_sharing_digitally') ||
-		specialistFlags.includes('urgent_human_support') ||
-		specialistFlags.includes('want_specialist') ||
-		identityDocuments.includes('no_identity_documents_now') ||
-		fiveMonthStay === 'left_spain' ||
-		(asylumBeforeCutoff === 'yes' && asylumCaseDocuments !== 'yes')
-	) {
-		const resultState = 'needs_specialist_review'
-		const recommendedRoute = 'collaborating_organisation'
-		return {
-			resultState,
-			recommendedRoute,
-			flags: [
-				...flags,
-				...(specialistFlags.includes('criminal_record_worry')
-					? (['result.flag.criminal_record_concern'] as MessageKey[])
-					: []),
-				...(specialistFlags.includes('identity_missing_or_mismatch')
-					? (['result.flag.identity_issue'] as MessageKey[])
-					: []),
-				...(supportNeeds.includes('child_or_dependant_support')
-					? (['result.flag.family_support_needs'] as MessageKey[])
-					: []),
-				...(specialistFlags.includes('asylum_case_not_clear')
-					? (['result.flag.asylum_complexity'] as MessageKey[])
-					: []),
-				...(identityDocuments.includes('no_identity_documents_now')
-					? (['result.flag.missing_identity_documents'] as MessageKey[])
-					: []),
-				...(fiveMonthStay === 'left_spain'
-					? (['result.flag.continuity_concern'] as MessageKey[])
-					: [])
-			],
-			reasonKey: getReasonKey(answers, 'result.reason.specialist_review'),
-			evidenceStrength,
-			showHowToApply: false,
-			showSupportCta: true,
-			showDocumentCta: false,
-			checklist: getChecklist(answers, resultState, recommendedRoute),
-			explanationKey: 'result.explanation.specialist_review',
-			humanReviewRecommended: true
-		}
-	}
-
-	if (flags.has('result.flag.uncertain_timeline')) {
-		const resultState = 'not_enough_information_yet'
-		const recommendedRoute = 'collaborating_organisation'
-		return {
-			resultState,
-			recommendedRoute,
-			flags: [
-				...flags,
-				...(supportNeeds.includes('child_or_dependant_support')
-					? (['result.flag.family_support_needs'] as MessageKey[])
-					: [])
-			],
-			reasonKey: 'result.reason.not_enough_information',
-			evidenceStrength,
-			showHowToApply: false,
-			showSupportCta: true,
-			showDocumentCta: false,
-			checklist: getChecklist(answers, resultState, recommendedRoute),
-			explanationKey: 'result.explanation.not_enough_information',
-			humanReviewRecommended: false
-		}
-	}
-
-	if (
-		evidenceStrength === 'thin' ||
-		evidenceBeforeCutoff.includes('none_yet') ||
-		evidenceRecentMonths.includes('none_yet')
-	) {
-		const resultState = 'possible_but_needs_more_evidence'
-		const recommendedRoute = 'official_portal'
-		return {
-			resultState,
-			recommendedRoute,
-			flags: supportNeeds.includes('child_or_dependant_support')
-				? ['result.flag.family_support_needs']
-				: [],
-			reasonKey: 'result.reason.more_evidence',
-			evidenceStrength,
-			showHowToApply: true,
-			showSupportCta: true,
-			showDocumentCta: true,
-			checklist: getChecklist(answers, resultState, recommendedRoute),
-			explanationKey: 'result.explanation.more_evidence',
-			humanReviewRecommended: false
-		}
-	}
-
-	const resultState = 'likely_in_scope'
-	const recommendedRoute = 'official_portal'
 	return {
 		resultState,
-		recommendedRoute,
-		flags: supportNeeds.includes('child_or_dependant_support')
-			? ['result.flag.family_support_needs']
-			: [],
-		reasonKey: 'result.reason.likely_in_scope',
-		evidenceStrength,
-		showHowToApply: true,
-		showSupportCta: true,
-		showDocumentCta: false,
-		checklist: getChecklist(answers, resultState, recommendedRoute),
-		explanationKey: 'result.explanation.likely_in_scope',
-		humanReviewRecommended: false
+		recommendedEligibilityRoute,
+		possibleEligibilityRoutes,
+		recommendedSubmissionPath,
+		reasonKey: getReasonKey(answers, recommendedEligibilityRoute),
+		explanationKey: getExplanationKey(recommendedEligibilityRoute),
+		checklist: buildChecklist(answers, resultState)
 	}
 }
