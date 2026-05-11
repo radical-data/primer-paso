@@ -130,6 +130,8 @@ export const en = {
 	'pages.handover.flags_title': 'Points that may need attention',
 	'pages.result.eyebrow': 'Result',
 	'pages.result.eligibility_title': 'Your result',
+	'pages.result.recommended_route_title': 'Recommended route',
+	'pages.result.other_possible_routes_title': 'Other routes that may also apply',
 	'pages.result.next_step_title': 'Your next step',
 	'pages.result.why_title': 'Why we think this',
 	'pages.result.continue_title': 'How to continue',
@@ -227,6 +229,35 @@ export const en = {
 		'I live with my adult child who needs a lot of support because of disability or health needs',
 	'steps.family_situation.options.mother_or_father': 'I live with my mother or father',
 	'steps.family_situation.options.none': 'None of these',
+	'steps.vulnerability_situation.title':
+		'Could any of these make your situation especially difficult?',
+	'steps.vulnerability_situation.hint':
+		'Select any that feel relevant. This only helps decide whether the vulnerability route should be checked with an organisation or social service.',
+	'steps.vulnerability_situation.error':
+		'Select any situations that apply, or select “None of these”.',
+	'steps.vulnerability_situation.check_answers_label':
+		'Situations that may need vulnerability-route review',
+	'steps.vulnerability_situation.options.none': 'None of these',
+	'vulnerability.applicant.social_isolation_or_lack_of_support_network':
+		'I do not have people or services I can rely on for support',
+	'vulnerability.applicant.homelessness_or_precarious_housing':
+		'I do not have stable or safe housing',
+	'vulnerability.applicant.discrimination_or_social_exclusion':
+		'I feel excluded, discriminated against, or treated unfairly',
+	'vulnerability.applicant.insufficient_income': 'I do not have enough income for basic needs',
+	'vulnerability.applicant.poverty_or_economic_exclusion_risk':
+		'I am at risk of poverty or serious financial hardship',
+	'vulnerability.applicant.difficulty_accessing_employment':
+		'I am finding it very difficult to get or keep work',
+	'vulnerability.applicant.dependants': 'I care for children or other dependants',
+	'vulnerability.applicant.vulnerable_family_unit':
+		'My household or family situation is especially difficult',
+	'vulnerability.applicant.single_parent_precarity':
+		'I am raising children alone in difficult circumstances',
+	'vulnerability.applicant.psychosocial_risks':
+		'Stress, trauma, mental health, or social problems are making things harder',
+	'vulnerability.applicant.exploitation_or_abuse':
+		'I have experienced exploitation, abuse, threats, or pressure',
 	'steps.identity_documents.title': 'Which identity papers do you have?',
 	'steps.identity_documents.check_answers_label': 'Identity papers',
 	'steps.identity_documents.error': 'Choose at least one option.',
@@ -363,11 +394,36 @@ export const en = {
 		'Any missing identity papers or details that do not match.',
 	'result.checklist.item.asylum_history_to_explain':
 		'What happened in any asylum or protection process in Spain.',
-	'result.title.likely_in_scope': 'Likely in scope',
-	'result.title.possible_but_needs_more_evidence':
-		'This route may fit, but you may need more papers first',
-	'result.title.needs_specialist_review': 'Needs specialist review',
-	'result.title.another_route_may_fit_better': 'This probably is not the right route for you',
-	'result.title.not_enough_information_yet':
-		'We need a bit more information before suggesting a next step'
+	'result.title.needs_specialist_review': 'Specialist review recommended',
+	'result.title.eligible': 'Recommended route found',
+	'result.title.not_this_process': 'This process may not fit',
+	'result.eligibility_route.international_protection':
+		'International protection / asylum applicant route',
+	'result.eligibility_route.family_unit': 'Family-unit route',
+	'result.eligibility_route.work_or_intention': 'Work or intention-to-work route',
+	'result.eligibility_route.vulnerability': 'Vulnerability route',
+	'result.explanation.international_protection':
+		'Based on your answers, the international protection / asylum applicant route looks like the clearest route to check first.',
+	'result.explanation.family_unit':
+		'Based on your answers, the family-unit route looks like the clearest route to check first.',
+	'result.explanation.work_or_intention':
+		'Based on your answers, the work or intention-to-work route looks like the clearest route to check first.',
+	'result.explanation.vulnerability':
+		'Based on your answers, the vulnerability route may be worth checking with an organisation or social service. This route usually needs a vulnerability certificate signed or sealed by an eligible body.',
+	'result.explanation.needs_specialist_review':
+		'Your answers do not clearly match one route. A specialist organisation should review the case before you submit.',
+	'result.explanation.not_this_process':
+		'Based on your answers, this regularisation process may not be the right process to use.',
+	'result.reason.not_present_before_cutoff':
+		'You answered that you were not in Spain before the cut-off date.',
+	'result.reason.five_month_stay_not_met':
+		'You answered that you left Spain during the five months before the application.',
+	'result.reason.specialist_flags':
+		'You selected an issue that should be reviewed by a specialist before submitting.',
+	'result.reason.no_clear_route':
+		'The answers do not yet show a clear family, work, vulnerability, or international protection route.',
+	'result.submission_path.registered_entity_online':
+		'The best next step is to contact a registered collaborating organisation if possible. They may be able to help prepare and submit the application electronically.',
+	'result.submission_path.specialist_review_first':
+		'The best next step is to get specialist advice before trying to submit.'
 } as const

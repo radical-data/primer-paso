@@ -1,11 +1,11 @@
 import {
 	CERTIFICATE_DRAFT_VERSION,
 	DOCUMENT_TYPE_VALUES,
-	parseCertificateDraft,
-	VULNERABILITY_REASON_VALUES
+	parseCertificateDraft
 } from '@primer-paso/certificate'
 import { error, fail, redirect } from '@sveltejs/kit'
-import { documentTypeLabel, vulnerabilityReasonLabel } from '$lib/labels'
+import { vulnerabilityReasonOptions } from '$lib/certificate/vulnerability-reasons'
+import { documentTypeLabel } from '$lib/labels'
 import { writeAuditEvent } from '$lib/server/audit'
 import { requirePermission } from '$lib/server/auth'
 import { getOrgPortalRepository } from '$lib/server/repository'
@@ -79,10 +79,7 @@ export const load: PageServerLoad = ({ locals }) => {
 			value,
 			label: documentTypeLabel(value)
 		})),
-		vulnerabilityReasonOptions: VULNERABILITY_REASON_VALUES.map((value) => ({
-			value,
-			label: vulnerabilityReasonLabel(value)
-		}))
+		vulnerabilityReasonOptions
 	}
 }
 

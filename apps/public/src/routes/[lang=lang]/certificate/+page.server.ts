@@ -1,4 +1,6 @@
 import { fail, redirect } from '@sveltejs/kit'
+import { getApplicantVulnerabilityReasonOptions } from '$lib/certificate/vulnerability-reasons'
+import { resolveLocale } from '$lib/content'
 import { localiseHref } from '$lib/i18n/routing'
 import {
 	certificateDraftToFormValue,
@@ -14,41 +16,6 @@ const documentTypeOptions = [
 	{ value: 'other', label: 'Other identity document' }
 ]
 
-const vulnerabilityReasonOptions = [
-	{
-		value: 'social_isolation_or_lack_of_support_network',
-		label: 'Social isolation or lack of support network'
-	},
-	{
-		value: 'homelessness_or_precarious_housing',
-		label: 'Homelessness or precarious housing'
-	},
-	{
-		value: 'discrimination_or_social_exclusion',
-		label: 'Discrimination or social exclusion'
-	},
-	{ value: 'insufficient_income', label: 'Insufficient income' },
-	{
-		value: 'poverty_or_economic_exclusion_risk',
-		label: 'Poverty or risk of economic exclusion'
-	},
-	{
-		value: 'difficulty_accessing_employment',
-		label: 'Difficulty accessing employment'
-	},
-	{ value: 'dependants', label: 'Children or dependants in their care' },
-	{
-		value: 'vulnerable_family_unit',
-		label: 'Family unit in a situation of vulnerability'
-	},
-	{
-		value: 'single_parent_precarity',
-		label: 'Single-parent family in precarious circumstances'
-	},
-	{ value: 'psychosocial_risks', label: 'Psychosocial risks' },
-	{ value: 'exploitation_or_abuse', label: 'Exposure to exploitation or abuse' }
-] satisfies Array<{ value: string; label: string }>
-
 export const load: PageServerLoad = ({ cookies, params }) => {
 	const state = getJourneyState(cookies)
 
@@ -56,7 +23,7 @@ export const load: PageServerLoad = ({ cookies, params }) => {
 		locale: params.lang,
 		value: certificateDraftToFormValue(state),
 		documentTypeOptions,
-		vulnerabilityReasonOptions,
+		vulnerabilityReasonOptions: getApplicantVulnerabilityReasonOptions(resolveLocale(params.lang)),
 		backHref: localiseHref(params.lang, '/result')
 	}
 }

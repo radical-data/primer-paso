@@ -130,6 +130,8 @@ export const ar = {
 	'pages.handover.flags_title': 'نقاط قد تحتاج إلى انتباه',
 	'pages.result.eyebrow': 'النتيجة',
 	'pages.result.eligibility_title': 'نتيجتك',
+	'pages.result.recommended_route_title': 'المسار الموصى به',
+	'pages.result.other_possible_routes_title': 'مسارات أخرى قد تنطبق أيضاً',
 	'pages.result.next_step_title': 'خطوتك التالية',
 	'pages.result.why_title': 'لماذا نعتقد ذلك',
 	'pages.result.continue_title': 'كيف تتابع',
@@ -223,6 +225,28 @@ export const ar = {
 		'أعيش مع طفلي البالغ الذي يحتاج إلى دعم كبير بسبب إعاقة أو احتياجات صحية',
 	'steps.family_situation.options.mother_or_father': 'أعيش مع أمي أو أبي',
 	'steps.family_situation.options.none': 'لا شيء من ذلك',
+	'steps.vulnerability_situation.title': 'هل تجعل أي من هذه الحالات وضعك صعباً بشكل خاص؟',
+	'steps.vulnerability_situation.hint':
+		'اختر ما ينطبق عليك أو يبدو قريباً من وضعك. هذا لا يثبت وجود حالة ضعف، بل يساعد فقط في معرفة ما إذا كان من الأفضل مراجعة هذا المسار مع منظمة أو خدمة اجتماعية.',
+	'steps.vulnerability_situation.error': 'اختر المواقف التي تنطبق عليك، أو اختر «لا شيء من ذلك».',
+	'steps.vulnerability_situation.check_answers_label': 'حالات قد تحتاج إلى مراجعة في مسار الضعف',
+	'steps.vulnerability_situation.options.none': 'لا شيء من ذلك',
+	'vulnerability.applicant.social_isolation_or_lack_of_support_network':
+		'لا أجد أشخاصاً أو خدمات يمكنني الاعتماد عليها للحصول على الدعم',
+	'vulnerability.applicant.homelessness_or_precarious_housing': 'ليس لدي سكن مستقر أو آمن',
+	'vulnerability.applicant.discrimination_or_social_exclusion':
+		'أشعر أنني أتعرض للإقصاء أو التمييز أو المعاملة غير العادلة',
+	'vulnerability.applicant.insufficient_income': 'ليس لدي دخل كافٍ لتغطية احتياجاتي الأساسية',
+	'vulnerability.applicant.poverty_or_economic_exclusion_risk':
+		'أواجه خطر الفقر أو صعوبات مالية خطيرة',
+	'vulnerability.applicant.difficulty_accessing_employment':
+		'أجد صعوبة كبيرة في الحصول على عمل أو الاحتفاظ به',
+	'vulnerability.applicant.dependants': 'أعتني بأطفال أو بأشخاص آخرين يعتمدون عليّ',
+	'vulnerability.applicant.vulnerable_family_unit': 'وضع أسرتي أو منزلي صعب بشكل خاص',
+	'vulnerability.applicant.single_parent_precarity': 'أربي أطفالاً وحدي في ظروف صعبة',
+	'vulnerability.applicant.psychosocial_risks':
+		'الضغط أو الصدمة أو الصحة النفسية أو المشكلات الاجتماعية تجعل وضعي أصعب',
+	'vulnerability.applicant.exploitation_or_abuse': 'تعرضت للاستغلال أو الإساءة أو التهديد أو الضغط',
 	'steps.identity_documents.title': 'ما وثائق الهوية التي بحوزتك؟',
 	'steps.identity_documents.check_answers_label': 'وثائق الهوية',
 	'steps.identity_documents.error': 'اختر خياراً واحداً على الأقل.',
@@ -353,11 +377,33 @@ export const ar = {
 	'result.checklist.item.identity_issue_to_explain': 'أي وثائق هوية مفقودة أو تفاصيل لا تتطابق.',
 	'result.checklist.item.asylum_history_to_explain':
 		'ما الذي حدث في أي إجراء لجوء أو حماية في إسبانيا.',
-	'result.title.likely_in_scope': 'من المرجّح أن هذه الحالة تنطبق عليك',
-	'result.title.possible_but_needs_more_evidence':
-		'قد يكون هذا المسار مناسباً، لكنك قد تحتاج إلى مزيد من المستندات أولاً',
-	'result.title.needs_specialist_review': 'يحتاج إلى مراجعة متخصصة',
-	'result.title.another_route_may_fit_better': 'غالباً ليس هذا هو المسار المناسب لك',
-	'result.title.not_enough_information_yet':
-		'نحتاج إلى مزيد قليل من المعلومات قبل اقتراح الخطوة التالية'
+	'result.title.needs_specialist_review': 'يُوصى بمراجعة متخصصة',
+	'result.title.eligible': 'تم العثور على مسار موصى به',
+	'result.title.not_this_process': 'قد لا يناسبك هذا الإجراء',
+	'result.eligibility_route.international_protection': 'مسار الحماية الدولية / طالب اللجوء',
+	'result.eligibility_route.family_unit': 'مسار الوحدة العائلية',
+	'result.eligibility_route.work_or_intention': 'مسار العمل أو نية العمل',
+	'result.eligibility_route.vulnerability': 'مسار الضعف',
+	'result.explanation.international_protection':
+		'بناءً على إجاباتك، يبدو مسار الحماية الدولية / طالب اللجوء هو الأوضح للتحقق منه أولاً.',
+	'result.explanation.family_unit':
+		'بناءً على إجاباتك، يبدو مسار الوحدة العائلية هو الأوضح للتحقق منه أولاً.',
+	'result.explanation.work_or_intention':
+		'بناءً على إجاباتك، يبدو مسار العمل أو نية العمل هو الأوضح للتحقق منه أولاً.',
+	'result.explanation.vulnerability':
+		'بناءً على إجاباتك، قد يكون من المفيد مراجعة مسار الضعف مع منظمة أو خدمة اجتماعية. يحتاج هذا المسار عادةً إلى شهادة ضعف موقعة أو مختومة من جهة مؤهلة.',
+	'result.explanation.needs_specialist_review':
+		'إجاباتك لا تطابق مساراً واحداً بوضوح. ينبغي لمنظمة متخصصة مراجعة الحالة قبل التقديم.',
+	'result.explanation.not_this_process':
+		'بناءً على إجاباتك، قد لا يكون هذا الإجراء التنظيمي هو الإجراء المناسب.',
+	'result.reason.not_present_before_cutoff': 'أجبت بأنك لم تكن في إسبانيا قبل تاريخ القطع.',
+	'result.reason.five_month_stay_not_met':
+		'أجبت بأنك غادرت إسبانيا خلال الأشهر الخمسة السابقة للتقديم.',
+	'result.reason.specialist_flags': 'اخترت مسألة ينبغي أن يراجعها مختص قبل التقديم.',
+	'result.reason.no_clear_route':
+		'الإجابات لا تُظهر بعد مساراً عائلياً أو عملياً أو ضعفاً أو حماية دولية واضحاً.',
+	'result.submission_path.registered_entity_online':
+		'أفضل خطوة تالية هي التواصل مع منظمة متعاونة مسجلة إن أمكن. قد تتمكن من المساعدة في إعداد التقديم وإرساله إلكترونياً.',
+	'result.submission_path.specialist_review_first':
+		'أفضل خطوة تالية هي الحصول على مشورة متخصصة قبل محاولة التقديم.'
 } satisfies Partial<Record<MessageKey, string>>

@@ -31,6 +31,14 @@ const raw = (value: string): FormattedReference => ({ type: 'raw', value })
 
 const notAnswered = (): FormattedReference[] => [message('common.not_answered')]
 
+const applyExclusiveOptions = (values: string[], step: JourneyStepDefinition) => {
+	const selectedExclusive = values.find((value) => step.exclusiveOptions?.includes(value))
+
+	if (!selectedExclusive) return values
+
+	return [selectedExclusive]
+}
+
 const singleChoiceAdapter: FieldAdapter = {
 	getFormValue: (answers, step) => String(answers[step.field] ?? ''),
 	parse: (formData, step) => {
@@ -65,7 +73,10 @@ const multiChoiceAdapter: FieldAdapter = {
 		const selected = formData.getAll(step.field).map(String)
 		const validValues =
 			'options' in step ? new Set(step.options.map((option) => option.value)) : new Set()
-		const values = selected.filter((value) => validValues.has(value))
+		const values = applyExclusiveOptions(
+			selected.filter((value) => validValues.has(value)),
+			step
+		)
 
 		if (values.length === 0) {
 			return { ok: false, errorKey: step.errorKey, formValue: selected }

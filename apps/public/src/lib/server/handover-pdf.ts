@@ -1,5 +1,5 @@
 import { PDFDocument, StandardFonts } from 'pdf-lib'
-import { getTranslator, type Locale } from '$lib/content'
+import { getTranslator, type Locale, type MessageKey } from '$lib/content'
 import type { HandoverPacket } from '$lib/server/handover'
 
 const PAGE_WIDTH = 595.28
@@ -203,13 +203,25 @@ export const buildHandoverPdf = async (
 	gap(4)
 	drawWrapped(packet.routeBody)
 
-	gap(10)
+	const otherPossibleRoutes = packet.possibleEligibilityRoutes.filter(
+		(route) => route !== packet.recommendedEligibilityRoute
+	)
+
+	if (otherPossibleRoutes.length > 0) {
+		gap(10)
+		drawSectionTitle(tt('pages.result.other_possible_routes_title'))
+		drawList(
+			otherPossibleRoutes.map((route) => tt(`result.eligibility_route.${route}` as MessageKey))
+		)
+	}
+
 	const hasChecklistItems =
 		packet.checklist.alreadyHave.length > 0 ||
 		packet.checklist.stillNeed.length > 0 ||
 		packet.checklist.discussWithSupport.length > 0 ||
 		packet.checklist.unresolved.length > 0
 	if (hasChecklistItems) {
+		gap(10)
 		drawSectionTitle(tt('pages.handover.checklist_title'))
 		drawCompactListSection(tt('pages.result.checklist.already_have'), packet.checklist.alreadyHave)
 		drawCompactListSection(tt('pages.result.checklist.still_need'), packet.checklist.stillNeed)
@@ -223,11 +235,6 @@ export const buildHandoverPdf = async (
 	drawSectionTitle(tt('pages.handover.answers_title'))
 	for (const answer of packet.answers) {
 		drawAnswerRow(answer.label, answer.value)
-	}
-
-	if (packet.flags.length > 0) {
-		drawSectionTitle(tt('pages.handover.flags_title'))
-		drawList(packet.flags)
 	}
 
 	drawSectionTitle(tt('pages.handover.links_title'))

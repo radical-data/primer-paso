@@ -23,6 +23,7 @@ export {
 	getCertificateTemplatePackagePath
 } from './template'
 export type * from './types'
+export type { VulnerabilityReason } from './types'
 export {
 	CERTIFICATE_DRAFT_VERSION,
 	DOCUMENT_TYPE_VALUES,

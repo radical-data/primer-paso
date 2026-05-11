@@ -22,9 +22,9 @@ const sendPageView = async () => {
 		stepSlug: typeof page.params.step === 'string' ? page.params.step : undefined,
 		resultState:
 			typeof page.data.result?.resultState === 'string' ? page.data.result.resultState : undefined,
-		recommendedRoute:
-			typeof page.data.result?.recommendedRoute === 'string'
-				? page.data.result.recommendedRoute
+		recommendedSubmissionPath:
+			typeof page.data.result?.recommendedSubmissionPath === 'string'
+				? page.data.result.recommendedSubmissionPath
 				: undefined,
 		title: document.title,
 		url: `${page.url.pathname}${page.url.search}`
