@@ -291,6 +291,63 @@ export const fr = {
 	'steps.identity_documents.options.no_identity_documents_now':
 		'Je n’ai pas de document d’identité avec moi en ce moment',
 	'steps.identity_documents.options.prefer_not_to_say': 'Je préfère ne pas le dire',
+	'steps.previous_residence_countries.title':
+		'Dans quels pays avez-vous vécu au cours des cinq dernières années ?',
+	'steps.previous_residence_countries.body':
+		'Ajoutez tout autre pays où vous avez vécu pendant cette période.',
+	'steps.previous_residence_countries.hint':
+		'Vous aurez généralement besoin de certificats de casier judiciaire des pays sélectionnés hors Espagne.',
+	'steps.previous_residence_countries.error': 'L’Espagne doit rester sélectionnée.',
+	'steps.previous_residence_countries.check_answers_label':
+		'Pays où vous avez vécu au cours des cinq dernières années',
+	'steps.previous_residence_countries.search_label': 'Rechercher tous les pays',
+	'steps.previous_residence_countries.spain_locked_label': 'Espagne',
+	'steps.previous_residence_countries.spain_locked_hint':
+		'Déjà incluse. Ne peut pas être supprimée.',
+	'steps.previous_residence_countries.common_countries_label': 'Pays fréquents',
+	'steps.previous_residence_countries.all_other_countries': 'Tous les autres pays',
+	'steps.previous_residence_countries.search_results': 'Résultats de recherche',
+	'steps.criminal_record_certificates.title':
+		'Quel est le statut de chaque certificat de casier judiciaire ?',
+	'steps.criminal_record_certificates.body':
+		'Indiquez si vous avez déjà le certificat, si vous l’avez demandé et l’attendez, si vous ne l’avez pas encore demandé, ou si vous n’êtes pas sûr·e.',
+	'steps.criminal_record_certificates.hint':
+		'Si vous avez demandé un certificat, gardez une preuve de la demande.',
+	'steps.criminal_record_certificates.error':
+		'Répondez aux questions sur le certificat pour chaque pays.',
+	'steps.criminal_record_certificates.check_answers_label':
+		'Statut du certificat de casier judiciaire',
+	'steps.criminal_record_certificates.check_answers.entry': '{country}: {status}',
+	'steps.criminal_record_certificates.options.already_have': 'Je l’ai déjà',
+	'steps.criminal_record_certificates.options.requested_waiting': 'Je l’ai demandé et je l’attends',
+	'steps.criminal_record_certificates.options.not_requested_yet': 'Je ne l’ai pas encore demandé',
+	'steps.criminal_record_certificates.options.not_sure': 'Je ne suis pas sûr·e',
+	'results.criminal_records.title': 'Préparation des certificats de casier judiciaire',
+	'results.criminal_records.intro':
+		'Les antécédents pénaux en Espagne sont vérifiés par l’administration. Pour les autres pays où vous avez vécu pendant la période pertinente, vous aurez généralement besoin d’un certificat de casier judiciaire.',
+	'results.criminal_records.status.already_have':
+		'Vous avez indiqué que vous avez déjà ce certificat.',
+	'results.criminal_records.status.requested_waiting':
+		'Vous avez indiqué que vous avez demandé ce certificat et que vous l’attendez.',
+	'results.criminal_records.status.not_requested_yet':
+		'Vous avez indiqué que ce certificat n’a pas encore été demandé.',
+	'results.criminal_records.status.not_sure': 'Vous n’êtes pas sûr·e concernant ce certificat.',
+	'results.criminal_records.status.unknown':
+		'Les informations sur le pays sont manquantes ou peu claires.',
+	'results.criminal_records.next_actions.request_criminal_record_certificate_today':
+		'Demandez ce certificat dès que possible.',
+	'results.criminal_records.next_actions.save_certificate_request_proof':
+		'Gardez la preuve que le certificat a été demandé.',
+	'results.criminal_records.next_actions.wait_until_one_month_then_prepare_fallback':
+		'Si un mois passe et que le certificat n’est pas arrivé, préparez les informations pour l’alternative avant de demander de l’aide.',
+	'results.criminal_records.next_actions.ask_specialist_about_criminal_record_certificate':
+		'Demandez à un·e spécialiste ou à une organisation enregistrée d’examiner cela avant le dépôt.',
+	'results.criminal_records.status_label': 'Statut',
+	'results.criminal_records.next_action_label': 'Prochaine action',
+	'pages.handover.criminal_records.title': 'Préparation des certificats de casier judiciaire',
+	'pages.handover.criminal_records.country': 'Pays',
+	'pages.handover.criminal_records.status': 'Statut',
+	'pages.handover.criminal_records.next_actions': 'Prochaines actions',
 	'steps.evidence_before_cutoff.title':
 		'Avez-vous des documents pouvant aider à montrer que vous viviez déjà en Espagne avant janvier 2026 ?',
 	'steps.evidence_before_cutoff.check_answers_label':

@@ -133,6 +133,64 @@ describe('runTriage', () => {
 		expect(result.reasonKey).toBeUndefined()
 	})
 
+	it('adds criminal-record blockers without changing eligibility path', () => {
+		const result = runTriage({
+			presentBeforeCutoff: 'yes',
+			asylumHistory: 'no',
+			fiveMonthStay: 'yes',
+			familySituation: ['child_under_18'],
+			workSituation: ['none'],
+			vulnerabilitySituation: ['none'],
+			previousResidenceCountries: [
+				{
+					countryCode: 'MA',
+					certificateStatus: 'not_requested_yet'
+				}
+			]
+		})
+
+		expect(result.recommendedEligibilityRoute).toBe('family_unit')
+		expect(result.criminalRecordAssessments[0].blockers).toContain(
+			'criminal_record_certificate_not_requested'
+		)
+	})
+
+	it('does not create criminal-record assessments for Spain only', () => {
+		const result = runTriage({
+			presentBeforeCutoff: 'yes',
+			asylumHistory: 'no',
+			fiveMonthStay: 'yes',
+			familySituation: ['child_under_18'],
+			workSituation: ['none'],
+			vulnerabilitySituation: ['none'],
+			previousResidenceCountries: [{ countryCode: 'ES' }]
+		})
+
+		expect(result.criminalRecordAssessments).toEqual([])
+	})
+
+	it('routes certificate uncertainty to specialist review before submission', () => {
+		const result = runTriage({
+			presentBeforeCutoff: 'yes',
+			asylumHistory: 'no',
+			fiveMonthStay: 'yes',
+			familySituation: ['child_under_18'],
+			workSituation: ['none'],
+			vulnerabilitySituation: ['none'],
+			previousResidenceCountries: [
+				{ countryCode: 'ES' },
+				{
+					countryCode: 'CO',
+					certificateStatus: 'not_sure'
+				}
+			]
+		})
+
+		expect(result.recommendedEligibilityRoute).toBe('family_unit')
+		expect(result.recommendedSubmissionPath).toBe('specialist_review_first')
+		expect(result.criminalRecordAssessments[0].urgency).toBe('specialist_review')
+	})
+
 	it('shows a specialist-flag reason when specialist review is the recommended route', () => {
 		const result = runTriage({
 			presentBeforeCutoff: 'yes',

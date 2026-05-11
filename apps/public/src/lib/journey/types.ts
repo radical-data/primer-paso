@@ -92,6 +92,16 @@ export const SPECIALIST_FLAG_VALUES = [
 ] as const
 export type SpecialistFlagValue = (typeof SPECIALIST_FLAG_VALUES)[number]
 
+export type CriminalRecordCertificateStatus =
+	| 'already_have'
+	| 'requested_waiting'
+	| 'not_requested_yet'
+	| 'not_sure'
+export interface PreviousResidenceCountry {
+	countryCode: string
+	certificateStatus?: CriminalRecordCertificateStatus
+}
+
 export const SUPPORT_NEED_VALUES = [
 	'another_language',
 	'in_person_help',
@@ -117,6 +127,7 @@ export interface JourneyAnswers {
 	familySituation?: FamilySituationValue[]
 	vulnerabilitySituation?: VulnerabilitySituationValue[]
 	identityDocuments?: IdentityDocumentValue[]
+	previousResidenceCountries?: PreviousResidenceCountry[]
 	evidenceBeforeCutoff?: EvidenceBeforeCutoffValue[]
 	evidenceRecentMonths?: EvidenceRecentValue[]
 	specialistFlags?: SpecialistFlagValue[]

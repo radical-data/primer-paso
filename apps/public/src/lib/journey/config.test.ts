@@ -33,6 +33,7 @@ describe('journey config', () => {
 
 	it('declares options for choice-based steps', () => {
 		for (const step of journeySteps) {
+			if (step.adapter === 'country-certificate-status') continue
 			expect(step.options.length > 0).toBe(true)
 		}
 	})
@@ -61,7 +62,7 @@ describe('journey config', () => {
 
 	it('uses applicant-facing vulnerability labels in the screener', () => {
 		const step = getJourneyStep('vulnerability-situation')
-		expect(step?.options).toContainEqual({
+		expect(step && 'options' in step ? step.options : []).toContainEqual({
 			value: 'insufficient_income',
 			labelKey: 'vulnerability.applicant.insufficient_income'
 		})
@@ -142,9 +143,63 @@ describe('journey route order', () => {
 				familySituation: ['child_under_18'],
 				workSituation: ['none'],
 				vulnerabilitySituation: ['none'],
-				specialistFlags: ['none']
+				specialistFlags: ['none'],
+				previousResidenceCountries: [
+					{
+						countryCode: 'CO',
+						certificateStatus: 'already_have'
+					}
+				]
 			},
 			'/province'
 		)
+	})
+
+	it('routes identity-documents to previous-residence-countries', () => {
+		expectStepTarget('identity-documents', {}, '/previous-residence-countries')
+	})
+
+	it('routes previous-residence-countries to evidence-before-cutoff when only Spain is selected', () => {
+		expectStepTarget(
+			'previous-residence-countries',
+			{ previousResidenceCountries: [{ countryCode: 'ES' }] },
+			'/evidence-before-cutoff'
+		)
+	})
+
+	it('routes previous-residence-countries to criminal-record-certificates when a foreign country is selected', () => {
+		expectStepTarget(
+			'previous-residence-countries',
+			{
+				previousResidenceCountries: [{ countryCode: 'ES' }, { countryCode: 'CO' }]
+			},
+			'/criminal-record-certificates'
+		)
+	})
+
+	it('routes criminal-record-certificates to evidence-before-cutoff', () => {
+		expectStepTarget('criminal-record-certificates', {}, '/evidence-before-cutoff')
+	})
+
+	it('routes evidence-before-cutoff back to previous-residence-countries when only Spain is selected', () => {
+		const step = getJourneyStep('evidence-before-cutoff')
+		expect(step).toBeDefined()
+		if (!step) return
+		expect(
+			resolveStepTarget(step.back, {
+				previousResidenceCountries: [{ countryCode: 'ES' }]
+			})
+		).toBe('/previous-residence-countries')
+	})
+
+	it('routes evidence-before-cutoff back to criminal-record-certificates when a foreign country is selected', () => {
+		const step = getJourneyStep('evidence-before-cutoff')
+		expect(step).toBeDefined()
+		if (!step) return
+		expect(
+			resolveStepTarget(step.back, {
+				previousResidenceCountries: [{ countryCode: 'ES' }, { countryCode: 'CO' }]
+			})
+		).toBe('/criminal-record-certificates')
 	})
 })

@@ -1,10 +1,16 @@
 import { APPLICANT_VULNERABILITY_REASON_LABEL_KEYS } from '$lib/certificate/vulnerability-reasons'
 import type { MessageKey } from '$lib/content'
+import { getCountries, getForeignCountries } from '$lib/generated/countries'
 import { provinces } from '$lib/generated/provinces'
 import type { JourneyAnswers } from '$lib/journey/types'
 import { runTriage } from '$lib/triage/engine'
 
-export type FieldAdapterName = 'single-choice' | 'multi-choice' | 'select'
+export type FieldAdapterName =
+	| 'single-choice'
+	| 'multi-choice'
+	| 'select'
+	| 'country-list'
+	| 'country-certificate-status'
 
 export type JourneyOption =
 	| {
@@ -44,7 +50,20 @@ export interface ChoiceStepDefinition extends BaseStepDefinition {
 	options: JourneyOption[]
 }
 
-export type JourneyStepDefinition = ChoiceStepDefinition
+export interface CountryListStepDefinition extends BaseStepDefinition {
+	adapter: 'country-list'
+	options: JourneyOption[]
+}
+
+export interface CountryCertificateStatusStepDefinition extends BaseStepDefinition {
+	adapter: 'country-certificate-status'
+	options: JourneyOption[]
+}
+
+export type JourneyStepDefinition =
+	| ChoiceStepDefinition
+	| CountryListStepDefinition
+	| CountryCertificateStatusStepDefinition
 
 const shouldAskProvince = (answers: JourneyAnswers) => {
 	const result = runTriage(answers)
@@ -57,6 +76,11 @@ const shouldAskProvince = (answers: JourneyAnswers) => {
 const provinceOptions: JourneyOption[] = provinces.map((province) => ({
 	value: province.code,
 	label: province.name
+}))
+
+const countryOptions: JourneyOption[] = getCountries('en').map((country) => ({
+	value: country.code,
+	label: country.code
 }))
 
 const applicantVulnerabilityOptions: JourneyOption[] = Object.entries(
@@ -265,7 +289,7 @@ const steps: JourneyStepDefinition[] = [
 		includeInCheckAnswers: true,
 		back: (answers) =>
 			answers.asylumBeforeCutoff === 'yes' ? 'asylum-before-cutoff' : 'vulnerability-situation',
-		next: 'evidence-before-cutoff',
+		next: 'previous-residence-countries',
 		exclusiveOptions: ['no_identity_documents_now', 'prefer_not_to_say', 'not_sure'],
 		options: [
 			{
@@ -300,6 +324,47 @@ const steps: JourneyStepDefinition[] = [
 		]
 	},
 	{
+		id: 'previous-residence-countries',
+		slug: 'previous-residence-countries',
+		field: 'previousResidenceCountries',
+		adapter: 'country-list',
+		eyebrowKey: 'eyebrows.documents',
+		titleKey: 'steps.previous_residence_countries.title',
+		bodyKey: 'steps.previous_residence_countries.body',
+		hintKey: 'steps.previous_residence_countries.hint',
+		errorKey: 'steps.previous_residence_countries.error',
+		checkAnswersLabelKey: 'steps.previous_residence_countries.check_answers_label',
+		includeInCheckAnswers: true,
+		back: 'identity-documents',
+		next: (answers) =>
+			(answers.previousResidenceCountries ?? []).some((country) => country.countryCode !== 'ES')
+				? 'criminal-record-certificates'
+				: 'evidence-before-cutoff',
+		options: countryOptions
+	},
+	{
+		id: 'criminal-record-certificates',
+		slug: 'criminal-record-certificates',
+		field: 'previousResidenceCountries',
+		adapter: 'country-certificate-status',
+		eyebrowKey: 'eyebrows.documents',
+		titleKey: 'steps.criminal_record_certificates.title',
+		bodyKey: 'steps.criminal_record_certificates.body',
+		hintKey: 'steps.criminal_record_certificates.hint',
+		errorKey: 'steps.criminal_record_certificates.error',
+		checkAnswersLabelKey: 'steps.criminal_record_certificates.check_answers_label',
+		includeInCheckAnswers: true,
+		guard: (answers) =>
+			(answers.previousResidenceCountries ?? []).some((country) => country.countryCode !== 'ES'),
+		redirectIfGuardFails: 'evidence-before-cutoff',
+		back: 'previous-residence-countries',
+		next: 'evidence-before-cutoff',
+		options: getForeignCountries('en').map((country) => ({
+			value: country.code,
+			label: country.name
+		}))
+	},
+	{
 		id: 'evidence-before-cutoff',
 		slug: 'evidence-before-cutoff',
 		field: 'evidenceBeforeCutoff',
@@ -309,7 +374,10 @@ const steps: JourneyStepDefinition[] = [
 		errorKey: 'steps.evidence_before_cutoff.error',
 		checkAnswersLabelKey: 'steps.evidence_before_cutoff.check_answers_label',
 		includeInCheckAnswers: true,
-		back: 'identity-documents',
+		back: (answers) =>
+			(answers.previousResidenceCountries ?? []).some((country) => country.countryCode !== 'ES')
+				? 'criminal-record-certificates'
+				: 'previous-residence-countries',
 		next: 'evidence-recent-months',
 		exclusiveOptions: ['none_yet', 'not_sure'],
 		options: [

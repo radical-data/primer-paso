@@ -257,6 +257,52 @@ export const ar = {
 	'steps.identity_documents.options.travel_document': 'وثيقة سفر',
 	'steps.identity_documents.options.no_identity_documents_now': 'ليست لدي الآن أي وثائق هوية معي',
 	'steps.identity_documents.options.prefer_not_to_say': 'أفضل عدم الإجابة',
+	'steps.previous_residence_countries.title': 'في أي بلدان عشت خلال السنوات الخمس الماضية؟',
+	'steps.previous_residence_countries.body': 'أضف أي بلد آخر عشت فيه خلال هذه الفترة.',
+	'steps.previous_residence_countries.hint':
+		'ستحتاج عادةً إلى شهادات سوابق جنائية من البلدان المحددة خارج إسبانيا.',
+	'steps.previous_residence_countries.error': 'يجب أن تبقى إسبانيا محددة.',
+	'steps.previous_residence_countries.check_answers_label':
+		'البلدان التي عشت فيها خلال السنوات الخمس الماضية',
+	'steps.previous_residence_countries.search_label': 'البحث في كل البلدان',
+	'steps.previous_residence_countries.spain_locked_label': 'إسبانيا',
+	'steps.previous_residence_countries.spain_locked_hint': 'مدرجة مسبقاً ولا يمكن إزالتها.',
+	'steps.previous_residence_countries.common_countries_label': 'بلدان شائعة',
+	'steps.previous_residence_countries.all_other_countries': 'كل البلدان الأخرى',
+	'steps.previous_residence_countries.search_results': 'نتائج البحث',
+	'steps.criminal_record_certificates.title': 'ما حالة كل شهادة سوابق جنائية؟',
+	'steps.criminal_record_certificates.body':
+		'أخبرنا إذا كانت الشهادة معك بالفعل، أو طلبتها وتنتظرها، أو لم تطلبها بعد، أو لست متأكداً.',
+	'steps.criminal_record_certificates.hint': 'إذا طلبت شهادة، فاحتفظ بإثبات الطلب.',
+	'steps.criminal_record_certificates.error': 'أجب عن أسئلة الشهادة لكل بلد.',
+	'steps.criminal_record_certificates.check_answers_label': 'حالة شهادة السوابق الجنائية',
+	'steps.criminal_record_certificates.check_answers.entry': '{country}: {status}',
+	'steps.criminal_record_certificates.options.already_have': 'الشهادة معي بالفعل',
+	'steps.criminal_record_certificates.options.requested_waiting': 'طلبتها وأنا أنتظرها',
+	'steps.criminal_record_certificates.options.not_requested_yet': 'لم أطلبها بعد',
+	'steps.criminal_record_certificates.options.not_sure': 'لست متأكداً',
+	'results.criminal_records.title': 'جاهزية شهادات السوابق الجنائية',
+	'results.criminal_records.intro':
+		'تتحقق الإدارة من السجل الجنائي في إسبانيا. وبالنسبة إلى البلدان الأخرى التي عشت فيها خلال الفترة ذات الصلة، ستحتاج عادةً إلى شهادة سوابق جنائية.',
+	'results.criminal_records.status.already_have': 'قلت إن هذه الشهادة معك بالفعل.',
+	'results.criminal_records.status.requested_waiting': 'قلت إنك طلبت هذه الشهادة وما زلت تنتظرها.',
+	'results.criminal_records.status.not_requested_yet': 'قلت إن هذه الشهادة لم تُطلب بعد.',
+	'results.criminal_records.status.not_sure': 'لست متأكداً بشأن هذه الشهادة.',
+	'results.criminal_records.status.unknown': 'معلومات البلد ناقصة أو غير واضحة.',
+	'results.criminal_records.next_actions.request_criminal_record_certificate_today':
+		'اطلب هذه الشهادة في أقرب وقت ممكن.',
+	'results.criminal_records.next_actions.save_certificate_request_proof':
+		'احتفظ بإثبات أن الشهادة قد طُلبت.',
+	'results.criminal_records.next_actions.wait_until_one_month_then_prepare_fallback':
+		'إذا مر شهر ولم تصل الشهادة، فحضّر معلومات الخيار البديل قبل طلب المساعدة.',
+	'results.criminal_records.next_actions.ask_specialist_about_criminal_record_certificate':
+		'اطلب من مختص أو منظمة مسجلة مراجعة هذا قبل التقديم.',
+	'results.criminal_records.status_label': 'الحالة',
+	'results.criminal_records.next_action_label': 'الإجراء التالي',
+	'pages.handover.criminal_records.title': 'جاهزية شهادات السوابق الجنائية',
+	'pages.handover.criminal_records.country': 'البلد',
+	'pages.handover.criminal_records.status': 'الحالة',
+	'pages.handover.criminal_records.next_actions': 'الإجراءات التالية',
 	'steps.evidence_before_cutoff.title':
 		'هل لديك أي مستندات يمكن أن تساعد في إثبات أنك كنت تعيش بالفعل في إسبانيا قبل يناير 2026؟',
 	'steps.evidence_before_cutoff.check_answers_label': 'مستندات قد تُظهر الإقامة قبل يناير 2026',

@@ -1,5 +1,12 @@
 import type { FormattedReference, MessageKey, MessageReference } from '$lib/content'
-import type { JourneyAnswers } from '$lib/journey/types'
+import { getCountryName } from '$lib/generated/countries'
+import {
+	ensureSpain,
+	parsePreviousResidenceCountries,
+	validateCriminalRecordCertificates,
+	validatePreviousResidenceCountries
+} from '$lib/journey/previous-residence-countries'
+import type { JourneyAnswers, PreviousResidenceCountry } from '$lib/journey/types'
 import type { JourneyStepDefinition } from './config'
 
 interface ParseSuccess {
@@ -119,8 +126,81 @@ const selectAdapter: FieldAdapter = {
 	format: singleChoiceAdapter.format
 }
 
+const getPreviousResidenceCountries = (answers: JourneyAnswers) =>
+	answers.previousResidenceCountries ?? []
+
+const formatPreviousResidenceCountryNames = (countries: PreviousResidenceCountry[]) =>
+	countries.map((country) => raw(getCountryName(country.countryCode)))
+
+const formatCriminalRecordCertificateCountry = (
+	country: PreviousResidenceCountry
+): FormattedReference[] => {
+	if (!country.certificateStatus) return []
+
+	const countryName = getCountryName(country.countryCode)
+	const status = message(
+		`steps.criminal_record_certificates.options.${country.certificateStatus}` as MessageKey
+	)
+
+	return [
+		message('steps.criminal_record_certificates.check_answers.entry', {
+			country: raw(countryName),
+			status
+		})
+	]
+}
+
+const countryListAdapter: FieldAdapter = {
+	getFormValue: (answers) => getPreviousResidenceCountries(answers),
+	parse: (formData, step) => {
+		const value = ensureSpain(parsePreviousResidenceCountries(formData.get(step.field)))
+		const errorKey = validatePreviousResidenceCountries(value)
+
+		if (errorKey) {
+			return { ok: false, errorKey: errorKey as MessageKey, formValue: value }
+		}
+
+		return {
+			ok: true,
+			answersPatch: { previousResidenceCountries: value },
+			formValue: value
+		}
+	},
+	format: (answers) => {
+		const countries = getPreviousResidenceCountries(answers)
+		return countries.length > 0 ? formatPreviousResidenceCountryNames(countries) : notAnswered()
+	}
+}
+
+const countryCertificateStatusAdapter: FieldAdapter = {
+	getFormValue: (answers) => getPreviousResidenceCountries(answers),
+	parse: (formData, step) => {
+		const value = ensureSpain(parsePreviousResidenceCountries(formData.get(step.field)))
+		const errorKey = validateCriminalRecordCertificates(value)
+
+		if (errorKey) {
+			return { ok: false, errorKey: errorKey as MessageKey, formValue: value }
+		}
+
+		return {
+			ok: true,
+			answersPatch: { previousResidenceCountries: value },
+			formValue: value
+		}
+	},
+	format: (answers) => {
+		const countries = getPreviousResidenceCountries(answers)
+		const foreignCountries = countries.filter((country) => country.countryCode !== 'ES')
+		if (foreignCountries.length === 0) return notAnswered()
+
+		return foreignCountries.flatMap((country) => formatCriminalRecordCertificateCountry(country))
+	}
+}
+
 export const fieldAdapters = {
 	'single-choice': singleChoiceAdapter,
 	'multi-choice': multiChoiceAdapter,
-	select: selectAdapter
+	select: selectAdapter,
+	'country-list': countryListAdapter,
+	'country-certificate-status': countryCertificateStatusAdapter
 } satisfies Record<string, FieldAdapter>
