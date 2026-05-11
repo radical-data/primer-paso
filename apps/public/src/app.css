@@ -707,7 +707,7 @@
 		@apply grid gap-4;
 	}
 
-	.eyebrow {
+	.step-label {
 		@apply text-muted-foreground m-0 text-sm font-semibold tracking-[0.02em];
 	}
 
