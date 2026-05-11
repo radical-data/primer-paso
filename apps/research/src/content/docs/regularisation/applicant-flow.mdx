@@ -1,87 +1,128 @@
 ---
 title: Mapping an Applicant Flow
-description: Mapping the flow of an applicant's journey through regularisation
+description: Mapping an applicant's journey through regularisation
 ---
 
 ```mermaid
 flowchart TD
-    START([Start]) --> ARRIVED{Did the person arrive in Spain<br/>before 1 Jan 2026?}
+    START([Start]) --> WINDOW{Within official<br/>application window?}
 
-    ARRIVED -- No --> NOT_ELIGIBLE_ARRIVAL[Not eligible under this process:<br/>arrival after the cut-off date]
-    ARRIVED -- Yes --> ASYLUM{Has the person requested<br/>international protection / asylum in Spain?}
+    subgraph eligibility [Eligibility]
+        WINDOW -- No --> INELIGIBLE[Not eligible under this process]
+        WINDOW -- Yes --> EXCLUDED{Already has active authorisation,<br/>Ukraine protection, statelessness route,<br/>or another separate route?}
 
-    %% Eligibility paths
-    ASYLUM -- Yes --> PATH_A[Path A:<br/>International protection / asylum applicant]
-    ASYLUM -- No --> PATH_B[Path B:<br/>Non-asylum / irregular administrative situation]
+        EXCLUDED -- Yes --> NOT_THIS_PROCESS[Use existing / separate route]
+        EXCLUDED -- No --> PENDING{Already submitted arraigo /<br/>exceptional-circumstances application?}
 
-    PATH_A --> DOC_A[Prepare asylum / protection evidence<br/>No vulnerability certificate normally required]
+        PENDING -- Yes --> NOT_THIS_PROCESS
+        PENDING -- No --> STATUS{Are they currently in an irregular<br/>administrative situation or an eligible<br/>international protection applicant?}
 
-    PATH_B --> FAMILY{Can they prove qualifying family unit?}
+        STATUS -- No --> INELIGIBLE
+        STATUS -- Yes --> ARRIVED{Were they in Spain<br/>before 1 Jan 2026?}
 
-    FAMILY -- Yes --> DOC_B2[Path B2:<br/>Family-unit route<br/>No vulnerability certificate required]
+        ARRIVED -- No --> INELIGIBLE
+        ARRIVED -- Yes --> ASYLUM{Had they requested, registered,<br/>or formalised international protection<br/>in Spain before 1 Jan 2026?}
 
-    FAMILY -- No --> WORK{Can they prove work in Spain<br/>or intention to work?}
+        ASYLUM -- Yes --> PATH_A[Path A:<br/>International protection / asylum applicant]
+        ASYLUM -- No --> RECENT_PRESENCE{Were they in Spain during<br/>the 5 months before application?}
 
-    WORK -- Yes --> DOC_B1[Path B1:<br/>Work or intention-to-work route<br/>No vulnerability certificate required]
+        RECENT_PRESENCE -- No --> INELIGIBLE
+        RECENT_PRESENCE -- Yes --> PATH_B[Path B:<br/>Non-asylum / irregular administrative situation]
 
-    WORK -- No --> VULN{Could they apply through vulnerability?}
+        PATH_B --> FAMILY{Are they part of a<br/>qualifying family unit?}
 
-    VULN -- Yes --> VULN_NEED[Path B3:<br/>Vulnerability route<br/>Vulnerability certificate required]
+        FAMILY -- Yes --> PATH_B2[Path B2:<br/>Family-unit route]
 
-    VULN -- No --> NO_ROUTE[No route identified by this guide<br/>Seek specialist advice]
+        FAMILY -- No --> WORK{Have they worked in Spain<br/>or do they intend to work?}
 
-    %% Vulnerability certificate branch
-    VULN_NEED --> DOWNLOAD_CERT[Download the official vulnerability<br/>certificate model]
-    DOWNLOAD_CERT --> COMPLETE_CERT[Complete the certificate form<br/>with the person's details and circumstances]
-    COMPLETE_CERT --> FIND_CERTIFIER[Find an eligible organisation<br/>that can accredit the certificate]
-    FIND_CERTIFIER --> ACCREDIT_CERT[Get the certificate accredited,<br/>signed/sealed, and returned]
-    ACCREDIT_CERT --> CERT_OK{Certificate obtained?}
+        WORK -- Yes --> PATH_B1[Path B1:<br/>Work or intention-to-work route]
 
-    CERT_OK -- Yes --> DOC_B3[Prepare vulnerability-route application pack<br/>Include accredited vulnerability certificate]
-    CERT_OK -- No --> NO_VULN_CERT[Cannot currently use vulnerability route<br/>Seek specialist advice or check another route]
+        WORK -- No --> VULN{Are they in a situation<br/>of vulnerability?}
 
-    %% Documents ready
-    DOC_A --> DOC_READY{Are all required documents ready?}
-    DOC_B1 --> DOC_READY
-    DOC_B2 --> DOC_READY
-    DOC_B3 --> DOC_READY
+        VULN -- Yes --> PATH_B3[Path B3:<br/>Vulnerability route]
 
-    DOC_READY -- No --> GATHER[Gather missing documents<br/>or get advice from a qualified person / entity]
-    GATHER --> DOC_READY
+        VULN -- No --> INELIGIBLE
+    end
 
-    DOC_READY -- Yes --> ELECTRONIC{Can the application be submitted electronically?}
+    subgraph documents [Document preparation]
+        PATH_A --> DOC_A[Prepare asylum / protection evidence]
 
-    %% Electronic routes
-    ELECTRONIC -- Yes --> E_ROUTE{Which electronic route?}
+        PATH_B2 --> DOC_B2[Prepare family-unit route evidence]
 
-    E_ROUTE --> OWN_CERT[Own digital certificate / Cl@ve / electronic ID]
-    E_ROUTE --> APOD[Representative via Registro Electrónico de Apoderamientos]
-    E_ROUTE --> PRO[Lawyer / graduado social / gestoría administrativa]
-    E_ROUTE --> NGO[Registered Entidad Colaboradora de Extranjería]
+        PATH_B1 --> DOC_B1[Prepare work or intention-to-work evidence]
 
-    OWN_CERT --> SUBMITTED[Application submitted]
-    APOD --> SUBMITTED
-    PRO --> SUBMITTED
-    NGO --> SUBMITTED
+        PATH_B3 --> COMPLETE_CERT
 
-    %% Presential cita branch
-    ELECTRONIC -- No --> PRESENTIAL[Presential submission route]
-    PRESENTIAL --> NEED_CITA[Regularisation cita previa required]
-    NEED_CITA --> CITA_METHOD{How to request cita previa?}
+        subgraph vulnerability_certificate [Vulnerability certificate]
+            COMPLETE_CERT[Complete the official vulnerability certificate form]
+            COMPLETE_CERT --> DOC_B3[Get eligible organisation to accredit certificate]
+        end
 
-    CITA_METHOD --> CITA_CLAVE[With Cl@ve through cita previa system<br/>Can choose office, date, and time]
-    CITA_METHOD --> CITA_FORM[Through web form<br/>System assigns appointment]
-    CITA_METHOD --> CITA_PHONE[Call 060<br/>Phone route]
+        DOC_A --> RECORDS_CHECK{Criminal / police record,<br/>public-order, public-security<br/>or public-health issue?}
+        DOC_B1 --> RECORDS_CHECK
+        DOC_B2 --> RECORDS_CHECK
+        DOC_B3 --> RECORDS_CHECK
 
-    CITA_CLAVE --> ATTEND[Attend enabled office<br/>with complete documents]
-    CITA_FORM --> ATTEND
-    CITA_PHONE --> ATTEND
+        subgraph criminal_records [Criminal / police records]
+            RECORDS_CHECK -- Yes --> RESOLVE_RECORDS[Check whether the issue can be<br/>cancelled, suppressed, corrected,<br/>expired, or clarified]
 
-    ATTEND --> SUBMITTED
+            RESOLVE_RECORDS --> RECORDS_RESOLVED{Issue resolved,<br/>not relevant, or safe to proceed?}
+
+            RECORDS_RESOLVED -- No --> DO_NOT_SUBMIT[Do not submit yet:<br/>records / public-order issue unresolved]
+        end
+
+        RECORDS_RESOLVED -- Yes --> COMMON_DOCS[Prepare common documents:<br/>identity document, dated presence evidence,<br/>criminal records, contact details]
+        RECORDS_CHECK -- No --> COMMON_DOCS
+    end
+
+    subgraph submission [Submission]
+        COMMON_DOCS--> ELECTRONIC{Can the application be submitted electronically?}
+
+        ELECTRONIC -- Yes --> E_ROUTE{Which electronic route?}
+
+        E_ROUTE --> OWN_CERT[Own digital certificate / Cl@ve / electronic ID]
+        E_ROUTE --> APOD[Representative via Registro Electrónico de Apoderamientos]
+        E_ROUTE --> PRO[Lawyer / graduado social / gestoría administrativa]
+        E_ROUTE --> NGO[Registered Entidad Colaboradora de Extranjería]
+
+        OWN_CERT --> SUBMITTED[Application submitted]
+        APOD --> SUBMITTED
+        PRO --> SUBMITTED
+        NGO --> SUBMITTED
+
+        ELECTRONIC -- No --> PRESENTIAL[Presential submission route]
+        PRESENTIAL --> NEED_CITA[Regularisation cita previa required]
+        NEED_CITA --> CITA_METHOD{How to request cita previa?}
+
+        CITA_METHOD --> CITA_CLAVE[With Cl@ve through cita previa system<br/>Can choose office, date, and time]
+        CITA_METHOD --> CITA_FORM[Through web form<br/>System assigns appointment]
+        CITA_METHOD --> CITA_PHONE[Call 060<br/>Phone route]
+
+        CITA_CLAVE --> ATTEND[Attend enabled office<br/>with complete documents]
+        CITA_FORM --> ATTEND
+        CITA_PHONE --> ATTEND
+
+        ATTEND --> SUBMITTED
+    end
+
+    subgraph after_submission [After submission]
+        SUBMITTED --> UTEX[Wait for UTEX start-of-procedure<br/>communication]
+        UTEX --> START_NOTICE{Start communication received?}
+
+        START_NOTICE -- No --> MONITOR[Monitor notifications<br/>and check contact details]
+        MONITOR --> START_NOTICE
+
+        START_NOTICE -- Yes --> WORK_RIGHTS[Work authorisation activated<br/>NUSS and healthcare recognition processed]
+        WORK_RIGHTS --> WAIT_RESOLUTION[Wait for resolution]
+        WAIT_RESOLUTION --> RESOLUTION{Resolution favourable?}
+
+        RESOLUTION -- Yes --> TIE[Apply for TIE within one month<br/>at National Police documentation unit]
+        RESOLUTION -- No --> APPEAL[Unfavourable resolution:<br/>appeal or alternative route]
+    end
 
     class START start;
-    class NOT_ELIGIBLE_ARRIVAL,NO_ROUTE,NO_VULN_CERT stop;
-    class ARRIVED,ASYLUM,FAMILY,WORK,VULN,CERT_OK,DOC_READY,ELECTRONIC,E_ROUTE,CITA_METHOD decision;
-    class PATH_A,PATH_B,DOC_A,DOC_B1,DOC_B2,DOC_B3,VULN_NEED,DOWNLOAD_CERT,COMPLETE_CERT,FIND_CERTIFIER,ACCREDIT_CERT,GATHER,PRESENTIAL,NEED_CITA,CITA_CLAVE,CITA_FORM,CITA_PHONE,ATTEND,OWN_CERT,APOD,PRO,NGO action;
+    class INELIGIBLE,NOT_THIS_PROCESS,DO_NOT_SUBMIT,APPEAL stop;
+    class WINDOW,EXCLUDED,PENDING,STATUS,ARRIVED,RECENT_PRESENCE,ASYLUM,FAMILY,WORK,VULN,RECORDS_CHECK,RECORDS_RESOLVED,ELECTRONIC,E_ROUTE,CITA_METHOD,START_NOTICE,RESOLUTION decision;
+    class PATH_A,PATH_B,PATH_B1,PATH_B2,DOC_B3,PATH_B3,DOC_A,DOC_B1,DOC_B2,DOC_B3,DOWNLOAD_CERT,COMPLETE_CERT,FIND_CERTIFIER,RESOLVE_RECORDS,COMMON_DOCS,PRESENTIAL,NEED_CITA,CITA_CLAVE,CITA_FORM,CITA_PHONE,ATTEND,OWN_CERT,APOD,PRO,NGO,UTEX,MONITOR,WORK_RIGHTS,WAIT_RESOLUTION,TIE action;
     class SUBMITTED success;
 ```

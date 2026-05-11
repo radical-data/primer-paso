@@ -23,17 +23,13 @@ export default defineConfig({
 				{
 					label: 'Civic tech',
 					autogenerate: { directory: 'civic-tech' }
+				},
+				{
+					label: 'Spain',
+					autogenerate: { directory: 'spain' }
 				}
 			]
 		}),
-		mermaid({
-			theme: 'forest',
-			autoTheme: true,
-			mermaidConfig: {
-				flowchart: {
-					curve: 'basis'
-				}
-			}
-		})
+		mermaid()
 	]
 })
