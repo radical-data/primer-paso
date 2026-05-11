@@ -20,7 +20,7 @@ type CountryListProps = {
 		allOtherCountries: string
 		searchResults: string
 	}
-	commonCountryCodes?: string[]
+	commonCountryCodes?: readonly string[]
 	describedby?: string
 }
 
