@@ -1,0 +1,21 @@
+export const COMMON_PREVIOUS_RESIDENCE_COUNTRY_CODES = [
+	'CO',
+	'MA',
+	'VE',
+	'PE',
+	'HN',
+	'EC',
+	'PK',
+	'SN',
+	'BO',
+	'NI',
+	'DO',
+	'AR',
+	'BR',
+	'CL',
+	'CU',
+	'SV',
+	'GT',
+	'NG',
+	'UA'
+] as const

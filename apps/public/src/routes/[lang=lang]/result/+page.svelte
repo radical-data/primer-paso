@@ -6,6 +6,7 @@ import { Button } from '@primer-paso/ui/button'
 import { StatusPanel } from '@primer-paso/ui/status-panel'
 import { trackEvent } from '$lib/analytics/matomo'
 import { getTranslator } from '$lib/content'
+import { getCountryName } from '$lib/generated/countries'
 import { localiseHref } from '$lib/i18n/routing'
 import { resultTone } from '$lib/result-ui'
 
@@ -29,6 +30,19 @@ const otherPossibleRoutes = $derived(
 	data.result.possibleEligibilityRoutes.filter(
 		(route) => route !== data.result.recommendedEligibilityRoute
 	)
+)
+const showChecklist = $derived(
+	data.result.checklist.alreadyHave.length > 0 ||
+		data.result.checklist.stillNeed.length > 0 ||
+		data.result.checklist.discussWithSupport.length > 0 ||
+		data.result.checklist.unresolved.length > 0 ||
+		data.result.criminalRecordAssessments.length > 0
+)
+const criminalRecordAlreadyHave = $derived(
+	data.result.criminalRecordAssessments.filter((assessment) => assessment.status === 'already_have')
+)
+const criminalRecordStillNeed = $derived(
+	data.result.criminalRecordAssessments.filter((assessment) => assessment.status !== 'already_have')
 )
 </script>
 <svelte:head> <meta name="robots" content="noindex, nofollow"> </svelte:head>
@@ -96,7 +110,7 @@ const otherPossibleRoutes = $derived(
 			{/if}
 		</section>
 
-		{#if data.result.checklist.alreadyHave.length > 0 || data.result.checklist.stillNeed.length > 0 || data.result.checklist.discussWithSupport.length > 0 || data.result.checklist.unresolved.length > 0}
+		{#if showChecklist}
 			<section class="panel section-block">
 				<div class="section-block">
 					<h2 class="section-title inline-flex items-center gap-2">
@@ -105,22 +119,47 @@ const otherPossibleRoutes = $derived(
 					</h2>
 				</div>
 				<div class="result-grid">
-					{#if data.result.checklist.alreadyHave.length > 0}
+					{#if data.result.checklist.alreadyHave.length > 0 || criminalRecordAlreadyHave.length > 0}
 						<div class="list-section">
 							<h3>{tt('pages.result.checklist.already_have')}</h3>
 							<ul>
 								{#each data.result.checklist.alreadyHave as itemKey (itemKey)}
 									<li>{tt(itemKey)}</li>
 								{/each}
+								{#each criminalRecordAlreadyHave as assessment (assessment.countryCode)}
+									<li>
+										{assessment.countryCode === 'unknown'
+											? tt('results.criminal_records.status.unknown')
+											: getCountryName(assessment.countryCode, data.locale ?? 'es')}:
+										{tt(`results.criminal_records.status.${assessment.status}`)}
+									</li>
+								{/each}
 							</ul>
 						</div>
 					{/if}
-					{#if data.result.checklist.stillNeed.length > 0}
+					{#if data.result.checklist.stillNeed.length > 0 || criminalRecordStillNeed.length > 0}
 						<div class="list-section">
 							<h3>{tt('pages.result.checklist.still_need')}</h3>
 							<ul>
 								{#each data.result.checklist.stillNeed as itemKey (itemKey)}
 									<li>{tt(itemKey)}</li>
+								{/each}
+								{#each criminalRecordStillNeed as assessment (assessment.countryCode)}
+									<li>
+										{assessment.countryCode === 'unknown'
+											? tt('results.criminal_records.status.unknown')
+											: getCountryName(assessment.countryCode, data.locale ?? 'es')}:
+										{tt(`results.criminal_records.status.${assessment.status}`)}
+										{#if assessment.nextActions.length > 0}
+											<ul>
+												{#each assessment.nextActions as action (action)}
+													<li>
+														{tt(`results.criminal_records.next_actions.${action}`)}
+													</li>
+												{/each}
+											</ul>
+										{/if}
+									</li>
 								{/each}
 							</ul>
 						</div>

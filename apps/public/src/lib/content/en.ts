@@ -269,6 +269,58 @@ export const en = {
 	'steps.identity_documents.options.no_identity_documents_now':
 		'I do not have any identity documents with me now',
 	'steps.identity_documents.options.prefer_not_to_say': 'Prefer not to say',
+	'steps.previous_residence_countries.title':
+		'In which countries have you lived during the last five years?',
+	'steps.previous_residence_countries.body':
+		'Add any other country where you have lived during this period.',
+	'steps.previous_residence_countries.hint':
+		'You will usually need criminal-record certificates from the selected countries outside Spain.',
+	'steps.previous_residence_countries.error': 'Spain must stay selected.',
+	'steps.previous_residence_countries.check_answers_label':
+		'Countries lived in during the last five years',
+	'steps.previous_residence_countries.search_label': 'Search all countries',
+	'steps.previous_residence_countries.spain_locked_label': 'Spain',
+	'steps.previous_residence_countries.spain_locked_hint': 'Already included. Cannot be removed.',
+	'steps.previous_residence_countries.common_countries_label': 'Common countries',
+	'steps.previous_residence_countries.all_other_countries': 'All other countries',
+	'steps.previous_residence_countries.search_results': 'Search results',
+	'steps.criminal_record_certificates.title':
+		'What is the status of each criminal-record certificate?',
+	'steps.criminal_record_certificates.body':
+		'Tell us whether you already have the certificate, have requested it, have not requested it yet, or are not sure.',
+	'steps.criminal_record_certificates.hint':
+		'If you requested a certificate, keep proof of the request.',
+	'steps.criminal_record_certificates.error': 'Answer the certificate questions for each country.',
+	'steps.criminal_record_certificates.check_answers_label': 'Criminal-record certificate status',
+	'steps.criminal_record_certificates.check_answers.entry': '{country}: {status}',
+	'steps.criminal_record_certificates.options.already_have': 'I already have it',
+	'steps.criminal_record_certificates.options.requested_waiting': 'I requested it and am waiting',
+	'steps.criminal_record_certificates.options.not_requested_yet': 'I have not requested it yet',
+	'steps.criminal_record_certificates.options.not_sure': 'I am not sure',
+	'results.criminal_records.title': 'Criminal-record certificate readiness',
+	'results.criminal_records.intro':
+		'Spanish criminal records are checked by the administration. For other countries where you lived during the relevant period, you will usually need a criminal-record certificate.',
+	'results.criminal_records.status.already_have': 'You said you already have this certificate.',
+	'results.criminal_records.status.requested_waiting':
+		'You said you requested this certificate and are waiting.',
+	'results.criminal_records.status.not_requested_yet':
+		'You said this certificate has not been requested yet.',
+	'results.criminal_records.status.not_sure': 'You are not sure about this certificate.',
+	'results.criminal_records.status.unknown': 'The country information is missing or unclear.',
+	'results.criminal_records.next_actions.request_criminal_record_certificate_today':
+		'Request this certificate as soon as possible.',
+	'results.criminal_records.next_actions.save_certificate_request_proof':
+		'Keep proof that the certificate was requested.',
+	'results.criminal_records.next_actions.wait_until_one_month_then_prepare_fallback':
+		'If one month passes and it has not arrived, prepare the fallback information before seeking help.',
+	'results.criminal_records.next_actions.ask_specialist_about_criminal_record_certificate':
+		'Ask a specialist or registered organisation to review this before submitting.',
+	'results.criminal_records.status_label': 'Status',
+	'results.criminal_records.next_action_label': 'Next action',
+	'pages.handover.criminal_records.title': 'Criminal-record certificate readiness',
+	'pages.handover.criminal_records.country': 'Country',
+	'pages.handover.criminal_records.status': 'Status',
+	'pages.handover.criminal_records.next_actions': 'Next actions',
 	'steps.evidence_before_cutoff.title':
 		'Do you have any documents that could help show you were already living in Spain before January 2026?',
 	'steps.evidence_before_cutoff.check_answers_label':

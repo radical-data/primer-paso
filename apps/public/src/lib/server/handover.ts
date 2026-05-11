@@ -1,12 +1,15 @@
 import { getTranslator, type Locale, type MessageKey, renderReference } from '$lib/content'
+import { getCountryName } from '$lib/generated/countries'
 import { journeySteps } from '$lib/journey/config'
 import { fieldAdapters } from '$lib/journey/field-adapters'
 import type { JourneyState } from '$lib/journey/types'
+import type { CriminalRecordNextAction } from '$lib/triage/criminal-records'
 import { runTriage } from '$lib/triage/engine'
 import type {
 	EligibilityRoute,
 	PositiveEligibilityRoute,
 	ResultState,
+	RouteBlocker,
 	SubmissionPath
 } from '$lib/triage/types'
 
@@ -21,6 +24,14 @@ export const OFFICIAL_PORTAL_URL = 'https://inclusion.gob.es/regularizacion'
 export const COLLABORATORS_PDF_URL =
 	'https://www.inclusion.gob.es/documents/d/guest/pdf-entidades-colaboradoras-16042026.pdf?download=false'
 
+export interface HandoverCriminalRecordCountry {
+	countryCode: string
+	countryName: string
+	status: string
+	blockers: RouteBlocker[]
+	nextActions: CriminalRecordNextAction[]
+}
+
 export interface HandoverPacket {
 	version: 1
 	sessionId: string
@@ -34,6 +45,9 @@ export interface HandoverPacket {
 	recommendedSubmissionPath: SubmissionPath
 	routeBody: string
 	checklist: TranslatedChecklist
+	criminalRecords?: {
+		countries: HandoverCriminalRecordCountry[]
+	}
 	officialPortalUrl: string
 	collaboratorsPdfUrl: string
 	answers: Array<{ label: string; value: string }>
@@ -58,6 +72,24 @@ export const buildHandoverPacket = (state: JourneyState, locale: Locale): Handov
 		}))
 		.filter((entry) => entry.value && entry.value !== notAnswered)
 
+	const criminalRecords = state.answers.previousResidenceCountries?.some(
+		(country) => country.countryCode !== 'ES'
+	)
+		? {
+				countries: result.criminalRecordAssessments
+					.filter((assessment) => assessment.countryCode !== 'unknown')
+					.map((assessment) => {
+						return {
+							countryCode: assessment.countryCode,
+							countryName: getCountryName(assessment.countryCode, locale),
+							status: tt(`results.criminal_records.status.${assessment.status}` as MessageKey),
+							blockers: assessment.blockers,
+							nextActions: assessment.nextActions
+						}
+					})
+			}
+		: undefined
+
 	return {
 		version: 1,
 		sessionId: state.sessionId,
@@ -76,6 +108,7 @@ export const buildHandoverPacket = (state: JourneyState, locale: Locale): Handov
 			discussWithSupport: result.checklist.discussWithSupport.map((key) => tt(key)),
 			unresolved: result.checklist.unresolved.map((key) => tt(key))
 		},
+		criminalRecords,
 		officialPortalUrl: OFFICIAL_PORTAL_URL,
 		collaboratorsPdfUrl: COLLABORATORS_PDF_URL,
 		answers

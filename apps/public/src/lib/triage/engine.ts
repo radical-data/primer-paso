@@ -1,5 +1,6 @@
 import type { MessageKey } from '$lib/content'
 import type { JourneyAnswers } from '$lib/journey/types'
+import { assessCriminalRecordCertificates } from '$lib/triage/criminal-records'
 import type {
 	EligibilityRoute,
 	PositiveEligibilityRoute,
@@ -16,7 +17,12 @@ const buildChecklist = (
 	resultState: TriageResult['resultState']
 ): PreparationChecklist => {
 	if (resultState === 'not_this_process') {
-		return { alreadyHave: [], stillNeed: [], discussWithSupport: [], unresolved: [] }
+		return {
+			alreadyHave: [],
+			stillNeed: [],
+			discussWithSupport: [],
+			unresolved: []
+		}
 	}
 
 	const identityDocuments = answers.identityDocuments ?? []
@@ -148,8 +154,13 @@ export const getRecommendedEligibilityRoute = (answers: JourneyAnswers): Eligibi
 
 const getRecommendedSubmissionPath = (
 	answers: JourneyAnswers,
-	recommendedEligibilityRoute: EligibilityRoute
+	recommendedEligibilityRoute: EligibilityRoute,
+	needsSpecialistCriminalRecordReview: boolean
 ): SubmissionPath => {
+	if (needsSpecialistCriminalRecordReview) {
+		return 'specialist_review_first'
+	}
+
 	if (
 		recommendedEligibilityRoute === 'not_this_process' ||
 		recommendedEligibilityRoute === 'needs_specialist_review' ||
@@ -195,9 +206,16 @@ const getReasonKey = (answers: JourneyAnswers, route: EligibilityRoute): Message
 export const runTriage = (answers: JourneyAnswers): TriageResult => {
 	const possibleEligibilityRoutes = getPossibleEligibilityRoutes(answers)
 	const recommendedEligibilityRoute = getRecommendedEligibilityRoute(answers)
+	const criminalRecordAssessments = assessCriminalRecordCertificates(
+		answers.previousResidenceCountries
+	)
+	const needsSpecialistCriminalRecordReview = criminalRecordAssessments.some(
+		(assessment) => assessment.urgency === 'specialist_review'
+	)
 	const recommendedSubmissionPath = getRecommendedSubmissionPath(
 		answers,
-		recommendedEligibilityRoute
+		recommendedEligibilityRoute,
+		needsSpecialistCriminalRecordReview
 	)
 	const resultState = getResultState(recommendedEligibilityRoute)
 
@@ -206,6 +224,7 @@ export const runTriage = (answers: JourneyAnswers): TriageResult => {
 		recommendedEligibilityRoute,
 		possibleEligibilityRoutes,
 		recommendedSubmissionPath,
+		criminalRecordAssessments,
 		reasonKey: getReasonKey(answers, recommendedEligibilityRoute),
 		explanationKey: getExplanationKey(recommendedEligibilityRoute),
 		checklist: buildChecklist(answers, resultState)

@@ -220,6 +220,28 @@ export const buildHandoverPdf = async (
 		packet.checklist.stillNeed.length > 0 ||
 		packet.checklist.discussWithSupport.length > 0 ||
 		packet.checklist.unresolved.length > 0
+	if (packet.criminalRecords && packet.criminalRecords.countries.length > 0) {
+		gap(10)
+		drawSectionTitle(tt('pages.handover.criminal_records.title'))
+		for (const country of packet.criminalRecords.countries) {
+			drawWrapped(
+				`${tt('pages.handover.criminal_records.country')}: ${country.countryName}`,
+				BODY_SIZE,
+				true
+			)
+			drawWrapped(`${tt('pages.handover.criminal_records.status')}: ${country.status}`)
+			if (country.nextActions.length > 0) {
+				drawWrapped(tt('pages.handover.criminal_records.next_actions'), BODY_SIZE, true)
+				drawList(
+					country.nextActions.map((action) =>
+						tt(`results.criminal_records.next_actions.${action}` as MessageKey)
+					)
+				)
+			}
+			gap(4)
+		}
+	}
+
 	if (hasChecklistItems) {
 		gap(10)
 		drawSectionTitle(tt('pages.handover.checklist_title'))

@@ -280,6 +280,60 @@ export const es = {
 	'steps.identity_documents.options.no_identity_documents_now':
 		'No tengo documentos de identidad conmigo ahora',
 	'steps.identity_documents.options.prefer_not_to_say': 'Prefiero no decirlo',
+	'steps.previous_residence_countries.title':
+		'¿En qué países has vivido durante los últimos cinco años?',
+	'steps.previous_residence_countries.body':
+		'Agrega cualquier otro país donde hayas vivido durante este periodo.',
+	'steps.previous_residence_countries.hint':
+		'Normalmente necesitarás certificados de antecedentes penales de los países seleccionados fuera de España.',
+	'steps.previous_residence_countries.error': 'España debe permanecer seleccionada.',
+	'steps.previous_residence_countries.check_answers_label':
+		'Países donde viviste durante los últimos cinco años',
+	'steps.previous_residence_countries.search_label': 'Buscar en todos los países',
+	'steps.previous_residence_countries.spain_locked_label': 'España',
+	'steps.previous_residence_countries.spain_locked_hint': 'Ya incluida. No se puede quitar.',
+	'steps.previous_residence_countries.common_countries_label': 'Países comunes',
+	'steps.previous_residence_countries.all_other_countries': 'Todos los demás países',
+	'steps.previous_residence_countries.search_results': 'Resultados de búsqueda',
+	'steps.criminal_record_certificates.title':
+		'¿Cuál es el estado de cada certificado de antecedentes penales?',
+	'steps.criminal_record_certificates.body':
+		'Indica si ya tienes el certificado, si lo solicitaste y estás esperando, si todavía no lo has solicitado o si no estás seguro/a.',
+	'steps.criminal_record_certificates.hint':
+		'Si solicitaste un certificado, guarda el comprobante de la solicitud.',
+	'steps.criminal_record_certificates.error':
+		'Responde las preguntas sobre el certificado para cada país.',
+	'steps.criminal_record_certificates.check_answers_label':
+		'Estado del certificado de antecedentes penales',
+	'steps.criminal_record_certificates.check_answers.entry': '{country}: {status}',
+	'steps.criminal_record_certificates.options.already_have': 'Ya lo tengo',
+	'steps.criminal_record_certificates.options.requested_waiting': 'Lo solicité y estoy esperando',
+	'steps.criminal_record_certificates.options.not_requested_yet': 'Todavía no lo he solicitado',
+	'steps.criminal_record_certificates.options.not_sure': 'No estoy seguro/a',
+	'results.criminal_records.title': 'Preparación de certificados de antecedentes penales',
+	'results.criminal_records.intro':
+		'Los antecedentes penales en España los revisa la administración. Para otros países donde viviste durante el periodo relevante, normalmente necesitarás un certificado de antecedentes penales.',
+	'results.criminal_records.status.already_have': 'Indicaste que ya tienes este certificado.',
+	'results.criminal_records.status.requested_waiting':
+		'Indicaste que solicitaste este certificado y estás esperando.',
+	'results.criminal_records.status.not_requested_yet':
+		'Indicaste que este certificado todavía no se ha solicitado.',
+	'results.criminal_records.status.not_sure': 'No estás seguro/a sobre este certificado.',
+	'results.criminal_records.status.unknown': 'La información del país falta o no está clara.',
+	'results.criminal_records.next_actions.request_criminal_record_certificate_today':
+		'Solicita este certificado lo antes posible.',
+	'results.criminal_records.next_actions.save_certificate_request_proof':
+		'Guarda el comprobante de que solicitaste el certificado.',
+	'results.criminal_records.next_actions.wait_until_one_month_then_prepare_fallback':
+		'Si pasa un mes y no ha llegado, prepara la información alternativa antes de pedir ayuda.',
+	'results.criminal_records.next_actions.ask_specialist_about_criminal_record_certificate':
+		'Pide a un/a especialista u organización registrada que revise esto antes de presentar la solicitud.',
+	'results.criminal_records.status_label': 'Estado',
+	'results.criminal_records.next_action_label': 'Siguiente acción',
+	'pages.handover.criminal_records.title': 'Preparación de certificados de antecedentes penales',
+	'pages.handover.criminal_records.country': 'País',
+	'pages.handover.criminal_records.status': 'Estado',
+	'pages.handover.criminal_records.next_actions': 'Siguientes acciones',
 	'steps.evidence_before_cutoff.title':
 		'¿Tienes algún documento que pueda ayudar a mostrar que ya vivías en España antes de enero de 2026?',
 	'steps.evidence_before_cutoff.check_answers_label':
