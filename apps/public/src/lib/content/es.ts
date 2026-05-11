@@ -194,8 +194,6 @@ export const es = {
 	'steps.completion_mode.options.someone_else': 'Para otra persona, con su permiso',
 	'steps.completion_mode.options.support_worker': 'Soy trabajador/a de apoyo o voluntario/a',
 	'steps.presence_before_cutoff.title': '¿Ya vivías en España antes del 1 de enero de 2026?',
-	'steps.presence_before_cutoff.hint':
-		'Responde según si ya vivías en España antes de la fecha límite',
 	'steps.presence_before_cutoff.check_answers_label':
 		'Vivir en España antes del 1 de enero de 2026',
 	'steps.presence_before_cutoff.error':

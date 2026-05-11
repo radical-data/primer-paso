@@ -186,8 +186,6 @@ export const en = {
 	'steps.completion_mode.options.someone_else': 'Someone else, with their permission',
 	'steps.completion_mode.options.support_worker': "I'm a support worker or volunteer",
 	'steps.presence_before_cutoff.title': 'Were you already living in Spain before 1 January 2026?',
-	'steps.presence_before_cutoff.hint':
-		'Answer based on whether you were already living in Spain before the cut-off date',
 	'steps.presence_before_cutoff.check_answers_label': 'Living in Spain before 1 January 2026',
 	'steps.presence_before_cutoff.error':
 		'Choose whether you were already living in Spain before 1 January 2026.',

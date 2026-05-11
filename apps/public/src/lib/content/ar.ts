@@ -186,8 +186,6 @@ export const ar = {
 	'steps.completion_mode.options.someone_else': 'لشخص آخر، بإذنه',
 	'steps.completion_mode.options.support_worker': 'أنا عامل دعم أو متطوع',
 	'steps.presence_before_cutoff.title': 'هل كنت تعيش بالفعل في إسبانيا قبل 1 يناير 2026؟',
-	'steps.presence_before_cutoff.hint':
-		'أجب بناءً على ما إذا كنت تعيش بالفعل في إسبانيا قبل تاريخ الحد',
 	'steps.presence_before_cutoff.check_answers_label': 'العيش في إسبانيا قبل 1 يناير 2026',
 	'steps.presence_before_cutoff.error': 'اختر ما إذا كنت تعيش بالفعل في إسبانيا قبل 1 يناير 2026.',
 	'steps.common.options.yes': 'نعم',

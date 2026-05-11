@@ -117,7 +117,6 @@ const steps: JourneyStepDefinition[] = [
 		adapter: 'single-choice',
 		eyebrowKey: 'eyebrows.eligibility',
 		titleKey: 'steps.presence_before_cutoff.title',
-		hintKey: 'steps.presence_before_cutoff.hint',
 		errorKey: 'steps.presence_before_cutoff.error',
 		checkAnswersLabelKey: 'steps.presence_before_cutoff.check_answers_label',
 		includeInCheckAnswers: true,

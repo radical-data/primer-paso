@@ -198,8 +198,6 @@ export const fr = {
 	'steps.completion_mode.options.someone_else': 'Pour une autre personne, avec son autorisation',
 	'steps.completion_mode.options.support_worker': 'Je suis travailleur·euse social·e ou bénévole',
 	'steps.presence_before_cutoff.title': 'Viviez-vous déjà en Espagne avant le 1er janvier 2026 ?',
-	'steps.presence_before_cutoff.hint':
-		'Répondez en fonction du fait que vous viviez déjà en Espagne avant la date limite',
 	'steps.presence_before_cutoff.check_answers_label':
 		'Résidence en Espagne avant le 1er janvier 2026',
 	'steps.presence_before_cutoff.error':
