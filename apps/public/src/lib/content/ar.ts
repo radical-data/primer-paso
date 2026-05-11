@@ -70,7 +70,6 @@ export const ar = {
 	'pages.home.steps.submission.collaborating_intro':
 		'وإذا لم يكن لديك ذلك، يمكنك التقديم بمساعدة منظمة متعاونة.',
 	'pages.home.official_portal_action': 'البوابة الرسمية للتسوية',
-	'pages.start.eyebrow': 'المرحلة 1',
 	'pages.organisations.meta_title': 'البحث عن الجهات',
 	'pages.organisations.meta_description':
 		'تصفح الجهات المتعاونة حسب الاسم والمقاطعة وبيانات الاتصال.',
@@ -180,10 +179,6 @@ export const ar = {
 	'steps.common.multi_choice_not_sure_error':
 		'اختر خيارًا أو اختر «لا شيء من هذه الخيارات» أو «لست متأكدًا/ة».',
 
-	'eyebrows.session_setup': 'للبدء',
-	'eyebrows.eligibility': 'الأهلية',
-	'eyebrows.documents': 'المستندات',
-	'eyebrows.support': 'احتياجات الدعم',
 	'steps.completion_mode.title': 'لمن تملأ هذا الاستبيان؟',
 	'steps.completion_mode.hint': 'اختر الخيار الذي يطابق هذه الجلسة بأفضل شكل.',
 	'steps.completion_mode.check_answers_label': 'الشخص الذي تملأ له هذا الاستبيان',

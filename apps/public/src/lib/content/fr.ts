@@ -74,7 +74,6 @@ export const fr = {
 	'pages.home.steps.submission.collaborating_intro':
 		"Sinon, vous pouvez la déposer avec l'aide d'une organisation collaboratrice.",
 	'pages.home.official_portal_action': 'Portail officiel de régularisation',
-	'pages.start.eyebrow': 'Étape 1',
 	'pages.organisations.meta_title': 'Trouver des organisations',
 	'pages.organisations.meta_description':
 		'Parcourez les organisations collaboratrices par nom, province et coordonnées.',
@@ -192,10 +191,6 @@ export const fr = {
 	'steps.common.multi_choice_not_sure_error':
 		'Sélectionnez une option ou sélectionnez « Aucune de ces options » ou « Je ne sais pas ».',
 
-	'eyebrows.session_setup': 'Pour commencer',
-	'eyebrows.eligibility': 'Éligibilité',
-	'eyebrows.documents': 'Documents',
-	'eyebrows.support': 'Besoins d’accompagnement',
 	'steps.completion_mode.title': 'Pour qui remplissez-vous ce questionnaire ?',
 	'steps.completion_mode.hint': 'Choisissez l’option qui correspond le mieux à cette session.',
 	'steps.completion_mode.check_answers_label':

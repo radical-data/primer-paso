@@ -12,7 +12,6 @@ const tt = $derived(getTranslator(data.locale ?? 'es'))
 <svelte:head> <meta name="description" content={tt('chrome.meta_description')}> </svelte:head>
 
 <section class="stack">
-	<p class="eyebrow">{tt('pages.start.eyebrow')}</p>
 	<div class="app-card stack">
 		<h1 class="page-title">{tt('pages.start.title')}</h1>
 		<div class="prose-block">

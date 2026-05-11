@@ -70,7 +70,6 @@ export const en = {
 	'pages.home.steps.submission.collaborating_intro':
 		'If not, you can submit with the help of a collaborating organisation.',
 	'pages.home.official_portal_action': 'Official regularisation portal',
-	'pages.start.eyebrow': 'Milestone 1',
 	'pages.organisations.meta_title': 'Find organisations',
 	'pages.organisations.meta_description':
 		'Browse collaborating organisations by name, province, and contact details.',
@@ -180,10 +179,6 @@ export const en = {
 	'steps.common.multi_choice_not_sure_error':
 		'Select an option or select “None of these” or “Not sure”.',
 
-	'eyebrows.session_setup': 'Getting started',
-	'eyebrows.eligibility': 'Eligibility',
-	'eyebrows.documents': 'Documents',
-	'eyebrows.support': 'Support needs',
 	'steps.completion_mode.title': 'Who are you filling this in for?',
 	'steps.completion_mode.hint': 'Choose the option that best matches this session.',
 	'steps.completion_mode.check_answers_label': 'Who you are filling this in for',

@@ -53,7 +53,6 @@ export const load: PageServerLoad = ({ cookies, params, url }) => {
 			slug: step.slug,
 			field: step.field,
 			adapter: step.adapter,
-			eyebrow: step.eyebrowKey ? tt(step.eyebrowKey) : undefined,
 			title: tt(step.titleKey),
 			body: step.bodyKey ? tt(step.bodyKey) : undefined,
 			hint: step.hintKey ? tt(step.hintKey) : undefined,

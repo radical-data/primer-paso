@@ -82,7 +82,6 @@ export const es = {
 	'pages.home.steps.submission.collaborating_intro':
 		'Si no, puedes presentarla con el apoyo de una organización colaboradora.',
 	'pages.home.official_portal_action': 'Portal oficial de regularización',
-	'pages.start.eyebrow': 'Hito 1',
 	'pages.organisations.meta_title': 'Buscar organizaciones',
 	'pages.organisations.meta_description':
 		'Explora organizaciones colaboradoras por nombre, provincia y datos de contacto.',
@@ -188,10 +187,6 @@ export const es = {
 	'pages.result.collaborating_cta.title': 'Buscar una organización colaboradora',
 	'pages.result.collaborating_cta.lead':
 		'Explora el directorio público de organizaciones colaboradoras sin repetir el cuestionario.',
-	'eyebrows.session_setup': 'Para empezar',
-	'eyebrows.eligibility': 'Elegibilidad',
-	'eyebrows.documents': 'Documentos',
-	'eyebrows.support': 'Necesidades de apoyo',
 	'steps.completion_mode.title': '¿Para quién estás completando esto?',
 	'steps.completion_mode.hint': 'Elige la opción que mejor describa esta sesión.',
 	'steps.completion_mode.check_answers_label': 'Para quién estás completando esto',
