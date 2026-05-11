@@ -436,9 +436,21 @@ export const en = {
 		'Any missing identity papers or details that do not match.',
 	'result.checklist.item.asylum_history_to_explain':
 		'What happened in any asylum or protection process in Spain.',
-	'result.title.needs_specialist_review': 'Specialist review recommended',
+	'result.title.needs_specialist_review': 'Get specialist support before you apply',
 	'result.title.eligible': 'Recommended route found',
 	'result.title.not_this_process': 'This process may not fit',
+
+	'result.heading.eligible': 'You are likely eligible for this process',
+	'result.heading.needs_specialist_review': 'You may be eligible, but your case needs review',
+	'result.heading.not_this_process': 'This process may not fit your situation',
+
+	'result.route_summary.international_protection':
+		'The best route to check first is the international protection / asylum applicant route.',
+	'result.route_summary.family_unit': 'The best route to check first is the family-unit route.',
+	'result.route_summary.work_or_intention':
+		'The best route to check first is the work or intention-to-work route.',
+	'result.route_summary.vulnerability':
+		'The vulnerability route may be worth checking first with an organisation or social service.',
 	'result.eligibility_route.international_protection':
 		'International protection / asylum applicant route',
 	'result.eligibility_route.family_unit': 'Family-unit route',
@@ -453,7 +465,7 @@ export const en = {
 	'result.explanation.vulnerability':
 		'Based on your answers, the vulnerability route may be worth checking with an organisation or social service. This route usually needs a vulnerability certificate signed or sealed by an eligible body.',
 	'result.explanation.needs_specialist_review':
-		'Your answers do not clearly match one route. A specialist organisation should review the case before you submit.',
+		'Your answers do not clearly match one route. A specialist organisation should review your case before you submit.',
 	'result.explanation.not_this_process':
 		'Based on your answers, this regularisation process may not be the right process to use.',
 	'result.reason.not_present_before_cutoff':
@@ -467,5 +479,5 @@ export const en = {
 	'result.submission_path.registered_entity_online':
 		'The best next step is to contact a registered collaborating organisation if possible. They may be able to help prepare and submit the application electronically.',
 	'result.submission_path.specialist_review_first':
-		'The best next step is to get specialist advice before trying to submit.'
+		'Contact a registered collaborating organisation if possible. Take this summary with you so they can review your situation before you submit.'
 } as const

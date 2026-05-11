@@ -417,6 +417,18 @@ export const ar = {
 	'result.title.needs_specialist_review': 'يُوصى بمراجعة متخصصة',
 	'result.title.eligible': 'تم العثور على مسار موصى به',
 	'result.title.not_this_process': 'قد لا يناسبك هذا الإجراء',
+
+	'result.heading.eligible': 'من المرجّح أنك مؤهل لهذه العملية',
+	'result.heading.needs_specialist_review': 'قد تكون مؤهلاً، لكن حالتك تحتاج إلى مراجعة',
+	'result.heading.not_this_process': 'قد لا تكون هذه العملية مناسبة لوضعك',
+	'result.route_summary.international_protection':
+		'المسار الأفضل للتحقق منه أولاً هو على الأرجح مسار طالبي الحماية الدولية أو اللجوء.',
+	'result.route_summary.family_unit':
+		'المسار الأفضل للتحقق منه أولاً هو على الأرجح مسار وحدة الأسرة.',
+	'result.route_summary.work_or_intention':
+		'المسار الأفضل للتحقق منه أولاً هو على الأرجح مسار العمل أو نية العمل.',
+	'result.route_summary.vulnerability':
+		'قد يكون من الأفضل التحقق أولاً من مسار حالة الهشاشة مع منظمة أو خدمة اجتماعية.',
 	'result.eligibility_route.international_protection': 'مسار الحماية الدولية / طالب اللجوء',
 	'result.eligibility_route.family_unit': 'مسار الوحدة العائلية',
 	'result.eligibility_route.work_or_intention': 'مسار العمل أو نية العمل',

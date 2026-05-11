@@ -480,6 +480,20 @@ export const fr = {
 	'result.title.needs_specialist_review': 'Révision spécialisée recommandée',
 	'result.title.eligible': 'Voie recommandée identifiée',
 	'result.title.not_this_process': 'Ce processus ne convient peut-être pas',
+
+	'result.heading.eligible': 'Vous êtes probablement éligible à cette procédure',
+	'result.heading.needs_specialist_review':
+		'Vous êtes peut-être éligible, mais votre situation doit être examinée',
+	'result.heading.not_this_process':
+		'Cette procédure ne correspond peut-être pas à votre situation',
+	'result.route_summary.international_protection':
+		'La première voie à vérifier est probablement celle des personnes ayant demandé la protection internationale ou l’asile.',
+	'result.route_summary.family_unit':
+		'La première voie à vérifier est probablement la voie liée à l’unité familiale.',
+	'result.route_summary.work_or_intention':
+		'La première voie à vérifier est probablement la voie liée au travail ou à l’intention de travailler.',
+	'result.route_summary.vulnerability':
+		'La voie liée à une situation de vulnérabilité peut être à vérifier en premier avec une organisation ou un service social.',
 	'result.eligibility_route.international_protection':
 		'Voie de protection internationale / demandeur·euse d’asile',
 	'result.eligibility_route.family_unit': 'Voie de regroupement familial',

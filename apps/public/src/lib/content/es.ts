@@ -459,7 +459,8 @@ export const es = {
 		'Cualquier documento de identidad que falte o datos que no coincidan.',
 	'result.checklist.item.asylum_history_to_explain':
 		'Qué ocurrió en cualquier proceso de asilo o protección en España.',
-	'result.title.needs_specialist_review': 'Se recomienda revisión especializada',
+	'result.title.needs_specialist_review':
+		'Busca apoyo especializado antes de presentar la solicitud',
 	'result.title.eligible': 'Vía recomendada encontrada',
 	'result.title.not_this_process': 'Este proceso puede no encajar',
 	'result.eligibility_route.international_protection':
@@ -476,7 +477,7 @@ export const es = {
 	'result.explanation.vulnerability':
 		'Según tus respuestas, puede convenir revisar la vía de vulnerabilidad con una entidad o con servicios sociales. Esta vía suele requerir un certificado de vulnerabilidad firmado o sellado por un organismo habilitado.',
 	'result.explanation.needs_specialist_review':
-		'Tus respuestas no encajan claramente en una sola vía. Una organización especializada debería revisar el caso antes de presentar la solicitud.',
+		'Tus respuestas no encajan claramente en una sola vía. Una organización especializada debería revisar tu caso antes de presentar la solicitud.',
 	'result.explanation.not_this_process':
 		'Según tus respuestas, este proceso de regularización puede no ser el proceso adecuado.',
 	'result.reason.not_present_before_cutoff':
@@ -490,5 +491,5 @@ export const es = {
 	'result.submission_path.registered_entity_online':
 		'El mejor siguiente paso es contactar, si es posible, con una entidad colaboradora registrada. Puede ayudarte a preparar y presentar la solicitud por vía electrónica.',
 	'result.submission_path.specialist_review_first':
-		'El mejor siguiente paso es obtener asesoramiento especializado antes de intentar presentar la solicitud.'
+		'Contacta con una organización colaboradora registrada si es posible. Lleva este resumen para que puedan revisar tu situación antes de presentar la solicitud.'
 } satisfies Partial<Record<MessageKey, string>>

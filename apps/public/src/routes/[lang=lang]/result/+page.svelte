@@ -1,7 +1,6 @@
 <script lang="ts">
 import FileDownIcon from '@lucide/svelte/icons/file-down'
 import ListChecksIcon from '@lucide/svelte/icons/list-checks'
-import { Badge } from '@primer-paso/ui/badge'
 import { Button } from '@primer-paso/ui/button'
 import { StatusPanel } from '@primer-paso/ui/status-panel'
 import { trackEvent } from '$lib/analytics/matomo'
@@ -14,15 +13,6 @@ let { data } = $props()
 
 const tt = $derived(getTranslator(data.locale ?? 'es'))
 
-const badgeVariant = $derived.by(() => {
-	switch (data.result.resultState) {
-		case 'eligible':
-			return 'success'
-		default:
-			return 'warning'
-	}
-})
-
 const statusTone = $derived(resultTone[data.result.resultState])
 const checkAnswersHref = $derived(localiseHref(data.locale ?? 'es', '/check-answers'))
 const startAgainHref = $derived(localiseHref(data.locale ?? 'es', '/screener?new=1'))
@@ -31,6 +21,36 @@ const otherPossibleRoutes = $derived(
 		(route) => route !== data.result.recommendedEligibilityRoute
 	)
 )
+
+const resultHeadingKeys = {
+	eligible: 'result.heading.eligible',
+	needs_specialist_review: 'result.heading.needs_specialist_review',
+	not_this_process: 'result.heading.not_this_process'
+} as const
+
+const routeSummaryKeys = {
+	international_protection: 'result.route_summary.international_protection',
+	family_unit: 'result.route_summary.family_unit',
+	work_or_intention: 'result.route_summary.work_or_intention',
+	vulnerability: 'result.route_summary.vulnerability'
+} as const
+
+const resultHeadingKey = $derived.by(() => {
+	return resultHeadingKeys[data.result.resultState]
+})
+
+const routeSummaryKey = $derived.by(() => {
+	if (data.result.resultState !== 'eligible') return undefined
+	if (
+		data.result.recommendedEligibilityRoute === 'needs_specialist_review' ||
+		data.result.recommendedEligibilityRoute === 'not_this_process'
+	) {
+		return undefined
+	}
+
+	return routeSummaryKeys[data.result.recommendedEligibilityRoute]
+})
+
 const showChecklist = $derived(
 	data.result.checklist.alreadyHave.length > 0 ||
 		data.result.checklist.stillNeed.length > 0 ||
@@ -49,34 +69,16 @@ const criminalRecordStillNeed = $derived(
 <section class="stack">
 	<div class="result-grid">
 		<StatusPanel tone={statusTone}>
-			<div class="section-block">
-				<Badge class="result-pill" data-state={data.result.resultState} variant={badgeVariant}>
-					{tt(`result.title.${data.result.resultState}`)}
-				</Badge>
-				<div class="section-block">
-					<h1 class="page-title">{tt('pages.result.recommended_route_title')}</h1>
-					<p class="lead-text">{tt(data.result.explanationKey)}</p>
-				</div>
-			</div>
+			<header class="result-hero" data-state={data.result.resultState}>
+				<p class="eyebrow">{tt('pages.result.eligibility_title')}</p>
+
+				<h1 class="page-title">{tt(resultHeadingKey)}</h1>
+
+				<p class="lead-text">
+					{routeSummaryKey ? tt(routeSummaryKey) : tt(data.result.explanationKey)}
+				</p>
+			</header>
 		</StatusPanel>
-
-		{#if data.result.reasonKey}
-			<section class="panel section-block">
-				<h2 class="section-title">{tt('pages.result.why_title')}</h2>
-				<p class="lead-text">{tt(data.result.reasonKey)}</p>
-			</section>
-		{/if}
-
-		{#if otherPossibleRoutes.length > 0}
-			<section class="panel section-block">
-				<h2 class="section-title">{tt('pages.result.other_possible_routes_title')}</h2>
-				<ul>
-					{#each otherPossibleRoutes as route}
-						<li>{tt(`result.eligibility_route.${route}`)}</li>
-					{/each}
-				</ul>
-			</section>
-		{/if}
 
 		<section class="cta-panel">
 			<div class="section-block">
@@ -107,6 +109,24 @@ const criminalRecordStillNeed = $derived(
 				</div>
 			{/if}
 		</section>
+
+		{#if data.result.reasonKey}
+			<section class="panel section-block">
+				<h2 class="section-title">{tt('pages.result.why_title')}</h2>
+				<p class="lead-text">{tt(data.result.reasonKey)}</p>
+			</section>
+		{/if}
+
+		{#if otherPossibleRoutes.length > 0}
+			<section class="panel section-block">
+				<h2 class="section-title">{tt('pages.result.other_possible_routes_title')}</h2>
+				<ul>
+					{#each otherPossibleRoutes as route}
+						<li>{tt(`result.eligibility_route.${route}`)}</li>
+					{/each}
+				</ul>
+			</section>
+		{/if}
 
 		{#if showChecklist}
 			<section class="panel section-block">
