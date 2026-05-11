@@ -91,24 +91,6 @@ const applicantVulnerabilityOptions: JourneyOption[] = Object.entries(
 
 const steps: JourneyStepDefinition[] = [
 	{
-		id: 'completion-mode',
-		slug: 'completion-mode',
-		field: 'completionMode',
-		adapter: 'single-choice',
-		titleKey: 'steps.completion_mode.title',
-		hintKey: 'steps.completion_mode.hint',
-		errorKey: 'steps.completion_mode.error',
-		checkAnswersLabelKey: 'steps.completion_mode.check_answers_label',
-		includeInCheckAnswers: true,
-		back: '/screener',
-		next: 'presence-before-cutoff',
-		options: [
-			{ value: 'self', labelKey: 'steps.completion_mode.options.self' },
-			{ value: 'someone_else', labelKey: 'steps.completion_mode.options.someone_else' },
-			{ value: 'support_worker', labelKey: 'steps.completion_mode.options.support_worker' }
-		]
-	},
-	{
 		id: 'presence-before-cutoff',
 		slug: 'presence-before-cutoff',
 		field: 'presentBeforeCutoff',
@@ -117,7 +99,7 @@ const steps: JourneyStepDefinition[] = [
 		errorKey: 'steps.presence_before_cutoff.error',
 		checkAnswersLabelKey: 'steps.presence_before_cutoff.check_answers_label',
 		includeInCheckAnswers: true,
-		back: 'completion-mode',
+		back: '/screener',
 		next: 'asylum-history',
 		options: [
 			{ value: 'yes', labelKey: 'steps.common.options.yes' },
