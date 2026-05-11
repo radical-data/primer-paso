@@ -247,10 +247,6 @@
 		@apply text-balance text-lg font-semibold tracking-tight md:text-xl;
 	}
 
-	.eyebrow {
-		@apply text-muted-foreground m-0 text-xs font-semibold tracking-[0.08em] uppercase;
-	}
-
 	.supporting-text {
 		@apply text-muted-foreground text-sm leading-6 md:text-[0.95rem];
 	}

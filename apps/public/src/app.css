@@ -559,9 +559,6 @@
 	.site-footer-about {
 		@apply grid gap-2;
 	}
-	.site-footer-eyebrow {
-		@apply text-muted-foreground text-xs font-semibold tracking-[0.08em] uppercase;
-	}
 	.site-footer-title {
 		@apply text-foreground text-base font-semibold tracking-tight;
 	}

@@ -29,7 +29,6 @@ export const fr = {
 	'chrome.nav.home': 'Accueil',
 	'chrome.nav.start': 'Voir ma première étape',
 	'chrome.nav.organisations': 'Trouver des organisations',
-	'chrome.footer.eyebrow': 'Primer Paso',
 	'chrome.footer.title': 'À propos de cet outil',
 	'chrome.footer.body':
 		'Primer Paso aide à comprendre le processus de régularisation extraordinaire de 2026 en Espagne, à identifier les documents ou informations qui peuvent encore manquer et à décider quand utiliser le portail officiel ou demander de l’aide.',
@@ -38,7 +37,6 @@ export const fr = {
 	'chrome.footer.disclaimer': 'Il ne remplace ni un conseil juridique ni une décision officielle.',
 	'chrome.footer.link.official_portal': 'Portail officiel',
 	'chrome.language_switcher_label': 'Langue',
-	'pages.home.eyebrow': 'Commencez ici',
 	'pages.home.title': 'Votre parcours vers la régularisation',
 	'pages.home.meta_title':
 		'Aide pour la régularisation extraordinaire 2026 en Espagne | Primer Paso',
@@ -77,7 +75,6 @@ export const fr = {
 	'pages.organisations.meta_title': 'Trouver des organisations',
 	'pages.organisations.meta_description':
 		'Parcourez les organisations collaboratrices par nom, province et coordonnées.',
-	'pages.organisations.eyebrow': 'Organisations collaboratrices',
 	'pages.organisations.title': 'Trouver une organisation collaboratrice',
 	'pages.organisations.lead':
 		'Consultez le répertoire public sans remplir le questionnaire. Recherchez par nom, lieu ou coordonnées.',
@@ -120,7 +117,6 @@ export const fr = {
 	'pages.start.expectation.timeline':
 		'si vous étiez déjà en Espagne avant le 1er janvier 2026 et si vous y êtes resté·e pendant toute la période de 5 mois avant de déposer votre demande',
 	'pages.start.start_now': 'Commencer le questionnaire',
-	'pages.check_answers.eyebrow': 'Vérification',
 	'pages.check_answers.title': 'Vérifiez vos réponses',
 	'pages.check_answers.hint':
 		'Vérifiez ces réponses avant de continuer. Vous pouvez modifier n’importe quelle réponse.',
@@ -137,7 +133,6 @@ export const fr = {
 	'pages.handover.checklist_title': 'Ce qu’il faut préparer',
 	'pages.handover.answers_title': 'Vos réponses',
 	'pages.handover.flags_title': 'Points pouvant demander une attention',
-	'pages.result.eyebrow': 'Résultat',
 	'pages.result.eligibility_title': 'Votre résultat',
 	'pages.result.recommended_route_title': 'Voie recommandée',
 	'pages.result.other_possible_routes_title': 'Autres voies qui pourraient aussi s’appliquer',

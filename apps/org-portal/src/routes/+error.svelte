@@ -12,7 +12,6 @@ const message = $derived(page.error?.message ?? 'Algo ha salido mal.')
 <div class="stack-lg">
 	<Card>
 		<CardContent class="grid gap-3 justify-items-center text-center py-4">
-			<p class="eyebrow">Error {status}</p>
 			<h1 class="text-balance text-[clamp(1.5rem,2.5vw,2rem)] font-semibold tracking-tight">
 				{#if status === 404}
 					Página no encontrada

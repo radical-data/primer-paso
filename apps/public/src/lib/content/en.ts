@@ -26,7 +26,6 @@ export const en = {
 	'chrome.nav.home': 'Home',
 	'chrome.nav.start': 'See my first step',
 	'chrome.nav.organisations': 'Find organisations',
-	'chrome.footer.eyebrow': 'Primer Paso',
 	'chrome.footer.title': 'About this tool',
 	'chrome.footer.body':
 		'Primer Paso helps people understand the 2026 extraordinary regularisation process in Spain, identify which documents or information may still be missing, and decide when to use the official portal or seek support.',
@@ -35,7 +34,6 @@ export const en = {
 	'chrome.footer.disclaimer': 'It does not replace legal advice or an official decision.',
 	'chrome.footer.link.official_portal': 'Official portal',
 	'chrome.language_switcher_label': 'Language',
-	'pages.home.eyebrow': 'Start here',
 	'pages.home.title': 'Your path to regularisation',
 	'pages.home.meta_title': "Support for Spain's 2026 regularisation process | Primer Paso",
 	'pages.home.meta_description':
@@ -73,7 +71,6 @@ export const en = {
 	'pages.organisations.meta_title': 'Find organisations',
 	'pages.organisations.meta_description':
 		'Browse collaborating organisations by name, province, and contact details.',
-	'pages.organisations.eyebrow': 'Collaborating organisations',
 	'pages.organisations.title': 'Find a collaborating organisation',
 	'pages.organisations.lead':
 		'Browse the public directory without completing the screener. Search by name, location, or contact details.',
@@ -111,7 +108,6 @@ export const en = {
 	'pages.start.expectation.timeline':
 		'whether you were in Spain before 1 January 2026 and stayed in Spain for the whole 5-month period before applying',
 	'pages.start.start_now': 'Start the questionnaire',
-	'pages.check_answers.eyebrow': 'Review',
 	'pages.check_answers.title': 'Check your answers',
 	'pages.check_answers.hint': 'Check these answers before you continue. You can change any answer.',
 	'pages.handover.summary_title': 'Summary',
@@ -127,7 +123,6 @@ export const en = {
 	'pages.handover.checklist_title': 'What to get ready',
 	'pages.handover.answers_title': 'Your answers',
 	'pages.handover.flags_title': 'Points that may need attention',
-	'pages.result.eyebrow': 'Result',
 	'pages.result.eligibility_title': 'Your result',
 	'pages.result.recommended_route_title': 'Recommended route',
 	'pages.result.other_possible_routes_title': 'Other routes that may also apply',

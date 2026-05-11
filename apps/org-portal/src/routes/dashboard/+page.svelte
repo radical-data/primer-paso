@@ -18,7 +18,6 @@ let { data } = $props()
 
 <div class="stack-lg">
 	<header class="section-block">
-		<p class="eyebrow">Primer Paso</p>
 		<h1 class="page-title">Panel de la organización</h1>
 	</header>
 

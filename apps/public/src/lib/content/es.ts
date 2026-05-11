@@ -37,7 +37,6 @@ export const es = {
 	'chrome.nav.home': 'Inicio',
 	'chrome.nav.start': 'Ver mi primer paso',
 	'chrome.nav.organisations': 'Buscar organizaciones',
-	'chrome.footer.eyebrow': 'Primer Paso',
 	'chrome.footer.title': 'Sobre esta herramienta',
 	'chrome.footer.body':
 		'Primer Paso ayuda a orientarse en el proceso de regularización extraordinaria de 2026 en España, identificar qué documentos o información pueden faltar y decidir cuándo usar el portal oficial o buscar apoyo.',
@@ -46,7 +45,6 @@ export const es = {
 	'chrome.footer.disclaimer': 'No sustituye asesoría legal ni constituye una decisión oficial.',
 	'chrome.footer.link.official_portal': 'Portal oficial',
 	'chrome.language_switcher_label': 'Idioma',
-	'pages.home.eyebrow': 'Empieza aquí',
 	'pages.home.title': 'Tu camino hacia la regularización',
 	'pages.home.meta_title':
 		'Ayuda para la regularización extraordinaria 2026 en España | Primer Paso',
@@ -85,7 +83,6 @@ export const es = {
 	'pages.organisations.meta_title': 'Buscar organizaciones',
 	'pages.organisations.meta_description':
 		'Explora organizaciones colaboradoras por nombre, provincia y datos de contacto.',
-	'pages.organisations.eyebrow': 'Organizaciones colaboradoras',
 	'pages.organisations.title': 'Buscar una organización colaboradora',
 	'pages.organisations.lead':
 		'Explora el directorio público sin completar el orientador. Busca por nombre, ubicación o datos de contacto.',
@@ -126,7 +123,6 @@ export const es = {
 	'pages.start.expectation.timeline':
 		'si estabas en España antes del 1 de enero de 2026 y permaneciste en España durante todo el periodo de 5 meses antes de presentar la solicitud',
 	'pages.start.start_now': 'Empezar el cuestionario',
-	'pages.check_answers.eyebrow': 'Revisión',
 	'pages.check_answers.title': 'Revisa tus respuestas',
 	'pages.check_answers.hint':
 		'Revisa estas respuestas antes de continuar. Puedes cambiar cualquier respuesta.',
@@ -143,7 +139,6 @@ export const es = {
 	'pages.handover.checklist_title': 'Qué conviene preparar',
 	'pages.handover.answers_title': 'Tus respuestas',
 	'pages.handover.flags_title': 'Puntos que pueden necesitar atención',
-	'pages.result.eyebrow': 'Resultado',
 	'pages.result.eligibility_title': 'Tu resultado',
 	'pages.result.recommended_route_title': 'Vía recomendada',
 	'pages.result.other_possible_routes_title': 'Otras vías que también podrían aplicar',

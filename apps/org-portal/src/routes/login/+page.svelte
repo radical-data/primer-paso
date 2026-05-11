@@ -11,7 +11,6 @@ let { data, form } = $props()
 
 <div class="stack-lg">
 	<div class="section-block">
-		<p class="eyebrow">Primer Paso</p>
 		<h1 class="page-title">Iniciar sesión en el portal de organizaciones</h1>
 	</div>
 

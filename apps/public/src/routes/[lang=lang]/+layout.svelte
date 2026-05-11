@@ -163,7 +163,6 @@ $effect(() => {
 	<footer class="site-footer">
 		<div class="site-footer-inner site-width">
 			<section class="site-footer-about" aria-labelledby="site-footer-title">
-				<p class="site-footer-eyebrow">{tt("chrome.footer.eyebrow")}</p>
 				<h2 id="site-footer-title" class="site-footer-title">
 					{tt("chrome.footer.title")}
 				</h2>

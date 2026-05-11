@@ -7,7 +7,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@primer-paso/ui/card'
 
 <div class="stack-lg">
 	<div class="section-block">
-		<p class="eyebrow">Primer Paso</p>
 		<h1 class="page-title">Portal de organizaciones</h1>
 		<p class="lead-text">
 			Utiliza este portal para abrir borradores de certificado, revisar la información, registrar

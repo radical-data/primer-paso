@@ -28,7 +28,6 @@ export const ar = {
 	'chrome.nav.home': 'الرئيسية',
 	'chrome.nav.start': 'خطوتي الأولى',
 	'chrome.nav.organisations': 'البحث عن منظمات',
-	'chrome.footer.eyebrow': 'Primer Paso',
 	'chrome.footer.title': 'حول هذه الأداة',
 	'chrome.footer.body':
 		'تساعد Primer Paso الأشخاص على فهم عملية التسوية الاستثنائية لعام 2026 في إسبانيا، وتحديد الوثائق أو المعلومات التي قد لا تزال ناقصة، واتخاذ قرار بشأن وقت استخدام البوابة الرسمية أو طلب الدعم.',
@@ -37,7 +36,6 @@ export const ar = {
 	'chrome.footer.disclaimer': 'لا تحل محل الاستشارة القانونية ولا تشكل قراراً رسمياً.',
 	'chrome.footer.link.official_portal': 'البوابة الرسمية',
 	'chrome.language_switcher_label': 'اللغة',
-	'pages.home.eyebrow': 'ابدأ من هنا',
 	'pages.home.title': 'مسارك نحو التسوية',
 	'pages.home.meta_title': 'دعم لعملية التسوية الاستثنائية في إسبانيا 2026 | Primer Paso',
 	'pages.home.meta_description':
@@ -73,7 +71,6 @@ export const ar = {
 	'pages.organisations.meta_title': 'البحث عن الجهات',
 	'pages.organisations.meta_description':
 		'تصفح الجهات المتعاونة حسب الاسم والمقاطعة وبيانات الاتصال.',
-	'pages.organisations.eyebrow': 'الجهات المتعاونة',
 	'pages.organisations.title': 'البحث عن جهة متعاونة',
 	'pages.organisations.lead':
 		'تصفح الدليل العام من دون إكمال الأداة. ابحث بالاسم أو الموقع أو بيانات الاتصال.',
@@ -111,7 +108,6 @@ export const ar = {
 	'pages.start.expectation.timeline':
 		'ما إذا كنت في إسبانيا قبل 1 يناير 2026 وما إذا بقيت في إسبانيا طوال فترة الـ5 أشهر قبل تقديم الطلب',
 	'pages.start.start_now': 'ابدأ الاستبيان',
-	'pages.check_answers.eyebrow': 'مراجعة',
 	'pages.check_answers.title': 'راجع إجاباتك',
 	'pages.check_answers.hint': 'راجع هذه الإجابات قبل المتابعة. يمكنك تغيير أي إجابة.',
 	'pages.handover.summary_title': 'الملخص',
@@ -127,7 +123,6 @@ export const ar = {
 	'pages.handover.checklist_title': 'ما الذي ينبغي تجهيزه',
 	'pages.handover.answers_title': 'إجاباتك',
 	'pages.handover.flags_title': 'نقاط قد تحتاج إلى انتباه',
-	'pages.result.eyebrow': 'النتيجة',
 	'pages.result.eligibility_title': 'نتيجتك',
 	'pages.result.recommended_route_title': 'المسار الموصى به',
 	'pages.result.other_possible_routes_title': 'مسارات أخرى قد تنطبق أيضاً',

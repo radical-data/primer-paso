@@ -29,8 +29,6 @@ const summaryRows = $derived(
 </script>
 <svelte:head> <meta name="robots" content="noindex, nofollow"> </svelte:head>
 <section class="stack">
-	<p class="eyebrow">{tt('pages.check_answers.eyebrow')}</p>
-
 	<div class="app-card stack">
 		<h1 class="page-title">{tt('pages.check_answers.title')}</h1>
 		<p class="hint">{tt('pages.check_answers.hint')}</p>

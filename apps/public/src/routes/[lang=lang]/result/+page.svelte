@@ -47,8 +47,6 @@ const criminalRecordStillNeed = $derived(
 </script>
 <svelte:head> <meta name="robots" content="noindex, nofollow"> </svelte:head>
 <section class="stack">
-	<p class="eyebrow">{tt('pages.result.eyebrow')}</p>
-
 	<div class="result-grid">
 		<StatusPanel tone={statusTone}>
 			<div class="section-block">

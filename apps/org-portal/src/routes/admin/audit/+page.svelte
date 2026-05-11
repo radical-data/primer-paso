@@ -29,7 +29,6 @@ const formatDate = (value: string) =>
 
 <div class="stack-lg">
 	<header class="section-block">
-		<p class="eyebrow">Administración de la organización</p>
 		<h1 class="page-title">Registro de auditoría</h1>
 		<p class="supporting-text">
 			Últimas acciones registradas para <strong>{data.organisation.name}</strong>.

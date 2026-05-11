@@ -53,7 +53,6 @@ $effect(() => {
 
 <div class="stack-lg">
 	<header class="section-block">
-		<p class="eyebrow">Borrador de certificado</p>
 		<h1 class="page-title">Revisar el borrador del certificado</h1>
 		<div class="actions">
 			<span class="status-pill" data-tone={statusTone}>{reviewStatusLabel(review.status)}</span>

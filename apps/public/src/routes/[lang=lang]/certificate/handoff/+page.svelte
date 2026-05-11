@@ -39,8 +39,6 @@ const expiresAt = $derived(
 </svelte:head>
 
 <section class="stack">
-	<p class="eyebrow">Certificate handoff</p>
-
 	<div class="app-card stack">
 		<div class="section-block">
 			<h1 class="page-title">Take this handoff to a collaborating organisation</h1>
