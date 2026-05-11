@@ -12,8 +12,8 @@ import {
 } from '$lib/server/journey'
 import type { Actions, PageServerLoad } from './$types'
 
-const getBackHref = (returnTo: string, backHref: string, locale: Locale) =>
-	returnTo.includes('/check-answers') ? localiseHref(locale, '/check-answers') : backHref
+const getBackHref = (returnTo: string | undefined, backHref: string, locale: Locale) =>
+	returnTo?.includes('/check-answers') ? localiseHref(locale, '/check-answers') : backHref
 
 export const load: PageServerLoad = ({ cookies, params, url }) => {
 	const step = getJourneyStep(params.step)

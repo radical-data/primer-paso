@@ -185,8 +185,12 @@ export const clearJourneyState = (cookies: Cookies) => {
 	})
 }
 
-export const getSafeReturnTo = (url: URL, fallback: string) =>
-	safeRelativePath(url.searchParams.get('returnTo'), fallback)
+export const getSafeReturnTo = (url: URL, fallback: string) => {
+	const returnTo = url.searchParams.get('returnTo')
+	if (!returnTo) return undefined
+
+	return safeRelativePath(returnTo, fallback)
+}
 
 export const resolveReturnTo = (candidate: FormDataEntryValue | null, fallback: string) =>
 	safeRelativePath(typeof candidate === 'string' ? candidate : null, fallback)
