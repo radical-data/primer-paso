@@ -31,7 +31,6 @@ export interface BaseStepDefinition {
 	slug: string
 	field: keyof JourneyAnswers
 	adapter: FieldAdapterName
-	eyebrowKey?: MessageKey
 	titleKey: MessageKey
 	bodyKey?: MessageKey
 	hintKey?: MessageKey
@@ -92,36 +91,15 @@ const applicantVulnerabilityOptions: JourneyOption[] = Object.entries(
 
 const steps: JourneyStepDefinition[] = [
 	{
-		id: 'completion-mode',
-		slug: 'completion-mode',
-		field: 'completionMode',
-		adapter: 'single-choice',
-		eyebrowKey: 'eyebrows.session_setup',
-		titleKey: 'steps.completion_mode.title',
-		hintKey: 'steps.completion_mode.hint',
-		errorKey: 'steps.completion_mode.error',
-		checkAnswersLabelKey: 'steps.completion_mode.check_answers_label',
-		includeInCheckAnswers: true,
-		back: '/screener',
-		next: 'presence-before-cutoff',
-		options: [
-			{ value: 'self', labelKey: 'steps.completion_mode.options.self' },
-			{ value: 'someone_else', labelKey: 'steps.completion_mode.options.someone_else' },
-			{ value: 'support_worker', labelKey: 'steps.completion_mode.options.support_worker' }
-		]
-	},
-	{
 		id: 'presence-before-cutoff',
 		slug: 'presence-before-cutoff',
 		field: 'presentBeforeCutoff',
 		adapter: 'single-choice',
-		eyebrowKey: 'eyebrows.eligibility',
 		titleKey: 'steps.presence_before_cutoff.title',
-		hintKey: 'steps.presence_before_cutoff.hint',
 		errorKey: 'steps.presence_before_cutoff.error',
 		checkAnswersLabelKey: 'steps.presence_before_cutoff.check_answers_label',
 		includeInCheckAnswers: true,
-		back: 'completion-mode',
+		back: '/screener',
 		next: 'asylum-history',
 		options: [
 			{ value: 'yes', labelKey: 'steps.common.options.yes' },
@@ -134,7 +112,6 @@ const steps: JourneyStepDefinition[] = [
 		slug: 'five-month-stay',
 		field: 'fiveMonthStay',
 		adapter: 'single-choice',
-		eyebrowKey: 'eyebrows.eligibility',
 		titleKey: 'steps.five_month_stay.title',
 		bodyKey: 'steps.five_month_stay.body',
 		errorKey: 'steps.five_month_stay.error',
@@ -156,7 +133,6 @@ const steps: JourneyStepDefinition[] = [
 		slug: 'asylum-history',
 		field: 'asylumHistory',
 		adapter: 'single-choice',
-		eyebrowKey: 'eyebrows.eligibility',
 		titleKey: 'steps.asylum_history.title',
 		errorKey: 'steps.asylum_history.error',
 		checkAnswersLabelKey: 'steps.asylum_history.check_answers_label',
@@ -175,7 +151,6 @@ const steps: JourneyStepDefinition[] = [
 		slug: 'asylum-before-cutoff',
 		field: 'asylumBeforeCutoff',
 		adapter: 'single-choice',
-		eyebrowKey: 'eyebrows.eligibility',
 		titleKey: 'steps.asylum_before_cutoff.title',
 		errorKey: 'steps.asylum_before_cutoff.error',
 		checkAnswersLabelKey: 'steps.asylum_before_cutoff.check_answers_label',
@@ -196,9 +171,9 @@ const steps: JourneyStepDefinition[] = [
 		slug: 'family-situation',
 		field: 'familySituation',
 		adapter: 'multi-choice',
-		eyebrowKey: 'eyebrows.eligibility',
 		titleKey: 'steps.family_situation.title',
-		errorKey: 'steps.family_situation.error',
+		hintKey: 'steps.common.multi_choice_hint',
+		errorKey: 'steps.common.multi_choice_not_sure_error',
 		checkAnswersLabelKey: 'steps.family_situation.check_answers_label',
 		includeInCheckAnswers: true,
 		back: 'five-month-stay',
@@ -219,7 +194,7 @@ const steps: JourneyStepDefinition[] = [
 				value: 'mother_or_father',
 				labelKey: 'steps.family_situation.options.mother_or_father'
 			},
-			{ value: 'none', labelKey: 'steps.family_situation.options.none' },
+			{ value: 'none', labelKey: 'steps.common.options.none' },
 			{ value: 'not_sure', labelKey: 'steps.common.options.not_sure' }
 		]
 	},
@@ -228,9 +203,9 @@ const steps: JourneyStepDefinition[] = [
 		slug: 'work-situation',
 		field: 'workSituation',
 		adapter: 'multi-choice',
-		eyebrowKey: 'eyebrows.eligibility',
 		titleKey: 'steps.work_situation.title',
-		errorKey: 'steps.work_situation.error',
+		hintKey: 'steps.common.multi_choice_hint',
+		errorKey: 'steps.common.multi_choice_not_sure_error',
 		checkAnswersLabelKey: 'steps.work_situation.check_answers_label',
 		includeInCheckAnswers: true,
 		back: 'family-situation',
@@ -251,7 +226,7 @@ const steps: JourneyStepDefinition[] = [
 				value: 'want_to_work_for_myself',
 				labelKey: 'steps.work_situation.options.want_to_work_for_myself'
 			},
-			{ value: 'none', labelKey: 'steps.work_situation.options.none' },
+			{ value: 'none', labelKey: 'steps.common.options.none' },
 			{ value: 'not_sure', labelKey: 'steps.common.options.not_sure' }
 		]
 	},
@@ -260,10 +235,9 @@ const steps: JourneyStepDefinition[] = [
 		slug: 'vulnerability-situation',
 		field: 'vulnerabilitySituation',
 		adapter: 'multi-choice',
-		eyebrowKey: 'eyebrows.eligibility',
 		titleKey: 'steps.vulnerability_situation.title',
 		hintKey: 'steps.vulnerability_situation.hint',
-		errorKey: 'steps.vulnerability_situation.error',
+		errorKey: 'steps.common.multi_choice_not_sure_error',
 		checkAnswersLabelKey: 'steps.vulnerability_situation.check_answers_label',
 		includeInCheckAnswers: true,
 		back: 'work-situation',
@@ -273,7 +247,7 @@ const steps: JourneyStepDefinition[] = [
 		exclusiveOptions: ['none', 'not_sure'],
 		options: [
 			...applicantVulnerabilityOptions,
-			{ value: 'none', labelKey: 'steps.vulnerability_situation.options.none' },
+			{ value: 'none', labelKey: 'steps.common.options.none' },
 			{ value: 'not_sure', labelKey: 'steps.common.options.not_sure' }
 		]
 	},
@@ -282,7 +256,6 @@ const steps: JourneyStepDefinition[] = [
 		slug: 'identity-documents',
 		field: 'identityDocuments',
 		adapter: 'multi-choice',
-		eyebrowKey: 'eyebrows.documents',
 		titleKey: 'steps.identity_documents.title',
 		errorKey: 'steps.identity_documents.error',
 		checkAnswersLabelKey: 'steps.identity_documents.check_answers_label',
@@ -328,7 +301,6 @@ const steps: JourneyStepDefinition[] = [
 		slug: 'previous-residence-countries',
 		field: 'previousResidenceCountries',
 		adapter: 'country-list',
-		eyebrowKey: 'eyebrows.documents',
 		titleKey: 'steps.previous_residence_countries.title',
 		bodyKey: 'steps.previous_residence_countries.body',
 		hintKey: 'steps.previous_residence_countries.hint',
@@ -347,7 +319,6 @@ const steps: JourneyStepDefinition[] = [
 		slug: 'criminal-record-certificates',
 		field: 'previousResidenceCountries',
 		adapter: 'country-certificate-status',
-		eyebrowKey: 'eyebrows.documents',
 		titleKey: 'steps.criminal_record_certificates.title',
 		bodyKey: 'steps.criminal_record_certificates.body',
 		hintKey: 'steps.criminal_record_certificates.hint',
@@ -369,7 +340,6 @@ const steps: JourneyStepDefinition[] = [
 		slug: 'evidence-before-cutoff',
 		field: 'evidenceBeforeCutoff',
 		adapter: 'multi-choice',
-		eyebrowKey: 'eyebrows.documents',
 		titleKey: 'steps.evidence_before_cutoff.title',
 		errorKey: 'steps.evidence_before_cutoff.error',
 		checkAnswersLabelKey: 'steps.evidence_before_cutoff.check_answers_label',
@@ -419,7 +389,6 @@ const steps: JourneyStepDefinition[] = [
 		slug: 'evidence-recent-months',
 		field: 'evidenceRecentMonths',
 		adapter: 'multi-choice',
-		eyebrowKey: 'eyebrows.documents',
 		titleKey: 'steps.evidence_recent_months.title',
 		hintKey: 'steps.evidence_recent_months.hint',
 		errorKey: 'steps.evidence_recent_months.error',
@@ -473,7 +442,6 @@ const steps: JourneyStepDefinition[] = [
 		slug: 'asylum-documents',
 		field: 'asylumCaseDocuments',
 		adapter: 'single-choice',
-		eyebrowKey: 'eyebrows.documents',
 		titleKey: 'steps.asylum_documents.title',
 		hintKey: 'steps.asylum_documents.hint',
 		errorKey: 'steps.asylum_documents.error',
@@ -494,8 +462,8 @@ const steps: JourneyStepDefinition[] = [
 		slug: 'support-needs',
 		field: 'supportNeeds',
 		adapter: 'multi-choice',
-		eyebrowKey: 'eyebrows.support',
 		titleKey: 'steps.support_needs.title',
+		hintKey: 'steps.common.multi_choice_hint',
 		errorKey: 'steps.support_needs.error',
 		checkAnswersLabelKey: 'steps.support_needs.check_answers_label',
 		includeInCheckAnswers: true,
@@ -504,7 +472,7 @@ const steps: JourneyStepDefinition[] = [
 				? 'asylum-documents'
 				: 'evidence-recent-months',
 		next: 'specialist-flags',
-		exclusiveOptions: ['not_sure'],
+		exclusiveOptions: ['none', 'not_sure'],
 		options: [
 			{
 				value: 'another_language',
@@ -538,6 +506,7 @@ const steps: JourneyStepDefinition[] = [
 				value: 'specialist_advice',
 				labelKey: 'steps.support_needs.options.specialist_advice'
 			},
+			{ value: 'none', labelKey: 'steps.support_needs.options.none' },
 			{ value: 'not_sure', labelKey: 'steps.common.options.not_sure' }
 		]
 	},
@@ -546,9 +515,9 @@ const steps: JourneyStepDefinition[] = [
 		slug: 'specialist-flags',
 		field: 'specialistFlags',
 		adapter: 'multi-choice',
-		eyebrowKey: 'eyebrows.support',
 		titleKey: 'steps.specialist_flags.title',
-		errorKey: 'steps.specialist_flags.error',
+		hintKey: 'steps.common.multi_choice_hint',
+		errorKey: 'steps.common.multi_choice_none_error',
 		checkAnswersLabelKey: 'steps.specialist_flags.check_answers_label',
 		includeInCheckAnswers: true,
 		back: 'support-needs',
@@ -583,7 +552,7 @@ const steps: JourneyStepDefinition[] = [
 				value: 'want_specialist',
 				labelKey: 'steps.specialist_flags.options.want_specialist'
 			},
-			{ value: 'none', labelKey: 'steps.specialist_flags.options.none' }
+			{ value: 'none', labelKey: 'steps.common.options.none' }
 		]
 	},
 	{
@@ -591,7 +560,6 @@ const steps: JourneyStepDefinition[] = [
 		slug: 'province',
 		field: 'province',
 		adapter: 'select',
-		eyebrowKey: 'eyebrows.support',
 		titleKey: 'steps.province.title',
 		hintKey: 'steps.province.hint',
 		errorKey: 'steps.province.error',

@@ -19,8 +19,6 @@ const checked = (option: string) =>
 </svelte:head>
 
 <section class="stack">
-	<p class="eyebrow">Certificate draft</p>
-
 	<div class="app-card stack">
 		<div class="section-block">
 			<h1 class="page-title">Prepare a vulnerability certificate draft</h1>

@@ -25,6 +25,7 @@ const tt = $derived(getTranslator(locale))
 const currentPath = $derived(data.currentPath ?? '/screener')
 const currentHref = $derived(`${page.url.pathname}${page.url.search}`)
 const radicalDataUrl = 'https://radicaldata.org'
+const isJourneyQuestion = $derived(Boolean(page.data.isJourneyQuestion))
 
 const languages: { value: Locale; label: string }[] = [
 	{ value: 'es', label: 'Español' },
@@ -68,7 +69,7 @@ $effect(() => {
 </script>
 
 <svelte:head>
-	<title>{tt('chrome.app_title')}</title>
+	<title>{tt("chrome.app_title")}</title>
 	<link rel="icon" href={faviconUrl} type="image/svg+xml">
 	<link rel="apple-touch-icon" href={faviconUrl}>
 	<link rel="mask-icon" href={faviconUrl} color="#315ec7">
@@ -90,46 +91,52 @@ $effect(() => {
 <MatomoTracker />
 
 <div class="app-shell">
-	<a class="skip-link" href="#main-content">{tt('chrome.skip_to_main')}</a>
+	<a class="skip-link" href="#main-content">{tt("chrome.skip_to_main")}</a>
 
-	<header class="site-header">
+	<header class:site-header={!isJourneyQuestion} class:site-header-compact={isJourneyQuestion}>
 		<div class="site-header-inner site-width">
 			<div class="site-header-top">
-				<a class="brand" href={resolve('/')}>
-					<span class="brand-mark">{tt('chrome.brand')}</span>
-					<span class="brand-tagline">{tt('chrome.tagline')}</span>
+				<a class="brand" href={resolve("/")}>
+					<span class="brand-mark">{tt("chrome.brand")}</span>
+					{#if !isJourneyQuestion}
+						<span class="brand-tagline">{tt("chrome.tagline")}</span>
+					{/if}
 				</a>
 			</div>
 
 			<div class="site-header-main">
-				<nav class="service-nav" aria-label={tt('chrome.primary_navigation')}>
-					<ul class="service-nav-list">
-						<li>
-							<a
-								class="service-nav-link"
-								href={homeHref}
-								aria-current={isCurrentNavItem(homeHref) ? 'page' : undefined}
-							>
-								{tt('chrome.nav.home')}
-							</a>
-						</li>
-						<li>
-							<a
-								class="service-nav-link"
-								href={screenerHref}
-								aria-current={isCurrentNavItem(screenerHref) ? 'page' : undefined}
-							>
-								{tt('chrome.nav.start')}
-							</a>
-						</li>
-					</ul>
-				</nav>
+				{#if !isJourneyQuestion}
+					<nav class="service-nav" aria-label={tt("chrome.primary_navigation")}>
+						<ul class="service-nav-list">
+							<li>
+								<a
+									class="service-nav-link"
+									href={homeHref}
+									aria-current={isCurrentNavItem(homeHref) ? "page" : undefined}
+								>
+									{tt("chrome.nav.home")}
+								</a>
+							</li>
+							<li>
+								<a
+									class="service-nav-link"
+									href={screenerHref}
+									aria-current={isCurrentNavItem(screenerHref)
+                    ? "page"
+                    : undefined}
+								>
+									{tt("chrome.nav.start")}
+								</a>
+							</li>
+						</ul>
+					</nav>
+				{/if}
 
 				<div class="language-nav">
 					<Select type="single" value={locale} onValueChange={onLanguageChange}>
 						<SelectTrigger
 							class="language-select-trigger"
-							aria-label={tt('chrome.language_switcher_label')}
+							aria-label={tt("chrome.language_switcher_label")}
 						>
 							<LanguagesIcon class="language-select-icon size-4 shrink-0" aria-hidden="true" />
 							<span class="language-select-value">{currentLanguageLabel}</span>
@@ -146,37 +153,48 @@ $effect(() => {
 			</div>
 		</div>
 	</header>
-	<main id="main-content" class="site-width py-8 pb-16">{@render children()}</main>
+	<main
+		id="main-content"
+		class:site-width={!isJourneyQuestion}
+		class:question-main={isJourneyQuestion}
+	>
+		{@render children()}
+	</main>
 	<footer class="site-footer">
 		<div class="site-footer-inner site-width">
 			<section class="site-footer-about" aria-labelledby="site-footer-title">
-				<p class="site-footer-eyebrow">{tt('chrome.footer.eyebrow')}</p>
-				<h2 id="site-footer-title" class="site-footer-title">{tt('chrome.footer.title')}</h2>
+				<h2 id="site-footer-title" class="site-footer-title">
+					{tt("chrome.footer.title")}
+				</h2>
 				<div class="site-footer-copy">
-					<p>{tt('chrome.footer.body')}</p>
+					<p>{tt("chrome.footer.body")}</p>
 					<p>
-						{tt('chrome.footer.attribution_prefix')}
-						{' '}
+						{tt("chrome.footer.attribution_prefix")}
+						{" "}
 						<a
 							class="site-footer-link !inline !min-h-0 underline underline-offset-4"
 							href={radicalDataUrl}
 							target="_blank"
 							rel="noreferrer"
 							><span class="inline-flex items-center gap-[0.2em] whitespace-nowrap"
-								>{tt('chrome.footer.attribution_name')}
+								>{tt("chrome.footer.attribution_name")}
 								<ExternalLinkIcon class="size-[0.85em] shrink-0" aria-hidden="true" /></span
 							></a
 						>
 					</p>
-					<p>{tt('chrome.footer.disclaimer')}</p>
+					<p>{tt("chrome.footer.disclaimer")}</p>
 				</div>
 			</section>
 
-			<nav class="site-footer-nav" aria-label={tt('chrome.footer.title')}>
-				<h2 class="site-footer-title">{tt('chrome.primary_navigation')}</h2>
+			<nav class="site-footer-nav" aria-label={tt("chrome.footer.title")}>
+				<h2 class="site-footer-title">{tt("chrome.primary_navigation")}</h2>
 				<ul class="site-footer-links">
-					<li><a class="site-footer-link" href={homeHref}>{tt('chrome.nav.home')}</a></li>
-					<li><a class="site-footer-link" href={screenerHref}>{tt('chrome.nav.start')}</a></li>
+					<li>
+						<a class="site-footer-link" href={homeHref}>{tt("chrome.nav.home")}</a>
+					</li>
+					<li>
+						<a class="site-footer-link" href={screenerHref}>{tt("chrome.nav.start")}</a>
+					</li>
 					<li>
 						<a
 							class="site-footer-link"
@@ -184,7 +202,7 @@ $effect(() => {
 							target="_blank"
 							rel="noreferrer"
 						>
-							{tt('chrome.footer.link.official_portal')}
+							{tt("chrome.footer.link.official_portal")}
 							<ExternalLinkIcon class="size-4" aria-hidden="true" />
 						</a>
 					</li>

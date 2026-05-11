@@ -13,7 +13,6 @@ let { data } = $props()
 
 <div class="stack-lg">
 	<header class="section-block">
-		<p class="eyebrow">Primer Paso</p>
 		<h1 class="page-title">Borrador de certificado</h1>
 	</header>
 

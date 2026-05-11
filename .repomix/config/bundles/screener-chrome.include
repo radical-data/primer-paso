@@ -1,0 +1,6 @@
+apps/public/src/lib/components/questions/QuestionPage.svelte
+apps/public/src/routes/[lang=lang]/+layout.svelte
+apps/public/src/app.css
+apps/public/src/routes/[lang=lang]/screener/**
+apps/public/src/routes/[lang=lang]/[step]/**
+apps/public/src/routes/[lang=lang]/+layout.server.ts

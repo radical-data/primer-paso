@@ -38,7 +38,6 @@ const shortFingerprint = (value: string) =>
 
 <div class="stack-lg">
 	<header class="section-block">
-		<p class="eyebrow">Administración de la organización</p>
 		<h1 class="page-title">Datos de organización</h1>
 		<p class="supporting-text">
 			Actualiza la información que se utilizará al emitir certificados y configura el certificado de

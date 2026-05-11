@@ -49,8 +49,6 @@ const metaDescription = $derived.by(() => {
 </svelte:head>
 
 <section class="stack">
-	<p class="eyebrow">{tt('pages.organisations.eyebrow')}</p>
-
 	<div class="app-card stack">
 		<div class="section-block">
 			<div class="actions">

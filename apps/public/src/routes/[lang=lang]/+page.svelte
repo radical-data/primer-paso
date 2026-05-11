@@ -161,7 +161,7 @@ const structuredData = $derived(
 				</span>
 			</button>
 			<div class="step-card-text">
-				<p class="eyebrow">
+				<p class="step-label">
 					{tt('pages.home.steps.step_label', { current: String(stepNumber), total: TOTAL_STEPS })}
 				</p>
 				<CardTitle class="step-card-title">{title}</CardTitle>
@@ -375,7 +375,7 @@ const structuredData = $derived(
 	color: var(--color-foreground);
 }
 
-:global(.step-card[data-primary="true"]) .step-card-text > .eyebrow {
+:global(.step-card[data-primary="true"]) .step-card-text > .step-label {
 	color: color-mix(in oklab, var(--color-primary) 80%, var(--color-foreground));
 }
 

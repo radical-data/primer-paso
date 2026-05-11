@@ -1,11 +1,10 @@
 <script lang="ts">
 import FileDownIcon from '@lucide/svelte/icons/file-down'
 import ListChecksIcon from '@lucide/svelte/icons/list-checks'
-import { Badge } from '@primer-paso/ui/badge'
 import { Button } from '@primer-paso/ui/button'
 import { StatusPanel } from '@primer-paso/ui/status-panel'
 import { trackEvent } from '$lib/analytics/matomo'
-import { getTranslator } from '$lib/content'
+import { getTranslator, type MessageKey } from '$lib/content'
 import { getCountryName } from '$lib/generated/countries'
 import { localiseHref } from '$lib/i18n/routing'
 import { resultTone } from '$lib/result-ui'
@@ -13,24 +12,111 @@ import { resultTone } from '$lib/result-ui'
 let { data } = $props()
 
 const tt = $derived(getTranslator(data.locale ?? 'es'))
-
-const badgeVariant = $derived.by(() => {
-	switch (data.result.resultState) {
-		case 'eligible':
-			return 'success'
-		default:
-			return 'warning'
-	}
-})
+const locale = $derived(data.locale ?? 'es')
 
 const statusTone = $derived(resultTone[data.result.resultState])
-const checkAnswersHref = $derived(localiseHref(data.locale ?? 'es', '/check-answers'))
-const startAgainHref = $derived(localiseHref(data.locale ?? 'es', '/screener?new=1'))
+const checkAnswersHref = $derived(localiseHref(locale, '/check-answers'))
+const startAgainHref = $derived(localiseHref(locale, '/screener?new=1'))
+const certificateHref = $derived(localiseHref(locale, '/certificate'))
 const otherPossibleRoutes = $derived(
 	data.result.possibleEligibilityRoutes.filter(
 		(route) => route !== data.result.recommendedEligibilityRoute
 	)
 )
+
+const resultHeadingKeys = {
+	eligible: 'result.heading.eligible',
+	needs_specialist_review: 'result.heading.needs_specialist_review',
+	not_this_process: 'result.heading.not_this_process'
+} as const
+
+const routeSummaryKeys = {
+	international_protection: 'result.route_summary.international_protection',
+	family_unit: 'result.route_summary.family_unit',
+	work_or_intention: 'result.route_summary.work_or_intention',
+	vulnerability: 'result.route_summary.vulnerability'
+} as const
+
+const resultHeadingKey = $derived.by(() => {
+	return resultHeadingKeys[data.result.resultState]
+})
+
+const routeSummaryKey = $derived.by(() => {
+	if (data.result.resultState !== 'eligible') return undefined
+	if (
+		data.result.recommendedEligibilityRoute === 'needs_specialist_review' ||
+		data.result.recommendedEligibilityRoute === 'not_this_process'
+	) {
+		return undefined
+	}
+
+	return routeSummaryKeys[data.result.recommendedEligibilityRoute]
+})
+
+type ResultPrimaryAction = {
+	kind: 'directory' | 'certificate' | 'documents' | 'review'
+	labelKey: MessageKey
+	href: string
+	eventCategory: string
+	eventAction: string
+}
+
+const nextStepBodyKey = $derived.by(() => {
+	if (data.result.resultState === 'not_this_process') {
+		return 'pages.result.next_step.not_this_process.body'
+	}
+
+	if (data.result.resultState === 'needs_specialist_review') {
+		return 'pages.result.next_step.specialist_review.body'
+	}
+
+	if (data.result.recommendedEligibilityRoute === 'vulnerability') {
+		return 'pages.result.next_step.vulnerability.body'
+	}
+
+	return 'pages.result.next_step.prepare_documents.body'
+})
+
+const primaryAction = $derived.by<ResultPrimaryAction>(() => {
+	if (data.result.resultState === 'not_this_process') {
+		return {
+			kind: 'review',
+			labelKey: 'common.review_answers',
+			href: checkAnswersHref,
+			eventCategory: 'Journey',
+			eventAction: 'Review answers'
+		}
+	}
+
+	if (data.result.recommendedEligibilityRoute === 'vulnerability') {
+		return {
+			kind: 'certificate',
+			labelKey: 'pages.result.create_certificate_action',
+			href: certificateHref,
+			eventCategory: 'Journey',
+			eventAction: 'Create vulnerability certificate'
+		}
+	}
+
+	if (data.result.resultState === 'needs_specialist_review') {
+		return {
+			kind: 'directory',
+			labelKey: 'common.open_directory',
+			href: data.organisationsHref,
+			eventCategory: 'Directory',
+			eventAction: 'Open directory'
+		}
+	}
+
+	return {
+		kind: 'documents',
+		labelKey: 'pages.result.review_documents_action',
+		href: '#documents',
+		eventCategory: 'Journey',
+		eventAction: 'Review documents'
+	}
+})
+
 const showChecklist = $derived(
 	data.result.checklist.alreadyHave.length > 0 ||
 		data.result.checklist.stillNeed.length > 0 ||
@@ -47,20 +133,42 @@ const criminalRecordStillNeed = $derived(
 </script>
 <svelte:head> <meta name="robots" content="noindex, nofollow"> </svelte:head>
 <section class="stack">
-	<p class="eyebrow">{tt('pages.result.eyebrow')}</p>
-
 	<div class="result-grid">
 		<StatusPanel tone={statusTone}>
-			<div class="section-block">
-				<Badge class="result-pill" data-state={data.result.resultState} variant={badgeVariant}>
-					{tt(`result.title.${data.result.resultState}`)}
-				</Badge>
-				<div class="section-block">
-					<h1 class="page-title">{tt('pages.result.recommended_route_title')}</h1>
-					<p class="lead-text">{tt(data.result.explanationKey)}</p>
-				</div>
-			</div>
+			<header class="result-hero" data-state={data.result.resultState}>
+				<p class="eyebrow">{tt('pages.result.eligibility_title')}</p>
+
+				<h1 class="page-title">{tt(resultHeadingKey)}</h1>
+
+				<p class="lead-text">
+					{routeSummaryKey ? tt(routeSummaryKey) : tt(data.result.explanationKey)}
+				</p>
+			</header>
 		</StatusPanel>
+
+		<section class="cta-panel">
+			<div class="section-block">
+				<h2 class="section-title">{tt('pages.result.next_step_title')}</h2>
+				<p class="lead-text">
+					{tt(nextStepBodyKey)}
+				</p>
+			</div>
+
+			{#if primaryAction.kind === 'directory'}
+				<p class="hint">{tt('pages.result.collaborating_cta.hint')}</p>
+			{/if}
+
+			<div class="actions">
+				<Button
+					href={primaryAction.href}
+					variant="default"
+					onclick={() =>
+						trackEvent(primaryAction.eventCategory, primaryAction.eventAction, data.result.resultState)}
+				>
+					{tt(primaryAction.labelKey)}
+				</Button>
+			</div>
+		</section>
 
 		{#if data.result.reasonKey}
 			<section class="panel section-block">
@@ -80,44 +188,15 @@ const criminalRecordStillNeed = $derived(
 			</section>
 		{/if}
 
-		<section class="cta-panel">
+		<section class="panel section-block" id="documents">
 			<div class="section-block">
-				<h2 class="section-title">{tt('pages.result.next_step_title')}</h2>
-				<p class="lead-text">
-					{tt(`result.submission_path.${data.result.recommendedSubmissionPath}`)}
-				</p>
+				<h2 class="section-title inline-flex items-center gap-2">
+					<ListChecksIcon class="size-5" aria-hidden="true" />
+					{tt('pages.result.checklist_title')}
+				</h2>
 			</div>
-			{#if data.result.recommendedSubmissionPath === 'registered_entity_online'}
-				<p class="hint">{tt('pages.result.collaborating_cta.hint')}</p>
-				<div class="actions">
-					<Button
-						href={data.organisationsHref}
-						onclick={() =>
-							trackEvent('Directory', 'Open directory', data.result.resultState)}
-						>{tt('common.open_directory')}</Button
-					>
-				</div>
-			{:else}
-				<div class="actions">
-					<Button
-						href={checkAnswersHref}
-						variant="default"
-						onclick={() => trackEvent('Journey', 'Review answers', data.result.resultState)}
-					>
-						{tt('common.review_answers')}
-					</Button>
-				</div>
-			{/if}
-		</section>
 
-		{#if showChecklist}
-			<section class="panel section-block">
-				<div class="section-block">
-					<h2 class="section-title inline-flex items-center gap-2">
-						<ListChecksIcon class="size-5" aria-hidden="true" />
-						{tt('pages.result.checklist_title')}
-					</h2>
-				</div>
+			{#if showChecklist}
 				<div class="result-grid">
 					{#if data.result.checklist.alreadyHave.length > 0 || criminalRecordAlreadyHave.length > 0}
 						<div class="list-section">
@@ -137,6 +216,7 @@ const criminalRecordStillNeed = $derived(
 							</ul>
 						</div>
 					{/if}
+
 					{#if data.result.checklist.stillNeed.length > 0 || criminalRecordStillNeed.length > 0}
 						<div class="list-section">
 							<h3>{tt('pages.result.checklist.still_need')}</h3>
@@ -164,6 +244,7 @@ const criminalRecordStillNeed = $derived(
 							</ul>
 						</div>
 					{/if}
+
 					{#if data.result.checklist.discussWithSupport.length > 0}
 						<div class="list-section">
 							<h3>{tt('pages.result.checklist.discuss_with_support')}</h3>
@@ -174,6 +255,7 @@ const criminalRecordStillNeed = $derived(
 							</ul>
 						</div>
 					{/if}
+
 					{#if data.result.checklist.unresolved.length > 0}
 						<div class="list-section">
 							<h3>{tt('pages.result.checklist.unresolved')}</h3>
@@ -185,8 +267,10 @@ const criminalRecordStillNeed = $derived(
 						</div>
 					{/if}
 				</div>
-			</section>
-		{/if}
+			{:else}
+				<p class="lead-text">{tt('pages.result.checklist.empty_eligible')}</p>
+			{/if}
+		</section>
 
 		<section class="panel-subtle section-block">
 			<h2 class="section-title">{tt('pages.result.handover_title')}</h2>

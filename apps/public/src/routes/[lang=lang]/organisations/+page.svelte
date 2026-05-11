@@ -73,7 +73,6 @@ const trackDirectorySearch = () => {
 </svelte:head>
 
 <section class="stack">
-	<p class="eyebrow">{tt('pages.organisations.eyebrow')}</p>
 	<div class="app-card stack">
 		<div class="section-block">
 			<h1 class="page-title">{tt('pages.organisations.title')}</h1>

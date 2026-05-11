@@ -74,7 +74,6 @@ $effect(() => {
 </script>
 <svelte:head> <meta name="robots" content="noindex, nofollow"> </svelte:head>
 <QuestionPage
-	eyebrow={data.step.eyebrow}
 	{locale}
 	errors={errorSummaryItems}
 	returnTo={data.returnTo}

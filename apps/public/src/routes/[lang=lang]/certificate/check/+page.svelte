@@ -17,8 +17,6 @@ const hasConsent = $derived(Boolean(data.consent))
 </svelte:head>
 
 <section class="stack">
-	<p class="eyebrow">Certificate draft</p>
-
 	<div class="app-card stack">
 		<div class="section-block">
 			<h1 class="page-title">Check the certificate draft</h1>

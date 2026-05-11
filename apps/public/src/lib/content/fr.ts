@@ -29,7 +29,6 @@ export const fr = {
 	'chrome.nav.home': 'Accueil',
 	'chrome.nav.start': 'Voir ma première étape',
 	'chrome.nav.organisations': 'Trouver des organisations',
-	'chrome.footer.eyebrow': 'Primer Paso',
 	'chrome.footer.title': 'À propos de cet outil',
 	'chrome.footer.body':
 		'Primer Paso aide à comprendre le processus de régularisation extraordinaire de 2026 en Espagne, à identifier les documents ou informations qui peuvent encore manquer et à décider quand utiliser le portail officiel ou demander de l’aide.',
@@ -38,7 +37,6 @@ export const fr = {
 	'chrome.footer.disclaimer': 'Il ne remplace ni un conseil juridique ni une décision officielle.',
 	'chrome.footer.link.official_portal': 'Portail officiel',
 	'chrome.language_switcher_label': 'Langue',
-	'pages.home.eyebrow': 'Commencez ici',
 	'pages.home.title': 'Votre parcours vers la régularisation',
 	'pages.home.meta_title':
 		'Aide pour la régularisation extraordinaire 2026 en Espagne | Primer Paso',
@@ -74,11 +72,9 @@ export const fr = {
 	'pages.home.steps.submission.collaborating_intro':
 		"Sinon, vous pouvez la déposer avec l'aide d'une organisation collaboratrice.",
 	'pages.home.official_portal_action': 'Portail officiel de régularisation',
-	'pages.start.eyebrow': 'Étape 1',
 	'pages.organisations.meta_title': 'Trouver des organisations',
 	'pages.organisations.meta_description':
 		'Parcourez les organisations collaboratrices par nom, province et coordonnées.',
-	'pages.organisations.eyebrow': 'Organisations collaboratrices',
 	'pages.organisations.title': 'Trouver une organisation collaboratrice',
 	'pages.organisations.lead':
 		'Consultez le répertoire public sans remplir le questionnaire. Recherchez par nom, lieu ou coordonnées.',
@@ -121,7 +117,6 @@ export const fr = {
 	'pages.start.expectation.timeline':
 		'si vous étiez déjà en Espagne avant le 1er janvier 2026 et si vous y êtes resté·e pendant toute la période de 5 mois avant de déposer votre demande',
 	'pages.start.start_now': 'Commencer le questionnaire',
-	'pages.check_answers.eyebrow': 'Vérification',
 	'pages.check_answers.title': 'Vérifiez vos réponses',
 	'pages.check_answers.hint':
 		'Vérifiez ces réponses avant de continuer. Vous pouvez modifier n’importe quelle réponse.',
@@ -138,11 +133,21 @@ export const fr = {
 	'pages.handover.checklist_title': 'Ce qu’il faut préparer',
 	'pages.handover.answers_title': 'Vos réponses',
 	'pages.handover.flags_title': 'Points pouvant demander une attention',
-	'pages.result.eyebrow': 'Résultat',
 	'pages.result.eligibility_title': 'Votre résultat',
 	'pages.result.recommended_route_title': 'Voie recommandée',
 	'pages.result.other_possible_routes_title': 'Autres voies qui pourraient aussi s’appliquer',
 	'pages.result.next_step_title': 'Votre prochaine étape',
+	'pages.result.next_step.prepare_documents.body':
+		'Préparez les documents qui appuient votre voie. Utilisez la liste ci-dessous pour voir ce que vous avez déjà et ce qui pourrait encore vous manquer.',
+	'pages.result.next_step.vulnerability.body':
+		'Préparez le certificat ou le rapport qui explique votre situation de vulnérabilité. Vous pouvez commencer par créer un brouillon à apporter aux services sociaux ou à une entité collaboratrice accréditée.',
+	'pages.result.next_step.specialist_review.body':
+		'Vos réponses suggèrent qu’il serait plus sûr de faire examiner votre situation avant de déposer la demande. Contactez une entité collaboratrice accréditée si possible et apportez ce résumé.',
+	'pages.result.next_step.not_this_process.body':
+		'Vérifiez à nouveau vos réponses, surtout les dates et la durée de séjour. Si elles sont correctes, cette procédure de régularisation n’est peut-être pas adaptée à votre situation.',
+	'pages.result.create_certificate_action': 'Créer un certificat de vulnérabilité',
+	'pages.result.checklist.empty_eligible':
+		'Aucun document manquant n’a été identifié à partir de vos réponses. Gardez vos documents d’identité, de résidence et les documents propres à votre voie prêts avant de déposer la demande.',
 	'pages.result.why_title': 'Pourquoi nous pensons cela',
 	'pages.result.continue_title': 'Comment continuer',
 	'pages.result.continue_body':
@@ -185,10 +190,13 @@ export const fr = {
 	'common.choose_month': 'Choisissez un mois',
 	'common.choose_one_answer': 'Choisissez une réponse',
 	'common.choose_all_that_apply': 'Cochez toutes les réponses qui s’appliquent',
-	'eyebrows.session_setup': 'Pour commencer',
-	'eyebrows.eligibility': 'Éligibilité',
-	'eyebrows.documents': 'Documents',
-	'eyebrows.support': 'Besoins d’accompagnement',
+
+	'steps.common.multi_choice_hint': 'Sélectionnez toutes les options qui s’appliquent.',
+	'steps.common.multi_choice_none_error':
+		'Sélectionnez une option ou sélectionnez « Aucune de ces options ».',
+	'steps.common.multi_choice_not_sure_error':
+		'Sélectionnez une option ou sélectionnez « Aucune de ces options » ou « Je ne sais pas ».',
+
 	'steps.completion_mode.title': 'Pour qui remplissez-vous ce questionnaire ?',
 	'steps.completion_mode.hint': 'Choisissez l’option qui correspond le mieux à cette session.',
 	'steps.completion_mode.check_answers_label':
@@ -198,8 +206,6 @@ export const fr = {
 	'steps.completion_mode.options.someone_else': 'Pour une autre personne, avec son autorisation',
 	'steps.completion_mode.options.support_worker': 'Je suis travailleur·euse social·e ou bénévole',
 	'steps.presence_before_cutoff.title': 'Viviez-vous déjà en Espagne avant le 1er janvier 2026 ?',
-	'steps.presence_before_cutoff.hint':
-		'Répondez en fonction du fait que vous viviez déjà en Espagne avant la date limite',
 	'steps.presence_before_cutoff.check_answers_label':
 		'Résidence en Espagne avant le 1er janvier 2026',
 	'steps.presence_before_cutoff.error':
@@ -207,6 +213,7 @@ export const fr = {
 	'steps.common.options.yes': 'Oui',
 	'steps.common.options.no': 'Non',
 	'steps.common.options.not_sure': 'Je ne suis pas sûr·e',
+	'steps.common.options.none': 'Aucune de ces réponses',
 	'steps.asylum_history.title':
 		'Avez-vous demandé l’asile ou une protection internationale en Espagne ?',
 	'steps.asylum_history.check_answers_label': 'Asile ou protection internationale en Espagne',
@@ -236,29 +243,22 @@ export const fr = {
 		'Choisissez si vous avez des documents concernant votre dossier d’asile ou de protection.',
 	'steps.work_situation.title': 'L’un de ces éléments décrit-il votre situation professionnelle ?',
 	'steps.work_situation.check_answers_label': 'Situation professionnelle',
-	'steps.work_situation.error': 'Choisissez au moins une option.',
 	'steps.work_situation.options.worked_in_spain': 'J’ai travaillé en Espagne',
 	'steps.work_situation.options.job_offer': 'J’ai une offre d’emploi',
 	'steps.work_situation.options.want_to_work_for_myself': 'Je veux travailler à mon compte',
-	'steps.work_situation.options.none': 'Aucune de ces réponses',
 	'steps.family_situation.title':
 		'L’un de ces éléments décrit-il votre situation familiale en Espagne ?',
 	'steps.family_situation.check_answers_label': 'Situation familiale en Espagne',
-	'steps.family_situation.error': 'Choisissez au moins une option.',
 	'steps.family_situation.options.child_under_18': 'Je vis avec mon enfant de moins de 18 ans',
 	'steps.family_situation.options.adult_child_support_needs':
 		'Je vis avec mon enfant adulte qui a besoin de beaucoup d’aide en raison d’un handicap ou de problèmes de santé',
 	'steps.family_situation.options.mother_or_father': 'Je vis avec ma mère ou mon père',
-	'steps.family_situation.options.none': 'Aucune de ces réponses',
 	'steps.vulnerability_situation.title':
 		'L’une de ces situations rend-elle votre situation particulièrement difficile ?',
 	'steps.vulnerability_situation.hint':
 		'Sélectionnez celles qui vous semblent pertinentes. Cela sert seulement à décider s’il faut vérifier la voie de vulnérabilité avec une organisation ou un service social.',
-	'steps.vulnerability_situation.error':
-		'Sélectionnez les situations qui correspondent, ou choisissez « Aucune de ces réponses ».',
 	'steps.vulnerability_situation.check_answers_label':
 		'Situations pouvant nécessiter un examen par la voie de vulnérabilité',
-	'steps.vulnerability_situation.options.none': 'Aucune de ces réponses',
 	'vulnerability.applicant.social_isolation_or_lack_of_support_network':
 		'Je n’ai pas de personnes ou de services sur lesquels compter pour obtenir de l’aide',
 	'vulnerability.applicant.homelessness_or_precarious_housing':
@@ -386,9 +386,8 @@ export const fr = {
 		'Un autre document portant une date et mon nom',
 	'steps.evidence_recent_months.options.none_yet': 'Je n’ai encore aucun de ces documents',
 	'steps.specialist_flags.title':
-		'Y a-t-il quelque chose qui pourrait signifier que vous avez besoin d’un avis spécialisé avant de faire votre demande ?',
+		'Y a-t-il quelque chose qu’il serait utile d’examiner avec une personne spécialiste avant de faire la demande ?',
 	'steps.specialist_flags.check_answers_label': 'Éléments pouvant nécessiter un avis spécialisé',
-	'steps.specialist_flags.error': 'Choisissez au moins une option.',
 	'steps.specialist_flags.options.criminal_record_worry':
 		'Je crains d’avoir un casier judiciaire ou une affaire pénale',
 	'steps.specialist_flags.options.identity_missing_or_mismatch':
@@ -402,14 +401,14 @@ export const fr = {
 	'steps.specialist_flags.options.urgent_human_support': 'J’ai besoin d’une aide humaine urgente',
 	'steps.specialist_flags.options.want_specialist':
 		'Je préfère parler de cela avec une personne spécialisée',
-	'steps.specialist_flags.options.none': 'Aucune de ces réponses',
-	'steps.support_needs.check_answers_label': 'Aide nécessaire',
+	'steps.support_needs.check_answers_label': 'Aide dont vous pourriez avoir besoin',
 	'steps.province.title': 'Dans quelle province êtes-vous ?',
 	'steps.province.hint': 'Cela nous aide à vous montrer des options d’aide près de chez vous.',
 	'steps.province.check_answers_label': 'Province',
 	'steps.province.error': 'Choisissez une province.',
-	'steps.support_needs.title': 'Quel type d’aide vous serait le plus utile ?',
-	'steps.support_needs.error': 'Choisissez au moins une option.',
+	'steps.support_needs.title': 'De quel type d’aide pourriez-vous avoir besoin ?',
+	'steps.support_needs.error':
+		'Sélectionnez une option ou sélectionnez « Je n’ai pas besoin d’aide pour le moment » ou « Je ne sais pas ».',
 	'steps.support_needs.options.another_language': 'Aide dans une autre langue',
 	'steps.support_needs.options.in_person_help': 'Aide en présentiel',
 	'steps.support_needs.options.phone_support': 'Aide par téléphone',
@@ -422,6 +421,7 @@ export const fr = {
 	'steps.support_needs.options.child_or_dependant_support':
 		'Aide également pour des enfants ou des personnes à charge',
 	'steps.support_needs.options.specialist_advice': 'Avis spécialisé',
+	'steps.support_needs.options.none': 'Je n’ai pas besoin d’aide pour le moment',
 	'result.reason.after_cutoff':
 		'Vous avez indiqué que vous ne viviez pas encore en Espagne avant le 1er janvier 2026.',
 	'result.reason.specialist_review':
@@ -491,6 +491,20 @@ export const fr = {
 	'result.title.needs_specialist_review': 'Révision spécialisée recommandée',
 	'result.title.eligible': 'Voie recommandée identifiée',
 	'result.title.not_this_process': 'Ce processus ne convient peut-être pas',
+
+	'result.heading.eligible': 'Vous êtes probablement éligible à cette procédure',
+	'result.heading.needs_specialist_review':
+		'Vous êtes peut-être éligible, mais votre situation doit être examinée',
+	'result.heading.not_this_process':
+		'Cette procédure ne correspond peut-être pas à votre situation',
+	'result.route_summary.international_protection':
+		'La première voie à vérifier est probablement celle des personnes ayant demandé la protection internationale ou l’asile.',
+	'result.route_summary.family_unit':
+		'La première voie à vérifier est probablement la voie liée à l’unité familiale.',
+	'result.route_summary.work_or_intention':
+		'La première voie à vérifier est probablement la voie liée au travail ou à l’intention de travailler.',
+	'result.route_summary.vulnerability':
+		'La voie liée à une situation de vulnérabilité peut être à vérifier en premier avec une organisation ou un service social.',
 	'result.eligibility_route.international_protection':
 		'Voie de protection internationale / demandeur·euse d’asile',
 	'result.eligibility_route.family_unit': 'Voie de regroupement familial',

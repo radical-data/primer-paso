@@ -26,7 +26,6 @@ export const en = {
 	'chrome.nav.home': 'Home',
 	'chrome.nav.start': 'See my first step',
 	'chrome.nav.organisations': 'Find organisations',
-	'chrome.footer.eyebrow': 'Primer Paso',
 	'chrome.footer.title': 'About this tool',
 	'chrome.footer.body':
 		'Primer Paso helps people understand the 2026 extraordinary regularisation process in Spain, identify which documents or information may still be missing, and decide when to use the official portal or seek support.',
@@ -35,7 +34,6 @@ export const en = {
 	'chrome.footer.disclaimer': 'It does not replace legal advice or an official decision.',
 	'chrome.footer.link.official_portal': 'Official portal',
 	'chrome.language_switcher_label': 'Language',
-	'pages.home.eyebrow': 'Start here',
 	'pages.home.title': 'Your path to regularisation',
 	'pages.home.meta_title': "Support for Spain's 2026 regularisation process | Primer Paso",
 	'pages.home.meta_description':
@@ -70,11 +68,9 @@ export const en = {
 	'pages.home.steps.submission.collaborating_intro':
 		'If not, you can submit with the help of a collaborating organisation.',
 	'pages.home.official_portal_action': 'Official regularisation portal',
-	'pages.start.eyebrow': 'Milestone 1',
 	'pages.organisations.meta_title': 'Find organisations',
 	'pages.organisations.meta_description':
 		'Browse collaborating organisations by name, province, and contact details.',
-	'pages.organisations.eyebrow': 'Collaborating organisations',
 	'pages.organisations.title': 'Find a collaborating organisation',
 	'pages.organisations.lead':
 		'Browse the public directory without completing the screener. Search by name, location, or contact details.',
@@ -112,7 +108,6 @@ export const en = {
 	'pages.start.expectation.timeline':
 		'whether you were in Spain before 1 January 2026 and stayed in Spain for the whole 5-month period before applying',
 	'pages.start.start_now': 'Start the questionnaire',
-	'pages.check_answers.eyebrow': 'Review',
 	'pages.check_answers.title': 'Check your answers',
 	'pages.check_answers.hint': 'Check these answers before you continue. You can change any answer.',
 	'pages.handover.summary_title': 'Summary',
@@ -128,11 +123,21 @@ export const en = {
 	'pages.handover.checklist_title': 'What to get ready',
 	'pages.handover.answers_title': 'Your answers',
 	'pages.handover.flags_title': 'Points that may need attention',
-	'pages.result.eyebrow': 'Result',
 	'pages.result.eligibility_title': 'Your result',
 	'pages.result.recommended_route_title': 'Recommended route',
 	'pages.result.other_possible_routes_title': 'Other routes that may also apply',
 	'pages.result.next_step_title': 'Your next step',
+	'pages.result.next_step.prepare_documents.body':
+		'Prepare the documents that support your route. Use the checklist below to see what you already have and what you may still need.',
+	'pages.result.next_step.vulnerability.body':
+		'Prepare the certificate or report that explains your vulnerability situation. You can start by creating a draft to take to social services or an accredited collaborating entity.',
+	'pages.result.next_step.specialist_review.body':
+		'Your answers suggest it would be safer to get your situation reviewed before you submit. Contact an accredited collaborating entity if possible, and take this summary with you.',
+	'pages.result.next_step.not_this_process.body':
+		'Check your answers again, especially your dates and timeline. If they are correct, this regularisation process may not be the right process to use.',
+	'pages.result.create_certificate_action': 'Create vulnerability certificate',
+	'pages.result.checklist.empty_eligible':
+		'No missing documents were identified from your answers. Keep your identity, residence, and route-specific documents ready before you apply.',
 	'pages.result.why_title': 'Why we think this',
 	'pages.result.continue_title': 'How to continue',
 	'pages.result.continue_body':
@@ -174,10 +179,12 @@ export const en = {
 	'common.choose_month': 'Choose month',
 	'common.choose_one_answer': 'Choose one answer',
 	'common.choose_all_that_apply': 'Choose all that apply',
-	'eyebrows.session_setup': 'Getting started',
-	'eyebrows.eligibility': 'Eligibility',
-	'eyebrows.documents': 'Documents',
-	'eyebrows.support': 'Support needs',
+
+	'steps.common.multi_choice_hint': 'Select all that apply.',
+	'steps.common.multi_choice_none_error': 'Select an option or select “None of these”.',
+	'steps.common.multi_choice_not_sure_error':
+		'Select an option or select “None of these” or “Not sure”.',
+
 	'steps.completion_mode.title': 'Who are you filling this in for?',
 	'steps.completion_mode.hint': 'Choose the option that best matches this session.',
 	'steps.completion_mode.check_answers_label': 'Who you are filling this in for',
@@ -186,14 +193,13 @@ export const en = {
 	'steps.completion_mode.options.someone_else': 'Someone else, with their permission',
 	'steps.completion_mode.options.support_worker': "I'm a support worker or volunteer",
 	'steps.presence_before_cutoff.title': 'Were you already living in Spain before 1 January 2026?',
-	'steps.presence_before_cutoff.hint':
-		'Answer based on whether you were already living in Spain before the cut-off date',
 	'steps.presence_before_cutoff.check_answers_label': 'Living in Spain before 1 January 2026',
 	'steps.presence_before_cutoff.error':
 		'Choose whether you were already living in Spain before 1 January 2026.',
 	'steps.common.options.yes': 'Yes',
 	'steps.common.options.no': 'No',
 	'steps.common.options.not_sure': "I'm not sure",
+	'steps.common.options.none': 'None of these',
 	'steps.asylum_history.title': 'Did you apply for asylum or international protection in Spain?',
 	'steps.asylum_history.check_answers_label': 'Asylum or international protection in Spain',
 	'steps.asylum_history.error':
@@ -216,28 +222,21 @@ export const en = {
 		'Choose whether you have documents about your asylum or protection case.',
 	'steps.work_situation.title': 'Does any of this describe your work situation?',
 	'steps.work_situation.check_answers_label': 'Work situation',
-	'steps.work_situation.error': 'Choose at least one option.',
 	'steps.work_situation.options.worked_in_spain': "I've worked in Spain",
 	'steps.work_situation.options.job_offer': 'I have a job offer',
 	'steps.work_situation.options.want_to_work_for_myself': 'I want to work for myself',
-	'steps.work_situation.options.none': 'None of these',
 	'steps.family_situation.title': 'Does any of this describe your family situation in Spain?',
 	'steps.family_situation.check_answers_label': 'Family situation in Spain',
-	'steps.family_situation.error': 'Choose at least one option.',
 	'steps.family_situation.options.child_under_18': 'I live with my child who is under 18',
 	'steps.family_situation.options.adult_child_support_needs':
 		'I live with my adult child who needs a lot of support because of disability or health needs',
 	'steps.family_situation.options.mother_or_father': 'I live with my mother or father',
-	'steps.family_situation.options.none': 'None of these',
 	'steps.vulnerability_situation.title':
 		'Could any of these make your situation especially difficult?',
 	'steps.vulnerability_situation.hint':
 		'Select any that feel relevant. This only helps decide whether the vulnerability route should be checked with an organisation or social service.',
-	'steps.vulnerability_situation.error':
-		'Select any situations that apply, or select “None of these”.',
 	'steps.vulnerability_situation.check_answers_label':
 		'Situations that may need vulnerability-route review',
-	'steps.vulnerability_situation.options.none': 'None of these',
 	'vulnerability.applicant.social_isolation_or_lack_of_support_network':
 		'I do not have people or services I can rely on for support',
 	'vulnerability.applicant.homelessness_or_precarious_housing':
@@ -355,9 +354,8 @@ export const en = {
 		'Something else with a date and my name on it',
 	'steps.evidence_recent_months.options.none_yet': 'I do not have any of these yet',
 	'steps.specialist_flags.title':
-		'Is there anything that might mean you need specialist advice before applying?',
+		'Is there anything it would be useful to review with a specialist before applying?',
 	'steps.specialist_flags.check_answers_label': 'Anything that may need specialist advice',
-	'steps.specialist_flags.error': 'Choose at least one option.',
 	'steps.specialist_flags.options.criminal_record_worry':
 		"I'm worried about a criminal record or criminal case",
 	'steps.specialist_flags.options.identity_missing_or_mismatch':
@@ -371,14 +369,14 @@ export const en = {
 	'steps.specialist_flags.options.urgent_human_support': 'I need urgent human support',
 	'steps.specialist_flags.options.want_specialist':
 		"I'd rather talk this through with a specialist",
-	'steps.specialist_flags.options.none': 'None of these',
-	'steps.support_needs.check_answers_label': 'Support needed',
+	'steps.support_needs.check_answers_label': 'Support you might need',
 	'steps.province.title': 'Which province are you in?',
 	'steps.province.hint': 'This helps us show support options near you.',
 	'steps.province.check_answers_label': 'Province',
 	'steps.province.error': 'Choose a province.',
-	'steps.support_needs.title': 'What kind of help would be most useful?',
-	'steps.support_needs.error': 'Choose at least one option.',
+	'steps.support_needs.title': 'What kind of help might you need?',
+	'steps.support_needs.error':
+		'Select an option or select “I do not need help right now” or “Not sure”.',
 	'steps.support_needs.options.another_language': 'Help in another language',
 	'steps.support_needs.options.in_person_help': 'In-person help',
 	'steps.support_needs.options.phone_support': 'Phone support',
@@ -387,6 +385,7 @@ export const en = {
 	'steps.support_needs.options.help_gathering_papers': 'Help understanding which papers to gather',
 	'steps.support_needs.options.child_or_dependant_support': 'Help with children or dependants too',
 	'steps.support_needs.options.specialist_advice': 'Specialist advice',
+	'steps.support_needs.options.none': 'I do not need help right now',
 	'result.reason.after_cutoff': 'You said you were not yet living in Spain before 1 January 2026.',
 	'result.reason.specialist_review':
 		'One or more of your answers suggests that it would be safer to get support before you apply.',
@@ -448,9 +447,21 @@ export const en = {
 		'Any missing identity papers or details that do not match.',
 	'result.checklist.item.asylum_history_to_explain':
 		'What happened in any asylum or protection process in Spain.',
-	'result.title.needs_specialist_review': 'Specialist review recommended',
+	'result.title.needs_specialist_review': 'Get specialist support before you apply',
 	'result.title.eligible': 'Recommended route found',
 	'result.title.not_this_process': 'This process may not fit',
+
+	'result.heading.eligible': 'You are likely eligible for this process',
+	'result.heading.needs_specialist_review': 'You may be eligible, but your case needs review',
+	'result.heading.not_this_process': 'This process may not fit your situation',
+
+	'result.route_summary.international_protection':
+		'The best route to check first is the international protection / asylum applicant route.',
+	'result.route_summary.family_unit': 'The best route to check first is the family-unit route.',
+	'result.route_summary.work_or_intention':
+		'The best route to check first is the work or intention-to-work route.',
+	'result.route_summary.vulnerability':
+		'The vulnerability route may be worth checking first with an organisation or social service.',
 	'result.eligibility_route.international_protection':
 		'International protection / asylum applicant route',
 	'result.eligibility_route.family_unit': 'Family-unit route',
@@ -465,7 +476,7 @@ export const en = {
 	'result.explanation.vulnerability':
 		'Based on your answers, the vulnerability route may be worth checking with an organisation or social service. This route usually needs a vulnerability certificate signed or sealed by an eligible body.',
 	'result.explanation.needs_specialist_review':
-		'Your answers do not clearly match one route. A specialist organisation should review the case before you submit.',
+		'Your answers do not clearly match one route. A specialist organisation should review your case before you submit.',
 	'result.explanation.not_this_process':
 		'Based on your answers, this regularisation process may not be the right process to use.',
 	'result.reason.not_present_before_cutoff':
@@ -479,5 +490,5 @@ export const en = {
 	'result.submission_path.registered_entity_online':
 		'The best next step is to contact a registered collaborating organisation if possible. They may be able to help prepare and submit the application electronically.',
 	'result.submission_path.specialist_review_first':
-		'The best next step is to get specialist advice before trying to submit.'
+		'Contact a registered collaborating organisation if possible. Take this summary with you so they can review your situation before you submit.'
 } as const

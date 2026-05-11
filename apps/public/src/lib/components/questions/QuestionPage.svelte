@@ -6,7 +6,6 @@ import type { Locale } from '$lib/content'
 import { getTranslator } from '$lib/content'
 
 interface Props {
-	eyebrow?: string
 	errors?: ErrorSummaryItem[]
 	returnTo?: string
 	backHref: string
@@ -15,40 +14,26 @@ interface Props {
 	children?: import('svelte').Snippet
 }
 
-let {
-	eyebrow,
-	errors = [],
-	returnTo,
-	backHref,
-	stepSlug,
-	locale = 'es',
-	children
-}: Props = $props()
+let { errors = [], returnTo, backHref, stepSlug, locale = 'es', children }: Props = $props()
 const tt = $derived(getTranslator(locale))
 const trackContinue = () => trackEvent('Journey', 'Continue question', stepSlug)
 </script>
 
-<section class="stack">
-	{#if eyebrow}
-		<p class="eyebrow">{eyebrow}</p>
+<section class="question-page">
+	{#if errors.length > 0}
+		<ErrorSummary title={tt("common.problem")} {errors} />
 	{/if}
 
-	<div class="app-card stack">
-		{#if errors.length > 0}
-			<ErrorSummary title={tt('common.problem')} {errors} />
+	<form method="POST" class="question-form">
+		{#if returnTo}
+			<input type="hidden" name="returnTo" value={returnTo}>
 		{/if}
 
-		<form method="POST" class="result-grid">
-			{#if returnTo}
-				<input type="hidden" name="returnTo" value={returnTo}>
-			{/if}
+		{@render children?.()}
 
-			{@render children?.()}
-
-			<div class="page-actions">
-				<Button type="submit" onclick={trackContinue}>{tt('common.continue')}</Button>
-				<Button href={backHref} variant="outline">{tt('common.back')}</Button>
-			</div>
-		</form>
-	</div>
+		<div class="page-actions">
+			<Button type="submit" onclick={trackContinue}>{tt("common.continue")}</Button>
+			<Button href={backHref} variant="outline">{tt("common.back")}</Button>
+		</div>
+	</form>
 </section>

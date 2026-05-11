@@ -28,7 +28,6 @@ export const ar = {
 	'chrome.nav.home': 'الرئيسية',
 	'chrome.nav.start': 'خطوتي الأولى',
 	'chrome.nav.organisations': 'البحث عن منظمات',
-	'chrome.footer.eyebrow': 'Primer Paso',
 	'chrome.footer.title': 'حول هذه الأداة',
 	'chrome.footer.body':
 		'تساعد Primer Paso الأشخاص على فهم عملية التسوية الاستثنائية لعام 2026 في إسبانيا، وتحديد الوثائق أو المعلومات التي قد لا تزال ناقصة، واتخاذ قرار بشأن وقت استخدام البوابة الرسمية أو طلب الدعم.',
@@ -37,7 +36,6 @@ export const ar = {
 	'chrome.footer.disclaimer': 'لا تحل محل الاستشارة القانونية ولا تشكل قراراً رسمياً.',
 	'chrome.footer.link.official_portal': 'البوابة الرسمية',
 	'chrome.language_switcher_label': 'اللغة',
-	'pages.home.eyebrow': 'ابدأ من هنا',
 	'pages.home.title': 'مسارك نحو التسوية',
 	'pages.home.meta_title': 'دعم لعملية التسوية الاستثنائية في إسبانيا 2026 | Primer Paso',
 	'pages.home.meta_description':
@@ -70,11 +68,9 @@ export const ar = {
 	'pages.home.steps.submission.collaborating_intro':
 		'وإذا لم يكن لديك ذلك، يمكنك التقديم بمساعدة منظمة متعاونة.',
 	'pages.home.official_portal_action': 'البوابة الرسمية للتسوية',
-	'pages.start.eyebrow': 'المرحلة 1',
 	'pages.organisations.meta_title': 'البحث عن الجهات',
 	'pages.organisations.meta_description':
 		'تصفح الجهات المتعاونة حسب الاسم والمقاطعة وبيانات الاتصال.',
-	'pages.organisations.eyebrow': 'الجهات المتعاونة',
 	'pages.organisations.title': 'البحث عن جهة متعاونة',
 	'pages.organisations.lead':
 		'تصفح الدليل العام من دون إكمال الأداة. ابحث بالاسم أو الموقع أو بيانات الاتصال.',
@@ -112,7 +108,6 @@ export const ar = {
 	'pages.start.expectation.timeline':
 		'ما إذا كنت في إسبانيا قبل 1 يناير 2026 وما إذا بقيت في إسبانيا طوال فترة الـ5 أشهر قبل تقديم الطلب',
 	'pages.start.start_now': 'ابدأ الاستبيان',
-	'pages.check_answers.eyebrow': 'مراجعة',
 	'pages.check_answers.title': 'راجع إجاباتك',
 	'pages.check_answers.hint': 'راجع هذه الإجابات قبل المتابعة. يمكنك تغيير أي إجابة.',
 	'pages.handover.summary_title': 'الملخص',
@@ -128,11 +123,21 @@ export const ar = {
 	'pages.handover.checklist_title': 'ما الذي ينبغي تجهيزه',
 	'pages.handover.answers_title': 'إجاباتك',
 	'pages.handover.flags_title': 'نقاط قد تحتاج إلى انتباه',
-	'pages.result.eyebrow': 'النتيجة',
 	'pages.result.eligibility_title': 'نتيجتك',
 	'pages.result.recommended_route_title': 'المسار الموصى به',
 	'pages.result.other_possible_routes_title': 'مسارات أخرى قد تنطبق أيضاً',
 	'pages.result.next_step_title': 'خطوتك التالية',
+	'pages.result.next_step.prepare_documents.body':
+		'حضّر الوثائق التي تدعم المسار المناسب لحالتك. استخدم القائمة أدناه لمعرفة ما لديك بالفعل وما قد لا تزال بحاجة إليه.',
+	'pages.result.next_step.vulnerability.body':
+		'حضّر الشهادة أو التقرير الذي يشرح حالة الهشاشة لديك. يمكنك البدء بإنشاء مسودة تأخذها إلى الخدمات الاجتماعية أو إلى جهة متعاونة معتمدة.',
+	'pages.result.next_step.specialist_review.body':
+		'تشير إجاباتك إلى أن مراجعة وضعك قبل تقديم الطلب ستكون أكثر أماناً. تواصل مع جهة متعاونة معتمدة إن أمكن، وخذ هذا الملخص معك.',
+	'pages.result.next_step.not_this_process.body':
+		'راجع إجاباتك مرة أخرى، وخاصة التواريخ ومدة الإقامة. إذا كانت صحيحة، فقد لا تكون عملية التسوية هذه مناسبة لوضعك.',
+	'pages.result.create_certificate_action': 'إنشاء شهادة الهشاشة',
+	'pages.result.checklist.empty_eligible':
+		'لم يتم تحديد وثائق ناقصة بناءً على إجاباتك. أبقِ وثائق الهوية والإقامة والوثائق الخاصة بمسارك جاهزة قبل تقديم الطلب.',
 	'pages.result.why_title': 'لماذا نعتقد ذلك',
 	'pages.result.continue_title': 'كيف تتابع',
 	'pages.result.continue_body':
@@ -174,10 +179,12 @@ export const ar = {
 	'common.choose_month': 'اختر شهراً',
 	'common.choose_one_answer': 'اختر إجابة واحدة',
 	'common.choose_all_that_apply': 'اختر كل ما ينطبق',
-	'eyebrows.session_setup': 'للبدء',
-	'eyebrows.eligibility': 'الأهلية',
-	'eyebrows.documents': 'المستندات',
-	'eyebrows.support': 'احتياجات الدعم',
+
+	'steps.common.multi_choice_hint': 'اختر كل الخيارات التي تنطبق.',
+	'steps.common.multi_choice_none_error': 'اختر خيارًا أو اختر «لا شيء من هذه الخيارات».',
+	'steps.common.multi_choice_not_sure_error':
+		'اختر خيارًا أو اختر «لا شيء من هذه الخيارات» أو «لست متأكدًا/ة».',
+
 	'steps.completion_mode.title': 'لمن تملأ هذا الاستبيان؟',
 	'steps.completion_mode.hint': 'اختر الخيار الذي يطابق هذه الجلسة بأفضل شكل.',
 	'steps.completion_mode.check_answers_label': 'الشخص الذي تملأ له هذا الاستبيان',
@@ -186,13 +193,12 @@ export const ar = {
 	'steps.completion_mode.options.someone_else': 'لشخص آخر، بإذنه',
 	'steps.completion_mode.options.support_worker': 'أنا عامل دعم أو متطوع',
 	'steps.presence_before_cutoff.title': 'هل كنت تعيش بالفعل في إسبانيا قبل 1 يناير 2026؟',
-	'steps.presence_before_cutoff.hint':
-		'أجب بناءً على ما إذا كنت تعيش بالفعل في إسبانيا قبل تاريخ الحد',
 	'steps.presence_before_cutoff.check_answers_label': 'العيش في إسبانيا قبل 1 يناير 2026',
 	'steps.presence_before_cutoff.error': 'اختر ما إذا كنت تعيش بالفعل في إسبانيا قبل 1 يناير 2026.',
 	'steps.common.options.yes': 'نعم',
 	'steps.common.options.no': 'لا',
 	'steps.common.options.not_sure': 'لست متأكداً',
+	'steps.common.options.none': 'لا شيء من ذلك',
 	'steps.asylum_history.title': 'هل تقدّمت بطلب لجوء أو حماية دولية في إسبانيا؟',
 	'steps.asylum_history.check_answers_label': 'اللجوء أو الحماية الدولية في إسبانيا',
 	'steps.asylum_history.error': 'اختر ما إذا كنت قد تقدّمت بطلب لجوء أو حماية دولية في إسبانيا.',
@@ -212,25 +218,19 @@ export const ar = {
 		'اختر ما إذا كانت لديك مستندات بشأن قضية اللجوء أو الحماية الخاصة بك.',
 	'steps.work_situation.title': 'هل يصف أي مما يلي وضعك في العمل؟',
 	'steps.work_situation.check_answers_label': 'الوضع في العمل',
-	'steps.work_situation.error': 'اختر خياراً واحداً على الأقل.',
 	'steps.work_situation.options.worked_in_spain': 'لقد عملت في إسبانيا',
 	'steps.work_situation.options.job_offer': 'لدي عرض عمل',
 	'steps.work_situation.options.want_to_work_for_myself': 'أريد العمل لحسابي الخاص',
-	'steps.work_situation.options.none': 'لا شيء من ذلك',
 	'steps.family_situation.title': 'هل يصف أي مما يلي وضعك العائلي في إسبانيا؟',
 	'steps.family_situation.check_answers_label': 'الوضع العائلي في إسبانيا',
-	'steps.family_situation.error': 'اختر خياراً واحداً على الأقل.',
 	'steps.family_situation.options.child_under_18': 'أعيش مع طفلي دون سن 18',
 	'steps.family_situation.options.adult_child_support_needs':
 		'أعيش مع طفلي البالغ الذي يحتاج إلى دعم كبير بسبب إعاقة أو احتياجات صحية',
 	'steps.family_situation.options.mother_or_father': 'أعيش مع أمي أو أبي',
-	'steps.family_situation.options.none': 'لا شيء من ذلك',
 	'steps.vulnerability_situation.title': 'هل تجعل أي من هذه الحالات وضعك صعباً بشكل خاص؟',
 	'steps.vulnerability_situation.hint':
 		'اختر ما ينطبق عليك أو يبدو قريباً من وضعك. هذا لا يثبت وجود حالة ضعف، بل يساعد فقط في معرفة ما إذا كان من الأفضل مراجعة هذا المسار مع منظمة أو خدمة اجتماعية.',
-	'steps.vulnerability_situation.error': 'اختر المواقف التي تنطبق عليك، أو اختر «لا شيء من ذلك».',
 	'steps.vulnerability_situation.check_answers_label': 'حالات قد تحتاج إلى مراجعة في مسار الضعف',
-	'steps.vulnerability_situation.options.none': 'لا شيء من ذلك',
 	'vulnerability.applicant.social_isolation_or_lack_of_support_network':
 		'لا أجد أشخاصاً أو خدمات يمكنني الاعتماد عليها للحصول على الدعم',
 	'vulnerability.applicant.homelessness_or_precarious_housing': 'ليس لدي سكن مستقر أو آمن',
@@ -333,9 +333,9 @@ export const ar = {
 	'steps.evidence_recent_months.options.travel_or_dated_receipts': 'سفر أو إيصالات مؤرخة',
 	'steps.evidence_recent_months.options.something_else_dated_named': 'مستند آخر يحمل تاريخاً واسمي',
 	'steps.evidence_recent_months.options.none_yet': 'لا أملك أياً من هذه بعد',
-	'steps.specialist_flags.title': 'هل هناك أي شيء قد يعني أنك تحتاج إلى مشورة متخصصة قبل التقديم؟',
+	'steps.specialist_flags.title':
+		'هل هناك أي شيء سيكون من المفيد مراجعته مع شخص متخصص قبل تقديم الطلب؟',
 	'steps.specialist_flags.check_answers_label': 'أمور قد تتطلب مشورة متخصصة',
-	'steps.specialist_flags.error': 'اختر خياراً واحداً على الأقل.',
 	'steps.specialist_flags.options.criminal_record_worry':
 		'أشعر بالقلق من وجود سجل جنائي أو قضية جنائية',
 	'steps.specialist_flags.options.identity_missing_or_mismatch':
@@ -348,14 +348,13 @@ export const ar = {
 		'لا أشعر بالأمان عند مشاركة بعض المعلومات رقمياً',
 	'steps.specialist_flags.options.urgent_human_support': 'أحتاج إلى دعم بشري عاجل',
 	'steps.specialist_flags.options.want_specialist': 'أفضل التحدث مع مختص حول هذا الأمر',
-	'steps.specialist_flags.options.none': 'لا شيء من ذلك',
-	'steps.support_needs.check_answers_label': 'الدعم المطلوب',
+	'steps.support_needs.check_answers_label': 'الدعم الذي قد تحتاجه',
 	'steps.province.title': 'في أي مقاطعة أنت؟',
 	'steps.province.hint': 'يساعدنا هذا في عرض خيارات الدعم القريبة منك.',
 	'steps.province.check_answers_label': 'المقاطعة',
 	'steps.province.error': 'اختر مقاطعة.',
-	'steps.support_needs.title': 'ما نوع المساعدة الأكثر فائدة لك؟',
-	'steps.support_needs.error': 'اختر خياراً واحداً على الأقل.',
+	'steps.support_needs.title': 'ما نوع المساعدة التي قد تحتاجها؟',
+	'steps.support_needs.error': 'اختر خيارًا أو اختر «لا أحتاج إلى مساعدة حاليًا» أو «لست متأكدًا/ة».',
 	'steps.support_needs.options.another_language': 'مساعدة بلغة أخرى',
 	'steps.support_needs.options.in_person_help': 'مساعدة حضورية',
 	'steps.support_needs.options.phone_support': 'دعم عبر الهاتف',
@@ -367,6 +366,7 @@ export const ar = {
 	'steps.support_needs.options.child_or_dependant_support':
 		'مساعدة أيضاً للأطفال أو الأشخاص المعالين',
 	'steps.support_needs.options.specialist_advice': 'مشورة متخصصة',
+	'steps.support_needs.options.none': 'لا أحتاج إلى مساعدة حاليًا',
 	'result.reason.after_cutoff': 'ذكرت أنك لم تكن تعيش بعد في إسبانيا قبل 1 يناير 2026.',
 	'result.reason.specialist_review':
 		'تشير واحدة أو أكثر من إجاباتك إلى أن الحصول على دعم قبل التقديم سيكون أكثر أماناً.',
@@ -428,6 +428,18 @@ export const ar = {
 	'result.title.needs_specialist_review': 'يُوصى بمراجعة متخصصة',
 	'result.title.eligible': 'تم العثور على مسار موصى به',
 	'result.title.not_this_process': 'قد لا يناسبك هذا الإجراء',
+
+	'result.heading.eligible': 'من المرجّح أنك مؤهل لهذه العملية',
+	'result.heading.needs_specialist_review': 'قد تكون مؤهلاً، لكن حالتك تحتاج إلى مراجعة',
+	'result.heading.not_this_process': 'قد لا تكون هذه العملية مناسبة لوضعك',
+	'result.route_summary.international_protection':
+		'المسار الأفضل للتحقق منه أولاً هو على الأرجح مسار طالبي الحماية الدولية أو اللجوء.',
+	'result.route_summary.family_unit':
+		'المسار الأفضل للتحقق منه أولاً هو على الأرجح مسار وحدة الأسرة.',
+	'result.route_summary.work_or_intention':
+		'المسار الأفضل للتحقق منه أولاً هو على الأرجح مسار العمل أو نية العمل.',
+	'result.route_summary.vulnerability':
+		'قد يكون من الأفضل التحقق أولاً من مسار حالة الهشاشة مع منظمة أو خدمة اجتماعية.',
 	'result.eligibility_route.international_protection': 'مسار الحماية الدولية / طالب اللجوء',
 	'result.eligibility_route.family_unit': 'مسار الوحدة العائلية',
 	'result.eligibility_route.work_or_intention': 'مسار العمل أو نية العمل',
