@@ -71,7 +71,7 @@ const buildChecklist = (
 		stillNeed.add('result.checklist.item.asylum_case_documents_needed')
 	stillNeed.add('result.checklist.item.official_document_requirements')
 
-	if (supportNeeds.length > 0)
+	if (hasPositiveChoice(supportNeeds))
 		discussWithSupport.add('result.checklist.item.practical_support_helpful')
 	if (resultState === 'needs_specialist_review')
 		discussWithSupport.add('result.checklist.item.complex_case_review')

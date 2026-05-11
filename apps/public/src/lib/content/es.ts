@@ -6,6 +6,12 @@ export const es = {
 	'common.choose_month': 'Elige un mes',
 	'common.choose_one_answer': 'Elige una respuesta',
 	'common.choose_all_that_apply': 'Elige todas las que correspondan',
+
+	'steps.common.multi_choice_hint': 'Elige todas las que correspondan.',
+	'steps.common.multi_choice_none_error': 'Elige una opción o selecciona «Ninguna de estas».',
+	'steps.common.multi_choice_not_sure_error':
+		'Elige una opción o selecciona «Ninguna de estas» o «No estoy seguro/a».',
+
 	'common.continue': 'Continuar',
 	'common.back': 'Volver',
 	'common.problem': 'Hay un problema',
@@ -201,6 +207,7 @@ export const es = {
 	'steps.common.options.yes': 'Sí',
 	'steps.common.options.no': 'No',
 	'steps.common.options.not_sure': 'No estoy seguro/a',
+	'steps.common.options.none': 'Ninguna de estas',
 	'steps.asylum_history.title': '¿Solicitaste asilo o protección internacional en España?',
 	'steps.asylum_history.check_answers_label': 'Asilo o protección internacional en España',
 	'steps.asylum_history.error': 'Elige si solicitaste asilo o protección internacional en España.',
@@ -223,29 +230,22 @@ export const es = {
 	'steps.asylum_documents.error': 'Elige si tienes documentos sobre tu caso de asilo o protección.',
 	'steps.work_situation.title': '¿Alguna de estas opciones describe tu situación laboral?',
 	'steps.work_situation.check_answers_label': 'Situación laboral',
-	'steps.work_situation.error': 'Elige al menos una opción.',
 	'steps.work_situation.options.worked_in_spain': 'He trabajado en España',
 	'steps.work_situation.options.job_offer': 'Tengo una oferta de trabajo',
 	'steps.work_situation.options.want_to_work_for_myself': 'Quiero trabajar por cuenta propia',
-	'steps.work_situation.options.none': 'Ninguna de estas',
 	'steps.family_situation.title':
 		'¿Alguna de estas opciones describe tu situación familiar en España?',
 	'steps.family_situation.check_answers_label': 'Situación familiar en España',
-	'steps.family_situation.error': 'Elige al menos una opción.',
 	'steps.family_situation.options.child_under_18': 'Vivo con mi hijo o hija menor de 18 años',
 	'steps.family_situation.options.adult_child_support_needs':
 		'Vivo con mi hijo o hija adulto/a que necesita mucho apoyo por discapacidad o problemas de salud',
 	'steps.family_situation.options.mother_or_father': 'Vivo con mi madre o mi padre',
-	'steps.family_situation.options.none': 'Ninguna de estas',
 	'steps.vulnerability_situation.title':
 		'¿Alguna de estas situaciones hace que tu caso sea especialmente difícil?',
 	'steps.vulnerability_situation.hint':
 		'Marca las que te parezcan relevantes. Esto solo ayuda a decidir si conviene revisar la vía de vulnerabilidad con una entidad o con servicios sociales.',
-	'steps.vulnerability_situation.error':
-		'Selecciona las situaciones que apliquen o elige «Ninguna de estas».',
 	'steps.vulnerability_situation.check_answers_label':
 		'Situaciones que podrían requerir revisión por la vía de vulnerabilidad',
-	'steps.vulnerability_situation.options.none': 'Ninguna de estas',
 	'vulnerability.applicant.social_isolation_or_lack_of_support_network':
 		'No tengo personas o servicios en los que pueda apoyarme',
 	'vulnerability.applicant.homelessness_or_precarious_housing':
@@ -371,9 +371,8 @@ export const es = {
 		'Otro documento con fecha y mi nombre',
 	'steps.evidence_recent_months.options.none_yet': 'Todavía no tengo ninguno de estos',
 	'steps.specialist_flags.title':
-		'¿Hay algo que pueda significar que necesitas asesoría especializada antes de solicitar?',
+		'¿Hay algo que convendría revisar con una persona especialista antes de solicitar?',
 	'steps.specialist_flags.check_answers_label': 'Algo que pueda requerir asesoría especializada',
-	'steps.specialist_flags.error': 'Elige al menos una opción.',
 	'steps.specialist_flags.options.criminal_record_worry':
 		'Me preocupa tener antecedentes penales o una causa penal',
 	'steps.specialist_flags.options.identity_missing_or_mismatch':
@@ -387,10 +386,10 @@ export const es = {
 	'steps.specialist_flags.options.urgent_human_support': 'Necesito apoyo humano urgente',
 	'steps.specialist_flags.options.want_specialist':
 		'Prefiero hablar de esto con una persona especialista',
-	'steps.specialist_flags.options.none': 'Ninguna de estas',
-	'steps.support_needs.title': '¿Qué tipo de ayuda te sería más útil?',
-	'steps.support_needs.error': 'Elige al menos una opción.',
-	'steps.support_needs.check_answers_label': 'Apoyo necesario',
+	'steps.support_needs.title': '¿Qué tipo de ayuda podrías necesitar?',
+	'steps.support_needs.error':
+		'Elige una opción o selecciona «No necesito ayuda por ahora» o «No estoy seguro/a».',
+	'steps.support_needs.check_answers_label': 'Apoyo que podrías necesitar',
 	'steps.support_needs.options.another_language': 'Ayuda en otro idioma',
 	'steps.support_needs.options.in_person_help': 'Ayuda presencial',
 	'steps.support_needs.options.help_using_phone_or_computer':
@@ -402,6 +401,7 @@ export const es = {
 	'steps.support_needs.options.child_or_dependant_support':
 		'Ayuda también para niños, niñas o personas dependientes',
 	'steps.support_needs.options.specialist_advice': 'Asesoría especializada',
+	'steps.support_needs.options.none': 'No necesito ayuda por ahora',
 	'steps.province.title': '¿En qué provincia estás?',
 	'steps.province.hint': 'Esto nos ayuda a mostrarte opciones de apoyo cerca de ti.',
 	'steps.province.check_answers_label': 'Provincia',

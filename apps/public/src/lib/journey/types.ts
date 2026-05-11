@@ -111,6 +111,7 @@ export const SUPPORT_NEED_VALUES = [
 	'help_gathering_papers',
 	'child_or_dependant_support',
 	'specialist_advice',
+	'none',
 	'not_sure'
 ] as const
 export type SupportNeedValue = (typeof SUPPORT_NEED_VALUES)[number]

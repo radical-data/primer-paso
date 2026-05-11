@@ -197,7 +197,8 @@ const steps: JourneyStepDefinition[] = [
 		adapter: 'multi-choice',
 		eyebrowKey: 'eyebrows.eligibility',
 		titleKey: 'steps.family_situation.title',
-		errorKey: 'steps.family_situation.error',
+		hintKey: 'steps.common.multi_choice_hint',
+		errorKey: 'steps.common.multi_choice_not_sure_error',
 		checkAnswersLabelKey: 'steps.family_situation.check_answers_label',
 		includeInCheckAnswers: true,
 		back: 'five-month-stay',
@@ -218,7 +219,7 @@ const steps: JourneyStepDefinition[] = [
 				value: 'mother_or_father',
 				labelKey: 'steps.family_situation.options.mother_or_father'
 			},
-			{ value: 'none', labelKey: 'steps.family_situation.options.none' },
+			{ value: 'none', labelKey: 'steps.common.options.none' },
 			{ value: 'not_sure', labelKey: 'steps.common.options.not_sure' }
 		]
 	},
@@ -229,7 +230,8 @@ const steps: JourneyStepDefinition[] = [
 		adapter: 'multi-choice',
 		eyebrowKey: 'eyebrows.eligibility',
 		titleKey: 'steps.work_situation.title',
-		errorKey: 'steps.work_situation.error',
+		hintKey: 'steps.common.multi_choice_hint',
+		errorKey: 'steps.common.multi_choice_not_sure_error',
 		checkAnswersLabelKey: 'steps.work_situation.check_answers_label',
 		includeInCheckAnswers: true,
 		back: 'family-situation',
@@ -250,7 +252,7 @@ const steps: JourneyStepDefinition[] = [
 				value: 'want_to_work_for_myself',
 				labelKey: 'steps.work_situation.options.want_to_work_for_myself'
 			},
-			{ value: 'none', labelKey: 'steps.work_situation.options.none' },
+			{ value: 'none', labelKey: 'steps.common.options.none' },
 			{ value: 'not_sure', labelKey: 'steps.common.options.not_sure' }
 		]
 	},
@@ -262,7 +264,7 @@ const steps: JourneyStepDefinition[] = [
 		eyebrowKey: 'eyebrows.eligibility',
 		titleKey: 'steps.vulnerability_situation.title',
 		hintKey: 'steps.vulnerability_situation.hint',
-		errorKey: 'steps.vulnerability_situation.error',
+		errorKey: 'steps.common.multi_choice_not_sure_error',
 		checkAnswersLabelKey: 'steps.vulnerability_situation.check_answers_label',
 		includeInCheckAnswers: true,
 		back: 'work-situation',
@@ -272,7 +274,7 @@ const steps: JourneyStepDefinition[] = [
 		exclusiveOptions: ['none', 'not_sure'],
 		options: [
 			...applicantVulnerabilityOptions,
-			{ value: 'none', labelKey: 'steps.vulnerability_situation.options.none' },
+			{ value: 'none', labelKey: 'steps.common.options.none' },
 			{ value: 'not_sure', labelKey: 'steps.common.options.not_sure' }
 		]
 	},
@@ -495,6 +497,7 @@ const steps: JourneyStepDefinition[] = [
 		adapter: 'multi-choice',
 		eyebrowKey: 'eyebrows.support',
 		titleKey: 'steps.support_needs.title',
+		hintKey: 'steps.common.multi_choice_hint',
 		errorKey: 'steps.support_needs.error',
 		checkAnswersLabelKey: 'steps.support_needs.check_answers_label',
 		includeInCheckAnswers: true,
@@ -503,7 +506,7 @@ const steps: JourneyStepDefinition[] = [
 				? 'asylum-documents'
 				: 'evidence-recent-months',
 		next: 'specialist-flags',
-		exclusiveOptions: ['not_sure'],
+		exclusiveOptions: ['none', 'not_sure'],
 		options: [
 			{
 				value: 'another_language',
@@ -537,6 +540,7 @@ const steps: JourneyStepDefinition[] = [
 				value: 'specialist_advice',
 				labelKey: 'steps.support_needs.options.specialist_advice'
 			},
+			{ value: 'none', labelKey: 'steps.support_needs.options.none' },
 			{ value: 'not_sure', labelKey: 'steps.common.options.not_sure' }
 		]
 	},
@@ -547,7 +551,8 @@ const steps: JourneyStepDefinition[] = [
 		adapter: 'multi-choice',
 		eyebrowKey: 'eyebrows.support',
 		titleKey: 'steps.specialist_flags.title',
-		errorKey: 'steps.specialist_flags.error',
+		hintKey: 'steps.common.multi_choice_hint',
+		errorKey: 'steps.common.multi_choice_none_error',
 		checkAnswersLabelKey: 'steps.specialist_flags.check_answers_label',
 		includeInCheckAnswers: true,
 		back: 'support-needs',
@@ -582,7 +587,7 @@ const steps: JourneyStepDefinition[] = [
 				value: 'want_specialist',
 				labelKey: 'steps.specialist_flags.options.want_specialist'
 			},
-			{ value: 'none', labelKey: 'steps.specialist_flags.options.none' }
+			{ value: 'none', labelKey: 'steps.common.options.none' }
 		]
 	},
 	{

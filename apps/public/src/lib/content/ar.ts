@@ -174,6 +174,12 @@ export const ar = {
 	'common.choose_month': 'اختر شهراً',
 	'common.choose_one_answer': 'اختر إجابة واحدة',
 	'common.choose_all_that_apply': 'اختر كل ما ينطبق',
+
+	'steps.common.multi_choice_hint': 'اختر كل الخيارات التي تنطبق.',
+	'steps.common.multi_choice_none_error': 'اختر خيارًا أو اختر «لا شيء من هذه الخيارات».',
+	'steps.common.multi_choice_not_sure_error':
+		'اختر خيارًا أو اختر «لا شيء من هذه الخيارات» أو «لست متأكدًا/ة».',
+
 	'eyebrows.session_setup': 'للبدء',
 	'eyebrows.eligibility': 'الأهلية',
 	'eyebrows.documents': 'المستندات',
@@ -191,6 +197,7 @@ export const ar = {
 	'steps.common.options.yes': 'نعم',
 	'steps.common.options.no': 'لا',
 	'steps.common.options.not_sure': 'لست متأكداً',
+	'steps.common.options.none': 'لا شيء من ذلك',
 	'steps.asylum_history.title': 'هل تقدّمت بطلب لجوء أو حماية دولية في إسبانيا؟',
 	'steps.asylum_history.check_answers_label': 'اللجوء أو الحماية الدولية في إسبانيا',
 	'steps.asylum_history.error': 'اختر ما إذا كنت قد تقدّمت بطلب لجوء أو حماية دولية في إسبانيا.',
@@ -210,25 +217,19 @@ export const ar = {
 		'اختر ما إذا كانت لديك مستندات بشأن قضية اللجوء أو الحماية الخاصة بك.',
 	'steps.work_situation.title': 'هل يصف أي مما يلي وضعك في العمل؟',
 	'steps.work_situation.check_answers_label': 'الوضع في العمل',
-	'steps.work_situation.error': 'اختر خياراً واحداً على الأقل.',
 	'steps.work_situation.options.worked_in_spain': 'لقد عملت في إسبانيا',
 	'steps.work_situation.options.job_offer': 'لدي عرض عمل',
 	'steps.work_situation.options.want_to_work_for_myself': 'أريد العمل لحسابي الخاص',
-	'steps.work_situation.options.none': 'لا شيء من ذلك',
 	'steps.family_situation.title': 'هل يصف أي مما يلي وضعك العائلي في إسبانيا؟',
 	'steps.family_situation.check_answers_label': 'الوضع العائلي في إسبانيا',
-	'steps.family_situation.error': 'اختر خياراً واحداً على الأقل.',
 	'steps.family_situation.options.child_under_18': 'أعيش مع طفلي دون سن 18',
 	'steps.family_situation.options.adult_child_support_needs':
 		'أعيش مع طفلي البالغ الذي يحتاج إلى دعم كبير بسبب إعاقة أو احتياجات صحية',
 	'steps.family_situation.options.mother_or_father': 'أعيش مع أمي أو أبي',
-	'steps.family_situation.options.none': 'لا شيء من ذلك',
 	'steps.vulnerability_situation.title': 'هل تجعل أي من هذه الحالات وضعك صعباً بشكل خاص؟',
 	'steps.vulnerability_situation.hint':
 		'اختر ما ينطبق عليك أو يبدو قريباً من وضعك. هذا لا يثبت وجود حالة ضعف، بل يساعد فقط في معرفة ما إذا كان من الأفضل مراجعة هذا المسار مع منظمة أو خدمة اجتماعية.',
-	'steps.vulnerability_situation.error': 'اختر المواقف التي تنطبق عليك، أو اختر «لا شيء من ذلك».',
 	'steps.vulnerability_situation.check_answers_label': 'حالات قد تحتاج إلى مراجعة في مسار الضعف',
-	'steps.vulnerability_situation.options.none': 'لا شيء من ذلك',
 	'vulnerability.applicant.social_isolation_or_lack_of_support_network':
 		'لا أجد أشخاصاً أو خدمات يمكنني الاعتماد عليها للحصول على الدعم',
 	'vulnerability.applicant.homelessness_or_precarious_housing': 'ليس لدي سكن مستقر أو آمن',
@@ -331,9 +332,9 @@ export const ar = {
 	'steps.evidence_recent_months.options.travel_or_dated_receipts': 'سفر أو إيصالات مؤرخة',
 	'steps.evidence_recent_months.options.something_else_dated_named': 'مستند آخر يحمل تاريخاً واسمي',
 	'steps.evidence_recent_months.options.none_yet': 'لا أملك أياً من هذه بعد',
-	'steps.specialist_flags.title': 'هل هناك أي شيء قد يعني أنك تحتاج إلى مشورة متخصصة قبل التقديم؟',
+	'steps.specialist_flags.title':
+		'هل هناك أي شيء سيكون من المفيد مراجعته مع شخص متخصص قبل تقديم الطلب؟',
 	'steps.specialist_flags.check_answers_label': 'أمور قد تتطلب مشورة متخصصة',
-	'steps.specialist_flags.error': 'اختر خياراً واحداً على الأقل.',
 	'steps.specialist_flags.options.criminal_record_worry':
 		'أشعر بالقلق من وجود سجل جنائي أو قضية جنائية',
 	'steps.specialist_flags.options.identity_missing_or_mismatch':
@@ -346,14 +347,13 @@ export const ar = {
 		'لا أشعر بالأمان عند مشاركة بعض المعلومات رقمياً',
 	'steps.specialist_flags.options.urgent_human_support': 'أحتاج إلى دعم بشري عاجل',
 	'steps.specialist_flags.options.want_specialist': 'أفضل التحدث مع مختص حول هذا الأمر',
-	'steps.specialist_flags.options.none': 'لا شيء من ذلك',
-	'steps.support_needs.check_answers_label': 'الدعم المطلوب',
+	'steps.support_needs.check_answers_label': 'الدعم الذي قد تحتاجه',
 	'steps.province.title': 'في أي مقاطعة أنت؟',
 	'steps.province.hint': 'يساعدنا هذا في عرض خيارات الدعم القريبة منك.',
 	'steps.province.check_answers_label': 'المقاطعة',
 	'steps.province.error': 'اختر مقاطعة.',
-	'steps.support_needs.title': 'ما نوع المساعدة الأكثر فائدة لك؟',
-	'steps.support_needs.error': 'اختر خياراً واحداً على الأقل.',
+	'steps.support_needs.title': 'ما نوع المساعدة التي قد تحتاجها؟',
+	'steps.support_needs.error': 'اختر خيارًا أو اختر «لا أحتاج إلى مساعدة حاليًا» أو «لست متأكدًا/ة».',
 	'steps.support_needs.options.another_language': 'مساعدة بلغة أخرى',
 	'steps.support_needs.options.in_person_help': 'مساعدة حضورية',
 	'steps.support_needs.options.phone_support': 'دعم عبر الهاتف',
@@ -365,6 +365,7 @@ export const ar = {
 	'steps.support_needs.options.child_or_dependant_support':
 		'مساعدة أيضاً للأطفال أو الأشخاص المعالين',
 	'steps.support_needs.options.specialist_advice': 'مشورة متخصصة',
+	'steps.support_needs.options.none': 'لا أحتاج إلى مساعدة حاليًا',
 	'result.reason.after_cutoff': 'ذكرت أنك لم تكن تعيش بعد في إسبانيا قبل 1 يناير 2026.',
 	'result.reason.specialist_review':
 		'تشير واحدة أو أكثر من إجاباتك إلى أن الحصول على دعم قبل التقديم سيكون أكثر أماناً.',
