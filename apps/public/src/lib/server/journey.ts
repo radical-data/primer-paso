@@ -122,18 +122,70 @@ export const hasStartedJourney = (answers: JourneyAnswers) => {
 	return Object.values(screenerAnswers).some(isMeaningfulAnswer)
 }
 
+const shouldDebugJourneyCookie = () =>
+	process.env.DEBUG_JOURNEY_COOKIE === '1' || process.env.DEBUG_VISUAL_SCREENER === '1'
+
+const debugJourneyCookie = (message: string, details: Record<string, unknown> = {}) => {
+	if (!shouldDebugJourneyCookie()) return
+
+	console.log(`[journey-cookie] ${message}`, details)
+}
+
 export const getJourneyState = (cookies: Cookies) => {
 	const raw = cookies.get(JOURNEY_COOKIE)
 
 	if (!raw) {
+		debugJourneyCookie('missing cookie', {
+			cookieName: JOURNEY_COOKIE
+		})
+
 		return createEmptyState()
 	}
 
+	debugJourneyCookie('raw cookie found', {
+		cookieName: JOURNEY_COOKIE,
+		rawLength: raw.length,
+		rawStart: raw.slice(0, 160)
+	})
+
 	try {
 		const parsed = JSON.parse(raw)
+		const valid = isJourneyState(parsed)
 
-		return isJourneyState(parsed) ? parsed : createEmptyState()
-	} catch {
+		debugJourneyCookie('parsed cookie', {
+			valid,
+			parsedType: typeof parsed,
+			sessionId:
+				parsed && typeof parsed === 'object'
+					? (parsed as Record<string, unknown>).sessionId
+					: undefined,
+			updatedAt:
+				parsed && typeof parsed === 'object'
+					? (parsed as Record<string, unknown>).updatedAt
+					: undefined,
+			answerKeys:
+				parsed &&
+				typeof parsed === 'object' &&
+				(parsed as Record<string, unknown>).answers &&
+				typeof (parsed as Record<string, unknown>).answers === 'object'
+					? Object.keys((parsed as Record<string, Record<string, unknown>>).answers)
+					: undefined,
+			answers:
+				parsed && typeof parsed === 'object'
+					? (parsed as Record<string, unknown>).answers
+					: undefined
+		})
+
+		if (valid) return parsed
+
+		debugJourneyCookie('cookie failed journey state validation')
+
+		return createEmptyState()
+	} catch (error) {
+		debugJourneyCookie('cookie JSON parse failed', {
+			error: error instanceof Error ? error.message : String(error)
+		})
+
 		return createEmptyState()
 	}
 }
