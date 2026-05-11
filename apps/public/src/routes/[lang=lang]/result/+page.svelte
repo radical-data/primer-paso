@@ -73,6 +73,8 @@ const startAgainHref = $derived(localiseHref(data.locale ?? 'es', '/screener?new
 					<Button
 						href={data.handoverHref}
 						variant="secondary"
+						data-sveltekit-reload
+						download
 						onclick={() =>
 							trackEvent('Journey', 'Download handover PDF', data.result.resultState)}
 					>
@@ -254,6 +256,8 @@ const startAgainHref = $derived(localiseHref(data.locale ?? 'es', '/screener?new
 					<Button
 						href={data.handoverHref}
 						variant="secondary"
+						data-sveltekit-reload
+						download
 						onclick={() =>
 							trackEvent('Journey', 'Download handover PDF', data.result.resultState)}
 					>
