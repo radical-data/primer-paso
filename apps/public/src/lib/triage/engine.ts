@@ -181,11 +181,11 @@ const getReasonKey = (answers: JourneyAnswers, route: EligibilityRoute): Message
 		return 'result.reason.five_month_stay_not_met' as MessageKey
 	}
 
-	if (hasSpecialistFlag(answers)) {
-		return 'result.reason.specialist_flags' as MessageKey
-	}
-
 	if (route === 'needs_specialist_review') {
+		if (hasSpecialistFlag(answers)) {
+			return 'result.reason.specialist_flags' as MessageKey
+		}
+
 		return 'result.reason.no_clear_route' as MessageKey
 	}
 

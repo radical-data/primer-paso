@@ -115,4 +115,37 @@ describe('runTriage', () => {
 		expect(result.recommendedEligibilityRoute).toBe('family_unit')
 		expect(result.possibleEligibilityRoutes).toEqual(['family_unit'])
 	})
+
+	it('does not show a specialist-flag reason when a clear route is still recommended', () => {
+		const result = runTriage({
+			presentBeforeCutoff: 'yes',
+			asylumHistory: 'no',
+			fiveMonthStay: 'yes',
+			familySituation: ['child_under_18'],
+			workSituation: ['none'],
+			vulnerabilitySituation: ['none'],
+			specialistFlags: ['want_specialist']
+		})
+
+		expect(result.resultState).toBe('eligible')
+		expect(result.recommendedEligibilityRoute).toBe('family_unit')
+		expect(result.recommendedSubmissionPath).toBe('specialist_review_first')
+		expect(result.reasonKey).toBeUndefined()
+	})
+
+	it('shows a specialist-flag reason when specialist review is the recommended route', () => {
+		const result = runTriage({
+			presentBeforeCutoff: 'yes',
+			asylumHistory: 'no',
+			fiveMonthStay: 'yes',
+			familySituation: ['none'],
+			workSituation: ['none'],
+			vulnerabilitySituation: ['none'],
+			specialistFlags: ['criminal_record_worry']
+		})
+
+		expect(result.resultState).toBe('needs_specialist_review')
+		expect(result.recommendedEligibilityRoute).toBe('needs_specialist_review')
+		expect(result.reasonKey).toBe('result.reason.specialist_flags')
+	})
 })
