@@ -287,7 +287,8 @@ export const es = {
 	'steps.evidence_before_cutoff.error': 'Elige al menos una opción.',
 	'steps.evidence_before_cutoff.options.padron_or_registration': 'Empadronamiento o registro',
 	'steps.evidence_before_cutoff.options.housing_papers': 'Documentos de vivienda',
-	'steps.evidence_before_cutoff.options.health_or_pharmacy': 'Documentos de salud o farmacia',
+	'steps.evidence_before_cutoff.options.health_or_pharmacy':
+		'Documentos de salud, citas médicas o recetas de farmacia',
 	'steps.evidence_before_cutoff.options.school_or_childcare':
 		'Documentos escolares o de cuidado infantil',
 	'steps.evidence_before_cutoff.options.work_papers': 'Documentos de trabajo',
@@ -299,17 +300,20 @@ export const es = {
 	'steps.evidence_before_cutoff.options.none_yet': 'Todavía no tengo ninguno de estos',
 	'steps.evidence_recent_months.title':
 		'¿Tienes algún documento de los últimos 5 meses que pueda ayudar a mostrar que has estado viviendo aquí recientemente?',
+	'steps.evidence_recent_months.hint':
+		'Recuerda que puedes presentar cualquier documento, papel o ticket que tenga tu nombre y la fecha',
 	'steps.evidence_recent_months.check_answers_label': 'Documentos de los últimos 5 meses',
 	'steps.evidence_recent_months.error': 'Elige al menos una opción.',
 	'steps.evidence_recent_months.options.housing_papers': 'Documentos de vivienda',
-	'steps.evidence_recent_months.options.health_or_pharmacy': 'Documentos de salud o farmacia',
+	'steps.evidence_recent_months.options.health_or_pharmacy':
+		'Documentos de salud, citas médicas o recetas de farmacia',
 	'steps.evidence_recent_months.options.school_or_childcare':
 		'Documentos escolares o de cuidado infantil',
 	'steps.evidence_recent_months.options.work_papers': 'Documentos de trabajo',
 	'steps.evidence_recent_months.options.organisation_or_church_letter':
 		'Cartas de una organización, iglesia o trabajador/a social',
 	'steps.evidence_recent_months.options.bank_or_money_transfer':
-		'Registros bancarios o de transferencias de dinero',
+		'Registros bancarios o justificantes de envío de dinero',
 	'steps.evidence_recent_months.options.travel_or_dated_receipts': 'Viajes o recibos con fecha',
 	'steps.evidence_recent_months.options.something_else_dated_named':
 		'Otro documento con fecha y mi nombre',

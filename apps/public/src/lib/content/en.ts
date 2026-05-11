@@ -287,6 +287,8 @@ export const en = {
 	'steps.evidence_before_cutoff.options.none_yet': 'I do not have any of these yet',
 	'steps.evidence_recent_months.title':
 		"Do you have any documents from the last 5 months that could help show you've been living here recently?",
+	'steps.evidence_recent_months.hint':
+		'Remember that you can present any document, paper, or receipt that has your name and the date on it',
 	'steps.evidence_recent_months.check_answers_label': 'Papers from the last 5 months',
 	'steps.evidence_recent_months.error': 'Choose at least one option.',
 	'steps.evidence_recent_months.options.housing_papers': 'Housing papers',

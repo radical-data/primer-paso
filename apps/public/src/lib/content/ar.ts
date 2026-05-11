@@ -273,6 +273,8 @@ export const ar = {
 	'steps.evidence_before_cutoff.options.none_yet': 'لا أملك أياً من هذه بعد',
 	'steps.evidence_recent_months.title':
 		'هل لديك أي مستندات من الأشهر الخمسة الماضية يمكن أن تساعد في إظهار أنك كنت تعيش هنا مؤخراً؟',
+	'steps.evidence_recent_months.hint':
+		'تذكر أنه يمكنك تقديم أي مستند أو ورقة أو إيصال يحمل اسمك والتاريخ',
 	'steps.evidence_recent_months.check_answers_label': 'مستندات من آخر 5 أشهر',
 	'steps.evidence_recent_months.error': 'اختر خياراً واحداً على الأقل.',
 	'steps.evidence_recent_months.options.housing_papers': 'مستندات سكن',

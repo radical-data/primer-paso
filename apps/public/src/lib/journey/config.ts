@@ -353,6 +353,7 @@ const steps: JourneyStepDefinition[] = [
 		adapter: 'multi-choice',
 		eyebrowKey: 'eyebrows.documents',
 		titleKey: 'steps.evidence_recent_months.title',
+		hintKey: 'steps.evidence_recent_months.hint',
 		errorKey: 'steps.evidence_recent_months.error',
 		checkAnswersLabelKey: 'steps.evidence_recent_months.check_answers_label',
 		includeInCheckAnswers: true,
