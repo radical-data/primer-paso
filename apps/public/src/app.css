@@ -492,8 +492,8 @@
 		@apply grid gap-3;
 	}
 
-	.result-hero .eyebrow,
-	.eyebrow {
+	.eyebrow,
+	.result-hero .eyebrow {
 		@apply text-muted-foreground m-0 text-sm leading-[1.3] font-bold;
 	}
 

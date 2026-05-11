@@ -143,6 +143,17 @@ export const es = {
 	'pages.result.recommended_route_title': 'Vía recomendada',
 	'pages.result.other_possible_routes_title': 'Otras vías que también podrían aplicar',
 	'pages.result.next_step_title': 'Tu siguiente paso',
+	'pages.result.next_step.prepare_documents.body':
+		'Prepara los documentos que apoyan tu vía. Usa la lista de abajo para ver lo que ya tienes y lo que aún podrías necesitar.',
+	'pages.result.next_step.vulnerability.body':
+		'Prepara el certificado o informe que explique tu situación de vulnerabilidad. Puedes empezar creando un borrador para llevarlo a servicios sociales o a una entidad colaboradora acreditada.',
+	'pages.result.next_step.specialist_review.body':
+		'Tus respuestas sugieren que sería más seguro revisar tu situación antes de presentar la solicitud. Contacta con una entidad colaboradora acreditada si es posible y lleva este resumen.',
+	'pages.result.next_step.not_this_process.body':
+		'Revisa tus respuestas de nuevo, especialmente las fechas y el tiempo de estancia. Si son correctas, puede que este proceso de regularización no sea el adecuado para tu situación.',
+	'pages.result.create_certificate_action': 'Crear certificado de vulnerabilidad',
+	'pages.result.checklist.empty_eligible':
+		'No se identificaron documentos pendientes a partir de tus respuestas. Ten preparados tus documentos de identidad, residencia y los documentos específicos de tu vía antes de presentar la solicitud.',
 	'pages.result.why_title': 'Por qué pensamos esto',
 	'pages.result.continue_title': 'Cómo continuar',
 	'pages.result.continue_body':

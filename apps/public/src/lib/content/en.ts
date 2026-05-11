@@ -127,6 +127,17 @@ export const en = {
 	'pages.result.recommended_route_title': 'Recommended route',
 	'pages.result.other_possible_routes_title': 'Other routes that may also apply',
 	'pages.result.next_step_title': 'Your next step',
+	'pages.result.next_step.prepare_documents.body':
+		'Prepare the documents that support your route. Use the checklist below to see what you already have and what you may still need.',
+	'pages.result.next_step.vulnerability.body':
+		'Prepare the certificate or report that explains your vulnerability situation. You can start by creating a draft to take to social services or an accredited collaborating entity.',
+	'pages.result.next_step.specialist_review.body':
+		'Your answers suggest it would be safer to get your situation reviewed before you submit. Contact an accredited collaborating entity if possible, and take this summary with you.',
+	'pages.result.next_step.not_this_process.body':
+		'Check your answers again, especially your dates and timeline. If they are correct, this regularisation process may not be the right process to use.',
+	'pages.result.create_certificate_action': 'Create vulnerability certificate',
+	'pages.result.checklist.empty_eligible':
+		'No missing documents were identified from your answers. Keep your identity, residence, and route-specific documents ready before you apply.',
 	'pages.result.why_title': 'Why we think this',
 	'pages.result.continue_title': 'How to continue',
 	'pages.result.continue_body':

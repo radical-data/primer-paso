@@ -137,6 +137,17 @@ export const fr = {
 	'pages.result.recommended_route_title': 'Voie recommandée',
 	'pages.result.other_possible_routes_title': 'Autres voies qui pourraient aussi s’appliquer',
 	'pages.result.next_step_title': 'Votre prochaine étape',
+	'pages.result.next_step.prepare_documents.body':
+		'Préparez les documents qui appuient votre voie. Utilisez la liste ci-dessous pour voir ce que vous avez déjà et ce qui pourrait encore vous manquer.',
+	'pages.result.next_step.vulnerability.body':
+		'Préparez le certificat ou le rapport qui explique votre situation de vulnérabilité. Vous pouvez commencer par créer un brouillon à apporter aux services sociaux ou à une entité collaboratrice accréditée.',
+	'pages.result.next_step.specialist_review.body':
+		'Vos réponses suggèrent qu’il serait plus sûr de faire examiner votre situation avant de déposer la demande. Contactez une entité collaboratrice accréditée si possible et apportez ce résumé.',
+	'pages.result.next_step.not_this_process.body':
+		'Vérifiez à nouveau vos réponses, surtout les dates et la durée de séjour. Si elles sont correctes, cette procédure de régularisation n’est peut-être pas adaptée à votre situation.',
+	'pages.result.create_certificate_action': 'Créer un certificat de vulnérabilité',
+	'pages.result.checklist.empty_eligible':
+		'Aucun document manquant n’a été identifié à partir de vos réponses. Gardez vos documents d’identité, de résidence et les documents propres à votre voie prêts avant de déposer la demande.',
 	'pages.result.why_title': 'Pourquoi nous pensons cela',
 	'pages.result.continue_title': 'Comment continuer',
 	'pages.result.continue_body':

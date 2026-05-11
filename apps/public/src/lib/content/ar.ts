@@ -127,6 +127,17 @@ export const ar = {
 	'pages.result.recommended_route_title': 'المسار الموصى به',
 	'pages.result.other_possible_routes_title': 'مسارات أخرى قد تنطبق أيضاً',
 	'pages.result.next_step_title': 'خطوتك التالية',
+	'pages.result.next_step.prepare_documents.body':
+		'حضّر الوثائق التي تدعم المسار المناسب لحالتك. استخدم القائمة أدناه لمعرفة ما لديك بالفعل وما قد لا تزال بحاجة إليه.',
+	'pages.result.next_step.vulnerability.body':
+		'حضّر الشهادة أو التقرير الذي يشرح حالة الهشاشة لديك. يمكنك البدء بإنشاء مسودة تأخذها إلى الخدمات الاجتماعية أو إلى جهة متعاونة معتمدة.',
+	'pages.result.next_step.specialist_review.body':
+		'تشير إجاباتك إلى أن مراجعة وضعك قبل تقديم الطلب ستكون أكثر أماناً. تواصل مع جهة متعاونة معتمدة إن أمكن، وخذ هذا الملخص معك.',
+	'pages.result.next_step.not_this_process.body':
+		'راجع إجاباتك مرة أخرى، وخاصة التواريخ ومدة الإقامة. إذا كانت صحيحة، فقد لا تكون عملية التسوية هذه مناسبة لوضعك.',
+	'pages.result.create_certificate_action': 'إنشاء شهادة الهشاشة',
+	'pages.result.checklist.empty_eligible':
+		'لم يتم تحديد وثائق ناقصة بناءً على إجاباتك. أبقِ وثائق الهوية والإقامة والوثائق الخاصة بمسارك جاهزة قبل تقديم الطلب.',
 	'pages.result.why_title': 'لماذا نعتقد ذلك',
 	'pages.result.continue_title': 'كيف تتابع',
 	'pages.result.continue_body':
