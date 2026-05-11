@@ -474,6 +474,17 @@ export const es = {
 		'Busca apoyo especializado antes de presentar la solicitud',
 	'result.title.eligible': 'Vía recomendada encontrada',
 	'result.title.not_this_process': 'Este proceso puede no encajar',
+	'result.heading.eligible': 'Parece que puedes estar dentro del proceso',
+	'result.heading.needs_specialist_review': 'Conviene revisar tu caso con apoyo especializado',
+	'result.heading.not_this_process': 'Puede que otra vía encaje mejor',
+	'result.route_summary.international_protection':
+		'Tus respuestas indican que la vía relacionada con protección internacional podría ser relevante.',
+	'result.route_summary.family_unit':
+		'Tus respuestas indican que la vía por unidad familiar podría ser relevante.',
+	'result.route_summary.work_or_intention':
+		'Tus respuestas indican que la vía por trabajo o intención de trabajar podría ser relevante.',
+	'result.route_summary.vulnerability':
+		'Tus respuestas indican que la vía por situación de vulnerabilidad podría ser relevante.',
 	'result.eligibility_route.international_protection':
 		'Vía de protección internacional / solicitante de asilo',
 	'result.eligibility_route.family_unit': 'Vía de unidad familiar',
