@@ -33,15 +33,15 @@
 		"@lucide/svelte": "^1.14.0",
 		"bits-ui": "^2.18.1",
 		"clsx": "^2.1.1",
-		"tailwind-merge": "^3.5.0",
+		"tailwind-merge": "^3.6.0",
 		"tailwind-variants": "^3.2.2"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.4.14",
+		"@biomejs/biome": "2.4.15",
 		"@types/node": "^25",
 		"svelte": "^5.55.5",
-		"svelte-check": "^4.4.7",
+		"svelte-check": "^4.4.8",
 		"typescript": "^6.0.3",
-		"vitest": "^4.1.5"
+		"vitest": "^4.1.6"
 	}
 }
