@@ -1,6 +1,12 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
-import { type BrowserContext, chromium, type Page } from '@playwright/test'
+import {
+	type BrowserContext,
+	type BrowserContextOptions,
+	chromium,
+	devices,
+	type Page
+} from '@playwright/test'
 import { VULNERABILITY_REASON_VALUES } from '@primer-paso/certificate'
 
 const BASE_URL = process.env.BASE_URL ?? 'http://localhost:5173'
@@ -26,6 +32,24 @@ type VisualVariant = {
 	pathname: string
 	answers?: VisualAnswers
 }
+
+type VisualProfile = {
+	name: string
+	contextOptions: BrowserContextOptions
+}
+
+const visualProfiles = [
+	{
+		name: 'web',
+		contextOptions: {
+			viewport: {
+				width: 1440,
+				height: 1200
+			}
+		}
+	},
+	{ name: 'mobile', contextOptions: devices['iPhone 15'] }
+] satisfies VisualProfile[]
 
 const now = () => new Date().toISOString()
 
@@ -276,17 +300,26 @@ async function setJourneyState(context: BrowserContext, answers: VisualAnswers) 
 }
 
 async function screenshot(page: Page, name: string) {
+	const screenshotPath = path.join(OUT_DIR, `${name}.png`)
+	await fs.mkdir(path.dirname(screenshotPath), { recursive: true })
+
 	await page.screenshot({
-		path: path.join(OUT_DIR, `${name}.png`),
+		path: screenshotPath,
 		fullPage: true
 	})
 }
 
-async function captureVariant(page: Page, context: BrowserContext, variant: VisualVariant) {
+async function captureVariant(
+	page: Page,
+	context: BrowserContext,
+	profile: VisualProfile,
+	variant: VisualVariant
+) {
 	const answers = variant.answers ?? baseAnswers
 	await setJourneyState(context, answers)
 
 	console.log('[visual:screener] visiting', {
+		profile: profile.name,
 		name: variant.name,
 		expectedPathname: variant.pathname,
 		url: `${BASE_URL}/${LOCALE}${variant.pathname}`
@@ -298,6 +331,7 @@ async function captureVariant(page: Page, context: BrowserContext, variant: Visu
 	const finalPathname = new URL(page.url()).pathname
 
 	console.log('[visual:screener] visited', {
+		profile: profile.name,
 		name: variant.name,
 		finalUrl: page.url(),
 		finalPathname
@@ -306,25 +340,32 @@ async function captureVariant(page: Page, context: BrowserContext, variant: Visu
 	if (!finalPathname.endsWith(`/${LOCALE}${variant.pathname}`)) {
 		console.warn(`Expected ${variant.pathname}, but landed on ${finalPathname}. Capturing anyway.`)
 	}
-	await screenshot(page, variant.name)
+
+	await screenshot(page, path.join(profile.name, variant.name))
 }
 
 async function run() {
 	await prepareOutput()
 	const browser = await chromium.launch()
-	const context = await browser.newContext({
-		viewport: {
-			width: 1440,
-			height: 1200
-		}
-	})
-	const page = await context.newPage()
+	const variants = [...ordinaryPages, ...criminalRecordPages, ...resultPages]
 
-	for (const variant of [...ordinaryPages, ...criminalRecordPages, ...resultPages]) {
-		await captureVariant(page, context, variant)
+	try {
+		for (const profile of visualProfiles) {
+			const context = await browser.newContext(profile.contextOptions)
+			const page = await context.newPage()
+
+			try {
+				for (const variant of variants) {
+					await captureVariant(page, context, profile, variant)
+				}
+			} finally {
+				await context.close()
+			}
+		}
+	} finally {
+		await browser.close()
 	}
 
-	await browser.close()
 	console.log(`Wrote screener screenshots to ${OUT_DIR}`)
 }
 
